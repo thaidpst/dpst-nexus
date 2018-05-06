@@ -1,0 +1,60 @@
+<div class="political-main-content">
+    <div class="political-main-section">
+  
+        <div class="political-fancy-title">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <h2>Admin Panel</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+              <div class="col-md-1"></div>
+              
+              <div class="col-md-10">
+                <table><tbody>
+                  <tr>
+                    <th>Username</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>E-mail address</th>
+                    <th>Level</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+
+                  <ng-container *ngIf="users===null">
+                    <tr><td colspan="8">No user data found.</td></tr>
+                  </ng-container>
+                  <ng-container *ngIf="users!==null">
+                    <tr *ngFor="let user of users;">
+                      <th>{{user.username}}</th>
+                      <th>{{user.firstname}}</th>
+                      <th>{{user.lastname}}</th>
+                      <th>{{user.email}}</th>
+                      <th>{{user.level}}</th>
+                      <th [ngClass]="{'ban':user.status=='Ban', 'pen':user.status=='Pending', 'hello-user':user.status=='Active'}">{{user.status}}</th>
+                      <th>
+                        <ng-container *ngIf="user.status!='Active'">
+                          <a class="hello-user" (click)="setAccountActive(user._id)">Set Active</a> |
+                        </ng-container>
+                        View | Edit 
+                        <ng-container *ngIf="user.level<9">| 
+                          <a class="ban" (click)="deleteAccount(user._id)">Delete</a>
+                        </ng-container>
+                      </th>
+                    </tr>
+                  </ng-container>
+
+                </tbody></table>
+              </div>
+              
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -8,7 +8,9 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "db": "mongod --dbpath=./database --port 7001",
+    "mongo": "mongo --port 7001"
   },
   "private": true,
   "dependencies": {
@@ -21,8 +23,16 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
-    "core-js": "^2.4.1",
+    "@types/googlemaps": "^3.30.8",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "d3": "^5.1.0",
+    "express": "^4.16.3",
+    "mongodb": "^3.0.7",
+    "monk": "^6.0.5",
     "rxjs": "^5.5.6",
+    "socket.io-client": "^2.1.0",
+    "socketio": "^1.0.0",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {

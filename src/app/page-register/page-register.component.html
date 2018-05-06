@@ -1,0 +1,81 @@
+
+<div class="political-main-content">
+  <div class="political-main-section">
+    <div class="political-fancy-title">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 *ngIf="settingService.getLanguage()=='Thai'">สมัครสมาชิก</h2>
+            <h2 *ngIf="settingService.getLanguage()=='English'">Register</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3"></div>
+        
+        <div class="col-md-6">
+          <div class="political-contact-form">
+            
+            <form *ngIf="settingService.getLanguage()=='Thai'"
+            #register1="ngForm" (ngSubmit)="registerMember(register1)" ngNativeValidate>
+              <ul>
+                <li><div class="input-label">ชื่อจริง</div>
+                  <input class="reg-input" type="text" name="firstname" value="" ngModel required></li>
+                <li><div class="input-label">นามสกุล</div>
+                  <input class="reg-input" type="text" name="lastname" value="" ngModel required></li>
+                <li><div class="input-label">ชื่อผู้ใช้งาน (ใช้ในการเข้าสู่ระบบ)</div>
+                  <input class="reg-input" type="text" name="username" value="" ngModel required>
+                  <div class="error-message"><span *ngIf="usernameInUse">* ชื่อผู้ใช้งานนี้ได้ถูกใช้งานเเล้ว</span></div>
+                </li>
+                <li><div class="input-label">E-mail address</div>
+                  <input class="reg-input" type="email" name="email" value="" ngModel required>
+                  <div class="error-message"><span *ngIf="emailInUse">* E-mail นี้ได้ถูกใช้งานเเล้ว</span></div>
+                </li>
+                <li><div class="input-label">รหัสผ่าน (อย่างต่ำ 5 ตัวอักษร)</div>
+                  <input class="reg-input" type="password" name="password" value="" ngModel required>
+                  <div *ngIf="passTooShort" class="error-message">* รหัสผ่านสั้นเกินไป</div>
+                </li>
+                <li><div class="input-label">ยืนยันรหัสผ่าน</div>
+                  <input class="reg-input" type="password" name="confirmPassword" value="" ngModel required>
+                  <div class="error-message"><span *ngIf="passNotMatch">* รหัสผ่านไม่ตรงกัน</span></div>
+                </li>
+                <input type="submit" value="สมัครสมาชิก" class="" style="margin-left:calc(50% - 81px);">
+              </ul>
+            </form>
+
+            <form *ngIf="settingService.getLanguage()=='English'"
+            #register2="ngForm" (ngSubmit)="registerMember(register2)" ngNativeValidate>
+              <ul>
+                <li><div class="input-label">Firstname</div>
+                  <input class="reg-input" type="text" name="firstname" value="" ngModel required></li>
+                <li><div class="input-label">Lastname</div>
+                  <input class="reg-input" type="text" name="lastname" value="" ngModel required></li>
+                <li><div class="input-label">Username (use for logging in)</div>
+                  <input class="reg-input" type="text" name="username" value="" ngModel required>
+                  <div class="error-message"><span *ngIf="usernameInUse">* Username is already in use</span></div>
+                </li>
+                <li><div class="input-label">E-mail address</div>
+                  <input class="reg-input" type="email" name="email" value="" ngModel required>
+                  <div class="error-message"><span *ngIf="emailInUse">* E-mail is already in use</span></div>
+                </li>
+                <li><div class="input-label">Password (5 letters minimum)</div>
+                  <input class="reg-input" type="password" name="password" value="" ngModel required>
+                  <div *ngIf="passTooShort" class="error-message">* Password is too short</div>
+                </li>
+                <li><div class="input-label">Confirm password</div>
+                  <input class="reg-input" type="password" name="confirmPassword" value="" ngModel required>
+                  <div class="error-message"><span *ngIf="passNotMatch">* Password does not match</span></div>
+                </li>
+                <input type="submit" value="สมัครสมาชิก" class="" style="margin-left:calc(50% - 81px);">
+              </ul>
+            </form>
+
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

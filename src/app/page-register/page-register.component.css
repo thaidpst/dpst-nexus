@@ -1,0 +1,23 @@
+
+.reg-input[type=text], .reg-input[type=email], .reg-input[type=password] {
+    color: #000000;
+    font-size: 16px;
+}
+.reg-input {
+    height: 45px;
+    margin: 0;
+    padding-left: 15px;
+    width: 100%;
+}
+
+.input-label {
+    color: #000000;
+}
+.req {
+    color: red;
+}
+.error-message {
+    height: 30px;
+    color: red;
+    font-size: 14px;
+}

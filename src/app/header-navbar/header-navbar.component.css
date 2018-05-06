@@ -1,0 +1,27 @@
+.logo img {
+    width: 213px !important;
+}
+
+.political-main-header, .sub-menu.level-2 {
+    box-shadow: 0 0 8px rgba(0,0,0,0.4);
+}
+
+.sub-menu.level-2 {margin: 0;}
+
+@media screen and (max-width: 990px) {
+    .menu.navbar.navbar-default {
+        box-shadow: 0 0 8px rgba(0,0,0,0.4);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo {
+        padding: 25px 0 0 0;
+    }
+    .menu-link span {
+        margin: 20px 0;
+    }
+    .navbar {
+        top: 129px;
+    }
+}

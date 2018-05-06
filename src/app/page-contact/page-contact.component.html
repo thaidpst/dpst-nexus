@@ -1,0 +1,167 @@
+
+<div class="political-main-content">
+    <div class="political-main-section">
+
+      <ng-container *ngIf="settingService.getLanguage()=='Thai'">
+        <div class="political-fancy-title">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12"><h2>ติดต่อเรา</h2></div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+
+            <div class="col-md-12">
+                <div class="political-contact-info">
+                  <ul class="row">
+                    <li class="col-md-3">
+                      <div class="political-contact-text">
+                        <i class="icon church-location-pin"></i>
+                        <h6>เจอเราที่ พสวท.</h6>
+                        <p>924 ถนนสุขุมวิท 
+                          <br>เขตคลองเตย กรุเทพ 
+                          <br>ประเทศไทย 10110</p>
+                      </div>
+                    </li>
+                    <li class="col-md-3">
+                      <div class="political-contact-text">
+                        <i class="icon church-phone-call"></i>
+                        <h6>โทรหาเรา</h6>
+                        <p>02 392 4021 
+                          <br>02 392 4021</p>
+                      </div>
+                    </li>
+                    <li class="col-md-3">
+                      <div class="political-contact-text">
+                        <i class="icon church-envelope"></i>
+                        <h6>E-mail หาเราที่</h6>
+                        <a href="mailto:nsric@ipst.ac.th">nsric@ipst.ac.th</a>
+                        <a href="mailto:sarun_sla@hotmail.com">sarun_sla@hotmail.com</a>
+                      </div>
+                    </li>
+                    <li class="col-md-3">
+                      <div class="political-contact-text">
+                        <i class="icon church-print"></i>
+                        <h6>Fax หาเราได้ที่</h6>
+                        <p>02 381 0750</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+            </div>
+
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="settingService.getLanguage()=='English'">
+        <div class="political-main-section">
+            <div class="political-fancy-title">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12"><h2>Get In touch</h2></div>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+    
+                <div class="col-md-12">
+                  <div class="political-contact-info">
+                    <ul class="row">
+                      <li class="col-md-3">
+                        <div class="political-contact-text">
+                          <i class="icon church-location-pin"></i>
+                          <h6>Meet Us At IPST</h6>
+                          <p>924 Sukhumvit Rd, 
+                            <br>Khlong Toei, Bangkok 
+                            <br>Thailand 10110</p>
+                        </div>
+                      </li>
+                      <li class="col-md-3">
+                        <div class="political-contact-text">
+                          <i class="icon church-phone-call"></i>
+                          <h6>Call Us At</h6>
+                          <p>+66 2 392 4021 
+                            <br>+66 2 392 4021</p>
+                        </div>
+                      </li>
+                      <li class="col-md-3">
+                        <div class="political-contact-text">
+                          <i class="icon church-envelope"></i>
+                          <h6>E-mail Us At</h6>
+                          <a href="mailto:nsric@ipst.ac.th">nsric@ipst.ac.th</a>
+                          <a href="mailto:sarun_sla@hotmail.com">sarun_sla@hotmail.com</a>
+                        </div>
+                      </li>
+                      <li class="col-md-3">
+                        <div class="political-contact-text">
+                          <i class="icon church-print"></i>
+                          <h6>Fax Us At</h6>
+                          <p>+66 2 381 0750</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+    
+              </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="political-main-section">
+        <div class="political-fancy-title">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <h2 *ngIf="settingService.getLanguage()=='Thai'">ส่งข้อความหาเรา</h2>
+                <h2 *ngIf="settingService.getLanguage()=='English'">Contact Us Now</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            
+            <div class="col-md-8">
+              <div class="political-contact-form">
+                <h2 class="political-section-heading" *ngIf="settingService.getLanguage()=='Thai'">ส่งข้อความหาเราตอนนี้</h2>
+                <h2 class="political-section-heading" *ngIf="settingService.getLanguage()=='English'">Message Us Now</h2>
+                <p *ngIf="settingService.getLanguage()=='Thai'">
+                  หลังจากที่เราได้รับข้อความของคุณ เราจะติดต่อกลับภายใน 2 วันทำการ
+                </p>
+                <p *ngIf="settingService.getLanguage()=='English'">
+                  After we received your email, we will reply to you within 2 business days. Thank you!
+                </p>
+
+                <form *ngIf="settingService.getLanguage()=='Thai'"
+                #form1="ngForm" (ngSubmit)="sendMessage(form1)" ngNativeValidate>
+                  <ul>
+                    <li><input class="reg-input" type="text" name="name" value="" placeholder="ชื่อของคุณ" ngModel required></li>
+                    <li><input class="reg-input" type="email" name="email" value="" placeholder="E-mail address ของคุณ" ngModel required></li>
+                    <li class="political-full-form"><textarea name="message" placeholder="ข้อความ" ngModel required></textarea></li>
+                    <input type="submit" value="ส่งข้อความ" class="" style="margin-left:calc(50% - 60px);">
+                  </ul>
+                </form>
+                <form *ngIf="settingService.getLanguage()=='English'"
+                #form2="ngForm" (ngSubmit)="sendMessage(form2)" ngNativeValidate>
+                  <ul>
+                    <li><input class="reg-input" type="text" name="name" value="" placeholder="Your name" ngModel required></li>
+                    <li><input class="reg-input" type="email" name="email" value="" placeholder="Your e-mail address" ngModel required></li>
+                    <li class="political-full-form"><textarea name="message" placeholder="Message" ngModel required></textarea></li>
+                    <input type="submit" value="Submit Now" class="" style="margin-left:calc(50% - 80px);">
+                  </ul>
+                </form>
+
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="political-contact-map"><div #gmap id="map"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+</div>

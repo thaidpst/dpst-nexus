@@ -1,0 +1,14 @@
+input:disabled {cursor: not-allowed;}
+
+.reg-input[type=text], .reg-input[type=email], .reg-input[type=password],
+.political-contact-form form textarea {
+    color: #000000;
+    font-size: 16px;
+}
+
+
+@media screen and (min-width: 990px) {
+    .political-contact-text {
+        height: 200px;
+    }
+}

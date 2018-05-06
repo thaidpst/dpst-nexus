@@ -1,0 +1,70 @@
+
+<div class="political-main-content">
+  <div class="political-main-section">
+    
+    <div class="political-fancy-title">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 *ngIf="settingService.getLanguage()=='Thai'">เข้าสู่ระบบ</h2>
+            <h2 *ngIf="settingService.getLanguage()=='English'">Log In</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3"></div>
+        
+        <div class="col-md-6">
+          <div class="political-contact-form">
+            
+            <form *ngIf="settingService.getLanguage()=='Thai'"
+            #login1="ngForm" (ngSubmit)="memberLogIn(login1)" ngNativeValidate>
+              <ul>
+                <li><div class="input-label">ชื่อผู้ใช้งาน</div>
+                  <input class="reg-input" type="text" name="username" value="" ngModel required></li>
+                <li><div class="input-label">รหัสผ่าน</div>
+                  <input class="reg-input" type="password" name="password" value="" ngModel required>
+                  <div class="error-message"><span *ngIf="loginFail">* ชื่อผู้ใช้งานหรือรหัสผ่านผิด</span></div>
+                </li>
+                <li class="last-input">
+                  <input name="rememberme" type="checkbox" ngModel> จำฉันไว้ในระบบ
+                </li>
+                <li class="last-input" style="text-align:right;">
+                  ลืม <a (click)="pageService.setPage('Forgot username')">ชื่อผู้ใช้งาน</a> / 
+                  <a (click)="pageService.setPage('Forgot password')">รหัสผ่าน</a>
+                </li>
+                <input type="submit" value="เข้าสู่ระบบ" class="" style="margin-left:calc(50% - 64px);">
+              </ul>
+            </form>
+
+            <form *ngIf="settingService.getLanguage()=='English'"
+            #login2="ngForm" (ngSubmit)="memberLogIn(login2)" ngNativeValidate>
+              <ul>
+                <li><div class="input-label">Username</div>
+                  <input class="reg-input" type="text" name="username" value="" ngModel required></li>
+                <li><div class="input-label">Password</div>
+                  <input class="reg-input" type="password" name="password" value="" ngModel required>
+                  <div class="error-message"><span *ngIf="loginFail">* Wrong username or password</span></div>
+                </li>
+                <li class="last-input">
+                  <input name="rememberme" type="checkbox" ngModel> Remember me
+                </li>
+                <li class="last-input" style="text-align:right;">
+                  Forgot <a (click)="pageService.setPage('Forgot username')">username</a> / 
+                  <a (click)="pageService.setPage('Forgot password')">password</a> ?
+                </li>
+                <input type="submit" value="Log In" class="" style="margin-left:calc(50% - 42px);">
+              </ul>
+            </form>
+
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+</div>
