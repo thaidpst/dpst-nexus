@@ -10,6 +10,7 @@ import { SettingService } from './services/setting.service';
 import { AuthenticationService } from './services/authentication.service';
 import { UserinfoService } from './services/userinfo.service';
 import { AdminService } from './services/admin.service';
+import { CookieService } from './services/cookie.service';
 
 // Components
 import { AppComponent } from './app.component';
@@ -46,7 +47,8 @@ import { PageAdminPanelComponent } from './page-admin-panel/page-admin-panel.com
     SettingService,
     AuthenticationService,
     UserinfoService,
-    AdminService
+    AdminService,
+    CookieService
   ],
   bootstrap: [
     AppComponent

@@ -5,6 +5,7 @@ import { SocketioService } from '../services/socketio.service';
 import { PageService } from '../services/page.service';
 import { SettingService } from '../services/setting.service';
 import { UserinfoService } from '../services/userinfo.service';
+import { CookieService } from '../services/cookie.service';
 
 @Component({
   selector: 'app-header-navbar',
@@ -20,7 +21,8 @@ export class HeaderNavbarComponent implements OnInit {
     private socketioService: SocketioService,
     private pageService: PageService,
     private settingService: SettingService,
-    private userinfoService: UserinfoService
+    private userinfoService: UserinfoService,
+    private cookieService: CookieService
   ) {
     this.host = d3.select(this.elementRef.nativeElement);
   }
@@ -50,6 +52,7 @@ export class HeaderNavbarComponent implements OnInit {
     this.socketioService.logout();
     this.userinfoService.setUserinfo(null);
     this.pageService.setPage('Homepage');
+    this.cookieService.clearUserLoginCookie();
   }
 
 }

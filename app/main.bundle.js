@@ -49,15 +49,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var socketio_service_1 = __webpack_require__("./src/app/services/socketio.service.ts");
 var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
+var authentication_service_1 = __webpack_require__("./src/app/services/authentication.service.ts");
 var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
+var cookie_service_1 = __webpack_require__("./src/app/services/cookie.service.ts");
 core_1.enableProdMode();
 var AppComponent = /** @class */ (function () {
-    function AppComponent(socketioService, pageService, userinfoService) {
+    function AppComponent(socketioService, pageService, authenticationService, userinfoService, cookieService) {
         this.socketioService = socketioService;
         this.pageService = pageService;
+        this.authenticationService = authenticationService;
         this.userinfoService = userinfoService;
+        this.cookieService = cookieService;
     }
     AppComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.socketioService.connect();
         this.socketioService.getSocket().on('announce-account-active', function (userId) {
             if (this.userinfoService.getUserinfo() !== null && userId == this.userinfoService.getUserinfo()._id) {
@@ -71,6 +76,19 @@ var AppComponent = /** @class */ (function () {
                 this.pageService.setPage('Homepage');
             }
         }.bind(this));
+        // Check remember me login
+        this.cookieService.checkRememberLogin()
+            .then(function (result) {
+            if (result.status) {
+                _this.authenticationService.loginWithCookie(result.data)
+                    .then(function (result2) {
+                    if (result2.status) {
+                        _this.socketioService.login(result2.data.username);
+                        _this.userinfoService.setUserinfo(result2.data);
+                    }
+                });
+            }
+        });
     };
     AppComponent = __decorate([
         core_1.Component({
@@ -80,7 +98,9 @@ var AppComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [socketio_service_1.SocketioService,
             page_service_1.PageService,
-            userinfo_service_1.UserinfoService])
+            authentication_service_1.AuthenticationService,
+            userinfo_service_1.UserinfoService,
+            cookie_service_1.CookieService])
     ], AppComponent);
     return AppComponent;
 }());
@@ -112,6 +132,7 @@ var setting_service_1 = __webpack_require__("./src/app/services/setting.service.
 var authentication_service_1 = __webpack_require__("./src/app/services/authentication.service.ts");
 var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
 var admin_service_1 = __webpack_require__("./src/app/services/admin.service.ts");
+var cookie_service_1 = __webpack_require__("./src/app/services/cookie.service.ts");
 // Components
 var app_component_1 = __webpack_require__("./src/app/app.component.ts");
 var header_navbar_component_1 = __webpack_require__("./src/app/header-navbar/header-navbar.component.ts");
@@ -149,7 +170,8 @@ var AppModule = /** @class */ (function () {
                 setting_service_1.SettingService,
                 authentication_service_1.AuthenticationService,
                 userinfo_service_1.UserinfoService,
-                admin_service_1.AdminService
+                admin_service_1.AdminService,
+                cookie_service_1.CookieService
             ],
             bootstrap: [
                 app_component_1.AppComponent
@@ -261,13 +283,15 @@ var socketio_service_1 = __webpack_require__("./src/app/services/socketio.servic
 var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
 var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
 var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
+var cookie_service_1 = __webpack_require__("./src/app/services/cookie.service.ts");
 var HeaderNavbarComponent = /** @class */ (function () {
-    function HeaderNavbarComponent(elementRef, socketioService, pageService, settingService, userinfoService) {
+    function HeaderNavbarComponent(elementRef, socketioService, pageService, settingService, userinfoService, cookieService) {
         this.elementRef = elementRef;
         this.socketioService = socketioService;
         this.pageService = pageService;
         this.settingService = settingService;
         this.userinfoService = userinfoService;
+        this.cookieService = cookieService;
         this.host = d3.select(this.elementRef.nativeElement);
     }
     HeaderNavbarComponent.prototype.ngOnInit = function () {
@@ -292,6 +316,7 @@ var HeaderNavbarComponent = /** @class */ (function () {
         this.socketioService.logout();
         this.userinfoService.setUserinfo(null);
         this.pageService.setPage('Homepage');
+        this.cookieService.clearUserLoginCookie();
     };
     HeaderNavbarComponent = __decorate([
         core_1.Component({
@@ -303,7 +328,8 @@ var HeaderNavbarComponent = /** @class */ (function () {
             socketio_service_1.SocketioService,
             page_service_1.PageService,
             setting_service_1.SettingService,
-            userinfo_service_1.UserinfoService])
+            userinfo_service_1.UserinfoService,
+            cookie_service_1.CookieService])
     ], HeaderNavbarComponent);
     return HeaderNavbarComponent;
 }());
@@ -627,13 +653,15 @@ var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
 var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
 var authentication_service_1 = __webpack_require__("./src/app/services/authentication.service.ts");
 var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
+var cookie_service_1 = __webpack_require__("./src/app/services/cookie.service.ts");
 var PageLoginComponent = /** @class */ (function () {
-    function PageLoginComponent(socketioService, pageService, settingService, authService, userinfoService) {
+    function PageLoginComponent(socketioService, pageService, settingService, authService, userinfoService, cookieService) {
         this.socketioService = socketioService;
         this.pageService = pageService;
         this.settingService = settingService;
         this.authService = authService;
         this.userinfoService = userinfoService;
+        this.cookieService = cookieService;
         this.loginFail = false;
     }
     PageLoginComponent.prototype.ngOnInit = function () {
@@ -643,6 +671,10 @@ var PageLoginComponent = /** @class */ (function () {
         this.authService.login(form.value)
             .then(function (result) {
             if (result.status) {
+                if (form.value.rememberme == true)
+                    _this.cookieService.setUserLoginCookie(result.data);
+                else
+                    _this.cookieService.clearUserLoginCookie();
                 _this.loginFail = false;
                 _this.loginSuccess(result.data);
                 form.resetForm();
@@ -667,7 +699,8 @@ var PageLoginComponent = /** @class */ (function () {
             page_service_1.PageService,
             setting_service_1.SettingService,
             authentication_service_1.AuthenticationService,
-            userinfo_service_1.UserinfoService])
+            userinfo_service_1.UserinfoService,
+            cookie_service_1.CookieService])
     ], PageLoginComponent);
     return PageLoginComponent;
 }());
@@ -924,6 +957,17 @@ var AuthenticationService = /** @class */ (function () {
         })
             .catch(function (err) { return null; });
     };
+    AuthenticationService.prototype.loginWithCookie = function (cookie) {
+        var url = this.apiUrl + '/loginwithcookie/' + cookie.username + '/' + cookie._id;
+        return this.http.get(url).toPromise()
+            .then(function (response) {
+            var result = response.json();
+            if (globals_1.testing)
+                console.log(result.message);
+            return result;
+        })
+            .catch(function (err) { return null; });
+    };
     AuthenticationService = __decorate([
         core_1.Injectable(),
         __metadata("design:paramtypes", [http_1.Http])
@@ -931,6 +975,74 @@ var AuthenticationService = /** @class */ (function () {
     return AuthenticationService;
 }());
 exports.AuthenticationService = AuthenticationService;
+
+
+/***/ }),
+
+/***/ "./src/app/services/cookie.service.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+var globals_1 = __webpack_require__("./src/app/globals.ts");
+var CookieService = /** @class */ (function () {
+    function CookieService(http) {
+        this.http = http;
+        this.apiUrl = globals_1.ipHost + '/cookie';
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+    }
+    CookieService.prototype.checkRememberLogin = function () {
+        var url = this.apiUrl + '/checkrememberlogin';
+        return this.http.get(url).toPromise()
+            .then(function (response) {
+            var result = response.json();
+            if (globals_1.testing)
+                console.log(result.message);
+            return result;
+        })
+            .catch(function (err) { return null; });
+    };
+    CookieService.prototype.setUserLoginCookie = function (userinfo) {
+        var url = this.apiUrl + '/setlogincookie/' + userinfo.username + '/' + userinfo._id;
+        this.http.get(url).toPromise()
+            .then(function (response) {
+            var result = response.json();
+            if (globals_1.testing)
+                console.log(result.message);
+            return result;
+        })
+            .catch(function (err) { return null; });
+    };
+    CookieService.prototype.clearUserLoginCookie = function () {
+        var url = this.apiUrl + '/clearlogincookie';
+        this.http.get(url).toPromise()
+            .then(function (response) {
+            var result = response.json();
+            if (globals_1.testing)
+                console.log(result.message);
+            return result;
+        })
+            .catch(function (err) { return null; });
+    };
+    CookieService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http])
+    ], CookieService);
+    return CookieService;
+}());
+exports.CookieService = CookieService;
 
 
 /***/ }),

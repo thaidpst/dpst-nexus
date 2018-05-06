@@ -45,6 +45,7 @@ router.post('/register', (req, res)=>{
             .catch(err1=>{res.json({status:false, message:'Register error: '+err1, data:null})});
     }
 });
+
 router.get('/login/:username/:password', (req, res)=>{
     let username = req.params.username,
         password = req.params.password;
@@ -73,6 +74,32 @@ router.get('/login/:username/:password', (req, res)=>{
             }
         })
         .catch(err1=>{res.json({status:false, message:'Login Error: '+err1, data:null})})
+});
+router.get('/loginwithcookie/:username/:userId', (req, res)=>{
+    let username = req.params.username,
+        userId = req.db.id(req.params.userId);
+    let dbUsers = req.db.get('users');
+
+    dbUsers.findOne({ _id: userId, username: username })
+        .then(check1=>{
+            if (check1===null) res.json({status:false, message:'Cookie login fail: Wrong username.', data:0});
+            else {
+                res.json({
+                    status: true, 
+                    message: 'Cookie login successfully!', 
+                    data: {
+                        _id: check1._id,
+                        username: check1.username,
+                        level: check1.level,
+                        firstname: check1.firstname,
+                        lastname: check1.lastname,
+                        email: check1.email,
+                        status: check1.status
+                    }
+                });            
+            }
+        })
+        .catch(err1=>{res.json({status:false, message:'Cookie login Error: '+err1, data:null})})
 });
 
 

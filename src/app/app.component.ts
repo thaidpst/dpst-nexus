@@ -2,7 +2,9 @@ import { Component, OnInit, enableProdMode } from '@angular/core';
 
 import { SocketioService } from './services/socketio.service';
 import { PageService } from './services/page.service';
+import { AuthenticationService } from './services/authentication.service';
 import { UserinfoService } from './services/userinfo.service';
+import { CookieService } from './services/cookie.service';
 
 enableProdMode();
 
@@ -16,7 +18,9 @@ export class AppComponent {
   constructor(
     private socketioService: SocketioService,
     private pageService: PageService,
-    private userinfoService: UserinfoService
+    private authenticationService: AuthenticationService,
+    private userinfoService: UserinfoService,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit() {
@@ -35,6 +39,20 @@ export class AppComponent {
         this.pageService.setPage('Homepage');
       }
     }.bind(this));
+
+    // Check remember me login
+    this.cookieService.checkRememberLogin()
+      .then(result=>{
+        if (result.status) {
+          this.authenticationService.loginWithCookie(result.data)
+            .then(result2=>{
+              if (result2.status) {
+                this.socketioService.login(result2.data.username);
+                this.userinfoService.setUserinfo(result2.data);
+              }
+            });
+        }
+      });
   }
 
 }

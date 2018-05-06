@@ -6,6 +6,7 @@ import { PageService } from '../services/page.service';
 import { SettingService } from '../services/setting.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { UserinfoService } from '../services/userinfo.service';
+import { CookieService } from '../services/cookie.service';
 
 @Component({
   selector: 'app-page-login',
@@ -21,7 +22,8 @@ export class PageLoginComponent implements OnInit {
     private pageService: PageService,
     private settingService: SettingService,
     private authService: AuthenticationService,
-    private userinfoService: UserinfoService
+    private userinfoService: UserinfoService,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit() {
@@ -31,6 +33,9 @@ export class PageLoginComponent implements OnInit {
     this.authService.login(form.value)
       .then(result=>{
         if (result.status) {
+          if (form.value.rememberme==true) this.cookieService.setUserLoginCookie(result.data);
+          else this.cookieService.clearUserLoginCookie();
+
           this.loginFail = false;
           this.loginSuccess(result.data);
           form.resetForm();

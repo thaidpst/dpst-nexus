@@ -4,25 +4,14 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const http = require('http');
 
-
-// Hash function
-String.prototype.hashCode = function() {
-    var hash = 0;
-    if (this.length == 0) {
-        return hash;
-    }
-    for (var i = 0; i < this.length; i++) {
-        char = this.charCodeAt(i);
-        hash = ((hash<<5)-hash)+char;
-        hash = hash & hash; // Convert to 32bit integer
-    }
-    return hash;
-}
-
 // Initialize application
 const app = express();
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+
+// Cookie parser
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 //CORS middleware
 var allowCrossDomain = function(req, res, next) {
@@ -53,11 +42,11 @@ app.use(express.static(path.join(__dirname, 'app')));
 const authentication = require('./api/authentication');
 const admin = require('./api/admin');
 const user = require('./api/user');
-// const admin = require('./server/routes/admin');
+const cookie = require('./api/cookie');
 app.use('/authentication', authentication);
 app.use('/admin', admin);
 app.use('/user', user);
-// app.use('/admin', admin);
+app.use('/cookie', cookie);
 
 // Send all other requests to the Angular app
 app.get('*', (req, res)=>{
