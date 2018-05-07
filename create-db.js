@@ -86,6 +86,10 @@ db.createCollection("userDetail", {
                     bsonType: "string",
                     description: "must be a string and is not required"
                 },
+                major: {
+                    bsonType: "string",
+                    description: "must be a string and is not required"
+                },
                 dpstYear: {
                     bsonType: "string",
                     description: "must be a string and is not required"

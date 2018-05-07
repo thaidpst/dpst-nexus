@@ -41,4 +41,17 @@ export class UserinfoService {
       .catch(err=>{return null});
   }
 
+  updateUserDetail(userId, updatedUserDetail) {
+    let url = this.apiUrl + '/updateuserdetail',
+        input = {userId: userId, updatedUserDetail: updatedUserDetail};
+    return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
+      .toPromise()
+      .then(response=>{
+        let result = response.json();
+        if (testing) console.log(result.message);
+        return result;
+      })
+      .catch(err=>{return null});
+  }
+
 }

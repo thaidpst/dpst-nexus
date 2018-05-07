@@ -30,6 +30,8 @@ import { PageUserProfileComponent } from './page-user-panel/page-user-profile/pa
 import { PageUserEditProfileComponent } from './page-user-panel/page-user-edit-profile/page-user-edit-profile.component';
 import { PageUserSettingComponent } from './page-user-panel/page-user-setting/page-user-setting.component';
 import { PageUserHistoryComponent } from './page-user-panel/page-user-history/page-user-history.component';
+import { ProfileFormComponent } from './forms/profile-form/profile-form.component';
+import { ProfileEditFormComponent } from './forms/profile-edit-form/profile-edit-form.component';
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import { PageUserHistoryComponent } from './page-user-panel/page-user-history/pa
     PageUserProfileComponent,
     PageUserEditProfileComponent,
     PageUserSettingComponent,
-    PageUserHistoryComponent
+    PageUserHistoryComponent,
+    ProfileFormComponent,
+    ProfileEditFormComponent
   ],
   imports: [
     BrowserModule,

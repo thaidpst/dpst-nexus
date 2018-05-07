@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SettingService } from '../../services/setting.service';
 import { UserinfoService } from '../../services/userinfo.service';
 
 @Component({
@@ -10,10 +9,9 @@ import { UserinfoService } from '../../services/userinfo.service';
 })
 export class PageUserProfileComponent implements OnInit {
 
-  private userOnHand = null;
+  private userDetail = null;
 
   constructor(
-    private settingService: SettingService,
     private userinfoService: UserinfoService
   ) { }
 
@@ -22,18 +20,9 @@ export class PageUserProfileComponent implements OnInit {
     this.userinfoService.getUserDetail(userinfo)
       .then(result=>{
         if (result!==null && result.status) {
-          this.userOnHand = result.data;
+          this.userDetail = result.data;
         }
       });
-  }
-
-  viewUserPosition() {
-    if (this.userOnHand.position===undefined) return 'N/A';
-    else return this.userOnHand.position;
-  }
-  viewUserAbout() {
-    if (this.userOnHand.about===undefined) return 'N/A';
-    else return this.userOnHand.about;
   }
 
 }

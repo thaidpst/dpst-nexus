@@ -1,64 +1,7 @@
-
-<div *ngIf="userOnHand===null" class="political-team political-team-list">
+<div *ngIf="userDetail===null" class="political-team political-team-list">
   <h3>Loading your data...</h3>
 </div>
 
-<div *ngIf="userOnHand!==null && settingService.getLanguage()=='Thai'" class="political-team political-team-list">
-  <ul class="row">
-    <li class="col-md-12">
-      <div class="political-team-list-wrap">
-        <figure><img [src]="userOnHand.profileUrl" alt="Profile image not available"></figure>
-        <div class="political-team-list-text">
-          <h2>{{userOnHand.firstname}} {{userOnHand.lastname}}</h2>
-          <span>ตำเเหน่ง: {{viewUserPosition()}}</span>
-          <p style="float:none; margin:5px 0 10px 0;">เกี่ยวกับ: {{viewUserAbout()}}</p>
-          <ul class="political-team-info">
-            <li><i class="fa fa-globe"></i><strong>พสวท. รุ่นที่</strong> {{userOnHand.dpstYear}}</li>
-            <li><i class="fa fa-graduation-cap"></i><strong>ระดับการศึกษา:</strong> {{userOnHand.education}}</li>
-            <li><i class="fa fa-book"></i><strong>สถานศีกษา:</strong> {{userOnHand.school}}</li>
-            <li><i class="fa fa-briefcase"></i><strong>สถานที่ทำงาน:</strong> {{userOnHand.workplace}}</li>
-            <li><i class="fa fa-envelope"></i><strong>E-mail:</strong> <a [href]="'mailto:'+userOnHand.email">{{userOnHand.email}}</a></li>
-            <li><i class="fa fa-phone"></i><strong>โทรศัพท์:</strong> <span>{{userOnHand.phone}}</span></li>
-            <li><i class="fa fa-comments"></i><strong>Line id:</strong> <span>{{userOnHand.lineId}}</span></li>
-            <li><i class="fa fa-home"></i><strong>ที่อยู่:</strong>
-              <br>{{userOnHand.address1}}
-              <ng-container *ngIf="userOnHand.address2!==undefined && userOnHand.address2!=''"><br>{{userOnHand.address2}}</ng-container>
-              <br>{{userOnHand.province}}, {{userOnHand.zip}}
-              <br>{{userOnHand.country}}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </li>
-  </ul>
-</div>
-
-<div *ngIf="userOnHand!==null && settingService.getLanguage()=='English'" class="political-team political-team-list">
-  <ul class="row">
-    <li class="col-md-12">
-      <div class="political-team-list-wrap">
-        <figure><img [src]="userOnHand.profileUrl" alt="Profile image not available"></figure>
-        <div class="political-team-list-text">
-          <h2>{{userOnHand.firstname}} {{userOnHand.lastname}}</h2>
-          <span>Position: {{viewUserPosition()}}</span>
-          <p style="float:none; margin:5px 0 10px 0;">About: {{viewUserAbout()}}</p>
-          <ul class="political-team-info">
-            <li><i class="fa fa-globe"></i><strong>DPST. #</strong> {{userOnHand.dpstYear}}</li>
-            <li><i class="fa fa-graduation-cap"></i><strong>Education:</strong> {{userOnHand.education}}</li>
-            <li><i class="fa fa-book"></i><strong>School/University:</strong> {{userOnHand.school}}</li>
-            <li><i class="fa fa-briefcase"></i><strong>Work place:</strong> {{userOnHand.workplace}}</li>
-            <li><i class="fa fa-envelope"></i><strong>E-mail:</strong> <a [href]="'mailto:'+userOnHand.email">{{userOnHand.email}}</a></li>
-            <li><i class="fa fa-phone"></i><strong>Phone:</strong> <span>{{userOnHand.phone}}</span></li>
-            <li><i class="fa fa-comments"></i><strong>Line id:</strong> <span>{{userOnHand.lineId}}</span></li>
-            <li><i class="fa fa-home"></i><strong>Address:</strong>
-              <br>{{userOnHand.address1}}
-              <ng-container *ngIf="userOnHand.address2!==undefined && userOnHand.address2!=''"><br>{{userOnHand.address2}}</ng-container>
-              <br>{{userOnHand.province}}, {{userOnHand.zip}}
-              <br>{{userOnHand.country}}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </li>
-  </ul>
-</div>
+<ng-container *ngIf="userDetail!==null">
+  <app-profile-form [userDetail]="userDetail"></app-profile-form>
+</ng-container>

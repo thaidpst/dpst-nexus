@@ -32,16 +32,10 @@ module.exports = "<div class=\"political-main-wrapper\">\n\n  <app-header-navbar
 /***/ }),
 
 /***/ "./src/app/app.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_socketio_service__ = __webpack_require__("./src/app/services/socketio.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_authentication_service__ = __webpack_require__("./src/app/services/authentication.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_cookie_service__ = __webpack_require__("./src/app/services/cookie.service.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -51,13 +45,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
-
-
-
-Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* enableProdMode */])();
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var socketio_service_1 = __webpack_require__("./src/app/services/socketio.service.ts");
+var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
+var authentication_service_1 = __webpack_require__("./src/app/services/authentication.service.ts");
+var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
+var cookie_service_1 = __webpack_require__("./src/app/services/cookie.service.ts");
+core_1.enableProdMode();
 var AppComponent = /** @class */ (function () {
     function AppComponent(socketioService, pageService, authenticationService, userinfoService, cookieService) {
         this.socketioService = socketioService;
@@ -97,139 +92,116 @@ var AppComponent = /** @class */ (function () {
         });
     };
     AppComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+        core_1.Component({
             selector: 'app-root',
             template: __webpack_require__("./src/app/app.component.html"),
             styles: [__webpack_require__("./src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_socketio_service__["a" /* SocketioService */],
-            __WEBPACK_IMPORTED_MODULE_2__services_page_service__["a" /* PageService */],
-            __WEBPACK_IMPORTED_MODULE_3__services_authentication_service__["a" /* AuthenticationService */],
-            __WEBPACK_IMPORTED_MODULE_4__services_userinfo_service__["a" /* UserinfoService */],
-            __WEBPACK_IMPORTED_MODULE_5__services_cookie_service__["a" /* CookieService */]])
+        __metadata("design:paramtypes", [socketio_service_1.SocketioService,
+            page_service_1.PageService,
+            authentication_service_1.AuthenticationService,
+            userinfo_service_1.UserinfoService,
+            cookie_service_1.CookieService])
     ], AppComponent);
     return AppComponent;
 }());
-
+exports.AppComponent = AppComponent;
 
 
 /***/ }),
 
 /***/ "./src/app/app.module.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_socketio_service__ = __webpack_require__("./src/app/services/socketio.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_authentication_service__ = __webpack_require__("./src/app/services/authentication.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_admin_service__ = __webpack_require__("./src/app/services/admin.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_cookie_service__ = __webpack_require__("./src/app/services/cookie.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__app_component__ = __webpack_require__("./src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__header_navbar_header_navbar_component__ = __webpack_require__("./src/app/header-navbar/header-navbar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__page_home_page_home_component__ = __webpack_require__("./src/app/page-home/page-home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__page_login_page_login_component__ = __webpack_require__("./src/app/page-login/page-login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__page_register_page_register_component__ = __webpack_require__("./src/app/page-register/page-register.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__page_contact_page_contact_component__ = __webpack_require__("./src/app/page-contact/page-contact.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__footer_footer_component__ = __webpack_require__("./src/app/footer/footer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__page_check_status_page_check_status_component__ = __webpack_require__("./src/app/page-check-status/page-check-status.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__page_admin_panel_page_admin_panel_component__ = __webpack_require__("./src/app/page-admin-panel/page-admin-panel.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__page_admin_panel_page_admin_user_table_page_admin_user_table_component__ = __webpack_require__("./src/app/page-admin-panel/page-admin-user-table/page-admin-user-table.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__page_admin_panel_page_admin_statistic_page_admin_statistic_component__ = __webpack_require__("./src/app/page-admin-panel/page-admin-statistic/page-admin-statistic.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__page_admin_panel_page_admin_email_blast_page_admin_email_blast_component__ = __webpack_require__("./src/app/page-admin-panel/page-admin-email-blast/page-admin-email-blast.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__page_user_panel_page_user_panel_component__ = __webpack_require__("./src/app/page-user-panel/page-user-panel.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__page_user_panel_page_user_profile_page_user_profile_component__ = __webpack_require__("./src/app/page-user-panel/page-user-profile/page-user-profile.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__page_user_panel_page_user_edit_profile_page_user_edit_profile_component__ = __webpack_require__("./src/app/page-user-panel/page-user-edit-profile/page-user-edit-profile.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__page_user_panel_page_user_setting_page_user_setting_component__ = __webpack_require__("./src/app/page-user-panel/page-user-setting/page-user-setting.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__page_user_panel_page_user_history_page_user_history_component__ = __webpack_require__("./src/app/page-user-panel/page-user-history/page-user-history.component.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var platform_browser_1 = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+var forms_1 = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
 // Services
-
-
-
-
-
-
-
+var socketio_service_1 = __webpack_require__("./src/app/services/socketio.service.ts");
+var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
+var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
+var authentication_service_1 = __webpack_require__("./src/app/services/authentication.service.ts");
+var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
+var admin_service_1 = __webpack_require__("./src/app/services/admin.service.ts");
+var cookie_service_1 = __webpack_require__("./src/app/services/cookie.service.ts");
 // Components
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+var app_component_1 = __webpack_require__("./src/app/app.component.ts");
+var header_navbar_component_1 = __webpack_require__("./src/app/header-navbar/header-navbar.component.ts");
+var page_home_component_1 = __webpack_require__("./src/app/page-home/page-home.component.ts");
+var page_login_component_1 = __webpack_require__("./src/app/page-login/page-login.component.ts");
+var page_register_component_1 = __webpack_require__("./src/app/page-register/page-register.component.ts");
+var page_contact_component_1 = __webpack_require__("./src/app/page-contact/page-contact.component.ts");
+var footer_component_1 = __webpack_require__("./src/app/footer/footer.component.ts");
+var page_check_status_component_1 = __webpack_require__("./src/app/page-check-status/page-check-status.component.ts");
+var page_admin_panel_component_1 = __webpack_require__("./src/app/page-admin-panel/page-admin-panel.component.ts");
+var page_admin_user_table_component_1 = __webpack_require__("./src/app/page-admin-panel/page-admin-user-table/page-admin-user-table.component.ts");
+var page_admin_statistic_component_1 = __webpack_require__("./src/app/page-admin-panel/page-admin-statistic/page-admin-statistic.component.ts");
+var page_admin_email_blast_component_1 = __webpack_require__("./src/app/page-admin-panel/page-admin-email-blast/page-admin-email-blast.component.ts");
+var page_user_panel_component_1 = __webpack_require__("./src/app/page-user-panel/page-user-panel.component.ts");
+var page_user_profile_component_1 = __webpack_require__("./src/app/page-user-panel/page-user-profile/page-user-profile.component.ts");
+var page_user_edit_profile_component_1 = __webpack_require__("./src/app/page-user-panel/page-user-edit-profile/page-user-edit-profile.component.ts");
+var page_user_setting_component_1 = __webpack_require__("./src/app/page-user-panel/page-user-setting/page-user-setting.component.ts");
+var page_user_history_component_1 = __webpack_require__("./src/app/page-user-panel/page-user-history/page-user-history.component.ts");
+var profile_form_component_1 = __webpack_require__("./src/app/forms/profile-form/profile-form.component.ts");
+var profile_edit_form_component_1 = __webpack_require__("./src/app/forms/profile-edit-form/profile-edit-form.component.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* NgModule */])({
+        core_1.NgModule({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_11__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_12__header_navbar_header_navbar_component__["a" /* HeaderNavbarComponent */],
-                __WEBPACK_IMPORTED_MODULE_13__page_home_page_home_component__["a" /* PageHomeComponent */],
-                __WEBPACK_IMPORTED_MODULE_14__page_login_page_login_component__["a" /* PageLoginComponent */],
-                __WEBPACK_IMPORTED_MODULE_15__page_register_page_register_component__["a" /* PageRegisterComponent */],
-                __WEBPACK_IMPORTED_MODULE_16__page_contact_page_contact_component__["a" /* PageContactComponent */],
-                __WEBPACK_IMPORTED_MODULE_17__footer_footer_component__["a" /* FooterComponent */],
-                __WEBPACK_IMPORTED_MODULE_18__page_check_status_page_check_status_component__["a" /* PageCheckStatusComponent */],
-                __WEBPACK_IMPORTED_MODULE_19__page_admin_panel_page_admin_panel_component__["a" /* PageAdminPanelComponent */],
-                __WEBPACK_IMPORTED_MODULE_20__page_admin_panel_page_admin_user_table_page_admin_user_table_component__["a" /* PageAdminUserTableComponent */],
-                __WEBPACK_IMPORTED_MODULE_21__page_admin_panel_page_admin_statistic_page_admin_statistic_component__["a" /* PageAdminStatisticComponent */],
-                __WEBPACK_IMPORTED_MODULE_22__page_admin_panel_page_admin_email_blast_page_admin_email_blast_component__["a" /* PageAdminEmailBlastComponent */],
-                __WEBPACK_IMPORTED_MODULE_23__page_user_panel_page_user_panel_component__["a" /* PageUserPanelComponent */],
-                __WEBPACK_IMPORTED_MODULE_24__page_user_panel_page_user_profile_page_user_profile_component__["a" /* PageUserProfileComponent */],
-                __WEBPACK_IMPORTED_MODULE_25__page_user_panel_page_user_edit_profile_page_user_edit_profile_component__["a" /* PageUserEditProfileComponent */],
-                __WEBPACK_IMPORTED_MODULE_26__page_user_panel_page_user_setting_page_user_setting_component__["a" /* PageUserSettingComponent */],
-                __WEBPACK_IMPORTED_MODULE_27__page_user_panel_page_user_history_page_user_history_component__["a" /* PageUserHistoryComponent */]
+                app_component_1.AppComponent,
+                header_navbar_component_1.HeaderNavbarComponent,
+                page_home_component_1.PageHomeComponent,
+                page_login_component_1.PageLoginComponent,
+                page_register_component_1.PageRegisterComponent,
+                page_contact_component_1.PageContactComponent,
+                footer_component_1.FooterComponent,
+                page_check_status_component_1.PageCheckStatusComponent,
+                page_admin_panel_component_1.PageAdminPanelComponent,
+                page_admin_user_table_component_1.PageAdminUserTableComponent,
+                page_admin_statistic_component_1.PageAdminStatisticComponent,
+                page_admin_email_blast_component_1.PageAdminEmailBlastComponent,
+                page_user_panel_component_1.PageUserPanelComponent,
+                page_user_profile_component_1.PageUserProfileComponent,
+                page_user_edit_profile_component_1.PageUserEditProfileComponent,
+                page_user_setting_component_1.PageUserSettingComponent,
+                page_user_history_component_1.PageUserHistoryComponent,
+                profile_form_component_1.ProfileFormComponent,
+                profile_edit_form_component_1.ProfileEditFormComponent
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-                __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* HttpModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */]
+                platform_browser_1.BrowserModule,
+                http_1.HttpModule,
+                forms_1.FormsModule
             ],
             providers: [
-                __WEBPACK_IMPORTED_MODULE_4__services_socketio_service__["a" /* SocketioService */],
-                __WEBPACK_IMPORTED_MODULE_5__services_page_service__["a" /* PageService */],
-                __WEBPACK_IMPORTED_MODULE_6__services_setting_service__["a" /* SettingService */],
-                __WEBPACK_IMPORTED_MODULE_7__services_authentication_service__["a" /* AuthenticationService */],
-                __WEBPACK_IMPORTED_MODULE_8__services_userinfo_service__["a" /* UserinfoService */],
-                __WEBPACK_IMPORTED_MODULE_9__services_admin_service__["a" /* AdminService */],
-                __WEBPACK_IMPORTED_MODULE_10__services_cookie_service__["a" /* CookieService */]
+                socketio_service_1.SocketioService,
+                page_service_1.PageService,
+                setting_service_1.SettingService,
+                authentication_service_1.AuthenticationService,
+                userinfo_service_1.UserinfoService,
+                admin_service_1.AdminService,
+                cookie_service_1.CookieService
             ],
             bootstrap: [
-                __WEBPACK_IMPORTED_MODULE_11__app_component__["a" /* AppComponent */]
+                app_component_1.AppComponent
             ]
         })
     ], AppModule);
     return AppModule;
 }());
-
+exports.AppModule = AppModule;
 
 
 /***/ }),
@@ -249,11 +221,10 @@ module.exports = "<footer id=\"political-footer\" class=\"political-footer-one\"
 /***/ }),
 
 /***/ "./src/app/footer/footer.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FooterComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -263,14 +234,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var FooterComponent = /** @class */ (function () {
     function FooterComponent() {
     }
     FooterComponent.prototype.ngOnInit = function () {
     };
     FooterComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+        core_1.Component({
             selector: 'app-footer',
             template: __webpack_require__("./src/app/footer/footer.component.html"),
             styles: [__webpack_require__("./src/app/footer/footer.component.css")]
@@ -279,21 +251,186 @@ var FooterComponent = /** @class */ (function () {
     ], FooterComponent);
     return FooterComponent;
 }());
+exports.FooterComponent = FooterComponent;
 
+
+/***/ }),
+
+/***/ "./src/app/forms/profile-edit-form/profile-edit-form.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ".political-team-list-wrap .political-team-info > li {width:100%;}\r\n\r\nul {list-style-type:none;}\r\n\r\n::-webkit-input-placeholder {color:#b9b9b9;}\r\n\r\n:-ms-input-placeholder {color:#b9b9b9;}\r\n\r\n::-ms-input-placeholder {color:#b9b9b9;}\r\n\r\n::placeholder {color:#b9b9b9;}\r\n\r\n:-ms-input-placeholder {color:#b9b9b9;}\r\n\r\n::-ms-input-placeholder {color:#b9b9b9;}\r\n\r\n.profile-input {\r\n    background: #ffffff; \r\n    border: 1px solid #a3a3a3; \r\n    width: 55%; \r\n    margin-left: 5px;\r\n}\r\n\r\n.profile-input[type=text] {color:#000000;}\r\n\r\n.profile-about {width:100%; height:80px; color:#000000;}\r\n\r\n.profile-ad1, .profile-ad2 {margin:3px 0;}\r\n\r\n.profile-ad1 {width:100%;}\r\n\r\n.profile-ad2 {width:calc(50% - 2.5px);}\r\n"
+
+/***/ }),
+
+/***/ "./src/app/forms/profile-edit-form/profile-edit-form.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "\n<div *ngIf=\"settingService.getLanguage()=='Thai'\" class=\"political-team political-team-list\">\n  <form #editProfile1=\"ngForm\" (ngSubmit)=\"editProfileDetail(editProfile1)\">\n    <ul class=\"row\">\n      <li class=\"col-md-12\">\n        <div class=\"political-team-list-wrap\">\n          <figure><img [src]=\"userDetail.profileUrl\" alt=\"Profile image not available\"></figure>\n          <div class=\"political-team-list-text\">\n            <h2 style=\"margin-bottom:15px;\">{{userDetail.firstname}} {{userDetail.lastname}}</h2>\n            <span style=\"width:100%;\">ตำเเหน่ง: \n              <input class=\"profile-input\" type=\"text\" name=\"position\" [ngModel]=\"defaultValue(userDetail.position)\" placeholder=\"ตำแหน่งของคุณ\" ngModel></span>\n            <p style=\"float:none; margin:5px 0 10px 0;\">\n              <textarea class=\"profile-input profile-about\" name=\"about\" [ngModel]=\"defaultValue(userDetail.about)\" placeholder=\"เกี่ยวกับคุณ\" ngModel></textarea>\n            </p>\n            <ul class=\"political-team-info\">\n              <li><i class=\"fa fa-globe\"></i><strong>พสวท. รุ่นที่</strong>\n                <input class=\"profile-input\" type=\"text\" name=\"dpstYear\" [ngModel]=\"defaultValue(userDetail.dpstYear)\" placeholder=\"รุ่นของคุณ\" ngModel></li>\n              <li><i class=\"fa fa-graduation-cap\"></i><strong>ระดับการศึกษา:</strong>\n                <input class=\"profile-input\" type=\"text\" name=\"education\" [ngModel]=\"defaultValue(userDetail.education)\" placeholder=\"ระดับการศึกษาของคุณ\" ngModel></li>\n              <li><i class=\"fa fa-ravelry\"></i><strong>สาขาวิชา:</strong>\n                <input class=\"profile-input\" type=\"text\" name=\"major\" [ngModel]=\"defaultValue(userDetail.mojor)\" placeholder=\"สาขาวิชาของคุณ\" ngModel></li>\n              <li><i class=\"fa fa-book\"></i><strong>สถานศีกษา:</strong>\n                <input class=\"profile-input\" type=\"text\" name=\"school\" [ngModel]=\"defaultValue(userDetail.school)\" placeholder=\"สถานศีกษาของคุณ\" ngModel></li>\n              <li><i class=\"fa fa-briefcase\"></i><strong>สถานที่ทำงาน:</strong> \n                <input class=\"profile-input\" type=\"text\" name=\"workplace\" [ngModel]=\"defaultValue(userDetail.workplace)\" placeholder=\"สถานที่ทำงานของคุณ\" ngModel></li>\n              <li><i class=\"fa fa-envelope\"></i><strong>E-mail:</strong> <a [href]=\"'mailto:'+userDetail.email\">{{userDetail.email}}</a></li>\n              <li><i class=\"fa fa-phone\"></i><strong>โทรศัพท์:</strong> \n                <input class=\"profile-input\" type=\"text\" name=\"phone\" [ngModel]=\"defaultValue(userDetail.phone)\" placeholder=\"เบอร์โทรศัพท์ของคุณ\" ngModel></li>\n              <li><i class=\"fa fa-comments\"></i><strong>Line id:</strong>\n                <input class=\"profile-input\" type=\"text\" name=\"lineId\" [ngModel]=\"defaultValue(userDetail.lineId)\" placeholder=\"Line id ของคุณ\" ngModel></li>\n              <li><i class=\"fa fa-home\"></i><strong>ที่อยู่:</strong>\n                <br><input class=\"profile-input profile-ad1\" type=\"text\" name=\"address1\" [ngModel]=\"defaultValue(userDetail.address1)\" placeholder=\"ที่อยู่ของคุณ\" ngModel>\n                <br><input class=\"profile-input profile-ad1\" type=\"text\" name=\"address2\" [ngModel]=\"defaultValue(userDetail.address2)\" placeholder=\"ที่อยู่ของคุณบรรทัดที่ 2\" ngModel>\n                <br><input class=\"profile-input profile-ad2\" type=\"text\" name=\"province\" [ngModel]=\"defaultValue(userDetail.province)\" placeholder=\"จังหวัด\" ngModel> \n                <input class=\"profile-input profile-ad2\" type=\"text\" name=\"zip\" [ngModel]=\"defaultValue(userDetail.zip)\" placeholder=\"รหัสไปรษณีย์\" ngModel>\n                <br><input class=\"profile-input profile-ad1\" type=\"text\" name=\"country\" [ngModel]=\"defaultValue(userDetail.country)\" placeholder=\"ประเทศ\" ngModel>\n              </li>\n              <li>\n                <input class=\"political-simple-btn\" type=\"submit\" value=\"เเก้ไขประวัติส่วนตัว\">\n              </li>\n            </ul>\n          </div>\n        </div>\n      </li>\n    </ul>\n  </form>\n</div>\n\n<div *ngIf=\"settingService.getLanguage()=='English'\" class=\"political-team political-team-list\">\n  <form #editProfile2=\"ngForm\" (ngSubmit)=\"editProfileDetail(editProfile2)\">\n    <ul class=\"row\">\n      <li class=\"col-md-12\">\n        <div class=\"political-team-list-wrap\">\n          <figure><img [src]=\"userDetail.profileUrl\" alt=\"Profile image not available\"></figure>\n          <div class=\"political-team-list-text\">\n            <h2 style=\"margin-bottom:15px;\">{{userDetail.firstname}} {{userDetail.lastname}}</h2>\n            <span style=\"width:100%;\">Position: \n              <input class=\"profile-input\" type=\"text\" name=\"position\" [ngModel]=\"defaultValue(userDetail.position)\" placeholder=\"Your position\" ngModel></span>\n            <p style=\"float:none; margin:5px 0 10px 0;\">\n              <textarea class=\"profile-input profile-about\" name=\"about\" [ngModel]=\"defaultValue(userDetail.about)\" placeholder=\"About you\" ngModel></textarea>\n            </p>\n            <ul class=\"political-team-info\">\n              <li><i class=\"fa fa-globe\"></i><strong>DPST. #</strong>\n                <input class=\"profile-input\" type=\"text\" name=\"dpstYear\" [ngModel]=\"defaultValue(userDetail.dpstYear)\" placeholder=\"Your DPST. #\" ngModel></li>\n              <li><i class=\"fa fa-graduation-cap\"></i><strong>Education:</strong>\n                <input class=\"profile-input\" type=\"text\" name=\"education\" [ngModel]=\"defaultValue(userDetail.education)\" placeholder=\"Your education\" ngModel></li>\n              <li><i class=\"fa fa-ravelry\"></i><strong>Major:</strong>\n                <input class=\"profile-input\" type=\"text\" name=\"major\" [ngModel]=\"defaultValue(userDetail.mojor)\" placeholder=\"Your field of study\" ngModel></li>\n              <li><i class=\"fa fa-book\"></i><strong>School/University:</strong>\n                <input class=\"profile-input\" type=\"text\" name=\"school\" [ngModel]=\"defaultValue(userDetail.school)\" placeholder=\"Your school/university\" ngModel></li>\n              <li><i class=\"fa fa-briefcase\"></i><strong>Work place:</strong> \n                <input class=\"profile-input\" type=\"text\" name=\"workplace\" [ngModel]=\"defaultValue(userDetail.workplace)\" placeholder=\"Your work place\" ngModel></li>\n              <li><i class=\"fa fa-envelope\"></i><strong>E-mail:</strong> <a [href]=\"'mailto:'+userDetail.email\">{{userDetail.email}}</a></li>\n              <li><i class=\"fa fa-phone\"></i><strong>Phone:</strong> \n                <input class=\"profile-input\" type=\"text\" name=\"phone\" [ngModel]=\"defaultValue(userDetail.phone)\" placeholder=\"Your telephone number\" ngModel></li>\n              <li><i class=\"fa fa-comments\"></i><strong>Line id:</strong>\n                <input class=\"profile-input\" type=\"text\" name=\"lineId\" [ngModel]=\"defaultValue(userDetail.lineId)\" placeholder=\"Your Line id\" ngModel></li>\n              <li><i class=\"fa fa-home\"></i><strong>Address:</strong>\n                <br><input class=\"profile-input profile-ad1\" type=\"text\" name=\"address1\" [ngModel]=\"defaultValue(userDetail.address1)\" placeholder=\"Your address\" ngModel>\n                <br><input class=\"profile-input profile-ad1\" type=\"text\" name=\"address2\" [ngModel]=\"defaultValue(userDetail.address2)\" placeholder=\"Your adress line 2\" ngModel>\n                <br><input class=\"profile-input profile-ad2\" type=\"text\" name=\"province\" [ngModel]=\"defaultValue(userDetail.province)\" placeholder=\"Province/State\" ngModel> \n                <input class=\"profile-input profile-ad2\" type=\"text\" name=\"zip\" [ngModel]=\"defaultValue(userDetail.zip)\" placeholder=\"ZIP code\" ngModel>\n                <br><input class=\"profile-input profile-ad1\" type=\"text\" name=\"country\" [ngModel]=\"defaultValue(userDetail.country)\" placeholder=\"Country\" ngModel>\n              </li>\n              <li>\n                <input class=\"political-simple-btn\" type=\"submit\" value=\"Update your profile\">\n              </li>\n            </ul>\n          </div>\n        </div>\n      </li>\n    </ul>\n  </form>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/forms/profile-edit-form/profile-edit-form.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
+var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
+var ProfileEditFormComponent = /** @class */ (function () {
+    function ProfileEditFormComponent(settingService, userinfoService) {
+        this.settingService = settingService;
+        this.userinfoService = userinfoService;
+        this.userDetailUpdated = new core_1.EventEmitter();
+    }
+    ProfileEditFormComponent.prototype.ngOnInit = function () {
+    };
+    ProfileEditFormComponent.prototype.viewUserPosition = function () {
+        if (this.userDetail.position === undefined)
+            return 'N/A';
+        else
+            return this.userDetail.position;
+    };
+    ProfileEditFormComponent.prototype.viewUserAbout = function () {
+        if (this.userDetail.about === undefined)
+            return 'N/A';
+        else
+            return this.userDetail.about;
+    };
+    ProfileEditFormComponent.prototype.defaultValue = function (value) {
+        if (value === undefined)
+            return '';
+        else
+            return value;
+    };
+    ProfileEditFormComponent.prototype.editProfileDetail = function (form) {
+        var _this = this;
+        var keys = Object.keys(form.value), updatedUserDetail = {};
+        for (var i = 0; i < keys.length; i++) {
+            if (form.value[keys[i]] != '') {
+                var cleanValue = form.value[keys[i]].replace(new RegExp('"', 'g'), '');
+                cleanValue = cleanValue.trim();
+                updatedUserDetail[keys[i]] = cleanValue;
+            }
+        }
+        var userinfo = Object.assign({}, this.userDetail), userId = userinfo.userId;
+        this.userinfoService.updateUserDetail(userId, updatedUserDetail)
+            .then(function (result) {
+            _this.userDetailUpdated.emit(result);
+        });
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], ProfileEditFormComponent.prototype, "userDetail", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", core_1.EventEmitter)
+    ], ProfileEditFormComponent.prototype, "userDetailUpdated", void 0);
+    ProfileEditFormComponent = __decorate([
+        core_1.Component({
+            selector: 'app-profile-edit-form',
+            template: __webpack_require__("./src/app/forms/profile-edit-form/profile-edit-form.component.html"),
+            styles: [__webpack_require__("./src/app/forms/profile-edit-form/profile-edit-form.component.css")]
+        }),
+        __metadata("design:paramtypes", [setting_service_1.SettingService,
+            userinfo_service_1.UserinfoService])
+    ], ProfileEditFormComponent);
+    return ProfileEditFormComponent;
+}());
+exports.ProfileEditFormComponent = ProfileEditFormComponent;
+
+
+/***/ }),
+
+/***/ "./src/app/forms/profile-form/profile-form.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ".political-team-list-wrap .political-team-info > li {width:100%;}\r\n"
+
+/***/ }),
+
+/***/ "./src/app/forms/profile-form/profile-form.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "\n<div *ngIf=\"settingService.getLanguage()=='Thai'\" class=\"political-team political-team-list\">\n  <ul class=\"row\">\n    <li class=\"col-md-12\">\n      <div class=\"political-team-list-wrap\">\n        <figure><img [src]=\"userDetail.profileUrl\" alt=\"Profile image not available\"></figure>\n        <div class=\"political-team-list-text\">\n          <h2>{{userDetail.firstname}} {{userDetail.lastname}}</h2>\n          <span>ตำเเหน่ง: {{viewUserPosition()}}</span>\n          <p style=\"float:none; margin:5px 0 10px 0;\">เกี่ยวกับ: {{viewUserAbout()}}</p>\n          <ul class=\"political-team-info\">\n            <li><i class=\"fa fa-globe\"></i><strong>พสวท. รุ่นที่</strong> {{userDetail.dpstYear}}</li>\n            <li><i class=\"fa fa-graduation-cap\"></i><strong>ระดับการศึกษา:</strong> {{userDetail.education}}</li>\n            <li><i class=\"fa fa-ravelry\"></i><strong>สาขาวิชา:</strong> {{userDetail.major}}</li>\n            <li><i class=\"fa fa-book\"></i><strong>สถานศีกษา:</strong> {{userDetail.school}}</li>\n            <li><i class=\"fa fa-briefcase\"></i><strong>สถานที่ทำงาน:</strong> {{userDetail.workplace}}</li>\n            <li><i class=\"fa fa-envelope\"></i><strong>E-mail:</strong> <a [href]=\"'mailto:'+userDetail.email\">{{userDetail.email}}</a></li>\n            <li><i class=\"fa fa-phone\"></i><strong>โทรศัพท์:</strong> <span>{{userDetail.phone}}</span></li>\n            <li><i class=\"fa fa-comments\"></i><strong>Line id:</strong> <span>{{userDetail.lineId}}</span></li>\n            <li><i class=\"fa fa-home\"></i><strong>ที่อยู่:</strong>\n              <br>{{userDetail.address1}}\n              <ng-container *ngIf=\"userDetail.address2!==undefined && userDetail.address2!=''\"><br>{{userDetail.address2}}</ng-container>\n              <br>{{userDetail.province}} {{userDetail.zip}}\n              <br>{{userDetail.country}}\n            </li>\n          </ul>\n        </div>\n      </div>\n    </li>\n  </ul>\n</div>\n\n<div *ngIf=\"settingService.getLanguage()=='English'\" class=\"political-team political-team-list\">\n  <ul class=\"row\">\n    <li class=\"col-md-12\">\n      <div class=\"political-team-list-wrap\">\n        <figure><img [src]=\"userDetail.profileUrl\" alt=\"Profile image not available\"></figure>\n        <div class=\"political-team-list-text\">\n          <h2>{{userDetail.firstname}} {{userDetail.lastname}}</h2>\n          <span>Position: {{viewUserPosition()}}</span>\n          <p style=\"float:none; margin:5px 0 10px 0;\">About: {{viewUserAbout()}}</p>\n          <ul class=\"political-team-info\">\n            <li><i class=\"fa fa-globe\"></i><strong>DPST. #</strong> {{userDetail.dpstYear}}</li>\n            <li><i class=\"fa fa-graduation-cap\"></i><strong>Education:</strong> {{userDetail.education}}</li>\n            <li><i class=\"fa fa-ravelry\"></i><strong>Major:</strong> {{userDetail.major}}</li>\n            <li><i class=\"fa fa-book\"></i><strong>School/University:</strong> {{userDetail.school}}</li>\n            <li><i class=\"fa fa-briefcase\"></i><strong>Work place:</strong> {{userDetail.workplace}}</li>\n            <li><i class=\"fa fa-envelope\"></i><strong>E-mail:</strong> <a [href]=\"'mailto:'+userDetail.email\">{{userDetail.email}}</a></li>\n            <li><i class=\"fa fa-phone\"></i><strong>Phone:</strong> <span>{{userDetail.phone}}</span></li>\n            <li><i class=\"fa fa-comments\"></i><strong>Line id:</strong> <span>{{userDetail.lineId}}</span></li>\n            <li><i class=\"fa fa-home\"></i><strong>Address:</strong>\n              <br>{{userDetail.address1}}\n              <ng-container *ngIf=\"userDetail.address2!==undefined && userDetail.address2!=''\"><br>{{userDetail.address2}}</ng-container>\n              <br>{{userDetail.province}} {{userDetail.zip}}\n              <br>{{userDetail.country}}\n            </li>\n          </ul>\n        </div>\n      </div>\n    </li>\n  </ul>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/forms/profile-form/profile-form.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
+var ProfileFormComponent = /** @class */ (function () {
+    function ProfileFormComponent(settingService) {
+        this.settingService = settingService;
+    }
+    ProfileFormComponent.prototype.ngOnInit = function () {
+    };
+    ProfileFormComponent.prototype.viewUserPosition = function () {
+        if (this.userDetail.position === undefined)
+            return 'N/A';
+        else
+            return this.userDetail.position;
+    };
+    ProfileFormComponent.prototype.viewUserAbout = function () {
+        if (this.userDetail.about === undefined)
+            return 'N/A';
+        else
+            return this.userDetail.about;
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], ProfileFormComponent.prototype, "userDetail", void 0);
+    ProfileFormComponent = __decorate([
+        core_1.Component({
+            selector: 'app-profile-form',
+            template: __webpack_require__("./src/app/forms/profile-form/profile-form.component.html"),
+            styles: [__webpack_require__("./src/app/forms/profile-form/profile-form.component.css")]
+        }),
+        __metadata("design:paramtypes", [setting_service_1.SettingService])
+    ], ProfileFormComponent);
+    return ProfileFormComponent;
+}());
+exports.ProfileFormComponent = ProfileFormComponent;
 
 
 /***/ }),
 
 /***/ "./src/app/globals.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ipHost; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return testing; });
 
-var ipHost = "http://localhost:7000";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ipHost = "http://localhost:7000";
 // export const ipHost: string = "http://159.65.70.206:7000";
-var testing = true;
+exports.testing = true;
 
 
 /***/ }),
@@ -313,17 +450,10 @@ module.exports = "<header id=\"political-header\" class=\"political-header-one\"
 /***/ }),
 
 /***/ "./src/app/header-navbar/header-navbar.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeaderNavbarComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3__ = __webpack_require__("./node_modules/d3/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_socketio_service__ = __webpack_require__("./src/app/services/socketio.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_cookie_service__ = __webpack_require__("./src/app/services/cookie.service.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -333,13 +463,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
-
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var d3 = __webpack_require__("./node_modules/d3/index.js");
+var socketio_service_1 = __webpack_require__("./src/app/services/socketio.service.ts");
+var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
+var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
+var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
+var cookie_service_1 = __webpack_require__("./src/app/services/cookie.service.ts");
 var HeaderNavbarComponent = /** @class */ (function () {
     function HeaderNavbarComponent(elementRef, socketioService, pageService, settingService, userinfoService, cookieService) {
         this.elementRef = elementRef;
@@ -348,7 +479,7 @@ var HeaderNavbarComponent = /** @class */ (function () {
         this.settingService = settingService;
         this.userinfoService = userinfoService;
         this.cookieService = cookieService;
-        this.host = __WEBPACK_IMPORTED_MODULE_1_d3__["a" /* select */](this.elementRef.nativeElement);
+        this.host = d3.select(this.elementRef.nativeElement);
     }
     HeaderNavbarComponent.prototype.ngOnInit = function () {
     };
@@ -375,21 +506,21 @@ var HeaderNavbarComponent = /** @class */ (function () {
         this.cookieService.clearUserLoginCookie();
     };
     HeaderNavbarComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+        core_1.Component({
             selector: 'app-header-navbar',
             template: __webpack_require__("./src/app/header-navbar/header-navbar.component.html"),
             styles: [__webpack_require__("./src/app/header-navbar/header-navbar.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_core__["r" /* ElementRef */],
-            __WEBPACK_IMPORTED_MODULE_2__services_socketio_service__["a" /* SocketioService */],
-            __WEBPACK_IMPORTED_MODULE_3__services_page_service__["a" /* PageService */],
-            __WEBPACK_IMPORTED_MODULE_4__services_setting_service__["a" /* SettingService */],
-            __WEBPACK_IMPORTED_MODULE_5__services_userinfo_service__["a" /* UserinfoService */],
-            __WEBPACK_IMPORTED_MODULE_6__services_cookie_service__["a" /* CookieService */]])
+        __metadata("design:paramtypes", [core_1.ElementRef,
+            socketio_service_1.SocketioService,
+            page_service_1.PageService,
+            setting_service_1.SettingService,
+            userinfo_service_1.UserinfoService,
+            cookie_service_1.CookieService])
     ], HeaderNavbarComponent);
     return HeaderNavbarComponent;
 }());
-
+exports.HeaderNavbarComponent = HeaderNavbarComponent;
 
 
 /***/ }),
@@ -409,11 +540,10 @@ module.exports = "<p>\n  page-admin-email-blast works!\n</p>\n"
 /***/ }),
 
 /***/ "./src/app/page-admin-panel/page-admin-email-blast/page-admin-email-blast.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageAdminEmailBlastComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -423,14 +553,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var PageAdminEmailBlastComponent = /** @class */ (function () {
     function PageAdminEmailBlastComponent() {
     }
     PageAdminEmailBlastComponent.prototype.ngOnInit = function () {
     };
     PageAdminEmailBlastComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+        core_1.Component({
             selector: 'app-page-admin-email-blast',
             template: __webpack_require__("./src/app/page-admin-panel/page-admin-email-blast/page-admin-email-blast.component.html"),
             styles: [__webpack_require__("./src/app/page-admin-panel/page-admin-email-blast/page-admin-email-blast.component.css")]
@@ -439,7 +570,7 @@ var PageAdminEmailBlastComponent = /** @class */ (function () {
     ], PageAdminEmailBlastComponent);
     return PageAdminEmailBlastComponent;
 }());
-
+exports.PageAdminEmailBlastComponent = PageAdminEmailBlastComponent;
 
 
 /***/ }),
@@ -459,13 +590,10 @@ module.exports = "<div class=\"political-subheader\">\r\n    <div class=\"contai
 /***/ }),
 
 /***/ "./src/app/page-admin-panel/page-admin-panel.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageAdminPanelComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -475,9 +603,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
+var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
 var PageAdminPanelComponent = /** @class */ (function () {
     function PageAdminPanelComponent(pageService, settingService) {
         this.pageService = pageService;
@@ -486,17 +615,17 @@ var PageAdminPanelComponent = /** @class */ (function () {
     PageAdminPanelComponent.prototype.ngOnInit = function () {
     };
     PageAdminPanelComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+        core_1.Component({
             selector: 'app-page-admin-panel',
             template: __webpack_require__("./src/app/page-admin-panel/page-admin-panel.component.html"),
             styles: [__webpack_require__("./src/app/page-admin-panel/page-admin-panel.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_page_service__["a" /* PageService */],
-            __WEBPACK_IMPORTED_MODULE_2__services_setting_service__["a" /* SettingService */]])
+        __metadata("design:paramtypes", [page_service_1.PageService,
+            setting_service_1.SettingService])
     ], PageAdminPanelComponent);
     return PageAdminPanelComponent;
 }());
-
+exports.PageAdminPanelComponent = PageAdminPanelComponent;
 
 
 /***/ }),
@@ -516,11 +645,10 @@ module.exports = "<p>\n  page-admin-statistic works!\n</p>\n"
 /***/ }),
 
 /***/ "./src/app/page-admin-panel/page-admin-statistic/page-admin-statistic.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageAdminStatisticComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -530,14 +658,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var PageAdminStatisticComponent = /** @class */ (function () {
     function PageAdminStatisticComponent() {
     }
     PageAdminStatisticComponent.prototype.ngOnInit = function () {
     };
     PageAdminStatisticComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+        core_1.Component({
             selector: 'app-page-admin-statistic',
             template: __webpack_require__("./src/app/page-admin-panel/page-admin-statistic/page-admin-statistic.component.html"),
             styles: [__webpack_require__("./src/app/page-admin-panel/page-admin-statistic/page-admin-statistic.component.css")]
@@ -546,7 +675,7 @@ var PageAdminStatisticComponent = /** @class */ (function () {
     ], PageAdminStatisticComponent);
     return PageAdminStatisticComponent;
 }());
-
+exports.PageAdminStatisticComponent = PageAdminStatisticComponent;
 
 
 /***/ }),
@@ -554,27 +683,22 @@ var PageAdminStatisticComponent = /** @class */ (function () {
 /***/ "./src/app/page-admin-panel/page-admin-user-table/page-admin-user-table.component.css":
 /***/ (function(module, exports) {
 
-module.exports = "th {color:#000000;}\r\ntd {font-weight:300;}\r\n.fa {cursor:pointer;}\r\n.show-per-page, .select-sort, input.search[type=text] {height:38px; padding:3px;}\r\n.show-per-page {width:60px;}\r\n.select-sort {width:190px;}\r\ninput.search[type=text] {\r\n    font-size: 16px;\r\n    border: 1px solid #dfdfdf;\r\n    width: 180px;\r\n    color: #5a5a5a;\r\n    font-weight: 300;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n}\r\n.top-option {padding:0 15px; float:right;}\r\n.political-team-list-wrap .political-team-info > li {width:100%;}\r\n\r\n"
+module.exports = "th {color:#000000;}\r\ntd {font-weight:300;}\r\n.fa {cursor:pointer;}\r\n.show-per-page, .select-sort, input.search[type=text] {height:38px; padding:3px;}\r\n.show-per-page {width:60px;}\r\n.select-sort {width:190px;}\r\ninput.search[type=text] {\r\n    font-size: 16px;\r\n    border: 1px solid #dfdfdf;\r\n    width: 180px;\r\n    color: #5a5a5a;\r\n    font-weight: 300;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n}\r\n.top-option {padding:0 15px; float:right;}\r\n.back-btn {float:right; margin-bottom:20px;}\r\n"
 
 /***/ }),
 
 /***/ "./src/app/page-admin-panel/page-admin-user-table/page-admin-user-table.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"subpage=='Table'\" class=\"political-blog-large\">\n\n  <!-- Selection criteria -->\n  <div class=\"political-pagination\" style=\"color:#000; margin:0 0 25px 0;\">\n\n      <div class=\"top-option\">\n        <input #keyword class=\"search\" type=\"text\" (keyup.enter)=\"tableSearch(keyword.value)\">\n        <input type=\"submit\" class=\"political-simple-btn\" value=\"Search\" (click)=\"tableSearch(keyword.value)\">\n      </div>\n\n      <div class=\"top-option\">\n        Sort by\n        <select class=\"select-sort\" (change)=\"tableSortChange($event.target.value)\">\n          <option value=\"None\" selected=\"selected\">None</option>\n          <option value=\"Firstname increasing\">Firstname increasing</option>\n          <option value=\"Firstname decreasing\">Firstname decreasing</option>\n          <option value=\"Level increasing\">Level increasing</option>\n          <option value=\"Level decreasing\">Level decreasing</option>\n          <option value=\"Status increasing\">Status increasing</option>\n          <option value=\"Status decreasing\">Status decreasing</option>\n          <option value=\"Register date increasing\">Register date increasing</option>\n          <option value=\"Register date decreasing\">Register date decreasing</option>\n        </select>\n      </div>\n\n      <div class=\"top-option\">\n        Show per page\n        <select class=\"show-per-page\" (change)=\"tableLimitChange($event.target.value)\">\n          <option value=\"10\">10</option>\n          <option value=\"25\" selected=\"selected\">25</option>\n          <option value=\"50\">50</option>\n          <option value=\"100\">100</option>\n        </select>\n      </div>\n        \n  </div>\n\n  <ul class=\"row\">\n    <li class=\"col-md-12\">\n\n      <table><tbody>\n        <tr>\n          <th>Username</th>\n          <th>Firstname</th>\n          <th>Lastname</th>\n          <th>E-mail address</th>\n          <th>Level</th>\n          <th>Status</th>\n          <th>Actions</th>\n        </tr>\n\n        <ng-container *ngIf=\"users===null\">\n          <tr><td colspan=\"8\">No user data found.</td></tr>\n        </ng-container>\n        <ng-container *ngIf=\"users!==null\">\n          <tr *ngFor=\"let user of users;\">\n            <td>{{user.username}}</td>\n            <td>{{user.firstname}}</td>\n            <td>{{user.lastname}}</td>\n            <td>{{user.email}}</td>\n            <td>{{user.level}}</td>\n            <td [ngClass]=\"{'ban':user.status=='Ban', 'pen':user.status=='Pending', 'hello-user':user.status=='Active'}\">{{user.status}}</td>\n            \n            <!-- Admin options based on level -->\n            <td *ngIf=\"user.level < userinfoService.getUserinfo().level\">\n              <i *ngIf=\"user.status!='Active'\" class=\"fa fa-check-square-o hello-user\" aria-hidden=\"true\"\n                (click)=\"setAccountStatus(user, 'Active')\">&nbsp;</i>\n              <i *ngIf=\"user.status!='Ban'\" class=\"fa fa-times pen\" aria-hidden=\"true\"\n                (click)=\"setAccountStatus(user, 'Ban')\">&nbsp;</i>\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>&nbsp;\n              <i class=\"fa fa-pencil-square-o view-icon\" aria-hidden=\"true\"></i>&nbsp;\n              <i class=\"fa fa-trash ban\" aria-hidden=\"true\"\n                (click)=\"tryDeleteAccount(user)\"></i>\n            </td><!-- Lower users -->\n            <td *ngIf=\"user.level > userinfoService.getUserinfo().level\">\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewUserinfo(user)\"></i>\n            </td><!-- Higher users -->\n            <td *ngIf=\"user.level==userinfoService.getUserinfo().level && user._id==userinfoService.getUserinfo()._id\">\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>&nbsp;\n              <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n            </td><!-- Yourself -->\n            <td *ngIf=\"user.level==userinfoService.getUserinfo().level && user._id!=userinfoService.getUserinfo()._id\">\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>\n            </td><!-- Same level users, not you -->\n\n          </tr>\n        </ng-container>\n\n      </tbody></table>\n\n      <!-- Pagination -->\n      <div class=\"political-pagination\">\n        <ul class=\"page-numbers\">\n            <li><a class=\"previous page-numbers\" (click)=\"previouseTablePage()\"><span aria-label=\"Next\"><i class=\"fa fa-angle-left\"></i></span></a></li>\n            <li *ngFor=\"let page of pagination;\">\n              <a *ngIf=\"page!=criteria.page\" class=\"page-numbers\"\n              (click)=\"paginationChangePage(page)\">{{page+1}}</a>\n              <span *ngIf=\"page==criteria.page\" class=\"page-numbers current\">{{page+1}}</span>\n            </li>\n            <li><a class=\"next page-numbers\" (click)=\"nextTablePage()\"><span aria-label=\"Next\"><i class=\"fa fa-angle-right\"></i></span></a></li>\n        </ul>\n      </div>\n\n    </li>\n  </ul>\n</div>\n\n<!-- Delete user panel -->\n<div *ngIf=\"subpage=='Try delete' && settingService.getLanguage()=='Thai'\" class=\"political-blog-large\">\n  <h1 style=\"margin-bottom:20px;\"><strong>คุณกำลังจะทำการ<span class=\"ban\">ลบข้อมูลผู้ใช้</span></strong></h1>\n  <h3 style=\"margin-bottom:20px;\">ชื่อผู้ใช้งาน: <span class=\"hello-user\" style=\"font-weight:600;\">{{userOnHand.username}}</span></h3>\n  <input type=\"submit\" class=\"political-simple-btn delete-btn\" value=\"ลบข้อมูลผู้ใช้\" (click)=\"deleteAccount()\">\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"ยกเลิก\" (click)=\"tryDeleteCancel()\">\n      \n</div>\n<div *ngIf=\"subpage=='Try delete' && settingService.getLanguage()=='English'\" class=\"political-blog-large\">\n  <h1 style=\"margin-bottom:20px;\"><strong>You are about to <span class=\"ban\">DELETE</span> a user</strong></h1>\n  <h3 style=\"margin-bottom:20px;\">Username: <span class=\"hello-user\" style=\"font-weight:600;\">{{userOnHand.username}}</span></h3>\n  <input type=\"submit\" class=\"political-simple-btn delete-btn\" value=\"DELETE\" (click)=\"deleteAccount()\">\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"Cancel\" (click)=\"tryDeleteCancel()\">\n</div>\n\n<!-- View user panel -->\n<div *ngIf=\"subpage=='View user' && settingService.getLanguage()=='Thai'\" class=\"political-team political-team-list\">\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"ย้อนกลับไป\" (click)=\"ViewUserBack()\"\n  style=\"float:right; margin-bottom:20px;\">\n  <ul class=\"row\">\n    <li class=\"col-md-12\">\n      <div class=\"political-team-list-wrap\">\n        <figure><img [src]=\"userOnHand.profileUrl\" alt=\"Profile image not available\"></figure>\n        <div class=\"political-team-list-text\">\n          <h2>{{userOnHand.firstname}} {{userOnHand.lastname}}</h2>\n          <span>ตำเเหน่ง: {{viewUserPosition()}}</span>\n          <p style=\"float:none; margin:5px 0 10px 0;\">เกี่ยวกับ: {{viewUserAbout()}}</p>\n          <ul class=\"political-team-info\">\n            <li><i class=\"fa fa-globe\"></i><strong>พสวท. รุ่นที่</strong> {{userOnHand.dpstYear}}</li>\n            <li><i class=\"fa fa-graduation-cap\"></i><strong>ระดับการศึกษา:</strong> {{userOnHand.education}}</li>\n            <li><i class=\"fa fa-book\"></i><strong>สถานศีกษา:</strong> {{userOnHand.school}}</li>\n            <li><i class=\"fa fa-briefcase\"></i><strong>สถานที่ทำงาน:</strong> {{userOnHand.workplace}}</li>\n            <li><i class=\"fa fa-envelope\"></i><strong>E-mail:</strong> <a [href]=\"'mailto:'+userOnHand.email\">{{userOnHand.email}}</a></li>\n            <li><i class=\"fa fa-phone\"></i><strong>โทรศัพท์:</strong> <span>{{userOnHand.phone}}</span></li>\n            <li><i class=\"fa fa-comments\"></i><strong>Line id:</strong> <span>{{userOnHand.lineId}}</span></li>\n            <li><i class=\"fa fa-home\"></i><strong>ที่อยู่:</strong>\n              <br>{{userOnHand.address1}}\n              <ng-container *ngIf=\"userOnHand.address2!==undefined && userOnHand.address2!=''\"><br>{{userOnHand.address2}}</ng-container>\n              <br>{{userOnHand.province}}, {{userOnHand.zip}}\n              <br>{{userOnHand.country}}\n            </li>\n          </ul>\n        </div>\n      </div>\n    </li>\n  </ul>\n</div>\n<div *ngIf=\"subpage=='View user' && settingService.getLanguage()=='English'\" class=\"political-team political-team-list\">\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"Go back\" (click)=\"ViewUserBack()\"\n  style=\"float:right; margin-bottom:20px;\">\n  <ul class=\"row\">\n    <li class=\"col-md-12\">\n      <div class=\"political-team-list-wrap\">\n        <figure><img [src]=\"userOnHand.profileUrl\" alt=\"Profile image not available\"></figure>\n        <div class=\"political-team-list-text\">\n          <h2>{{userOnHand.firstname}} {{userOnHand.lastname}}</h2>\n          <span>Position: {{viewUserPosition()}}</span>\n          <p style=\"float:none; margin:5px 0 10px 0;\">About: {{viewUserAbout()}}</p>\n          <ul class=\"political-team-info\">\n            <li><i class=\"fa fa-globe\"></i><strong>DPST. #</strong> {{userOnHand.dpstYear}}</li>\n            <li><i class=\"fa fa-graduation-cap\"></i><strong>Education:</strong> {{userOnHand.education}}</li>\n            <li><i class=\"fa fa-book\"></i><strong>School/University:</strong> {{userOnHand.school}}</li>\n            <li><i class=\"fa fa-briefcase\"></i><strong>Work place:</strong> {{userOnHand.workplace}}</li>\n            <li><i class=\"fa fa-envelope\"></i><strong>E-mail:</strong> <a [href]=\"'mailto:'+userOnHand.email\">{{userOnHand.email}}</a></li>\n            <li><i class=\"fa fa-phone\"></i><strong>Phone:</strong> <span>{{userOnHand.phone}}</span></li>\n            <li><i class=\"fa fa-comments\"></i><strong>Line id:</strong> <span>{{userOnHand.lineId}}</span></li>\n            <li><i class=\"fa fa-home\"></i><strong>Address:</strong>\n              <br>{{userOnHand.address1}}\n              <ng-container *ngIf=\"userOnHand.address2!==undefined && userOnHand.address2!=''\"><br>{{userOnHand.address2}}</ng-container>\n              <br>{{userOnHand.province}}, {{userOnHand.zip}}\n              <br>{{userOnHand.country}}\n            </li>\n          </ul>\n        </div>\n      </div>\n    </li>\n  </ul>\n</div>"
+module.exports = "<div *ngIf=\"subpage=='Table'\" class=\"political-blog-large\">\n\n  <!-- Selection criteria -->\n  <div class=\"political-pagination\" style=\"color:#000; margin:0 0 25px 0;\">\n\n      <div class=\"top-option\">\n        <input #keyword class=\"search\" type=\"text\" (keyup.enter)=\"tableSearch(keyword.value)\">\n        <input type=\"submit\" class=\"political-simple-btn\" value=\"Search\" (click)=\"tableSearch(keyword.value)\">\n      </div>\n\n      <div class=\"top-option\">\n        Sort by\n        <select class=\"select-sort\" (change)=\"tableSortChange($event.target.value)\">\n          <option value=\"None\" selected=\"selected\">None</option>\n          <option value=\"Firstname increasing\">Firstname increasing</option>\n          <option value=\"Firstname decreasing\">Firstname decreasing</option>\n          <option value=\"Level increasing\">Level increasing</option>\n          <option value=\"Level decreasing\">Level decreasing</option>\n          <option value=\"Status increasing\">Status increasing</option>\n          <option value=\"Status decreasing\">Status decreasing</option>\n          <option value=\"Register date increasing\">Register date increasing</option>\n          <option value=\"Register date decreasing\">Register date decreasing</option>\n        </select>\n      </div>\n\n      <div class=\"top-option\">\n        Show per page\n        <select class=\"show-per-page\" (change)=\"tableLimitChange($event.target.value)\">\n          <option value=\"10\">10</option>\n          <option value=\"25\" selected=\"selected\">25</option>\n          <option value=\"50\">50</option>\n          <option value=\"100\">100</option>\n        </select>\n      </div>\n        \n  </div>\n\n  <ul class=\"row\">\n    <li class=\"col-md-12\">\n\n      <table><tbody>\n        <tr>\n          <th>Username</th>\n          <th>Firstname</th>\n          <th>Lastname</th>\n          <th>E-mail address</th>\n          <th>Level</th>\n          <th>Status</th>\n          <th>Actions</th>\n        </tr>\n\n        <ng-container *ngIf=\"users===null\">\n          <tr><td colspan=\"8\">No user data found.</td></tr>\n        </ng-container>\n        <ng-container *ngIf=\"users!==null\">\n          <tr *ngFor=\"let user of users;\">\n            <td>{{user.username}}</td>\n            <td>{{user.firstname}}</td>\n            <td>{{user.lastname}}</td>\n            <td>{{user.email}}</td>\n            <td>{{user.level}}</td>\n            <td [ngClass]=\"{'ban':user.status=='Ban', 'pen':user.status=='Pending', 'hello-user':user.status=='Active'}\">{{user.status}}</td>\n            \n            <!-- Admin options based on level -->\n            <td *ngIf=\"user.level < userinfoService.getUserinfo().level\">\n              <i *ngIf=\"user.status!='Active'\" class=\"fa fa-check-square-o hello-user\" aria-hidden=\"true\"\n                (click)=\"setAccountStatus(user, 'Active')\">&nbsp;</i>\n              <i *ngIf=\"user.status!='Ban'\" class=\"fa fa-times pen\" aria-hidden=\"true\"\n                (click)=\"setAccountStatus(user, 'Ban')\">&nbsp;</i>\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>&nbsp;\n              <i class=\"fa fa-pencil-square-o view-icon\" aria-hidden=\"true\"></i>&nbsp;\n              <i class=\"fa fa-trash ban\" aria-hidden=\"true\"\n                (click)=\"tryDeleteAccount(user)\"></i>\n            </td><!-- Lower users -->\n            <td *ngIf=\"user.level > userinfoService.getUserinfo().level\">\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewUserinfo(user)\"></i>\n            </td><!-- Higher users -->\n            <td *ngIf=\"user.level==userinfoService.getUserinfo().level && user._id==userinfoService.getUserinfo()._id\">\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>&nbsp;\n              <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n            </td><!-- Yourself -->\n            <td *ngIf=\"user.level==userinfoService.getUserinfo().level && user._id!=userinfoService.getUserinfo()._id\">\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>\n            </td><!-- Same level users, not you -->\n\n          </tr>\n        </ng-container>\n\n      </tbody></table>\n\n      <!-- Pagination -->\n      <div class=\"political-pagination\">\n        <ul class=\"page-numbers\">\n            <li><a class=\"previous page-numbers\" (click)=\"previouseTablePage()\"><span aria-label=\"Next\"><i class=\"fa fa-angle-left\"></i></span></a></li>\n            <li *ngFor=\"let page of pagination;\">\n              <a *ngIf=\"page!=criteria.page\" class=\"page-numbers\"\n              (click)=\"paginationChangePage(page)\">{{page+1}}</a>\n              <span *ngIf=\"page==criteria.page\" class=\"page-numbers current\">{{page+1}}</span>\n            </li>\n            <li><a class=\"next page-numbers\" (click)=\"nextTablePage()\"><span aria-label=\"Next\"><i class=\"fa fa-angle-right\"></i></span></a></li>\n        </ul>\n      </div>\n\n    </li>\n  </ul>\n</div>\n\n<!-- Delete user panel -->\n<div *ngIf=\"subpage=='Try delete' && settingService.getLanguage()=='Thai'\" class=\"political-blog-large\">\n  <h1 style=\"margin-bottom:20px;\"><strong>คุณกำลังจะทำการ<span class=\"ban\">ลบข้อมูลผู้ใช้</span></strong></h1>\n  <h3 style=\"margin-bottom:20px;\">ชื่อผู้ใช้งาน: <span class=\"hello-user\" style=\"font-weight:600;\">{{userOnHand.username}}</span></h3>\n  <input type=\"submit\" class=\"political-simple-btn delete-btn\" value=\"ลบข้อมูลผู้ใช้\" (click)=\"deleteAccount()\">\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"ยกเลิก\" (click)=\"tryDeleteCancel()\">\n      \n</div>\n<div *ngIf=\"subpage=='Try delete' && settingService.getLanguage()=='English'\" class=\"political-blog-large\">\n  <h1 style=\"margin-bottom:20px;\"><strong>You are about to <span class=\"ban\">DELETE</span> a user</strong></h1>\n  <h3 style=\"margin-bottom:20px;\">Username: <span class=\"hello-user\" style=\"font-weight:600;\">{{userOnHand.username}}</span></h3>\n  <input type=\"submit\" class=\"political-simple-btn delete-btn\" value=\"DELETE\" (click)=\"deleteAccount()\">\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"Cancel\" (click)=\"tryDeleteCancel()\">\n</div>\n\n<!-- View user profile -->\n<ng-container *ngIf=\"subpage=='View user' && userOnHand!==null\">\n  <input *ngIf=\"settingService.getLanguage()=='Thai'\" class=\"political-simple-btn back-btn\" type=\"submit\" \n    (click)=\"ViewUserBack()\" value=\"ย้อนกลับไป\">\n  <input *ngIf=\"settingService.getLanguage()=='English'\" class=\"political-simple-btn back-btn\" type=\"submit\" \n    (click)=\"ViewUserBack()\" value=\"Go back\">\n  <app-profile-form [userDetail]=\"userOnHand\"></app-profile-form>\n</ng-container>\n"
 
 /***/ }),
 
 /***/ "./src/app/page-admin-panel/page-admin-user-table/page-admin-user-table.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageAdminUserTableComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_socketio_service__ = __webpack_require__("./src/app/services/socketio.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_admin_service__ = __webpack_require__("./src/app/services/admin.service.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -584,11 +708,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var socketio_service_1 = __webpack_require__("./src/app/services/socketio.service.ts");
+var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
+var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
+var admin_service_1 = __webpack_require__("./src/app/services/admin.service.ts");
 var PageAdminUserTableComponent = /** @class */ (function () {
     function PageAdminUserTableComponent(socketioService, settingService, userinfoService, adminService) {
         this.socketioService = socketioService;
@@ -726,19 +851,19 @@ var PageAdminUserTableComponent = /** @class */ (function () {
         this.getUsersSubscription.unsubscribe();
     };
     PageAdminUserTableComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+        core_1.Component({
             selector: 'app-page-admin-user-table',
             template: __webpack_require__("./src/app/page-admin-panel/page-admin-user-table/page-admin-user-table.component.html"),
             styles: [__webpack_require__("./src/app/page-admin-panel/page-admin-user-table/page-admin-user-table.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_socketio_service__["a" /* SocketioService */],
-            __WEBPACK_IMPORTED_MODULE_2__services_setting_service__["a" /* SettingService */],
-            __WEBPACK_IMPORTED_MODULE_3__services_userinfo_service__["a" /* UserinfoService */],
-            __WEBPACK_IMPORTED_MODULE_4__services_admin_service__["a" /* AdminService */]])
+        __metadata("design:paramtypes", [socketio_service_1.SocketioService,
+            setting_service_1.SettingService,
+            userinfo_service_1.UserinfoService,
+            admin_service_1.AdminService])
     ], PageAdminUserTableComponent);
     return PageAdminUserTableComponent;
 }());
-
+exports.PageAdminUserTableComponent = PageAdminUserTableComponent;
 
 
 /***/ }),
@@ -758,13 +883,10 @@ module.exports = "<div class=\"political-main-content\">\n  <div class=\"politic
 /***/ }),
 
 /***/ "./src/app/page-check-status/page-check-status.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageCheckStatusComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -774,9 +896,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
+var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
 var PageCheckStatusComponent = /** @class */ (function () {
     function PageCheckStatusComponent(settingService, userinfoService) {
         this.settingService = settingService;
@@ -785,17 +908,17 @@ var PageCheckStatusComponent = /** @class */ (function () {
     PageCheckStatusComponent.prototype.ngOnInit = function () {
     };
     PageCheckStatusComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+        core_1.Component({
             selector: 'app-page-check-status',
             template: __webpack_require__("./src/app/page-check-status/page-check-status.component.html"),
             styles: [__webpack_require__("./src/app/page-check-status/page-check-status.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_setting_service__["a" /* SettingService */],
-            __WEBPACK_IMPORTED_MODULE_2__services_userinfo_service__["a" /* UserinfoService */]])
+        __metadata("design:paramtypes", [setting_service_1.SettingService,
+            userinfo_service_1.UserinfoService])
     ], PageCheckStatusComponent);
     return PageCheckStatusComponent;
 }());
-
+exports.PageCheckStatusComponent = PageCheckStatusComponent;
 
 
 /***/ }),
@@ -815,13 +938,10 @@ module.exports = "\n<div class=\"political-main-content\">\n    <div class=\"pol
 /***/ }),
 
 /***/ "./src/app/page-contact/page-contact.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageContactComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -831,9 +951,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
+var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
 var PageContactComponent = /** @class */ (function () {
     function PageContactComponent(pageService, settingService) {
         this.pageService = pageService;
@@ -860,21 +981,21 @@ var PageContactComponent = /** @class */ (function () {
         form.resetForm();
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_3" /* ViewChild */])('gmap'),
+        core_1.ViewChild('gmap'),
         __metadata("design:type", Object)
     ], PageContactComponent.prototype, "gmapElement", void 0);
     PageContactComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+        core_1.Component({
             selector: 'app-page-contact',
             template: __webpack_require__("./src/app/page-contact/page-contact.component.html"),
             styles: [__webpack_require__("./src/app/page-contact/page-contact.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_page_service__["a" /* PageService */],
-            __WEBPACK_IMPORTED_MODULE_2__services_setting_service__["a" /* SettingService */]])
+        __metadata("design:paramtypes", [page_service_1.PageService,
+            setting_service_1.SettingService])
     ], PageContactComponent);
     return PageContactComponent;
 }());
-
+exports.PageContactComponent = PageContactComponent;
 
 
 /***/ }),
@@ -894,14 +1015,10 @@ module.exports = "<div class=\"political-banner\">\n\t\t<div class=\"political-b
 /***/ }),
 
 /***/ "./src/app/page-home/page-home.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageHomeComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -911,10 +1028,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
+var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
+var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
 var PageHomeComponent = /** @class */ (function () {
     function PageHomeComponent(pageService, settingService, userinfoService) {
         this.pageService = pageService;
@@ -924,18 +1042,18 @@ var PageHomeComponent = /** @class */ (function () {
     PageHomeComponent.prototype.ngOnInit = function () {
     };
     PageHomeComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+        core_1.Component({
             selector: 'app-page-home',
             template: __webpack_require__("./src/app/page-home/page-home.component.html"),
             styles: [__webpack_require__("./src/app/page-home/page-home.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_page_service__["a" /* PageService */],
-            __WEBPACK_IMPORTED_MODULE_2__services_setting_service__["a" /* SettingService */],
-            __WEBPACK_IMPORTED_MODULE_3__services_userinfo_service__["a" /* UserinfoService */]])
+        __metadata("design:paramtypes", [page_service_1.PageService,
+            setting_service_1.SettingService,
+            userinfo_service_1.UserinfoService])
     ], PageHomeComponent);
     return PageHomeComponent;
 }());
-
+exports.PageHomeComponent = PageHomeComponent;
 
 
 /***/ }),
@@ -955,17 +1073,10 @@ module.exports = "\n<div class=\"political-main-content\">\n  <div class=\"polit
 /***/ }),
 
 /***/ "./src/app/page-login/page-login.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageLoginComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_socketio_service__ = __webpack_require__("./src/app/services/socketio.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_authentication_service__ = __webpack_require__("./src/app/services/authentication.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_cookie_service__ = __webpack_require__("./src/app/services/cookie.service.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -975,13 +1086,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
-
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var socketio_service_1 = __webpack_require__("./src/app/services/socketio.service.ts");
+var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
+var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
+var authentication_service_1 = __webpack_require__("./src/app/services/authentication.service.ts");
+var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
+var cookie_service_1 = __webpack_require__("./src/app/services/cookie.service.ts");
 var PageLoginComponent = /** @class */ (function () {
     function PageLoginComponent(socketioService, pageService, settingService, authService, userinfoService, cookieService) {
         this.socketioService = socketioService;
@@ -1018,21 +1130,21 @@ var PageLoginComponent = /** @class */ (function () {
         this.pageService.setPage('Homepage');
     };
     PageLoginComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+        core_1.Component({
             selector: 'app-page-login',
             template: __webpack_require__("./src/app/page-login/page-login.component.html"),
             styles: [__webpack_require__("./src/app/page-login/page-login.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_socketio_service__["a" /* SocketioService */],
-            __WEBPACK_IMPORTED_MODULE_2__services_page_service__["a" /* PageService */],
-            __WEBPACK_IMPORTED_MODULE_3__services_setting_service__["a" /* SettingService */],
-            __WEBPACK_IMPORTED_MODULE_4__services_authentication_service__["a" /* AuthenticationService */],
-            __WEBPACK_IMPORTED_MODULE_5__services_userinfo_service__["a" /* UserinfoService */],
-            __WEBPACK_IMPORTED_MODULE_6__services_cookie_service__["a" /* CookieService */]])
+        __metadata("design:paramtypes", [socketio_service_1.SocketioService,
+            page_service_1.PageService,
+            setting_service_1.SettingService,
+            authentication_service_1.AuthenticationService,
+            userinfo_service_1.UserinfoService,
+            cookie_service_1.CookieService])
     ], PageLoginComponent);
     return PageLoginComponent;
 }());
-
+exports.PageLoginComponent = PageLoginComponent;
 
 
 /***/ }),
@@ -1052,17 +1164,10 @@ module.exports = "\n<div class=\"political-main-content\">\n  <div class=\"polit
 /***/ }),
 
 /***/ "./src/app/page-register/page-register.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageRegisterComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_socketio_service__ = __webpack_require__("./src/app/services/socketio.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_authentication_service__ = __webpack_require__("./src/app/services/authentication.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_cookie_service__ = __webpack_require__("./src/app/services/cookie.service.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1072,13 +1177,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
-
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var socketio_service_1 = __webpack_require__("./src/app/services/socketio.service.ts");
+var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
+var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
+var authentication_service_1 = __webpack_require__("./src/app/services/authentication.service.ts");
+var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
+var cookie_service_1 = __webpack_require__("./src/app/services/cookie.service.ts");
 var PageRegisterComponent = /** @class */ (function () {
     function PageRegisterComponent(socketioService, pageService, settingService, authService, userinfoService, cookieService) {
         this.socketioService = socketioService;
@@ -1148,21 +1254,21 @@ var PageRegisterComponent = /** @class */ (function () {
         });
     };
     PageRegisterComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+        core_1.Component({
             selector: 'app-page-register',
             template: __webpack_require__("./src/app/page-register/page-register.component.html"),
             styles: [__webpack_require__("./src/app/page-register/page-register.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_socketio_service__["a" /* SocketioService */],
-            __WEBPACK_IMPORTED_MODULE_2__services_page_service__["a" /* PageService */],
-            __WEBPACK_IMPORTED_MODULE_3__services_setting_service__["a" /* SettingService */],
-            __WEBPACK_IMPORTED_MODULE_4__services_authentication_service__["a" /* AuthenticationService */],
-            __WEBPACK_IMPORTED_MODULE_5__services_userinfo_service__["a" /* UserinfoService */],
-            __WEBPACK_IMPORTED_MODULE_6__services_cookie_service__["a" /* CookieService */]])
+        __metadata("design:paramtypes", [socketio_service_1.SocketioService,
+            page_service_1.PageService,
+            setting_service_1.SettingService,
+            authentication_service_1.AuthenticationService,
+            userinfo_service_1.UserinfoService,
+            cookie_service_1.CookieService])
     ], PageRegisterComponent);
     return PageRegisterComponent;
 }());
-
+exports.PageRegisterComponent = PageRegisterComponent;
 
 
 /***/ }),
@@ -1177,16 +1283,15 @@ module.exports = ""
 /***/ "./src/app/page-user-panel/page-user-edit-profile/page-user-edit-profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  page-user-edit-profile works!\n</p>\n"
+module.exports = "<div *ngIf=\"userDetail===null\" class=\"political-team political-team-list\">\n  <h3>Loading your data...</h3>\n</div>\n\n<ng-container *ngIf=\"userDetail!==null\">\n  <app-profile-edit-form [userDetail]=\"userDetail\"\n  (userDetailUpdated)=\"userDetailUpdatedDone($event)\"></app-profile-edit-form>\n</ng-container>\n"
 
 /***/ }),
 
 /***/ "./src/app/page-user-panel/page-user-edit-profile/page-user-edit-profile.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageUserEditProfileComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1196,23 +1301,43 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
+var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
 var PageUserEditProfileComponent = /** @class */ (function () {
-    function PageUserEditProfileComponent() {
+    function PageUserEditProfileComponent(userinfoService, pageService) {
+        this.userinfoService = userinfoService;
+        this.pageService = pageService;
+        this.userDetail = null;
     }
     PageUserEditProfileComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        var userinfo = Object.assign({}, this.userinfoService.getUserinfo());
+        this.userinfoService.getUserDetail(userinfo)
+            .then(function (result) {
+            if (result !== null && result.status) {
+                _this.userDetail = result.data;
+            }
+        });
+    };
+    PageUserEditProfileComponent.prototype.userDetailUpdatedDone = function (result) {
+        if (result.status) {
+            this.pageService.setSubpage('Profile');
+        }
     };
     PageUserEditProfileComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+        core_1.Component({
             selector: 'app-page-user-edit-profile',
             template: __webpack_require__("./src/app/page-user-panel/page-user-edit-profile/page-user-edit-profile.component.html"),
             styles: [__webpack_require__("./src/app/page-user-panel/page-user-edit-profile/page-user-edit-profile.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [userinfo_service_1.UserinfoService,
+            page_service_1.PageService])
     ], PageUserEditProfileComponent);
     return PageUserEditProfileComponent;
 }());
-
+exports.PageUserEditProfileComponent = PageUserEditProfileComponent;
 
 
 /***/ }),
@@ -1232,11 +1357,10 @@ module.exports = "<p>\n  page-user-history works!\n</p>\n"
 /***/ }),
 
 /***/ "./src/app/page-user-panel/page-user-history/page-user-history.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageUserHistoryComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1246,14 +1370,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var PageUserHistoryComponent = /** @class */ (function () {
     function PageUserHistoryComponent() {
     }
     PageUserHistoryComponent.prototype.ngOnInit = function () {
     };
     PageUserHistoryComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+        core_1.Component({
             selector: 'app-page-user-history',
             template: __webpack_require__("./src/app/page-user-panel/page-user-history/page-user-history.component.html"),
             styles: [__webpack_require__("./src/app/page-user-panel/page-user-history/page-user-history.component.css")]
@@ -1262,7 +1387,7 @@ var PageUserHistoryComponent = /** @class */ (function () {
     ], PageUserHistoryComponent);
     return PageUserHistoryComponent;
 }());
-
+exports.PageUserHistoryComponent = PageUserHistoryComponent;
 
 
 /***/ }),
@@ -1282,13 +1407,10 @@ module.exports = "<div class=\"political-subheader\">\n    <div class=\"containe
 /***/ }),
 
 /***/ "./src/app/page-user-panel/page-user-panel.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageUserPanelComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1298,9 +1420,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
+var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
 var PageUserPanelComponent = /** @class */ (function () {
     function PageUserPanelComponent(pageService, settingService) {
         this.pageService = pageService;
@@ -1321,17 +1444,17 @@ var PageUserPanelComponent = /** @class */ (function () {
             return '';
     };
     PageUserPanelComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+        core_1.Component({
             selector: 'app-page-user-panel',
             template: __webpack_require__("./src/app/page-user-panel/page-user-panel.component.html"),
             styles: [__webpack_require__("./src/app/page-user-panel/page-user-panel.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_page_service__["a" /* PageService */],
-            __WEBPACK_IMPORTED_MODULE_2__services_setting_service__["a" /* SettingService */]])
+        __metadata("design:paramtypes", [page_service_1.PageService,
+            setting_service_1.SettingService])
     ], PageUserPanelComponent);
     return PageUserPanelComponent;
 }());
-
+exports.PageUserPanelComponent = PageUserPanelComponent;
 
 
 /***/ }),
@@ -1339,25 +1462,22 @@ var PageUserPanelComponent = /** @class */ (function () {
 /***/ "./src/app/page-user-panel/page-user-profile/page-user-profile.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".political-team-list-wrap .political-team-info > li {width:100%;}"
+module.exports = ""
 
 /***/ }),
 
 /***/ "./src/app/page-user-panel/page-user-profile/page-user-profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div *ngIf=\"userOnHand===null\" class=\"political-team political-team-list\">\n  <h3>Loading your data...</h3>\n</div>\n\n<div *ngIf=\"userOnHand!==null && settingService.getLanguage()=='Thai'\" class=\"political-team political-team-list\">\n  <ul class=\"row\">\n    <li class=\"col-md-12\">\n      <div class=\"political-team-list-wrap\">\n        <figure><img [src]=\"userOnHand.profileUrl\" alt=\"Profile image not available\"></figure>\n        <div class=\"political-team-list-text\">\n          <h2>{{userOnHand.firstname}} {{userOnHand.lastname}}</h2>\n          <span>ตำเเหน่ง: {{viewUserPosition()}}</span>\n          <p style=\"float:none; margin:5px 0 10px 0;\">เกี่ยวกับ: {{viewUserAbout()}}</p>\n          <ul class=\"political-team-info\">\n            <li><i class=\"fa fa-globe\"></i><strong>พสวท. รุ่นที่</strong> {{userOnHand.dpstYear}}</li>\n            <li><i class=\"fa fa-graduation-cap\"></i><strong>ระดับการศึกษา:</strong> {{userOnHand.education}}</li>\n            <li><i class=\"fa fa-book\"></i><strong>สถานศีกษา:</strong> {{userOnHand.school}}</li>\n            <li><i class=\"fa fa-briefcase\"></i><strong>สถานที่ทำงาน:</strong> {{userOnHand.workplace}}</li>\n            <li><i class=\"fa fa-envelope\"></i><strong>E-mail:</strong> <a [href]=\"'mailto:'+userOnHand.email\">{{userOnHand.email}}</a></li>\n            <li><i class=\"fa fa-phone\"></i><strong>โทรศัพท์:</strong> <span>{{userOnHand.phone}}</span></li>\n            <li><i class=\"fa fa-comments\"></i><strong>Line id:</strong> <span>{{userOnHand.lineId}}</span></li>\n            <li><i class=\"fa fa-home\"></i><strong>ที่อยู่:</strong>\n              <br>{{userOnHand.address1}}\n              <ng-container *ngIf=\"userOnHand.address2!==undefined && userOnHand.address2!=''\"><br>{{userOnHand.address2}}</ng-container>\n              <br>{{userOnHand.province}}, {{userOnHand.zip}}\n              <br>{{userOnHand.country}}\n            </li>\n          </ul>\n        </div>\n      </div>\n    </li>\n  </ul>\n</div>\n\n<div *ngIf=\"userOnHand!==null && settingService.getLanguage()=='English'\" class=\"political-team political-team-list\">\n  <ul class=\"row\">\n    <li class=\"col-md-12\">\n      <div class=\"political-team-list-wrap\">\n        <figure><img [src]=\"userOnHand.profileUrl\" alt=\"Profile image not available\"></figure>\n        <div class=\"political-team-list-text\">\n          <h2>{{userOnHand.firstname}} {{userOnHand.lastname}}</h2>\n          <span>Position: {{viewUserPosition()}}</span>\n          <p style=\"float:none; margin:5px 0 10px 0;\">About: {{viewUserAbout()}}</p>\n          <ul class=\"political-team-info\">\n            <li><i class=\"fa fa-globe\"></i><strong>DPST. #</strong> {{userOnHand.dpstYear}}</li>\n            <li><i class=\"fa fa-graduation-cap\"></i><strong>Education:</strong> {{userOnHand.education}}</li>\n            <li><i class=\"fa fa-book\"></i><strong>School/University:</strong> {{userOnHand.school}}</li>\n            <li><i class=\"fa fa-briefcase\"></i><strong>Work place:</strong> {{userOnHand.workplace}}</li>\n            <li><i class=\"fa fa-envelope\"></i><strong>E-mail:</strong> <a [href]=\"'mailto:'+userOnHand.email\">{{userOnHand.email}}</a></li>\n            <li><i class=\"fa fa-phone\"></i><strong>Phone:</strong> <span>{{userOnHand.phone}}</span></li>\n            <li><i class=\"fa fa-comments\"></i><strong>Line id:</strong> <span>{{userOnHand.lineId}}</span></li>\n            <li><i class=\"fa fa-home\"></i><strong>Address:</strong>\n              <br>{{userOnHand.address1}}\n              <ng-container *ngIf=\"userOnHand.address2!==undefined && userOnHand.address2!=''\"><br>{{userOnHand.address2}}</ng-container>\n              <br>{{userOnHand.province}}, {{userOnHand.zip}}\n              <br>{{userOnHand.country}}\n            </li>\n          </ul>\n        </div>\n      </div>\n    </li>\n  </ul>\n</div>"
+module.exports = "<div *ngIf=\"userDetail===null\" class=\"political-team political-team-list\">\n  <h3>Loading your data...</h3>\n</div>\n\n<ng-container *ngIf=\"userDetail!==null\">\n  <app-profile-form [userDetail]=\"userDetail\"></app-profile-form>\n</ng-container>\n"
 
 /***/ }),
 
 /***/ "./src/app/page-user-panel/page-user-profile/page-user-profile.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageUserProfileComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1367,14 +1487,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
 var PageUserProfileComponent = /** @class */ (function () {
-    function PageUserProfileComponent(settingService, userinfoService) {
-        this.settingService = settingService;
+    function PageUserProfileComponent(userinfoService) {
         this.userinfoService = userinfoService;
-        this.userOnHand = null;
+        this.userDetail = null;
     }
     PageUserProfileComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1382,34 +1501,21 @@ var PageUserProfileComponent = /** @class */ (function () {
         this.userinfoService.getUserDetail(userinfo)
             .then(function (result) {
             if (result !== null && result.status) {
-                _this.userOnHand = result.data;
+                _this.userDetail = result.data;
             }
         });
     };
-    PageUserProfileComponent.prototype.viewUserPosition = function () {
-        if (this.userOnHand.position === undefined)
-            return 'N/A';
-        else
-            return this.userOnHand.position;
-    };
-    PageUserProfileComponent.prototype.viewUserAbout = function () {
-        if (this.userOnHand.about === undefined)
-            return 'N/A';
-        else
-            return this.userOnHand.about;
-    };
     PageUserProfileComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+        core_1.Component({
             selector: 'app-page-user-profile',
             template: __webpack_require__("./src/app/page-user-panel/page-user-profile/page-user-profile.component.html"),
             styles: [__webpack_require__("./src/app/page-user-panel/page-user-profile/page-user-profile.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_setting_service__["a" /* SettingService */],
-            __WEBPACK_IMPORTED_MODULE_2__services_userinfo_service__["a" /* UserinfoService */]])
+        __metadata("design:paramtypes", [userinfo_service_1.UserinfoService])
     ], PageUserProfileComponent);
     return PageUserProfileComponent;
 }());
-
+exports.PageUserProfileComponent = PageUserProfileComponent;
 
 
 /***/ }),
@@ -1424,16 +1530,15 @@ module.exports = ""
 /***/ "./src/app/page-user-panel/page-user-setting/page-user-setting.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  page-user-setting works!\n</p>\n"
+module.exports = "<p>\r\n  page-user-setting works!\r\n</p>\r\n"
 
 /***/ }),
 
 /***/ "./src/app/page-user-panel/page-user-setting/page-user-setting.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageUserSettingComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1443,14 +1548,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var PageUserSettingComponent = /** @class */ (function () {
     function PageUserSettingComponent() {
     }
     PageUserSettingComponent.prototype.ngOnInit = function () {
     };
     PageUserSettingComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+        core_1.Component({
             selector: 'app-page-user-setting',
             template: __webpack_require__("./src/app/page-user-panel/page-user-setting/page-user-setting.component.html"),
             styles: [__webpack_require__("./src/app/page-user-panel/page-user-setting/page-user-setting.component.css")]
@@ -1459,20 +1565,16 @@ var PageUserSettingComponent = /** @class */ (function () {
     ], PageUserSettingComponent);
     return PageUserSettingComponent;
 }());
-
+exports.PageUserSettingComponent = PageUserSettingComponent;
 
 
 /***/ }),
 
 /***/ "./src/app/services/admin.service.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AdminService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals__ = __webpack_require__("./src/app/globals.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__ = __webpack_require__("./node_modules/rxjs/_esm5/Subject.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1482,16 +1584,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+var globals_1 = __webpack_require__("./src/app/globals.ts");
+var Subject_1 = __webpack_require__("./node_modules/rxjs/_esm5/Subject.js");
 var AdminService = /** @class */ (function () {
     function AdminService(http) {
         this.http = http;
-        this.apiUrl = __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* ipHost */] + '/admin';
-        this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
-        this.subjectUsers = new __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__["a" /* Subject */]();
+        this.apiUrl = globals_1.ipHost + '/admin';
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        this.subjectUsers = new Subject_1.Subject();
     }
     AdminService.prototype.getUsers = function (criteria) {
         var _this = this;
@@ -1500,7 +1603,7 @@ var AdminService = /** @class */ (function () {
         return this.http.get(url).toPromise()
             .then(function (response) {
             var result = response.json();
-            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
+            if (globals_1.testing)
                 console.log(result.message);
             _this.subjectUsers.next(result);
         })
@@ -1514,7 +1617,7 @@ var AdminService = /** @class */ (function () {
             .toPromise()
             .then(function (response) {
             var result = response.json();
-            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
+            if (globals_1.testing)
                 console.log(result.message);
             return result;
         })
@@ -1526,7 +1629,7 @@ var AdminService = /** @class */ (function () {
             .toPromise()
             .then(function (response) {
             var result = response.json();
-            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
+            if (globals_1.testing)
                 console.log(result.message);
             return result;
         })
@@ -1537,24 +1640,21 @@ var AdminService = /** @class */ (function () {
         return this.subjectUsers.asObservable();
     };
     AdminService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http])
     ], AdminService);
     return AdminService;
 }());
-
+exports.AdminService = AdminService;
 
 
 /***/ }),
 
 /***/ "./src/app/services/authentication.service.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthenticationService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals__ = __webpack_require__("./src/app/globals.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1564,14 +1664,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+var globals_1 = __webpack_require__("./src/app/globals.ts");
 var AuthenticationService = /** @class */ (function () {
     function AuthenticationService(http) {
         this.http = http;
-        this.apiUrl = __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* ipHost */] + '/authentication';
-        this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        this.apiUrl = globals_1.ipHost + '/authentication';
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
     AuthenticationService.prototype.register = function (formValue) {
         var url = this.apiUrl + '/register', input = formValue;
@@ -1579,7 +1680,7 @@ var AuthenticationService = /** @class */ (function () {
             .toPromise()
             .then(function (response) {
             var result = response.json();
-            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
+            if (globals_1.testing)
                 console.log(result.message);
             return result;
         })
@@ -1590,7 +1691,7 @@ var AuthenticationService = /** @class */ (function () {
         return this.http.get(url).toPromise()
             .then(function (response) {
             var result = response.json();
-            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
+            if (globals_1.testing)
                 console.log(result.message);
             return result;
         })
@@ -1601,31 +1702,28 @@ var AuthenticationService = /** @class */ (function () {
         return this.http.get(url).toPromise()
             .then(function (response) {
             var result = response.json();
-            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
+            if (globals_1.testing)
                 console.log(result.message);
             return result;
         })
             .catch(function (err) { return null; });
     };
     AuthenticationService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http])
     ], AuthenticationService);
     return AuthenticationService;
 }());
-
+exports.AuthenticationService = AuthenticationService;
 
 
 /***/ }),
 
 /***/ "./src/app/services/cookie.service.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CookieService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals__ = __webpack_require__("./src/app/globals.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1635,21 +1733,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+var globals_1 = __webpack_require__("./src/app/globals.ts");
 var CookieService = /** @class */ (function () {
     function CookieService(http) {
         this.http = http;
-        this.apiUrl = __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* ipHost */] + '/cookie';
-        this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        this.apiUrl = globals_1.ipHost + '/cookie';
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
     CookieService.prototype.checkRememberLogin = function () {
         var url = this.apiUrl + '/checkrememberlogin';
         return this.http.get(url).toPromise()
             .then(function (response) {
             var result = response.json();
-            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
+            if (globals_1.testing)
                 console.log(result.message);
             return result;
         })
@@ -1660,7 +1759,7 @@ var CookieService = /** @class */ (function () {
         this.http.get(url).toPromise()
             .then(function (response) {
             var result = response.json();
-            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
+            if (globals_1.testing)
                 console.log(result.message);
             return result;
         })
@@ -1671,29 +1770,28 @@ var CookieService = /** @class */ (function () {
         this.http.get(url).toPromise()
             .then(function (response) {
             var result = response.json();
-            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
+            if (globals_1.testing)
                 console.log(result.message);
             return result;
         })
             .catch(function (err) { return null; });
     };
     CookieService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http])
     ], CookieService);
     return CookieService;
 }());
-
+exports.CookieService = CookieService;
 
 
 /***/ }),
 
 /***/ "./src/app/services/page.service.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1703,7 +1801,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var PageService = /** @class */ (function () {
     function PageService() {
         this.page = 'Homepage';
@@ -1717,22 +1816,21 @@ var PageService = /** @class */ (function () {
     PageService.prototype.setSubpage = function (subpage) { this.subpage = subpage; };
     PageService.prototype.getSubpage = function () { return this.subpage; };
     PageService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Injectable */])(),
+        core_1.Injectable(),
         __metadata("design:paramtypes", [])
     ], PageService);
     return PageService;
 }());
-
+exports.PageService = PageService;
 
 
 /***/ }),
 
 /***/ "./src/app/services/setting.service.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1742,7 +1840,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var SettingService = /** @class */ (function () {
     function SettingService() {
         this.language = 'Thai'; // Thai or English
@@ -1750,26 +1849,21 @@ var SettingService = /** @class */ (function () {
     SettingService.prototype.setLanguage = function (language) { this.language = language; };
     SettingService.prototype.getLanguage = function () { return this.language; };
     SettingService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Injectable */])(),
+        core_1.Injectable(),
         __metadata("design:paramtypes", [])
     ], SettingService);
     return SettingService;
 }());
-
+exports.SettingService = SettingService;
 
 
 /***/ }),
 
 /***/ "./src/app/services/socketio.service.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SocketioService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_socket_io_client__ = __webpack_require__("./node_modules/socket.io-client/lib/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_socket_io_client__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_globals__ = __webpack_require__("./node_modules/globals/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_globals___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_globals__);
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1779,13 +1873,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var io = __webpack_require__("./node_modules/socket.io-client/lib/index.js");
+var globals_1 = __webpack_require__("./node_modules/globals/index.js");
 // import { AdminService } from './admin.service';
 var SocketioService = /** @class */ (function () {
     function SocketioService() {
-        this.socket = __WEBPACK_IMPORTED_MODULE_1_socket_io_client__(__WEBPACK_IMPORTED_MODULE_2_globals__["ipHost"]);
+        this.socket = io(globals_1.ipHost);
     }
     SocketioService.prototype.connect = function () {
         this.socket.on('online-users', function (onlineUsers) {
@@ -1811,24 +1906,21 @@ var SocketioService = /** @class */ (function () {
         this.socket.emit('account-delete', userId);
     };
     SocketioService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Injectable */])(),
+        core_1.Injectable(),
         __metadata("design:paramtypes", [])
     ], SocketioService);
     return SocketioService;
 }());
-
+exports.SocketioService = SocketioService;
 
 
 /***/ }),
 
 /***/ "./src/app/services/userinfo.service.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserinfoService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals__ = __webpack_require__("./src/app/globals.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1838,15 +1930,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+var globals_1 = __webpack_require__("./src/app/globals.ts");
 var UserinfoService = /** @class */ (function () {
     function UserinfoService(http) {
         this.http = http;
         this.userinfo = null;
-        this.apiUrl = __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* ipHost */] + '/user';
-        this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        this.apiUrl = globals_1.ipHost + '/user';
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
     UserinfoService.prototype.setUserinfo = function (userinfo) { this.userinfo = userinfo; };
     UserinfoService.prototype.getUserinfo = function () { return this.userinfo; };
@@ -1856,7 +1949,7 @@ var UserinfoService = /** @class */ (function () {
         return this.http.get(url).toPromise()
             .then(function (response) {
             var result = response.json();
-            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
+            if (globals_1.testing)
                 console.log(result.message);
             _this.userinfo = result.data;
         })
@@ -1869,33 +1962,46 @@ var UserinfoService = /** @class */ (function () {
         return this.http.get(url).toPromise()
             .then(function (response) {
             var result = response.json();
-            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
+            if (globals_1.testing)
+                console.log(result.message);
+            return result;
+        })
+            .catch(function (err) { return null; });
+    };
+    UserinfoService.prototype.updateUserDetail = function (userId, updatedUserDetail) {
+        var url = this.apiUrl + '/updateuserdetail', input = { userId: userId, updatedUserDetail: updatedUserDetail };
+        return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
+            .toPromise()
+            .then(function (response) {
+            var result = response.json();
+            if (globals_1.testing)
                 console.log(result.message);
             return result;
         })
             .catch(function (err) { return null; });
     };
     UserinfoService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http])
     ], UserinfoService);
     return UserinfoService;
 }());
-
+exports.UserinfoService = UserinfoService;
 
 
 /***/ }),
 
 /***/ "./src/environments/environment.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
+
 // The file contents for the current environment will overwrite these during build.
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-var environment = {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.environment = {
     production: false
 };
 
@@ -1903,22 +2009,19 @@ var environment = {
 /***/ }),
 
 /***/ "./src/main.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__("./node_modules/@angular/platform-browser-dynamic/esm5/platform-browser-dynamic.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__("./src/app/app.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("./src/environments/environment.ts");
 
-
-
-
-if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* enableProdMode */])();
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var platform_browser_dynamic_1 = __webpack_require__("./node_modules/@angular/platform-browser-dynamic/esm5/platform-browser-dynamic.js");
+var app_module_1 = __webpack_require__("./src/app/app.module.ts");
+var environment_1 = __webpack_require__("./src/environments/environment.ts");
+if (environment_1.environment.production) {
+    core_1.enableProdMode();
 }
-Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
+platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(app_module_1.AppModule)
     .catch(function (err) { return console.log(err); });
 
 

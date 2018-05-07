@@ -1,3 +1,8 @@
-<p>
-  page-user-edit-profile works!
-</p>
+<div *ngIf="userDetail===null" class="political-team political-team-list">
+  <h3>Loading your data...</h3>
+</div>
+
+<ng-container *ngIf="userDetail!==null">
+  <app-profile-edit-form [userDetail]="userDetail"
+  (userDetailUpdated)="userDetailUpdatedDone($event)"></app-profile-edit-form>
+</ng-container>

@@ -42,5 +42,22 @@ router.get('/getuserdetail/:userId', (req, res)=>{
         .catch(err1=>{res.json({status:false, message:'Get user error: '+err1, data:null})});
 });
 
+router.post('/updateuserdetail', (req, res)=>{
+    let userId = req.db.id(req.body.input.userId),
+        updatedUserDetail = req.body.input.updatedUserDetail;
+    let dbUserDetail = req.db.get('userDetail');
+
+    dbUserDetail.findOne({ userId: userId })
+        .then(check1=>{
+            if (check1===null) res.json({status:false, message:'Update user detail fail: Cannot find the account.', data:0});
+            else {
+                let result = {...check1, ...updatedUserDetail}
+                dbUserDetail.update({ _id: req.db.id(result._id) }, result, { multi: false })
+                    .then(()=>{res.json({status:true, message:'The user detail has been updated successfully.', data:1})});
+            }
+        })
+        .catch(err1=>{res.json({status:false, message:'Update user detail error: '+err1, data:null})}); 
+});
+
 
 module.exports = router;
