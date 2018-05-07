@@ -7,6 +7,7 @@ import { SettingService } from '../services/setting.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { UserinfoService } from '../services/userinfo.service';
 import { AdminService } from '../services/admin.service';
+import { CookieService } from '../services/cookie.service';
 
 @Component({
   selector: 'app-page-register',
@@ -25,7 +26,8 @@ export class PageRegisterComponent implements OnInit {
     private pageService: PageService,
     private settingService: SettingService,
     private authService: AuthenticationService,
-    private userinfoService: UserinfoService
+    private userinfoService: UserinfoService,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit() {
@@ -56,6 +58,7 @@ export class PageRegisterComponent implements OnInit {
         this.socketioService.login(result.data.username);
         this.userinfoService.setUserinfo(result.data);
         this.pageService.setPage('Check status');
+        this.cookieService.setUserLoginCookie(result.data);
       });
   }
 

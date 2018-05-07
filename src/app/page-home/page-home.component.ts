@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { PageService } from '../services/page.service';
 import { SettingService } from '../services/setting.service';
+import { UserinfoService } from '../services/userinfo.service';
 
 @Component({
   selector: 'app-page-home',
@@ -12,7 +13,8 @@ export class PageHomeComponent implements OnInit {
 
   constructor(
     private pageService: PageService,
-    private settingService: SettingService
+    private settingService: SettingService,
+    private userinfoService: UserinfoService
   ) { }
 
   ngOnInit() {

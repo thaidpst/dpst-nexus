@@ -15,8 +15,9 @@ export class AdminService {
 
   constructor(private http: Http) { }
 
-  getUsers(start=0, limit=10) {
-    let url = this.apiUrl + '/getusers/' + start + '/' + limit;
+  getUsers(criteria) {
+    let url = this.apiUrl + '/getusers/' + criteria.start + '/' + criteria.limit + '/' 
+      + criteria.sort + '/' + criteria.search;
 
     return this.http.get(url).toPromise()
       .then(response=>{
@@ -29,9 +30,9 @@ export class AdminService {
       });
   }
 
-  setAccoundActive(userId) {
-    let url = this.apiUrl + '/setaccountactive',
-            input = {userId: userId};
+  setAccoundStatus(userinfo, status) {
+    let url = this.apiUrl + '/setaccountstatus',
+            input = {userId: userinfo._id, status: status};
     return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
       .toPromise()
       .then(response=>{
@@ -41,9 +42,10 @@ export class AdminService {
       })
       .catch(err=>{return null});
   }
-  deleteAccount(userId) {
+
+  deleteAccount(userinfo) {
     let url = this.apiUrl + '/deleteaccount',
-            input = {userId: userId};
+            input = {userId: userinfo._id};
     return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
       .toPromise()
       .then(response=>{

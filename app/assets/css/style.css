@@ -1990,7 +1990,7 @@ blockquote a {
     font-weight: bold;
     background-color: transparent;
 }
-.comment-respond form p input[type="submit"]:hover { background-color: #ffffff; color: #f34235; }
+.comment-respond form p input[type="submit"]:hover { background-color: #ffffff; color: #63a4ff; }
 .comment-respond form p label {
     margin: 0px 0px 15px;
     float: left;
@@ -2250,8 +2250,8 @@ blockquote a {
     background-color: #f8f8f8;
     border: 3px solid #eaeaea;
 }
-.political-pagination > ul > li > a:hover { background-color: #f34235; color: #ffffff; border: 3px solid #004ba0;  }
-.political-pagination > ul > li > span.current{ background-color: #f34235; color: #ffffff; border: 3px solid #004ba0; }
+.political-pagination > ul > li > a:hover { background-color: #63a4ff; color: #ffffff; border: 3px solid #004ba0;  }
+.political-pagination > ul > li > span.current{ background-color: #63a4ff; color: #ffffff; border: 3px solid #004ba0; }
 /*pagination*/
 /*blog gridv2*/
 .political-blog-gridv2,.political-blog-gridv2 ul li figure,.political-blog-gridv2 ul li figure a,.political-blog-gridv2 ul li figure a img {
@@ -2318,7 +2318,7 @@ blockquote a {
     bottom: -1px;
     width: 50px;
     height: 1px;
-    background-color: #f34235;
+    background-color: #63a4ff;
 }
 .political-gridv2-text .political-blog-heading span { float: left; }
 .political-gridv2-text .political-blog-heading span > time:after {
@@ -2398,7 +2398,7 @@ blockquote a {
     font-size: 26px;
     height: 40px;
     left: 0px;
-    color: #f34235;
+    color: #63a4ff;
     text-align: center;
     margin-top: -26px;
     position: absolute;
@@ -2464,7 +2464,7 @@ blockquote a {
     width: 100%;
     margin-bottom: 13px;
 }
-.political-blog-tags span { color: #f34235; }
+.political-blog-tags span { color: #63a4ff; }
 .political-blog-tags a { color: #5a5a5a; }
 /*points*/
 .political-campaign-points,.political-liststyle-one,.political-campaign-points-thumb.political-campaign-points-thumb a img {
@@ -2491,7 +2491,7 @@ blockquote a {
     left: 0px;
     top: 0px;
     font-family: 'FontAwesome';
-    color: #f34235;
+    color: #63a4ff;
     font-size: 15px;
 }
 /*donation form*/
@@ -2600,7 +2600,7 @@ blockquote a {
     font-size: 14px;
     font-weight: bold;
 }
-.poltical-compaign-form p input[type="submit"]:hover { background-color: #ffffff; color: #f34235; }
+.poltical-compaign-form p input[type="submit"]:hover { background-color: #ffffff; color: #63a4ff; }
 
 /*classic gallery*/
 .political-gallery,.political-classic-gallery ul li figure,.political-classic-gallery ul li figure a img {
@@ -2813,7 +2813,7 @@ blockquote a {
 }
 .political-compaign-grid-text .progress { width: 90%; }
 .political-compaign-grid-text .progress-bar,.political-compaign-list-text .progress-bar,.political-cause-grid-layer .progress-bar {
-   background-color: #f34235;
+   background-color: #63a4ff;
    position: relative;
    border-radius: 25px;
    margin: 0px;
@@ -2835,7 +2835,7 @@ blockquote a {
     width: 30px;
     height: 30px;
     border-radius: 100%;
-    background-color: #f34235;
+    background-color: #63a4ff;
     color: #ffffff;
     display: inline-block;
     position: absolute;
@@ -3317,7 +3317,7 @@ blockquote a {
     top: 0px;
     width: 100%;
     height: 100%;
-    background-color: #f34235;
+    background-color: #63a4ff;
     opacity: 0; 
 }
 .political-main-content .widget_gallery ul li:hover figure a i {

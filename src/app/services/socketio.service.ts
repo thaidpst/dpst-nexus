@@ -35,8 +35,8 @@ export class SocketioService {
     this.socket.emit('member-logout');
   }
 
-  accountActive(userId) {
-    this.socket.emit('account-active', userId);
+  accountStatus(userId) {
+    this.socket.emit('account-status', userId);
   }
   deleteAccount(userId) {
     this.socket.emit('account-delete', userId);

@@ -68,7 +68,7 @@
                                         <ng-container *ngIf="settingService.getLanguage()=='English'">Hello,
                                             <span class="hello-user">{{userinfoService.getUserinfo().username}}</span>
                                         </ng-container>
-                                    </a><span class="has-subnav profile-nav" (click)="toggleSubnav('.profile-nav')"><i class="fa fa-angle-down"></i></span>
+                                    </a><span class="has-subnav profile-nav"><i class="fa fa-angle-down"></i></span>
                                     <ul class="sub-menu level-2 profile-nav">
                                         <li><a (click)="pageService.setPage('Profile'); unactive();">
                                             <ng-container *ngIf="settingService.getLanguage()=='Thai'">ประวัติส่วนตัว</ng-container>
@@ -81,7 +81,8 @@
 
                                         <!-- Admin panel -->
                                         <li *ngIf="userinfoService.getUserinfo().level>=8">
-                                            <a (click)="pageService.setPage('Admin panel'); unactive();">
+                                            <a (click)="pageService.setPage('Admin panel'); pageService.setSubpage('User table'); unactive();"
+                                            class="hello-user" style="font-weight:600;">
                                                 Admin Panel
                                             </a>
                                         </li>
@@ -107,7 +108,7 @@
                                 </a></li>
 
                                 <!-- Language -->
-                                <li>
+                                <!-- <li>
                                     <a>
                                         <ng-container *ngIf="settingService.getLanguage()=='Thai'">เลือกภาษา</ng-container>
                                         <ng-container *ngIf="settingService.getLanguage()=='English'">Language</ng-container>
@@ -121,6 +122,13 @@
                                             <ng-container *ngIf="settingService.getLanguage()=='Thai'">ภาษาอังกฤษ</ng-container>
                                             <ng-container *ngIf="settingService.getLanguage()=='English'">English</ng-container>
                                         </a></li>
+                                    </ul>
+                                </li> -->
+                                <li>
+                                    <a>Language</a><span class="has-subnav"><i class="fa fa-angle-down"></i></span>
+                                    <ul class="sub-menu level-2">
+                                        <li><a (click)="settingService.setLanguage('Thai'); unactive();">Thai</a></li>
+                                        <li><a (click)="settingService.setLanguage('English'); unactive();">English</a></li>
                                     </ul>
                                 </li>
 

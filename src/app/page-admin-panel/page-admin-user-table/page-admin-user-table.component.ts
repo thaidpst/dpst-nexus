@@ -1,0 +1,139 @@
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+
+import { SocketioService } from '../../services/socketio.service';
+import { SettingService } from '../../services/setting.service';
+import { UserinfoService } from '../../services/userinfo.service';
+import { AdminService } from '../../services/admin.service';
+
+@Component({
+  selector: 'app-page-admin-user-table',
+  templateUrl: './page-admin-user-table.component.html',
+  styleUrls: ['./page-admin-user-table.component.css']
+})
+export class PageAdminUserTableComponent implements OnInit {
+
+  private getUsersSubscription: Subscription;
+  private criteria = {
+    page: 0, start: 0, limit: 25, totalUsers: 0,
+    sort: 'None', search: 'EmptyNone'
+  };
+  private pagination = [];
+  private users = null;
+
+  private subpage = 'Table';
+
+  private userOnHand = null;
+
+  constructor(
+    private socketioService: SocketioService,
+    private settingService: SettingService,
+    private userinfoService: UserinfoService,
+    private adminService: AdminService
+  ) { }
+
+  ngOnInit() {
+    this.getUsersSubscription = this.adminService.observeUsers().subscribe(result=>{
+      if (result.status) {
+        this.users = result.data;
+        this.criteria.totalUsers = result.totalUsers;
+
+        this.pagination = [];
+        let count = 0;
+        while (count*this.criteria.limit < this.criteria.totalUsers) {
+          this.pagination.push(count);          
+          count += 1;
+        }
+      }
+    });
+
+    this.socketioService.getSocket().on('update-new-users', function() {
+      this.adminService.getUsers(this.criteria);
+    }.bind(this));
+    this.socketioService.getSocket().on('announce-account-status', function() {
+      this.adminService.getUsers(this.criteria);
+    }.bind(this));
+    this.socketioService.getSocket().on('announce-account-delete', function() {
+      this.adminService.getUsers(this.criteria);
+    }.bind(this));
+
+    this.adminService.getUsers(this.criteria);
+  }
+
+  setAccountStatus(userinfo, status) {
+    this.adminService.setAccoundStatus(userinfo, status).then(result=>{
+      if (result.status) {
+        this.adminService.getUsers(this.criteria);
+        this.socketioService.accountStatus(userinfo._id);
+      }
+    });
+  }
+
+  tableLimitChange(limit) {
+    this.criteria.page = 0;
+    this.criteria.start = 0;
+    this.criteria.limit = limit;
+    this.criteria.totalUsers = 0;
+    this.pagination = [];
+    this.users = null;
+    this.adminService.getUsers(this.criteria);
+  }
+  paginationChangePage(page) {
+    this.criteria.page = page;
+    this.criteria.start = page * this.criteria.limit;
+    this.adminService.getUsers(this.criteria);
+  }
+  previouseTablePage() {
+    if (this.criteria.page > 0) {
+      this.criteria.page -= 1;
+      this.criteria.start = this.criteria.page * this.criteria.limit;
+      this.adminService.getUsers(this.criteria);
+    }
+  }
+  nextTablePage() {
+    if ((this.criteria.page+1)*this.criteria.limit < this.criteria.totalUsers) {
+      this.criteria.page += 1;
+      this.criteria.start = this.criteria.page * this.criteria.limit;
+      this.adminService.getUsers(this.criteria);
+    }
+  }
+  tableSortChange(sort) {
+    this.criteria.sort = sort;
+    this.adminService.getUsers(this.criteria);
+  }
+  tableSearch(keyword) {
+    keyword = keyword.trim();
+    if ((this.criteria.search=='EmptyNone' && keyword=='') || this.criteria.search==keyword) {}
+    else if (keyword=='') {
+      this.criteria.search = 'EmptyNone';
+      this.adminService.getUsers(this.criteria);
+    } else {      
+      this.criteria.search = keyword;
+      this.adminService.getUsers(this.criteria);
+    }
+  }
+
+  // Delete user process
+  tryDeleteAccount(userinfo) {this.subpage = 'Try delete'; this.userOnHand = userinfo;}
+  tryDeleteCancel() {this.subpage = 'Table'; this.userOnHand = null;}
+  deleteAccount() {
+    if (this.userOnHand!==null) {
+      this.adminService.deleteAccount(this.userOnHand).then(result=>{
+        if (result.status) {
+          this.adminService.getUsers(this.criteria);
+          this.socketioService.deleteAccount(this.userOnHand._id);
+          this.userOnHand = null;
+          this.subpage = 'Table';
+        }
+      });
+    }
+  }
+
+  // View user process
+  viewUserinfo(userinfo) {this.subpage = 'View user'; this.userOnHand = userinfo;}
+
+  ngOnDestroy() {
+    this.getUsersSubscription.unsubscribe();
+  }
+
+}

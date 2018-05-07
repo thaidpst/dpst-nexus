@@ -1,0 +1,23 @@
+th {color: #000000;}
+td {font-weight: 300;}
+
+.fa {cursor: pointer;}
+
+.show-per-page, .select-sort, input.search[type=text] {height: 38px; padding: 3px;}
+.show-per-page {width: 60px;}
+.select-sort {width: 190px;}
+input.search[type=text] {
+    font-size: 16px;
+    border: 1px solid #dfdfdf;
+    width: 180px;
+    color: #5a5a5a;
+    font-weight: 300;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.top-option {
+    padding: 0 15px;
+    float: right;
+}
+

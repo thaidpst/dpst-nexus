@@ -26,9 +26,10 @@ export class AppComponent {
   ngOnInit() {
     this.socketioService.connect();
 
-    this.socketioService.getSocket().on('announce-account-active', function(userId) {
+    this.socketioService.getSocket().on('announce-account-status', function(userId) {
       if (this.userinfoService.getUserinfo()!==null && userId==this.userinfoService.getUserinfo()._id) {
         this.userinfoService.update();
+        this.pageService.setPage('Check status');
       }
     }.bind(this));
 

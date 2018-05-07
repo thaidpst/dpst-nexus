@@ -1,0 +1,130 @@
+<div *ngIf="subpage=='Table'" class="political-blog-large">
+
+  <!-- Selection criteria -->
+  <div class="political-pagination" style="color:#000; margin:0 0 25px 0;">
+
+      <div class="top-option">
+        <input #keyword class="search" type="text" (keyup.enter)="tableSearch(keyword.value)">
+        <input type="submit" class="political-simple-btn" value="Search" (click)="tableSearch(keyword.value)">
+      </div>
+
+      <div class="top-option">
+        Sort by
+        <select class="select-sort" (change)="tableSortChange($event.target.value)">
+          <option value="None" selected="selected">None</option>
+          <option value="Firstname increasing">Firstname increasing</option>
+          <option value="Firstname decreasing">Firstname decreasing</option>
+          <option value="Level increasing">Level increasing</option>
+          <option value="Level decreasing">Level decreasing</option>
+          <option value="Status increasing">Status increasing</option>
+          <option value="Status decreasing">Status decreasing</option>
+          <option value="Register date increasing">Register date increasing</option>
+          <option value="Register date decreasing">Register date decreasing</option>
+        </select>
+      </div>
+
+      <div class="top-option">
+        Show per page
+        <select class="show-per-page" (change)="tableLimitChange($event.target.value)">
+          <option value="10">10</option>
+          <option value="25" selected="selected">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+        
+  </div>
+
+  <ul class="row">
+    <li class="col-md-12">
+
+      <table><tbody>
+        <tr>
+          <th>Username</th>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>E-mail address</th>
+          <th>Level</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+
+        <ng-container *ngIf="users===null">
+          <tr><td colspan="8">No user data found.</td></tr>
+        </ng-container>
+        <ng-container *ngIf="users!==null">
+          <tr *ngFor="let user of users;">
+            <td>{{user.username}}</td>
+            <td>{{user.firstname}}</td>
+            <td>{{user.lastname}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.level}}</td>
+            <td [ngClass]="{'ban':user.status=='Ban', 'pen':user.status=='Pending', 'hello-user':user.status=='Active'}">{{user.status}}</td>
+            
+            <!-- Admin options based on level -->
+            <td *ngIf="user.level < userinfoService.getUserinfo().level">
+              <i *ngIf="user.status!='Active'" class="fa fa-check-square-o hello-user" aria-hidden="true"
+                (click)="setAccountStatus(user, 'Active')">&nbsp;</i>
+              <i *ngIf="user.status!='Ban'" class="fa fa-times pen" aria-hidden="true"
+                (click)="setAccountStatus(user, 'Ban')">&nbsp;</i>
+              <i class="fa fa-address-book-o hello-user" aria-hidden="true"
+                (click)="viewUserinfo(user)"></i>&nbsp;
+              <i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp;
+              <i class="fa fa-pencil-square-o view-icon" aria-hidden="true"></i>&nbsp;
+              <i class="fa fa-trash ban" aria-hidden="true"
+                (click)="tryDeleteAccount(user)"></i>
+            </td><!-- Lower users -->
+            <td *ngIf="user.level > userinfoService.getUserinfo().level">
+              <i class="fa fa-address-book-o hello-user" aria-hidden="true"
+                (click)="viewUserinfo(user)"></i>
+            </td><!-- Higher users -->
+            <td *ngIf="user.level==userinfoService.getUserinfo().level && user._id==userinfoService.getUserinfo()._id">
+              <i class="fa fa-address-book-o hello-user" aria-hidden="true"
+                (click)="viewUserinfo(user)"></i>&nbsp;
+              <i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp;
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </td><!-- Yourself -->
+            <td *ngIf="user.level==userinfoService.getUserinfo().level && user._id!=userinfoService.getUserinfo()._id">
+              <i class="fa fa-address-book-o hello-user" aria-hidden="true"
+                (click)="viewUserinfo(user)"></i>&nbsp;
+              <i class="fa fa-bar-chart" aria-hidden="true"></i>
+            </td><!-- Same level users, not you -->
+
+          </tr>
+        </ng-container>
+
+      </tbody></table>
+
+      <!-- Pagination -->
+      <div class="political-pagination">
+        <ul class="page-numbers">
+            <li><a class="previous page-numbers" (click)="previouseTablePage()"><span aria-label="Next"><i class="fa fa-angle-left"></i></span></a></li>
+            <li *ngFor="let page of pagination;">
+              <a *ngIf="page!=criteria.page" class="page-numbers"
+              (click)="paginationChangePage(page)">{{page+1}}</a>
+              <span *ngIf="page==criteria.page" class="page-numbers current">{{page+1}}</span>
+            </li>
+            <li><a class="next page-numbers" (click)="nextTablePage()"><span aria-label="Next"><i class="fa fa-angle-right"></i></span></a></li>
+        </ul>
+      </div>
+
+    </li>
+  </ul>
+</div>
+
+<!-- Delete user panel -->
+<div *ngIf="subpage=='Try delete' && settingService.getLanguage()=='Thai'" class="political-blog-large">
+  <h1 style="margin-bottom:20px;"><strong>คุณกำลังจะทำการ<span class="ban">ลบข้อมูลผู้ใช้</span></strong></h1>
+  <h3 style="margin-bottom:20px;">ชื่อผู้ใช้งาน: <span class="hello-user" style="font-weight:600;">{{userOnHand.username}}</span></h3>
+  <input type="submit" class="political-simple-btn delete-btn" value="ลบข้อมูลผู้ใช้" (click)="deleteAccount()">
+  <input type="submit" class="political-simple-btn" value="ยกเลิก" (click)="tryDeleteCancel()">
+      
+</div>
+<div *ngIf="subpage=='Try delete' && settingService.getLanguage()=='English'" class="political-blog-large">
+  <h1 style="margin-bottom:20px;"><strong>You are about to <span class="ban">DELETE</span> a user</strong></h1>
+  <h3 style="margin-bottom:20px;">Username: <span class="hello-user" style="font-weight:600;">{{userOnHand.username}}</span></h3>
+  <input type="submit" class="political-simple-btn delete-btn" value="DELETE" (click)="deleteAccount()">
+  <input type="submit" class="political-simple-btn" value="Cancel" (click)="tryDeleteCancel()">
+</div>
+
+<!-- View user panel -->

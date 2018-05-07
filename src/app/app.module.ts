@@ -22,6 +22,9 @@ import { PageContactComponent } from './page-contact/page-contact.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageCheckStatusComponent } from './page-check-status/page-check-status.component';
 import { PageAdminPanelComponent } from './page-admin-panel/page-admin-panel.component';
+import { PageAdminUserTableComponent } from './page-admin-panel/page-admin-user-table/page-admin-user-table.component';
+import { PageAdminStatisticComponent } from './page-admin-panel/page-admin-statistic/page-admin-statistic.component';
+import { PageAdminEmailBlastComponent } from './page-admin-panel/page-admin-email-blast/page-admin-email-blast.component';
 
 
 @NgModule({
@@ -34,7 +37,10 @@ import { PageAdminPanelComponent } from './page-admin-panel/page-admin-panel.com
     PageContactComponent,
     FooterComponent,
     PageCheckStatusComponent,
-    PageAdminPanelComponent
+    PageAdminPanelComponent,
+    PageAdminUserTableComponent,
+    PageAdminStatisticComponent,
+    PageAdminEmailBlastComponent
   ],
   imports: [
     BrowserModule,

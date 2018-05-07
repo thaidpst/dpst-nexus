@@ -32,8 +32,8 @@ exports = module.exports = function(io) {
             io.emit('online-users', onlineUsers);
         });
 
-        socket.on('account-active', userId=>{
-            io.emit('announce-account-active', userId);
+        socket.on('account-status', userId=>{
+            io.emit('announce-account-status', userId);
         });
         socket.on('account-delete', userId=>{
             io.emit('announce-account-delete', userId);

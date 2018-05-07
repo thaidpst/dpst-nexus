@@ -8,6 +8,8 @@
 
 .sub-menu.level-2 {margin: 0;}
 
+.pen {color:orange !important; font-weight:600 !important;}
+
 @media screen and (max-width: 990px) {
     .menu.navbar.navbar-default {
         box-shadow: 0 0 8px rgba(0,0,0,0.4);
