@@ -130,7 +130,24 @@ export class PageAdminUserTableComponent implements OnInit {
   }
 
   // View user process
-  viewUserinfo(userinfo) {this.subpage = 'View user'; this.userOnHand = userinfo;}
+  viewUserinfo(userinfo) {
+    this.userinfoService.getUserDetail(userinfo)
+      .then(result=>{
+        if (result!==null && result.status) {
+          this.userOnHand = result.data;        
+          this.subpage = 'View user'; 
+        }
+      });
+  }
+  ViewUserBack() {this.subpage = 'Table'; this.userOnHand = null;}
+  viewUserPosition() {
+    if (this.userOnHand.position===undefined) return 'N/A';
+    else return this.userOnHand.position;
+  }
+  viewUserAbout() {
+    if (this.userOnHand.about===undefined) return 'N/A';
+    else return this.userOnHand.about;
+  }
 
   ngOnDestroy() {
     this.getUsersSubscription.unsubscribe();

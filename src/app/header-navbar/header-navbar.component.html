@@ -59,7 +59,7 @@
                                     </ul>
                                 </li>
 
-                                <!-- Profile -->
+                                <!-- User panel -->
                                 <li [ngClass]="{'active':pageService.getPage()=='Profile'}" *ngIf="userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().status=='Active'">
                                     <a>
                                         <ng-container *ngIf="settingService.getLanguage()=='Thai'">สวัสดี 
@@ -70,11 +70,11 @@
                                         </ng-container>
                                     </a><span class="has-subnav profile-nav"><i class="fa fa-angle-down"></i></span>
                                     <ul class="sub-menu level-2 profile-nav">
-                                        <li><a (click)="pageService.setPage('Profile'); unactive();">
+                                        <li><a (click)="pageService.setPage('User panel'); pageService.setSubpage('Profile'); unactive();">
                                             <ng-container *ngIf="settingService.getLanguage()=='Thai'">ประวัติส่วนตัว</ng-container>
                                             <ng-container *ngIf="settingService.getLanguage()=='English'">Profile</ng-container>
                                         </a></li>
-                                        <li><a (click)="pageService.setPage('Profile'); unactive();">
+                                        <li><a (click)="pageService.setPage('User panel'); pageService.setSubpage('History'); unactive();">
                                             <ng-container *ngIf="settingService.getLanguage()=='Thai'">ประวัติการใช้งาน</ng-container>
                                             <ng-container *ngIf="settingService.getLanguage()=='English'">History</ng-container>
                                         </a></li>

@@ -1,11 +1,11 @@
-th {color: #000000;}
-td {font-weight: 300;}
+th {color:#000000;}
+td {font-weight:300;}
 
-.fa {cursor: pointer;}
+.fa {cursor:pointer;}
 
-.show-per-page, .select-sort, input.search[type=text] {height: 38px; padding: 3px;}
-.show-per-page {width: 60px;}
-.select-sort {width: 190px;}
+.show-per-page, .select-sort, input.search[type=text] {height:38px; padding:3px;}
+.show-per-page {width:60px;}
+.select-sort {width:190px;}
 input.search[type=text] {
     font-size: 16px;
     border: 1px solid #dfdfdf;
@@ -16,8 +16,7 @@ input.search[type=text] {
     padding-right: 10px;
 }
 
-.top-option {
-    padding: 0 15px;
-    float: right;
-}
+.top-option {padding:0 15px; float:right;}
+
+.political-team-list-wrap .political-team-info > li {width:100%;}
 

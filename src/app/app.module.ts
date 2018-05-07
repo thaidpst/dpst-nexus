@@ -25,6 +25,11 @@ import { PageAdminPanelComponent } from './page-admin-panel/page-admin-panel.com
 import { PageAdminUserTableComponent } from './page-admin-panel/page-admin-user-table/page-admin-user-table.component';
 import { PageAdminStatisticComponent } from './page-admin-panel/page-admin-statistic/page-admin-statistic.component';
 import { PageAdminEmailBlastComponent } from './page-admin-panel/page-admin-email-blast/page-admin-email-blast.component';
+import { PageUserPanelComponent } from './page-user-panel/page-user-panel.component';
+import { PageUserProfileComponent } from './page-user-panel/page-user-profile/page-user-profile.component';
+import { PageUserEditProfileComponent } from './page-user-panel/page-user-edit-profile/page-user-edit-profile.component';
+import { PageUserSettingComponent } from './page-user-panel/page-user-setting/page-user-setting.component';
+import { PageUserHistoryComponent } from './page-user-panel/page-user-history/page-user-history.component';
 
 
 @NgModule({
@@ -40,7 +45,12 @@ import { PageAdminEmailBlastComponent } from './page-admin-panel/page-admin-emai
     PageAdminPanelComponent,
     PageAdminUserTableComponent,
     PageAdminStatisticComponent,
-    PageAdminEmailBlastComponent
+    PageAdminEmailBlastComponent,
+    PageUserPanelComponent,
+    PageUserProfileComponent,
+    PageUserEditProfileComponent,
+    PageUserSettingComponent,
+    PageUserHistoryComponent
   ],
   imports: [
     BrowserModule,

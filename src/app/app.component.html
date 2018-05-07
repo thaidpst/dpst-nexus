@@ -22,6 +22,11 @@
     <app-page-check-status></app-page-check-status>
   </ng-container>
 
+  <!-- User panel -->
+  <ng-container *ngIf="pageService.getPage()=='User panel' && userinfoService.getUserinfo()!==null">
+    <app-page-user-panel></app-page-user-panel>
+  </ng-container>
+
   <!-- Admin panel -->
   <ng-container *ngIf="pageService.getPage()=='Admin panel' && userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().level>=8">
     <app-page-admin-panel></app-page-admin-panel>

@@ -44,6 +44,77 @@ db.createCollection("users", {
     },
     validationAction: "warn"
 });
+db.createCollection("userDetail", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: [ "userId", "profileUrl" ],
+            properties: {
+                userId: {
+                    bsonType: "objectId",
+                    description: "must be a ObjectId in users collection(_id) and is require"
+                },
+                profileUrl: {
+                    bsonType: "string",
+                    description: "must be a string and is required"
+                },
+                about: {
+                    bsonType: "string",
+                    description: "must be a string and is not required"
+                },
+                phone: {
+                    bsonType: "string",
+                    description: "must be a string and is not required"
+                },
+                lineId: {
+                    bsonType: "string",
+                    description: "must be a string and is not required"
+                },
+                position: {
+                    bsonType: "string",
+                    description: "must be a string and is not required"
+                },
+                school: {
+                    bsonType: "string",
+                    description: "must be a string and is not required"
+                },
+                workplace: {
+                    bsonType: "string",
+                    description: "must be a string and is not required"
+                },
+                education: {
+                    bsonType: "string",
+                    description: "must be a string and is not required"
+                },
+                dpstYear: {
+                    bsonType: "string",
+                    description: "must be a string and is not required"
+                },
+                zip: {
+                    bsonType: "string",
+                    description: "must be a string and is not required"
+                },
+                country: {
+                    bsonType: "string",
+                    description: "must be a string and is not required"
+                },
+                province: {
+                    bsonType: "string",
+                    description: "must be a string and is not required"
+                },
+                address1: {
+                    bsonType: "string",
+                    description: "must be a string and is not required"
+                },
+                address2: {
+                    bsonType: "string",
+                    description: "must be a string and is not required"
+                }
+            }
+        }
+    },
+    validationAction: "warn"
+});
 
 //  Initialize data
 db.users.insert({
@@ -65,4 +136,30 @@ db.users.insert({
     lastname: "ศรีเจริญ",
     email: "nsric@ipst.ac.th",
     status: "Active"
+});
+db.users.insert({
+    username : "chinissai",
+    password : "badc11358bb889bdd1ec674c606e66c87d3ca569475b09d99e0027a44976914ec25f526c7f7a2bfb3b56ff80936c0ea2d817956e2f65bbb22a9bda51fda004b0",
+    salt : "6b0164bc5c1ad0020fd046bae81ea9ac",
+    level: 8,
+    firstname: "Chin",
+    lastname: "Isradisaikul",
+    email: "chinissai@hotmail.com",
+    status: "Active"
+});
+
+let user1 = db.users.findOne({username: "TofuMaster"})._id;
+db.userDetail.insert({
+    userId: user1,
+    profileUrl: 'assets/img/profile/base.jpg'
+});
+let user2 = db.users.findOne({username: "nui"})._id;
+db.userDetail.insert({
+    userId: user2,
+    profileUrl: 'assets/img/profile/base.jpg'
+});
+let user3 = db.users.findOne({username: "chinissai"})._id;
+db.userDetail.insert({
+    userId: user3,
+    profileUrl: 'assets/img/profile/base.jpg'
 });

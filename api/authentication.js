@@ -5,7 +5,8 @@ let crypto = require('crypto');
 
 router.post('/register', (req, res)=>{
     let input = req.body.input;
-    let dbUsers = req.db.get('users');
+    let dbUsers = req.db.get('users'),
+        dbUserDetail = req.db.get('userDetail');
 
     if (input.password.length<5) res.json({status:false, message:'Register fail: Password is too short.', data:0});
     else {
@@ -33,7 +34,21 @@ router.post('/register', (req, res)=>{
                                     email: input.email,
                                     status: 'Pending'
                                 })
-                                .then(check3=>{res.json({status:true, message:'Register successfully!', data:1})})
+                                .then(check3=>{
+                                    dbUsers.findOne({username: input.username}, {_id: 1})
+                                        .then(check4=>{
+
+                                            dbUserDetail.insert({
+                                                userId: check4._id,
+                                                profileUrl: 'assets/img/profile/base.jpg'
+                                            })
+                                            .then(check5=>{
+                                                res.json({status:true, message:'Register successfully!', data:1});
+                                            })
+                                            .catch(err5=>{res.json({status:false, message:'Register error: '+err5, data:null})});
+                                        })
+                                        .catch(err4=>{res.json({status:false, message:'Register error: '+err4, data:null})});
+                                })
                                 .catch(err3=>{res.json({status:false, message:'Register error: '+err3, data:null})})
 
                             } else res.json({status:false, message:'Register fail: Email is already in use.', data:-2});

@@ -72,11 +72,15 @@ router.post('/setaccountstatus', (req, res)=>{
 
 router.post('/deleteaccount', (req, res)=>{
     let userId = req.db.id(req.body.input.userId);
-    let dbUsers = req.db.get('users');
+    let dbUsers = req.db.get('users'),
+        dbUserDetail = req.db.get('userDetail');
 
     dbUsers.remove({ _id: userId }, { justOne: true })
-        .then(status=>{
-            res.json({status:true, message:'The account has been deleted successfully.', data:1});
+        .then(status1=>{
+            dbUserDetail.remove({ userId: userId }, { justOne: true })
+                .then(status2=>{
+                    res.json({status:true, message:'The account has been deleted successfully.', data:1});
+                });
         });      
 });
 

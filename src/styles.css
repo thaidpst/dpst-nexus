@@ -1,9 +1,10 @@
 
 html, body {height:100%; margin:0;}
-.political-main-wrapper {min-height:100%; margin-bottom:-78px;}
+.political-main-wrapper {min-height:100%;}
+/* .political-main-wrapper {min-height:100%; margin-bottom:-78px;}
 @media screen and (max-width:480px) {
     .political-main-wrapper {margin-bottom:-107px;} 
-}
+} */
 
 
 a {cursor: pointer;}

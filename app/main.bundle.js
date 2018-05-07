@@ -27,15 +27,21 @@ module.exports = ""
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"political-main-wrapper\">\n\n  <app-header-navbar></app-header-navbar>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Homepage'\">\n    <app-page-home></app-page-home>\n  </ng-container>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Log in'\">\n    <app-page-login></app-page-login>\n  </ng-container>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Register'\">\n    <app-page-register></app-page-register>\n  </ng-container>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Contact'\">\n    <app-page-contact></app-page-contact>\n  </ng-container>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Check status'\">\n    <app-page-check-status></app-page-check-status>\n  </ng-container>\n\n  <!-- Admin panel -->\n  <ng-container *ngIf=\"pageService.getPage()=='Admin panel' && userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().level>=8\">\n    <app-page-admin-panel></app-page-admin-panel>\n  </ng-container>\n  \n  <!-- <div>{{socketioService.getOnlineUsers()}}</div> -->  \n</div>\n\n<app-footer></app-footer>\n"
+module.exports = "<div class=\"political-main-wrapper\">\n\n  <app-header-navbar></app-header-navbar>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Homepage'\">\n    <app-page-home></app-page-home>\n  </ng-container>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Log in'\">\n    <app-page-login></app-page-login>\n  </ng-container>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Register'\">\n    <app-page-register></app-page-register>\n  </ng-container>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Contact'\">\n    <app-page-contact></app-page-contact>\n  </ng-container>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Check status'\">\n    <app-page-check-status></app-page-check-status>\n  </ng-container>\n\n  <!-- User panel -->\n  <ng-container *ngIf=\"pageService.getPage()=='User panel' && userinfoService.getUserinfo()!==null\">\n    <app-page-user-panel></app-page-user-panel>\n  </ng-container>\n\n  <!-- Admin panel -->\n  <ng-container *ngIf=\"pageService.getPage()=='Admin panel' && userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().level>=8\">\n    <app-page-admin-panel></app-page-admin-panel>\n  </ng-container>\n  \n  <!-- <div>{{socketioService.getOnlineUsers()}}</div> -->  \n</div>\n\n<app-footer></app-footer>\n"
 
 /***/ }),
 
 /***/ "./src/app/app.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_socketio_service__ = __webpack_require__("./src/app/services/socketio.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_authentication_service__ = __webpack_require__("./src/app/services/authentication.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_cookie_service__ = __webpack_require__("./src/app/services/cookie.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -45,14 +51,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var socketio_service_1 = __webpack_require__("./src/app/services/socketio.service.ts");
-var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
-var authentication_service_1 = __webpack_require__("./src/app/services/authentication.service.ts");
-var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
-var cookie_service_1 = __webpack_require__("./src/app/services/cookie.service.ts");
-core_1.enableProdMode();
+
+
+
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* enableProdMode */])();
 var AppComponent = /** @class */ (function () {
     function AppComponent(socketioService, pageService, authenticationService, userinfoService, cookieService) {
         this.socketioService = socketioService;
@@ -92,102 +97,139 @@ var AppComponent = /** @class */ (function () {
         });
     };
     AppComponent = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-root',
             template: __webpack_require__("./src/app/app.component.html"),
             styles: [__webpack_require__("./src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [socketio_service_1.SocketioService,
-            page_service_1.PageService,
-            authentication_service_1.AuthenticationService,
-            userinfo_service_1.UserinfoService,
-            cookie_service_1.CookieService])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_socketio_service__["a" /* SocketioService */],
+            __WEBPACK_IMPORTED_MODULE_2__services_page_service__["a" /* PageService */],
+            __WEBPACK_IMPORTED_MODULE_3__services_authentication_service__["a" /* AuthenticationService */],
+            __WEBPACK_IMPORTED_MODULE_4__services_userinfo_service__["a" /* UserinfoService */],
+            __WEBPACK_IMPORTED_MODULE_5__services_cookie_service__["a" /* CookieService */]])
     ], AppComponent);
     return AppComponent;
 }());
-exports.AppComponent = AppComponent;
+
 
 
 /***/ }),
 
 /***/ "./src/app/app.module.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_socketio_service__ = __webpack_require__("./src/app/services/socketio.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_authentication_service__ = __webpack_require__("./src/app/services/authentication.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_admin_service__ = __webpack_require__("./src/app/services/admin.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_cookie_service__ = __webpack_require__("./src/app/services/cookie.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__app_component__ = __webpack_require__("./src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__header_navbar_header_navbar_component__ = __webpack_require__("./src/app/header-navbar/header-navbar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__page_home_page_home_component__ = __webpack_require__("./src/app/page-home/page-home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__page_login_page_login_component__ = __webpack_require__("./src/app/page-login/page-login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__page_register_page_register_component__ = __webpack_require__("./src/app/page-register/page-register.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__page_contact_page_contact_component__ = __webpack_require__("./src/app/page-contact/page-contact.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__footer_footer_component__ = __webpack_require__("./src/app/footer/footer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__page_check_status_page_check_status_component__ = __webpack_require__("./src/app/page-check-status/page-check-status.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__page_admin_panel_page_admin_panel_component__ = __webpack_require__("./src/app/page-admin-panel/page-admin-panel.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__page_admin_panel_page_admin_user_table_page_admin_user_table_component__ = __webpack_require__("./src/app/page-admin-panel/page-admin-user-table/page-admin-user-table.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__page_admin_panel_page_admin_statistic_page_admin_statistic_component__ = __webpack_require__("./src/app/page-admin-panel/page-admin-statistic/page-admin-statistic.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__page_admin_panel_page_admin_email_blast_page_admin_email_blast_component__ = __webpack_require__("./src/app/page-admin-panel/page-admin-email-blast/page-admin-email-blast.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__page_user_panel_page_user_panel_component__ = __webpack_require__("./src/app/page-user-panel/page-user-panel.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__page_user_panel_page_user_profile_page_user_profile_component__ = __webpack_require__("./src/app/page-user-panel/page-user-profile/page-user-profile.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__page_user_panel_page_user_edit_profile_page_user_edit_profile_component__ = __webpack_require__("./src/app/page-user-panel/page-user-edit-profile/page-user-edit-profile.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__page_user_panel_page_user_setting_page_user_setting_component__ = __webpack_require__("./src/app/page-user-panel/page-user-setting/page-user-setting.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__page_user_panel_page_user_history_page_user_history_component__ = __webpack_require__("./src/app/page-user-panel/page-user-history/page-user-history.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var platform_browser_1 = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
-var forms_1 = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
+
+
+
+
 // Services
-var socketio_service_1 = __webpack_require__("./src/app/services/socketio.service.ts");
-var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
-var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
-var authentication_service_1 = __webpack_require__("./src/app/services/authentication.service.ts");
-var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
-var admin_service_1 = __webpack_require__("./src/app/services/admin.service.ts");
-var cookie_service_1 = __webpack_require__("./src/app/services/cookie.service.ts");
+
+
+
+
+
+
+
 // Components
-var app_component_1 = __webpack_require__("./src/app/app.component.ts");
-var header_navbar_component_1 = __webpack_require__("./src/app/header-navbar/header-navbar.component.ts");
-var page_home_component_1 = __webpack_require__("./src/app/page-home/page-home.component.ts");
-var page_login_component_1 = __webpack_require__("./src/app/page-login/page-login.component.ts");
-var page_register_component_1 = __webpack_require__("./src/app/page-register/page-register.component.ts");
-var page_contact_component_1 = __webpack_require__("./src/app/page-contact/page-contact.component.ts");
-var footer_component_1 = __webpack_require__("./src/app/footer/footer.component.ts");
-var page_check_status_component_1 = __webpack_require__("./src/app/page-check-status/page-check-status.component.ts");
-var page_admin_panel_component_1 = __webpack_require__("./src/app/page-admin-panel/page-admin-panel.component.ts");
-var page_admin_user_table_component_1 = __webpack_require__("./src/app/page-admin-panel/page-admin-user-table/page-admin-user-table.component.ts");
-var page_admin_statistic_component_1 = __webpack_require__("./src/app/page-admin-panel/page-admin-statistic/page-admin-statistic.component.ts");
-var page_admin_email_blast_component_1 = __webpack_require__("./src/app/page-admin-panel/page-admin-email-blast/page-admin-email-blast.component.ts");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        core_1.NgModule({
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* NgModule */])({
             declarations: [
-                app_component_1.AppComponent,
-                header_navbar_component_1.HeaderNavbarComponent,
-                page_home_component_1.PageHomeComponent,
-                page_login_component_1.PageLoginComponent,
-                page_register_component_1.PageRegisterComponent,
-                page_contact_component_1.PageContactComponent,
-                footer_component_1.FooterComponent,
-                page_check_status_component_1.PageCheckStatusComponent,
-                page_admin_panel_component_1.PageAdminPanelComponent,
-                page_admin_user_table_component_1.PageAdminUserTableComponent,
-                page_admin_statistic_component_1.PageAdminStatisticComponent,
-                page_admin_email_blast_component_1.PageAdminEmailBlastComponent
+                __WEBPACK_IMPORTED_MODULE_11__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_12__header_navbar_header_navbar_component__["a" /* HeaderNavbarComponent */],
+                __WEBPACK_IMPORTED_MODULE_13__page_home_page_home_component__["a" /* PageHomeComponent */],
+                __WEBPACK_IMPORTED_MODULE_14__page_login_page_login_component__["a" /* PageLoginComponent */],
+                __WEBPACK_IMPORTED_MODULE_15__page_register_page_register_component__["a" /* PageRegisterComponent */],
+                __WEBPACK_IMPORTED_MODULE_16__page_contact_page_contact_component__["a" /* PageContactComponent */],
+                __WEBPACK_IMPORTED_MODULE_17__footer_footer_component__["a" /* FooterComponent */],
+                __WEBPACK_IMPORTED_MODULE_18__page_check_status_page_check_status_component__["a" /* PageCheckStatusComponent */],
+                __WEBPACK_IMPORTED_MODULE_19__page_admin_panel_page_admin_panel_component__["a" /* PageAdminPanelComponent */],
+                __WEBPACK_IMPORTED_MODULE_20__page_admin_panel_page_admin_user_table_page_admin_user_table_component__["a" /* PageAdminUserTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_21__page_admin_panel_page_admin_statistic_page_admin_statistic_component__["a" /* PageAdminStatisticComponent */],
+                __WEBPACK_IMPORTED_MODULE_22__page_admin_panel_page_admin_email_blast_page_admin_email_blast_component__["a" /* PageAdminEmailBlastComponent */],
+                __WEBPACK_IMPORTED_MODULE_23__page_user_panel_page_user_panel_component__["a" /* PageUserPanelComponent */],
+                __WEBPACK_IMPORTED_MODULE_24__page_user_panel_page_user_profile_page_user_profile_component__["a" /* PageUserProfileComponent */],
+                __WEBPACK_IMPORTED_MODULE_25__page_user_panel_page_user_edit_profile_page_user_edit_profile_component__["a" /* PageUserEditProfileComponent */],
+                __WEBPACK_IMPORTED_MODULE_26__page_user_panel_page_user_setting_page_user_setting_component__["a" /* PageUserSettingComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__page_user_panel_page_user_history_page_user_history_component__["a" /* PageUserHistoryComponent */]
             ],
             imports: [
-                platform_browser_1.BrowserModule,
-                http_1.HttpModule,
-                forms_1.FormsModule
+                __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* HttpModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */]
             ],
             providers: [
-                socketio_service_1.SocketioService,
-                page_service_1.PageService,
-                setting_service_1.SettingService,
-                authentication_service_1.AuthenticationService,
-                userinfo_service_1.UserinfoService,
-                admin_service_1.AdminService,
-                cookie_service_1.CookieService
+                __WEBPACK_IMPORTED_MODULE_4__services_socketio_service__["a" /* SocketioService */],
+                __WEBPACK_IMPORTED_MODULE_5__services_page_service__["a" /* PageService */],
+                __WEBPACK_IMPORTED_MODULE_6__services_setting_service__["a" /* SettingService */],
+                __WEBPACK_IMPORTED_MODULE_7__services_authentication_service__["a" /* AuthenticationService */],
+                __WEBPACK_IMPORTED_MODULE_8__services_userinfo_service__["a" /* UserinfoService */],
+                __WEBPACK_IMPORTED_MODULE_9__services_admin_service__["a" /* AdminService */],
+                __WEBPACK_IMPORTED_MODULE_10__services_cookie_service__["a" /* CookieService */]
             ],
             bootstrap: [
-                app_component_1.AppComponent
+                __WEBPACK_IMPORTED_MODULE_11__app_component__["a" /* AppComponent */]
             ]
         })
     ], AppModule);
     return AppModule;
 }());
-exports.AppModule = AppModule;
+
 
 
 /***/ }),
@@ -207,10 +249,11 @@ module.exports = "<footer id=\"political-footer\" class=\"political-footer-one\"
 /***/ }),
 
 /***/ "./src/app/footer/footer.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FooterComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -220,15 +263,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+
 var FooterComponent = /** @class */ (function () {
     function FooterComponent() {
     }
     FooterComponent.prototype.ngOnInit = function () {
     };
     FooterComponent = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-footer',
             template: __webpack_require__("./src/app/footer/footer.component.html"),
             styles: [__webpack_require__("./src/app/footer/footer.component.css")]
@@ -237,20 +279,21 @@ var FooterComponent = /** @class */ (function () {
     ], FooterComponent);
     return FooterComponent;
 }());
-exports.FooterComponent = FooterComponent;
+
 
 
 /***/ }),
 
 /***/ "./src/app/globals.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ipHost; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return testing; });
 
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ipHost = "http://localhost:7000";
+var ipHost = "http://localhost:7000";
 // export const ipHost: string = "http://159.65.70.206:7000";
-exports.testing = true;
+var testing = true;
 
 
 /***/ }),
@@ -265,15 +308,22 @@ module.exports = ".logo img {\r\n    width: 213px !important;\r\n}\r\n\r\n.polit
 /***/ "./src/app/header-navbar/header-navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header id=\"political-header\" class=\"political-header-one\">\n    <div class=\"political-main-header\">\n        <div class=\"container\">\n            <div class=\"row\">\n\n                <aside class=\"col-md-3\">\n                    <a (click)=\"pageService.setPage('Home')\" class=\"logo\"><img src=\"assets/img/logo/base.png\" alt=\"\"></a>\n                </aside>\n\n                <aside class=\"col-md-9\">\n                    <div class=\"political-navigation\">\n                        <a href=\"#menu\" class=\"menu-link active\" (click)=\"unactiveSubMenu()\">\n                            <span style=\"margin-right:0;\"></span>\n                        </a>\n                        <nav id=\"menu\" class=\"menu navbar navbar-default\" (mouseleave)=\"autoCloseNavbar()\">\n                            <ul class=\"level-1 navbar-nav\">\n\n                                <!-- Homepage -->\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Homepage'}\"><a (click)=\"pageService.setPage('Homepage'); unactive();\">\n                                    <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">หน้าแรก</ng-container>\n                                    <ng-container *ngIf=\"settingService.getLanguage()=='English'\">HomePage</ng-container>\n                                </a></li>\n\n                                <!-- Log in -->\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Log in'}\" *ngIf=\"userinfoService.getUserinfo()===null\">\n                                    <a (click)=\"pageService.setPage('Log in'); unactive();\">\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">เข้าสู่ระบบ</ng-container>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Log in</ng-container>\n                                    </a>\n                                </li>\n\n                                <!-- Register -->\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Register'}\" *ngIf=\"userinfoService.getUserinfo()===null\">\n                                    <a (click)=\"pageService.setPage('Register'); unactive();\">\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">สมัครสมาชิก</ng-container>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Register</ng-container>\n                                    </a>\n                                </li>\n\n                                <!-- Check status -->\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Check status'}\" *ngIf=\"userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().status!='Active'\">\n                                    <a>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">สถานะ: \n                                            <span [ngClass]=\"{'ban':userinfoService.getUserinfo().status=='Ban', 'pen':userinfoService.getUserinfo().status=='Pending'}\">{{userinfoService.getUserinfo().status}}</span>\n                                        </ng-container>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Status:\n                                            <span [ngClass]=\"{'ban':userinfoService.getUserinfo().status=='Ban', 'pen':userinfoService.getUserinfo().status=='Pending'}\">{{userinfoService.getUserinfo().status}}</span>\n                                        </ng-container>\n                                    </a><span class=\"has-subnav status-nav\" (click)=\"toggleSubnav('.status-nav')\"><i class=\"fa fa-angle-down\"></i></span>\n                                    <ul class=\"sub-menu level-2 status-nav\">\n                                        <li><a (click)=\"pageService.setPage('Check status'); unactive();\">\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">คืออะไร</ng-container>\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">What is this?</ng-container>\n                                        </a></li>\n                                        <li><a (click)=\"memberLogOut(); unactive();\">\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ออกจากระบบ</ng-container>\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Log out</ng-container>\n                                        </a></li>\n                                    </ul>\n                                </li>\n\n                                <!-- Profile -->\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Profile'}\" *ngIf=\"userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().status=='Active'\">\n                                    <a>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">สวัสดี \n                                            <span class=\"hello-user\">{{userinfoService.getUserinfo().username}}</span>\n                                        </ng-container>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Hello,\n                                            <span class=\"hello-user\">{{userinfoService.getUserinfo().username}}</span>\n                                        </ng-container>\n                                    </a><span class=\"has-subnav profile-nav\"><i class=\"fa fa-angle-down\"></i></span>\n                                    <ul class=\"sub-menu level-2 profile-nav\">\n                                        <li><a (click)=\"pageService.setPage('Profile'); unactive();\">\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ประวัติส่วนตัว</ng-container>\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Profile</ng-container>\n                                        </a></li>\n                                        <li><a (click)=\"pageService.setPage('Profile'); unactive();\">\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ประวัติการใช้งาน</ng-container>\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">History</ng-container>\n                                        </a></li>\n\n                                        <!-- Admin panel -->\n                                        <li *ngIf=\"userinfoService.getUserinfo().level>=8\">\n                                            <a (click)=\"pageService.setPage('Admin panel'); pageService.setSubpage('User table'); unactive();\"\n                                            class=\"hello-user\" style=\"font-weight:600;\">\n                                                Admin Panel\n                                            </a>\n                                        </li>\n                                        <li><a (click)=\"memberLogOut(); unactive();\">\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ออกจากระบบ</ng-container>\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Log out</ng-container>\n                                        </a></li>\n                                    </ul>\n                                </li>\n\n                                <!-- Forms -->\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Forms'}\" *ngIf=\"userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().status=='Active'\">\n                                    <a (click)=\"pageService.setPage('Forms'); unactive();\">\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">แบบฟอร์ม</ng-container>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Forms</ng-container>\n                                    </a>\n                                </li>\n\n                                <!-- Contact -->\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Contact'}\"><a (click)=\"pageService.setPage('Contact'); unactive();\">\n                                    <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ติดต่อเรา</ng-container>\n                                    <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Contact Us</ng-container>\n                                </a></li>\n\n                                <!-- Language -->\n                                <!-- <li>\n                                    <a>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">เลือกภาษา</ng-container>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Language</ng-container>\n                                    </a><span class=\"has-subnav\"><i class=\"fa fa-angle-down\"></i></span>\n                                    <ul class=\"sub-menu level-2\">\n                                        <li><a (click)=\"settingService.setLanguage('Thai'); unactive();\">\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ภาษาไทย</ng-container>\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Thai</ng-container>\n                                        </a></li>\n                                        <li><a (click)=\"settingService.setLanguage('English'); unactive();\">\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ภาษาอังกฤษ</ng-container>\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">English</ng-container>\n                                        </a></li>\n                                    </ul>\n                                </li> -->\n                                <li>\n                                    <a>Language</a><span class=\"has-subnav\"><i class=\"fa fa-angle-down\"></i></span>\n                                    <ul class=\"sub-menu level-2\">\n                                        <li><a (click)=\"settingService.setLanguage('Thai'); unactive();\">Thai</a></li>\n                                        <li><a (click)=\"settingService.setLanguage('English'); unactive();\">English</a></li>\n                                    </ul>\n                                </li>\n\n                            </ul>\n                        </nav>\n                    </div>\n                </aside>\n\n            </div>\n        </div>\n    </div>\n</header>"
+module.exports = "<header id=\"political-header\" class=\"political-header-one\">\n    <div class=\"political-main-header\">\n        <div class=\"container\">\n            <div class=\"row\">\n\n                <aside class=\"col-md-3\">\n                    <a (click)=\"pageService.setPage('Home')\" class=\"logo\"><img src=\"assets/img/logo/base.png\" alt=\"\"></a>\n                </aside>\n\n                <aside class=\"col-md-9\">\n                    <div class=\"political-navigation\">\n                        <a href=\"#menu\" class=\"menu-link active\" (click)=\"unactiveSubMenu()\">\n                            <span style=\"margin-right:0;\"></span>\n                        </a>\n                        <nav id=\"menu\" class=\"menu navbar navbar-default\" (mouseleave)=\"autoCloseNavbar()\">\n                            <ul class=\"level-1 navbar-nav\">\n\n                                <!-- Homepage -->\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Homepage'}\"><a (click)=\"pageService.setPage('Homepage'); unactive();\">\n                                    <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">หน้าแรก</ng-container>\n                                    <ng-container *ngIf=\"settingService.getLanguage()=='English'\">HomePage</ng-container>\n                                </a></li>\n\n                                <!-- Log in -->\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Log in'}\" *ngIf=\"userinfoService.getUserinfo()===null\">\n                                    <a (click)=\"pageService.setPage('Log in'); unactive();\">\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">เข้าสู่ระบบ</ng-container>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Log in</ng-container>\n                                    </a>\n                                </li>\n\n                                <!-- Register -->\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Register'}\" *ngIf=\"userinfoService.getUserinfo()===null\">\n                                    <a (click)=\"pageService.setPage('Register'); unactive();\">\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">สมัครสมาชิก</ng-container>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Register</ng-container>\n                                    </a>\n                                </li>\n\n                                <!-- Check status -->\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Check status'}\" *ngIf=\"userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().status!='Active'\">\n                                    <a>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">สถานะ: \n                                            <span [ngClass]=\"{'ban':userinfoService.getUserinfo().status=='Ban', 'pen':userinfoService.getUserinfo().status=='Pending'}\">{{userinfoService.getUserinfo().status}}</span>\n                                        </ng-container>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Status:\n                                            <span [ngClass]=\"{'ban':userinfoService.getUserinfo().status=='Ban', 'pen':userinfoService.getUserinfo().status=='Pending'}\">{{userinfoService.getUserinfo().status}}</span>\n                                        </ng-container>\n                                    </a><span class=\"has-subnav status-nav\" (click)=\"toggleSubnav('.status-nav')\"><i class=\"fa fa-angle-down\"></i></span>\n                                    <ul class=\"sub-menu level-2 status-nav\">\n                                        <li><a (click)=\"pageService.setPage('Check status'); unactive();\">\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">คืออะไร</ng-container>\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">What is this?</ng-container>\n                                        </a></li>\n                                        <li><a (click)=\"memberLogOut(); unactive();\">\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ออกจากระบบ</ng-container>\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Log out</ng-container>\n                                        </a></li>\n                                    </ul>\n                                </li>\n\n                                <!-- User panel -->\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Profile'}\" *ngIf=\"userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().status=='Active'\">\n                                    <a>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">สวัสดี \n                                            <span class=\"hello-user\">{{userinfoService.getUserinfo().username}}</span>\n                                        </ng-container>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Hello,\n                                            <span class=\"hello-user\">{{userinfoService.getUserinfo().username}}</span>\n                                        </ng-container>\n                                    </a><span class=\"has-subnav profile-nav\"><i class=\"fa fa-angle-down\"></i></span>\n                                    <ul class=\"sub-menu level-2 profile-nav\">\n                                        <li><a (click)=\"pageService.setPage('User panel'); pageService.setSubpage('Profile'); unactive();\">\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ประวัติส่วนตัว</ng-container>\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Profile</ng-container>\n                                        </a></li>\n                                        <li><a (click)=\"pageService.setPage('User panel'); pageService.setSubpage('History'); unactive();\">\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ประวัติการใช้งาน</ng-container>\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">History</ng-container>\n                                        </a></li>\n\n                                        <!-- Admin panel -->\n                                        <li *ngIf=\"userinfoService.getUserinfo().level>=8\">\n                                            <a (click)=\"pageService.setPage('Admin panel'); pageService.setSubpage('User table'); unactive();\"\n                                            class=\"hello-user\" style=\"font-weight:600;\">\n                                                Admin Panel\n                                            </a>\n                                        </li>\n                                        <li><a (click)=\"memberLogOut(); unactive();\">\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ออกจากระบบ</ng-container>\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Log out</ng-container>\n                                        </a></li>\n                                    </ul>\n                                </li>\n\n                                <!-- Forms -->\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Forms'}\" *ngIf=\"userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().status=='Active'\">\n                                    <a (click)=\"pageService.setPage('Forms'); unactive();\">\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">แบบฟอร์ม</ng-container>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Forms</ng-container>\n                                    </a>\n                                </li>\n\n                                <!-- Contact -->\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Contact'}\"><a (click)=\"pageService.setPage('Contact'); unactive();\">\n                                    <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ติดต่อเรา</ng-container>\n                                    <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Contact Us</ng-container>\n                                </a></li>\n\n                                <!-- Language -->\n                                <!-- <li>\n                                    <a>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">เลือกภาษา</ng-container>\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Language</ng-container>\n                                    </a><span class=\"has-subnav\"><i class=\"fa fa-angle-down\"></i></span>\n                                    <ul class=\"sub-menu level-2\">\n                                        <li><a (click)=\"settingService.setLanguage('Thai'); unactive();\">\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ภาษาไทย</ng-container>\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Thai</ng-container>\n                                        </a></li>\n                                        <li><a (click)=\"settingService.setLanguage('English'); unactive();\">\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ภาษาอังกฤษ</ng-container>\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">English</ng-container>\n                                        </a></li>\n                                    </ul>\n                                </li> -->\n                                <li>\n                                    <a>Language</a><span class=\"has-subnav\"><i class=\"fa fa-angle-down\"></i></span>\n                                    <ul class=\"sub-menu level-2\">\n                                        <li><a (click)=\"settingService.setLanguage('Thai'); unactive();\">Thai</a></li>\n                                        <li><a (click)=\"settingService.setLanguage('English'); unactive();\">English</a></li>\n                                    </ul>\n                                </li>\n\n                            </ul>\n                        </nav>\n                    </div>\n                </aside>\n\n            </div>\n        </div>\n    </div>\n</header>"
 
 /***/ }),
 
 /***/ "./src/app/header-navbar/header-navbar.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeaderNavbarComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3__ = __webpack_require__("./node_modules/d3/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_socketio_service__ = __webpack_require__("./src/app/services/socketio.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_cookie_service__ = __webpack_require__("./src/app/services/cookie.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -283,14 +333,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var d3 = __webpack_require__("./node_modules/d3/index.js");
-var socketio_service_1 = __webpack_require__("./src/app/services/socketio.service.ts");
-var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
-var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
-var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
-var cookie_service_1 = __webpack_require__("./src/app/services/cookie.service.ts");
+
+
+
+
+
+
+
 var HeaderNavbarComponent = /** @class */ (function () {
     function HeaderNavbarComponent(elementRef, socketioService, pageService, settingService, userinfoService, cookieService) {
         this.elementRef = elementRef;
@@ -299,7 +348,7 @@ var HeaderNavbarComponent = /** @class */ (function () {
         this.settingService = settingService;
         this.userinfoService = userinfoService;
         this.cookieService = cookieService;
-        this.host = d3.select(this.elementRef.nativeElement);
+        this.host = __WEBPACK_IMPORTED_MODULE_1_d3__["a" /* select */](this.elementRef.nativeElement);
     }
     HeaderNavbarComponent.prototype.ngOnInit = function () {
     };
@@ -326,21 +375,21 @@ var HeaderNavbarComponent = /** @class */ (function () {
         this.cookieService.clearUserLoginCookie();
     };
     HeaderNavbarComponent = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-header-navbar',
             template: __webpack_require__("./src/app/header-navbar/header-navbar.component.html"),
             styles: [__webpack_require__("./src/app/header-navbar/header-navbar.component.css")]
         }),
-        __metadata("design:paramtypes", [core_1.ElementRef,
-            socketio_service_1.SocketioService,
-            page_service_1.PageService,
-            setting_service_1.SettingService,
-            userinfo_service_1.UserinfoService,
-            cookie_service_1.CookieService])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_core__["r" /* ElementRef */],
+            __WEBPACK_IMPORTED_MODULE_2__services_socketio_service__["a" /* SocketioService */],
+            __WEBPACK_IMPORTED_MODULE_3__services_page_service__["a" /* PageService */],
+            __WEBPACK_IMPORTED_MODULE_4__services_setting_service__["a" /* SettingService */],
+            __WEBPACK_IMPORTED_MODULE_5__services_userinfo_service__["a" /* UserinfoService */],
+            __WEBPACK_IMPORTED_MODULE_6__services_cookie_service__["a" /* CookieService */]])
     ], HeaderNavbarComponent);
     return HeaderNavbarComponent;
 }());
-exports.HeaderNavbarComponent = HeaderNavbarComponent;
+
 
 
 /***/ }),
@@ -360,10 +409,11 @@ module.exports = "<p>\n  page-admin-email-blast works!\n</p>\n"
 /***/ }),
 
 /***/ "./src/app/page-admin-panel/page-admin-email-blast/page-admin-email-blast.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageAdminEmailBlastComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -373,15 +423,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+
 var PageAdminEmailBlastComponent = /** @class */ (function () {
     function PageAdminEmailBlastComponent() {
     }
     PageAdminEmailBlastComponent.prototype.ngOnInit = function () {
     };
     PageAdminEmailBlastComponent = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-page-admin-email-blast',
             template: __webpack_require__("./src/app/page-admin-panel/page-admin-email-blast/page-admin-email-blast.component.html"),
             styles: [__webpack_require__("./src/app/page-admin-panel/page-admin-email-blast/page-admin-email-blast.component.css")]
@@ -390,7 +439,7 @@ var PageAdminEmailBlastComponent = /** @class */ (function () {
     ], PageAdminEmailBlastComponent);
     return PageAdminEmailBlastComponent;
 }());
-exports.PageAdminEmailBlastComponent = PageAdminEmailBlastComponent;
+
 
 
 /***/ }),
@@ -398,7 +447,7 @@ exports.PageAdminEmailBlastComponent = PageAdminEmailBlastComponent;
 /***/ "./src/app/page-admin-panel/page-admin-panel.component.css":
 /***/ (function(module, exports) {
 
-module.exports = "li.active a {\r\n    color: #228ae6;\r\n    font-weight: 600;\r\n}"
+module.exports = "li.active a {color:#228ae6; font-weight:600;}"
 
 /***/ }),
 
@@ -410,10 +459,13 @@ module.exports = "<div class=\"political-subheader\">\r\n    <div class=\"contai
 /***/ }),
 
 /***/ "./src/app/page-admin-panel/page-admin-panel.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageAdminPanelComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -423,10 +475,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
-var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
+
+
+
 var PageAdminPanelComponent = /** @class */ (function () {
     function PageAdminPanelComponent(pageService, settingService) {
         this.pageService = pageService;
@@ -435,17 +486,17 @@ var PageAdminPanelComponent = /** @class */ (function () {
     PageAdminPanelComponent.prototype.ngOnInit = function () {
     };
     PageAdminPanelComponent = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-page-admin-panel',
             template: __webpack_require__("./src/app/page-admin-panel/page-admin-panel.component.html"),
             styles: [__webpack_require__("./src/app/page-admin-panel/page-admin-panel.component.css")]
         }),
-        __metadata("design:paramtypes", [page_service_1.PageService,
-            setting_service_1.SettingService])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_page_service__["a" /* PageService */],
+            __WEBPACK_IMPORTED_MODULE_2__services_setting_service__["a" /* SettingService */]])
     ], PageAdminPanelComponent);
     return PageAdminPanelComponent;
 }());
-exports.PageAdminPanelComponent = PageAdminPanelComponent;
+
 
 
 /***/ }),
@@ -465,10 +516,11 @@ module.exports = "<p>\n  page-admin-statistic works!\n</p>\n"
 /***/ }),
 
 /***/ "./src/app/page-admin-panel/page-admin-statistic/page-admin-statistic.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageAdminStatisticComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -478,15 +530,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+
 var PageAdminStatisticComponent = /** @class */ (function () {
     function PageAdminStatisticComponent() {
     }
     PageAdminStatisticComponent.prototype.ngOnInit = function () {
     };
     PageAdminStatisticComponent = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-page-admin-statistic',
             template: __webpack_require__("./src/app/page-admin-panel/page-admin-statistic/page-admin-statistic.component.html"),
             styles: [__webpack_require__("./src/app/page-admin-panel/page-admin-statistic/page-admin-statistic.component.css")]
@@ -495,7 +546,7 @@ var PageAdminStatisticComponent = /** @class */ (function () {
     ], PageAdminStatisticComponent);
     return PageAdminStatisticComponent;
 }());
-exports.PageAdminStatisticComponent = PageAdminStatisticComponent;
+
 
 
 /***/ }),
@@ -503,22 +554,27 @@ exports.PageAdminStatisticComponent = PageAdminStatisticComponent;
 /***/ "./src/app/page-admin-panel/page-admin-user-table/page-admin-user-table.component.css":
 /***/ (function(module, exports) {
 
-module.exports = "th {color: #000000;}\r\ntd {font-weight: 300;}\r\n.fa {cursor: pointer;}\r\n.show-per-page, .select-sort, input.search[type=text] {height: 38px; padding: 3px;}\r\n.show-per-page {width: 60px;}\r\n.select-sort {width: 190px;}\r\ninput.search[type=text] {\r\n    font-size: 16px;\r\n    border: 1px solid #dfdfdf;\r\n    width: 180px;\r\n    color: #5a5a5a;\r\n    font-weight: 300;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n}\r\n.top-option {\r\n    padding: 0 15px;\r\n    float: right;\r\n}\r\n\r\n"
+module.exports = "th {color:#000000;}\r\ntd {font-weight:300;}\r\n.fa {cursor:pointer;}\r\n.show-per-page, .select-sort, input.search[type=text] {height:38px; padding:3px;}\r\n.show-per-page {width:60px;}\r\n.select-sort {width:190px;}\r\ninput.search[type=text] {\r\n    font-size: 16px;\r\n    border: 1px solid #dfdfdf;\r\n    width: 180px;\r\n    color: #5a5a5a;\r\n    font-weight: 300;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n}\r\n.top-option {padding:0 15px; float:right;}\r\n.political-team-list-wrap .political-team-info > li {width:100%;}\r\n\r\n"
 
 /***/ }),
 
 /***/ "./src/app/page-admin-panel/page-admin-user-table/page-admin-user-table.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"subpage=='Table'\" class=\"political-blog-large\">\n\n  <!-- Selection criteria -->\n  <div class=\"political-pagination\" style=\"color:#000; margin:0 0 25px 0;\">\n\n      <div class=\"top-option\">\n        <input #keyword class=\"search\" type=\"text\" (keyup.enter)=\"tableSearch(keyword.value)\">\n        <input type=\"submit\" class=\"political-simple-btn\" value=\"Search\" (click)=\"tableSearch(keyword.value)\">\n      </div>\n\n      <div class=\"top-option\">\n        Sort by\n        <select class=\"select-sort\" (change)=\"tableSortChange($event.target.value)\">\n          <option value=\"None\" selected=\"selected\">None</option>\n          <option value=\"Firstname increasing\">Firstname increasing</option>\n          <option value=\"Firstname decreasing\">Firstname decreasing</option>\n          <option value=\"Level increasing\">Level increasing</option>\n          <option value=\"Level decreasing\">Level decreasing</option>\n          <option value=\"Status increasing\">Status increasing</option>\n          <option value=\"Status decreasing\">Status decreasing</option>\n          <option value=\"Register date increasing\">Register date increasing</option>\n          <option value=\"Register date decreasing\">Register date decreasing</option>\n        </select>\n      </div>\n\n      <div class=\"top-option\">\n        Show per page\n        <select class=\"show-per-page\" (change)=\"tableLimitChange($event.target.value)\">\n          <option value=\"10\">10</option>\n          <option value=\"25\" selected=\"selected\">25</option>\n          <option value=\"50\">50</option>\n          <option value=\"100\">100</option>\n        </select>\n      </div>\n        \n  </div>\n\n  <ul class=\"row\">\n    <li class=\"col-md-12\">\n\n      <table><tbody>\n        <tr>\n          <th>Username</th>\n          <th>Firstname</th>\n          <th>Lastname</th>\n          <th>E-mail address</th>\n          <th>Level</th>\n          <th>Status</th>\n          <th>Actions</th>\n        </tr>\n\n        <ng-container *ngIf=\"users===null\">\n          <tr><td colspan=\"8\">No user data found.</td></tr>\n        </ng-container>\n        <ng-container *ngIf=\"users!==null\">\n          <tr *ngFor=\"let user of users;\">\n            <td>{{user.username}}</td>\n            <td>{{user.firstname}}</td>\n            <td>{{user.lastname}}</td>\n            <td>{{user.email}}</td>\n            <td>{{user.level}}</td>\n            <td [ngClass]=\"{'ban':user.status=='Ban', 'pen':user.status=='Pending', 'hello-user':user.status=='Active'}\">{{user.status}}</td>\n            \n            <!-- Admin options based on level -->\n            <td *ngIf=\"user.level < userinfoService.getUserinfo().level\">\n              <i *ngIf=\"user.status!='Active'\" class=\"fa fa-check-square-o hello-user\" aria-hidden=\"true\"\n                (click)=\"setAccountStatus(user, 'Active')\">&nbsp;</i>\n              <i *ngIf=\"user.status!='Ban'\" class=\"fa fa-times pen\" aria-hidden=\"true\"\n                (click)=\"setAccountStatus(user, 'Ban')\">&nbsp;</i>\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>&nbsp;\n              <i class=\"fa fa-pencil-square-o view-icon\" aria-hidden=\"true\"></i>&nbsp;\n              <i class=\"fa fa-trash ban\" aria-hidden=\"true\"\n                (click)=\"tryDeleteAccount(user)\"></i>\n            </td><!-- Lower users -->\n            <td *ngIf=\"user.level > userinfoService.getUserinfo().level\">\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewUserinfo(user)\"></i>\n            </td><!-- Higher users -->\n            <td *ngIf=\"user.level==userinfoService.getUserinfo().level && user._id==userinfoService.getUserinfo()._id\">\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>&nbsp;\n              <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n            </td><!-- Yourself -->\n            <td *ngIf=\"user.level==userinfoService.getUserinfo().level && user._id!=userinfoService.getUserinfo()._id\">\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>\n            </td><!-- Same level users, not you -->\n\n          </tr>\n        </ng-container>\n\n      </tbody></table>\n\n      <!-- Pagination -->\n      <div class=\"political-pagination\">\n        <ul class=\"page-numbers\">\n            <li><a class=\"previous page-numbers\" (click)=\"previouseTablePage()\"><span aria-label=\"Next\"><i class=\"fa fa-angle-left\"></i></span></a></li>\n            <li *ngFor=\"let page of pagination;\">\n              <a *ngIf=\"page!=criteria.page\" class=\"page-numbers\"\n              (click)=\"paginationChangePage(page)\">{{page+1}}</a>\n              <span *ngIf=\"page==criteria.page\" class=\"page-numbers current\">{{page+1}}</span>\n            </li>\n            <li><a class=\"next page-numbers\" (click)=\"nextTablePage()\"><span aria-label=\"Next\"><i class=\"fa fa-angle-right\"></i></span></a></li>\n        </ul>\n      </div>\n\n    </li>\n  </ul>\n</div>\n\n<!-- Delete user panel -->\n<div *ngIf=\"subpage=='Try delete' && settingService.getLanguage()=='Thai'\" class=\"political-blog-large\">\n  <h1 style=\"margin-bottom:20px;\"><strong>คุณกำลังจะทำการ<span class=\"ban\">ลบข้อมูลผู้ใช้</span></strong></h1>\n  <h3 style=\"margin-bottom:20px;\">ชื่อผู้ใช้งาน: <span class=\"hello-user\" style=\"font-weight:600;\">{{userOnHand.username}}</span></h3>\n  <input type=\"submit\" class=\"political-simple-btn delete-btn\" value=\"ลบข้อมูลผู้ใช้\" (click)=\"deleteAccount()\">\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"ยกเลิก\" (click)=\"tryDeleteCancel()\">\n      \n</div>\n<div *ngIf=\"subpage=='Try delete' && settingService.getLanguage()=='English'\" class=\"political-blog-large\">\n  <h1 style=\"margin-bottom:20px;\"><strong>You are about to <span class=\"ban\">DELETE</span> a user</strong></h1>\n  <h3 style=\"margin-bottom:20px;\">Username: <span class=\"hello-user\" style=\"font-weight:600;\">{{userOnHand.username}}</span></h3>\n  <input type=\"submit\" class=\"political-simple-btn delete-btn\" value=\"DELETE\" (click)=\"deleteAccount()\">\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"Cancel\" (click)=\"tryDeleteCancel()\">\n</div>\n\n<!-- View user panel -->"
+module.exports = "<div *ngIf=\"subpage=='Table'\" class=\"political-blog-large\">\n\n  <!-- Selection criteria -->\n  <div class=\"political-pagination\" style=\"color:#000; margin:0 0 25px 0;\">\n\n      <div class=\"top-option\">\n        <input #keyword class=\"search\" type=\"text\" (keyup.enter)=\"tableSearch(keyword.value)\">\n        <input type=\"submit\" class=\"political-simple-btn\" value=\"Search\" (click)=\"tableSearch(keyword.value)\">\n      </div>\n\n      <div class=\"top-option\">\n        Sort by\n        <select class=\"select-sort\" (change)=\"tableSortChange($event.target.value)\">\n          <option value=\"None\" selected=\"selected\">None</option>\n          <option value=\"Firstname increasing\">Firstname increasing</option>\n          <option value=\"Firstname decreasing\">Firstname decreasing</option>\n          <option value=\"Level increasing\">Level increasing</option>\n          <option value=\"Level decreasing\">Level decreasing</option>\n          <option value=\"Status increasing\">Status increasing</option>\n          <option value=\"Status decreasing\">Status decreasing</option>\n          <option value=\"Register date increasing\">Register date increasing</option>\n          <option value=\"Register date decreasing\">Register date decreasing</option>\n        </select>\n      </div>\n\n      <div class=\"top-option\">\n        Show per page\n        <select class=\"show-per-page\" (change)=\"tableLimitChange($event.target.value)\">\n          <option value=\"10\">10</option>\n          <option value=\"25\" selected=\"selected\">25</option>\n          <option value=\"50\">50</option>\n          <option value=\"100\">100</option>\n        </select>\n      </div>\n        \n  </div>\n\n  <ul class=\"row\">\n    <li class=\"col-md-12\">\n\n      <table><tbody>\n        <tr>\n          <th>Username</th>\n          <th>Firstname</th>\n          <th>Lastname</th>\n          <th>E-mail address</th>\n          <th>Level</th>\n          <th>Status</th>\n          <th>Actions</th>\n        </tr>\n\n        <ng-container *ngIf=\"users===null\">\n          <tr><td colspan=\"8\">No user data found.</td></tr>\n        </ng-container>\n        <ng-container *ngIf=\"users!==null\">\n          <tr *ngFor=\"let user of users;\">\n            <td>{{user.username}}</td>\n            <td>{{user.firstname}}</td>\n            <td>{{user.lastname}}</td>\n            <td>{{user.email}}</td>\n            <td>{{user.level}}</td>\n            <td [ngClass]=\"{'ban':user.status=='Ban', 'pen':user.status=='Pending', 'hello-user':user.status=='Active'}\">{{user.status}}</td>\n            \n            <!-- Admin options based on level -->\n            <td *ngIf=\"user.level < userinfoService.getUserinfo().level\">\n              <i *ngIf=\"user.status!='Active'\" class=\"fa fa-check-square-o hello-user\" aria-hidden=\"true\"\n                (click)=\"setAccountStatus(user, 'Active')\">&nbsp;</i>\n              <i *ngIf=\"user.status!='Ban'\" class=\"fa fa-times pen\" aria-hidden=\"true\"\n                (click)=\"setAccountStatus(user, 'Ban')\">&nbsp;</i>\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>&nbsp;\n              <i class=\"fa fa-pencil-square-o view-icon\" aria-hidden=\"true\"></i>&nbsp;\n              <i class=\"fa fa-trash ban\" aria-hidden=\"true\"\n                (click)=\"tryDeleteAccount(user)\"></i>\n            </td><!-- Lower users -->\n            <td *ngIf=\"user.level > userinfoService.getUserinfo().level\">\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewUserinfo(user)\"></i>\n            </td><!-- Higher users -->\n            <td *ngIf=\"user.level==userinfoService.getUserinfo().level && user._id==userinfoService.getUserinfo()._id\">\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>&nbsp;\n              <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n            </td><!-- Yourself -->\n            <td *ngIf=\"user.level==userinfoService.getUserinfo().level && user._id!=userinfoService.getUserinfo()._id\">\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>\n            </td><!-- Same level users, not you -->\n\n          </tr>\n        </ng-container>\n\n      </tbody></table>\n\n      <!-- Pagination -->\n      <div class=\"political-pagination\">\n        <ul class=\"page-numbers\">\n            <li><a class=\"previous page-numbers\" (click)=\"previouseTablePage()\"><span aria-label=\"Next\"><i class=\"fa fa-angle-left\"></i></span></a></li>\n            <li *ngFor=\"let page of pagination;\">\n              <a *ngIf=\"page!=criteria.page\" class=\"page-numbers\"\n              (click)=\"paginationChangePage(page)\">{{page+1}}</a>\n              <span *ngIf=\"page==criteria.page\" class=\"page-numbers current\">{{page+1}}</span>\n            </li>\n            <li><a class=\"next page-numbers\" (click)=\"nextTablePage()\"><span aria-label=\"Next\"><i class=\"fa fa-angle-right\"></i></span></a></li>\n        </ul>\n      </div>\n\n    </li>\n  </ul>\n</div>\n\n<!-- Delete user panel -->\n<div *ngIf=\"subpage=='Try delete' && settingService.getLanguage()=='Thai'\" class=\"political-blog-large\">\n  <h1 style=\"margin-bottom:20px;\"><strong>คุณกำลังจะทำการ<span class=\"ban\">ลบข้อมูลผู้ใช้</span></strong></h1>\n  <h3 style=\"margin-bottom:20px;\">ชื่อผู้ใช้งาน: <span class=\"hello-user\" style=\"font-weight:600;\">{{userOnHand.username}}</span></h3>\n  <input type=\"submit\" class=\"political-simple-btn delete-btn\" value=\"ลบข้อมูลผู้ใช้\" (click)=\"deleteAccount()\">\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"ยกเลิก\" (click)=\"tryDeleteCancel()\">\n      \n</div>\n<div *ngIf=\"subpage=='Try delete' && settingService.getLanguage()=='English'\" class=\"political-blog-large\">\n  <h1 style=\"margin-bottom:20px;\"><strong>You are about to <span class=\"ban\">DELETE</span> a user</strong></h1>\n  <h3 style=\"margin-bottom:20px;\">Username: <span class=\"hello-user\" style=\"font-weight:600;\">{{userOnHand.username}}</span></h3>\n  <input type=\"submit\" class=\"political-simple-btn delete-btn\" value=\"DELETE\" (click)=\"deleteAccount()\">\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"Cancel\" (click)=\"tryDeleteCancel()\">\n</div>\n\n<!-- View user panel -->\n<div *ngIf=\"subpage=='View user' && settingService.getLanguage()=='Thai'\" class=\"political-team political-team-list\">\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"ย้อนกลับไป\" (click)=\"ViewUserBack()\"\n  style=\"float:right; margin-bottom:20px;\">\n  <ul class=\"row\">\n    <li class=\"col-md-12\">\n      <div class=\"political-team-list-wrap\">\n        <figure><img [src]=\"userOnHand.profileUrl\" alt=\"Profile image not available\"></figure>\n        <div class=\"political-team-list-text\">\n          <h2>{{userOnHand.firstname}} {{userOnHand.lastname}}</h2>\n          <span>ตำเเหน่ง: {{viewUserPosition()}}</span>\n          <p style=\"float:none; margin:5px 0 10px 0;\">เกี่ยวกับ: {{viewUserAbout()}}</p>\n          <ul class=\"political-team-info\">\n            <li><i class=\"fa fa-globe\"></i><strong>พสวท. รุ่นที่</strong> {{userOnHand.dpstYear}}</li>\n            <li><i class=\"fa fa-graduation-cap\"></i><strong>ระดับการศึกษา:</strong> {{userOnHand.education}}</li>\n            <li><i class=\"fa fa-book\"></i><strong>สถานศีกษา:</strong> {{userOnHand.school}}</li>\n            <li><i class=\"fa fa-briefcase\"></i><strong>สถานที่ทำงาน:</strong> {{userOnHand.workplace}}</li>\n            <li><i class=\"fa fa-envelope\"></i><strong>E-mail:</strong> <a [href]=\"'mailto:'+userOnHand.email\">{{userOnHand.email}}</a></li>\n            <li><i class=\"fa fa-phone\"></i><strong>โทรศัพท์:</strong> <span>{{userOnHand.phone}}</span></li>\n            <li><i class=\"fa fa-comments\"></i><strong>Line id:</strong> <span>{{userOnHand.lineId}}</span></li>\n            <li><i class=\"fa fa-home\"></i><strong>ที่อยู่:</strong>\n              <br>{{userOnHand.address1}}\n              <ng-container *ngIf=\"userOnHand.address2!==undefined && userOnHand.address2!=''\"><br>{{userOnHand.address2}}</ng-container>\n              <br>{{userOnHand.province}}, {{userOnHand.zip}}\n              <br>{{userOnHand.country}}\n            </li>\n          </ul>\n        </div>\n      </div>\n    </li>\n  </ul>\n</div>\n<div *ngIf=\"subpage=='View user' && settingService.getLanguage()=='English'\" class=\"political-team political-team-list\">\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"Go back\" (click)=\"ViewUserBack()\"\n  style=\"float:right; margin-bottom:20px;\">\n  <ul class=\"row\">\n    <li class=\"col-md-12\">\n      <div class=\"political-team-list-wrap\">\n        <figure><img [src]=\"userOnHand.profileUrl\" alt=\"Profile image not available\"></figure>\n        <div class=\"political-team-list-text\">\n          <h2>{{userOnHand.firstname}} {{userOnHand.lastname}}</h2>\n          <span>Position: {{viewUserPosition()}}</span>\n          <p style=\"float:none; margin:5px 0 10px 0;\">About: {{viewUserAbout()}}</p>\n          <ul class=\"political-team-info\">\n            <li><i class=\"fa fa-globe\"></i><strong>DPST. #</strong> {{userOnHand.dpstYear}}</li>\n            <li><i class=\"fa fa-graduation-cap\"></i><strong>Education:</strong> {{userOnHand.education}}</li>\n            <li><i class=\"fa fa-book\"></i><strong>School/University:</strong> {{userOnHand.school}}</li>\n            <li><i class=\"fa fa-briefcase\"></i><strong>Work place:</strong> {{userOnHand.workplace}}</li>\n            <li><i class=\"fa fa-envelope\"></i><strong>E-mail:</strong> <a [href]=\"'mailto:'+userOnHand.email\">{{userOnHand.email}}</a></li>\n            <li><i class=\"fa fa-phone\"></i><strong>Phone:</strong> <span>{{userOnHand.phone}}</span></li>\n            <li><i class=\"fa fa-comments\"></i><strong>Line id:</strong> <span>{{userOnHand.lineId}}</span></li>\n            <li><i class=\"fa fa-home\"></i><strong>Address:</strong>\n              <br>{{userOnHand.address1}}\n              <ng-container *ngIf=\"userOnHand.address2!==undefined && userOnHand.address2!=''\"><br>{{userOnHand.address2}}</ng-container>\n              <br>{{userOnHand.province}}, {{userOnHand.zip}}\n              <br>{{userOnHand.country}}\n            </li>\n          </ul>\n        </div>\n      </div>\n    </li>\n  </ul>\n</div>"
 
 /***/ }),
 
 /***/ "./src/app/page-admin-panel/page-admin-user-table/page-admin-user-table.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageAdminUserTableComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_socketio_service__ = __webpack_require__("./src/app/services/socketio.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_admin_service__ = __webpack_require__("./src/app/services/admin.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -528,12 +584,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var socketio_service_1 = __webpack_require__("./src/app/services/socketio.service.ts");
-var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
-var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
-var admin_service_1 = __webpack_require__("./src/app/services/admin.service.ts");
+
+
+
+
+
 var PageAdminUserTableComponent = /** @class */ (function () {
     function PageAdminUserTableComponent(socketioService, settingService, userinfoService, adminService) {
         this.socketioService = socketioService;
@@ -644,24 +699,46 @@ var PageAdminUserTableComponent = /** @class */ (function () {
         }
     };
     // View user process
-    PageAdminUserTableComponent.prototype.viewUserinfo = function (userinfo) { this.subpage = 'View user'; this.userOnHand = userinfo; };
+    PageAdminUserTableComponent.prototype.viewUserinfo = function (userinfo) {
+        var _this = this;
+        this.userinfoService.getUserDetail(userinfo)
+            .then(function (result) {
+            if (result !== null && result.status) {
+                _this.userOnHand = result.data;
+                _this.subpage = 'View user';
+            }
+        });
+    };
+    PageAdminUserTableComponent.prototype.ViewUserBack = function () { this.subpage = 'Table'; this.userOnHand = null; };
+    PageAdminUserTableComponent.prototype.viewUserPosition = function () {
+        if (this.userOnHand.position === undefined)
+            return 'N/A';
+        else
+            return this.userOnHand.position;
+    };
+    PageAdminUserTableComponent.prototype.viewUserAbout = function () {
+        if (this.userOnHand.about === undefined)
+            return 'N/A';
+        else
+            return this.userOnHand.about;
+    };
     PageAdminUserTableComponent.prototype.ngOnDestroy = function () {
         this.getUsersSubscription.unsubscribe();
     };
     PageAdminUserTableComponent = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-page-admin-user-table',
             template: __webpack_require__("./src/app/page-admin-panel/page-admin-user-table/page-admin-user-table.component.html"),
             styles: [__webpack_require__("./src/app/page-admin-panel/page-admin-user-table/page-admin-user-table.component.css")]
         }),
-        __metadata("design:paramtypes", [socketio_service_1.SocketioService,
-            setting_service_1.SettingService,
-            userinfo_service_1.UserinfoService,
-            admin_service_1.AdminService])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_socketio_service__["a" /* SocketioService */],
+            __WEBPACK_IMPORTED_MODULE_2__services_setting_service__["a" /* SettingService */],
+            __WEBPACK_IMPORTED_MODULE_3__services_userinfo_service__["a" /* UserinfoService */],
+            __WEBPACK_IMPORTED_MODULE_4__services_admin_service__["a" /* AdminService */]])
     ], PageAdminUserTableComponent);
     return PageAdminUserTableComponent;
 }());
-exports.PageAdminUserTableComponent = PageAdminUserTableComponent;
+
 
 
 /***/ }),
@@ -681,10 +758,13 @@ module.exports = "<div class=\"political-main-content\">\n  <div class=\"politic
 /***/ }),
 
 /***/ "./src/app/page-check-status/page-check-status.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageCheckStatusComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -694,10 +774,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
-var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
+
+
+
 var PageCheckStatusComponent = /** @class */ (function () {
     function PageCheckStatusComponent(settingService, userinfoService) {
         this.settingService = settingService;
@@ -706,17 +785,17 @@ var PageCheckStatusComponent = /** @class */ (function () {
     PageCheckStatusComponent.prototype.ngOnInit = function () {
     };
     PageCheckStatusComponent = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-page-check-status',
             template: __webpack_require__("./src/app/page-check-status/page-check-status.component.html"),
             styles: [__webpack_require__("./src/app/page-check-status/page-check-status.component.css")]
         }),
-        __metadata("design:paramtypes", [setting_service_1.SettingService,
-            userinfo_service_1.UserinfoService])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_setting_service__["a" /* SettingService */],
+            __WEBPACK_IMPORTED_MODULE_2__services_userinfo_service__["a" /* UserinfoService */]])
     ], PageCheckStatusComponent);
     return PageCheckStatusComponent;
 }());
-exports.PageCheckStatusComponent = PageCheckStatusComponent;
+
 
 
 /***/ }),
@@ -736,10 +815,13 @@ module.exports = "\n<div class=\"political-main-content\">\n    <div class=\"pol
 /***/ }),
 
 /***/ "./src/app/page-contact/page-contact.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageContactComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -749,10 +831,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
-var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
+
+
+
 var PageContactComponent = /** @class */ (function () {
     function PageContactComponent(pageService, settingService) {
         this.pageService = pageService;
@@ -779,21 +860,21 @@ var PageContactComponent = /** @class */ (function () {
         form.resetForm();
     };
     __decorate([
-        core_1.ViewChild('gmap'),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_3" /* ViewChild */])('gmap'),
         __metadata("design:type", Object)
     ], PageContactComponent.prototype, "gmapElement", void 0);
     PageContactComponent = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-page-contact',
             template: __webpack_require__("./src/app/page-contact/page-contact.component.html"),
             styles: [__webpack_require__("./src/app/page-contact/page-contact.component.css")]
         }),
-        __metadata("design:paramtypes", [page_service_1.PageService,
-            setting_service_1.SettingService])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_page_service__["a" /* PageService */],
+            __WEBPACK_IMPORTED_MODULE_2__services_setting_service__["a" /* SettingService */]])
     ], PageContactComponent);
     return PageContactComponent;
 }());
-exports.PageContactComponent = PageContactComponent;
+
 
 
 /***/ }),
@@ -813,10 +894,14 @@ module.exports = "<div class=\"political-banner\">\n\t\t<div class=\"political-b
 /***/ }),
 
 /***/ "./src/app/page-home/page-home.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageHomeComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -826,11 +911,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
-var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
-var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
+
+
+
+
 var PageHomeComponent = /** @class */ (function () {
     function PageHomeComponent(pageService, settingService, userinfoService) {
         this.pageService = pageService;
@@ -840,18 +924,18 @@ var PageHomeComponent = /** @class */ (function () {
     PageHomeComponent.prototype.ngOnInit = function () {
     };
     PageHomeComponent = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-page-home',
             template: __webpack_require__("./src/app/page-home/page-home.component.html"),
             styles: [__webpack_require__("./src/app/page-home/page-home.component.css")]
         }),
-        __metadata("design:paramtypes", [page_service_1.PageService,
-            setting_service_1.SettingService,
-            userinfo_service_1.UserinfoService])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_page_service__["a" /* PageService */],
+            __WEBPACK_IMPORTED_MODULE_2__services_setting_service__["a" /* SettingService */],
+            __WEBPACK_IMPORTED_MODULE_3__services_userinfo_service__["a" /* UserinfoService */]])
     ], PageHomeComponent);
     return PageHomeComponent;
 }());
-exports.PageHomeComponent = PageHomeComponent;
+
 
 
 /***/ }),
@@ -871,10 +955,17 @@ module.exports = "\n<div class=\"political-main-content\">\n  <div class=\"polit
 /***/ }),
 
 /***/ "./src/app/page-login/page-login.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageLoginComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_socketio_service__ = __webpack_require__("./src/app/services/socketio.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_authentication_service__ = __webpack_require__("./src/app/services/authentication.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_cookie_service__ = __webpack_require__("./src/app/services/cookie.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -884,14 +975,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var socketio_service_1 = __webpack_require__("./src/app/services/socketio.service.ts");
-var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
-var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
-var authentication_service_1 = __webpack_require__("./src/app/services/authentication.service.ts");
-var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
-var cookie_service_1 = __webpack_require__("./src/app/services/cookie.service.ts");
+
+
+
+
+
+
+
 var PageLoginComponent = /** @class */ (function () {
     function PageLoginComponent(socketioService, pageService, settingService, authService, userinfoService, cookieService) {
         this.socketioService = socketioService;
@@ -928,21 +1018,21 @@ var PageLoginComponent = /** @class */ (function () {
         this.pageService.setPage('Homepage');
     };
     PageLoginComponent = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-page-login',
             template: __webpack_require__("./src/app/page-login/page-login.component.html"),
             styles: [__webpack_require__("./src/app/page-login/page-login.component.css")]
         }),
-        __metadata("design:paramtypes", [socketio_service_1.SocketioService,
-            page_service_1.PageService,
-            setting_service_1.SettingService,
-            authentication_service_1.AuthenticationService,
-            userinfo_service_1.UserinfoService,
-            cookie_service_1.CookieService])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_socketio_service__["a" /* SocketioService */],
+            __WEBPACK_IMPORTED_MODULE_2__services_page_service__["a" /* PageService */],
+            __WEBPACK_IMPORTED_MODULE_3__services_setting_service__["a" /* SettingService */],
+            __WEBPACK_IMPORTED_MODULE_4__services_authentication_service__["a" /* AuthenticationService */],
+            __WEBPACK_IMPORTED_MODULE_5__services_userinfo_service__["a" /* UserinfoService */],
+            __WEBPACK_IMPORTED_MODULE_6__services_cookie_service__["a" /* CookieService */]])
     ], PageLoginComponent);
     return PageLoginComponent;
 }());
-exports.PageLoginComponent = PageLoginComponent;
+
 
 
 /***/ }),
@@ -962,10 +1052,17 @@ module.exports = "\n<div class=\"political-main-content\">\n  <div class=\"polit
 /***/ }),
 
 /***/ "./src/app/page-register/page-register.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageRegisterComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_socketio_service__ = __webpack_require__("./src/app/services/socketio.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_authentication_service__ = __webpack_require__("./src/app/services/authentication.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_cookie_service__ = __webpack_require__("./src/app/services/cookie.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -975,14 +1072,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var socketio_service_1 = __webpack_require__("./src/app/services/socketio.service.ts");
-var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
-var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
-var authentication_service_1 = __webpack_require__("./src/app/services/authentication.service.ts");
-var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
-var cookie_service_1 = __webpack_require__("./src/app/services/cookie.service.ts");
+
+
+
+
+
+
+
 var PageRegisterComponent = /** @class */ (function () {
     function PageRegisterComponent(socketioService, pageService, settingService, authService, userinfoService, cookieService) {
         this.socketioService = socketioService;
@@ -1052,30 +1148,45 @@ var PageRegisterComponent = /** @class */ (function () {
         });
     };
     PageRegisterComponent = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-page-register',
             template: __webpack_require__("./src/app/page-register/page-register.component.html"),
             styles: [__webpack_require__("./src/app/page-register/page-register.component.css")]
         }),
-        __metadata("design:paramtypes", [socketio_service_1.SocketioService,
-            page_service_1.PageService,
-            setting_service_1.SettingService,
-            authentication_service_1.AuthenticationService,
-            userinfo_service_1.UserinfoService,
-            cookie_service_1.CookieService])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_socketio_service__["a" /* SocketioService */],
+            __WEBPACK_IMPORTED_MODULE_2__services_page_service__["a" /* PageService */],
+            __WEBPACK_IMPORTED_MODULE_3__services_setting_service__["a" /* SettingService */],
+            __WEBPACK_IMPORTED_MODULE_4__services_authentication_service__["a" /* AuthenticationService */],
+            __WEBPACK_IMPORTED_MODULE_5__services_userinfo_service__["a" /* UserinfoService */],
+            __WEBPACK_IMPORTED_MODULE_6__services_cookie_service__["a" /* CookieService */]])
     ], PageRegisterComponent);
     return PageRegisterComponent;
 }());
-exports.PageRegisterComponent = PageRegisterComponent;
+
 
 
 /***/ }),
 
-/***/ "./src/app/services/admin.service.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./src/app/page-user-panel/page-user-edit-profile/page-user-edit-profile.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/page-user-panel/page-user-edit-profile/page-user-edit-profile.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  page-user-edit-profile works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/page-user-panel/page-user-edit-profile/page-user-edit-profile.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageUserEditProfileComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1085,17 +1196,302 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
-var globals_1 = __webpack_require__("./src/app/globals.ts");
-var Subject_1 = __webpack_require__("./node_modules/rxjs/_esm5/Subject.js");
+
+var PageUserEditProfileComponent = /** @class */ (function () {
+    function PageUserEditProfileComponent() {
+    }
+    PageUserEditProfileComponent.prototype.ngOnInit = function () {
+    };
+    PageUserEditProfileComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'app-page-user-edit-profile',
+            template: __webpack_require__("./src/app/page-user-panel/page-user-edit-profile/page-user-edit-profile.component.html"),
+            styles: [__webpack_require__("./src/app/page-user-panel/page-user-edit-profile/page-user-edit-profile.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], PageUserEditProfileComponent);
+    return PageUserEditProfileComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/page-user-panel/page-user-history/page-user-history.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/page-user-panel/page-user-history/page-user-history.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  page-user-history works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/page-user-panel/page-user-history/page-user-history.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageUserHistoryComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var PageUserHistoryComponent = /** @class */ (function () {
+    function PageUserHistoryComponent() {
+    }
+    PageUserHistoryComponent.prototype.ngOnInit = function () {
+    };
+    PageUserHistoryComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'app-page-user-history',
+            template: __webpack_require__("./src/app/page-user-panel/page-user-history/page-user-history.component.html"),
+            styles: [__webpack_require__("./src/app/page-user-panel/page-user-history/page-user-history.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], PageUserHistoryComponent);
+    return PageUserHistoryComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/page-user-panel/page-user-panel.component.css":
+/***/ (function(module, exports) {
+
+module.exports = "li.active a {color:#228ae6; font-weight:600;}"
+
+/***/ }),
+
+/***/ "./src/app/page-user-panel/page-user-panel.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"political-subheader\">\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n\n                <div *ngIf=\"settingService.getLanguage()=='Thai'\" class=\"political-subheader-wrap\">\n                    <h1>หน้าผู้ใช้งาน</h1>\n                    <ul class=\"political-breadcrumb\">\n                        <li><a (click)=\"pageService.setPage('Homepage')\">หน้าเเรก</a></li>\n                        <li>หน้าผู้ใช้งาน</li>\n                        <li class=\"active\">{{subpageTranslation()}}</li>\n                    </ul>\n                </div>\n                <div *ngIf=\"settingService.getLanguage()=='English'\" class=\"political-subheader-wrap\">\n                    <h1>User Panel</h1>\n                    <ul class=\"political-breadcrumb\">\n                        <li><a (click)=\"pageService.setPage('Homepage')\">Homepage</a></li>\n                        <li>User Panel</li>\n                        <li class=\"active\">{{pageService.getSubpage()}}</li>\n                    </ul>\n                </div>\n\n            </div>\n        </div>\n    </div>\n</div>\n\n<div class=\"political-main-content\">\n    <div class=\"political-main-section\">\n        <div class=\"container\">\n            <div class=\"row\">\n\n                <!-- Admin panel sidbar -->\n                <aside class=\"col-md-3\">\n                    <div *ngIf=\"settingService.getLanguage()=='Thai'\" class=\"widget widget_cetagories\">\n                        <h2 class=\"political-widget-heading\">User Menu</h2>\n                        <ul>\n                            <li [ngClass]=\"{'active':pageService.getSubpage()=='Profile'}\">\n                                <a (click)=\"pageService.setSubpage('Profile')\">ประวัติส่วนตัว</a></li>\n                            <li [ngClass]=\"{'active':pageService.getSubpage()=='Edit profile'}\">\n                                <a (click)=\"pageService.setSubpage('Edit profile')\">เเก้ไขประวัติส่วนตัว</a></li>\n                            <li [ngClass]=\"{'active':pageService.getSubpage()=='History'}\">\n                                <a (click)=\"pageService.setSubpage('History')\">ประวัติการใช้งาน</a></li>\n                            <li [ngClass]=\"{'active':pageService.getSubpage()=='Setting'}\">\n                                <a (click)=\"pageService.setSubpage('Setting')\">ตั้งค่า</a></li>\n                        </ul>\n                    </div>\n                    <div *ngIf=\"settingService.getLanguage()=='English'\" class=\"widget widget_cetagories\">\n                        <h2 class=\"political-widget-heading\">User Menu</h2>\n                        <ul>\n                            <li [ngClass]=\"{'active':pageService.getSubpage()=='Profile'}\">\n                                <a (click)=\"pageService.setSubpage('Profile')\">Profile</a></li>\n                            <li [ngClass]=\"{'active':pageService.getSubpage()=='Edit profile'}\">\n                                <a (click)=\"pageService.setSubpage('Edit profile')\">Edit Profile</a></li>\n                            <li [ngClass]=\"{'active':pageService.getSubpage()=='History'}\">\n                                <a (click)=\"pageService.setSubpage('History')\">History</a></li>\n                            <li [ngClass]=\"{'active':pageService.getSubpage()=='Setting'}\">\n                                <a (click)=\"pageService.setSubpage('Setting')\">Setting</a></li>\n                        </ul>\n                    </div>\n                </aside>\n\n                <!-- User panel subpages -->\n                <div class=\"col-md-9\">\n\n                    <ng-container *ngIf=\"pageService.getSubpage()=='Profile'\">\n                        <app-page-user-profile></app-page-user-profile>\n                    </ng-container>\n                    <ng-container *ngIf=\"pageService.getSubpage()=='Edit profile'\">\n                        <app-page-user-edit-profile></app-page-user-edit-profile>\n                    </ng-container>\n                    <ng-container *ngIf=\"pageService.getSubpage()=='History'\">\n                        <app-page-user-history></app-page-user-history>\n                    </ng-container>\n                    <ng-container *ngIf=\"pageService.getSubpage()=='Setting'\">\n                        <app-page-user-setting></app-page-user-setting>\n                    </ng-container>\n\n                </div>\n\n            </div>\n        </div>\n    </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/page-user-panel/page-user-panel.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageUserPanelComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_page_service__ = __webpack_require__("./src/app/services/page.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var PageUserPanelComponent = /** @class */ (function () {
+    function PageUserPanelComponent(pageService, settingService) {
+        this.pageService = pageService;
+        this.settingService = settingService;
+    }
+    PageUserPanelComponent.prototype.ngOnInit = function () {
+    };
+    PageUserPanelComponent.prototype.subpageTranslation = function () {
+        if (this.pageService.getSubpage() == 'Profile')
+            return 'ประวัติส่วนตัว';
+        else if (this.pageService.getSubpage() == 'Edit profile')
+            return 'เเก้ไขประวัติส่วนตัว';
+        else if (this.pageService.getSubpage() == 'History')
+            return 'ประวัติการใช้งาน';
+        else if (this.pageService.getSubpage() == 'Setting')
+            return 'ตั้งค่า';
+        else
+            return '';
+    };
+    PageUserPanelComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'app-page-user-panel',
+            template: __webpack_require__("./src/app/page-user-panel/page-user-panel.component.html"),
+            styles: [__webpack_require__("./src/app/page-user-panel/page-user-panel.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_page_service__["a" /* PageService */],
+            __WEBPACK_IMPORTED_MODULE_2__services_setting_service__["a" /* SettingService */]])
+    ], PageUserPanelComponent);
+    return PageUserPanelComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/page-user-panel/page-user-profile/page-user-profile.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ".political-team-list-wrap .political-team-info > li {width:100%;}"
+
+/***/ }),
+
+/***/ "./src/app/page-user-panel/page-user-profile/page-user-profile.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "\n<div *ngIf=\"userOnHand===null\" class=\"political-team political-team-list\">\n  <h3>Loading your data...</h3>\n</div>\n\n<div *ngIf=\"userOnHand!==null && settingService.getLanguage()=='Thai'\" class=\"political-team political-team-list\">\n  <ul class=\"row\">\n    <li class=\"col-md-12\">\n      <div class=\"political-team-list-wrap\">\n        <figure><img [src]=\"userOnHand.profileUrl\" alt=\"Profile image not available\"></figure>\n        <div class=\"political-team-list-text\">\n          <h2>{{userOnHand.firstname}} {{userOnHand.lastname}}</h2>\n          <span>ตำเเหน่ง: {{viewUserPosition()}}</span>\n          <p style=\"float:none; margin:5px 0 10px 0;\">เกี่ยวกับ: {{viewUserAbout()}}</p>\n          <ul class=\"political-team-info\">\n            <li><i class=\"fa fa-globe\"></i><strong>พสวท. รุ่นที่</strong> {{userOnHand.dpstYear}}</li>\n            <li><i class=\"fa fa-graduation-cap\"></i><strong>ระดับการศึกษา:</strong> {{userOnHand.education}}</li>\n            <li><i class=\"fa fa-book\"></i><strong>สถานศีกษา:</strong> {{userOnHand.school}}</li>\n            <li><i class=\"fa fa-briefcase\"></i><strong>สถานที่ทำงาน:</strong> {{userOnHand.workplace}}</li>\n            <li><i class=\"fa fa-envelope\"></i><strong>E-mail:</strong> <a [href]=\"'mailto:'+userOnHand.email\">{{userOnHand.email}}</a></li>\n            <li><i class=\"fa fa-phone\"></i><strong>โทรศัพท์:</strong> <span>{{userOnHand.phone}}</span></li>\n            <li><i class=\"fa fa-comments\"></i><strong>Line id:</strong> <span>{{userOnHand.lineId}}</span></li>\n            <li><i class=\"fa fa-home\"></i><strong>ที่อยู่:</strong>\n              <br>{{userOnHand.address1}}\n              <ng-container *ngIf=\"userOnHand.address2!==undefined && userOnHand.address2!=''\"><br>{{userOnHand.address2}}</ng-container>\n              <br>{{userOnHand.province}}, {{userOnHand.zip}}\n              <br>{{userOnHand.country}}\n            </li>\n          </ul>\n        </div>\n      </div>\n    </li>\n  </ul>\n</div>\n\n<div *ngIf=\"userOnHand!==null && settingService.getLanguage()=='English'\" class=\"political-team political-team-list\">\n  <ul class=\"row\">\n    <li class=\"col-md-12\">\n      <div class=\"political-team-list-wrap\">\n        <figure><img [src]=\"userOnHand.profileUrl\" alt=\"Profile image not available\"></figure>\n        <div class=\"political-team-list-text\">\n          <h2>{{userOnHand.firstname}} {{userOnHand.lastname}}</h2>\n          <span>Position: {{viewUserPosition()}}</span>\n          <p style=\"float:none; margin:5px 0 10px 0;\">About: {{viewUserAbout()}}</p>\n          <ul class=\"political-team-info\">\n            <li><i class=\"fa fa-globe\"></i><strong>DPST. #</strong> {{userOnHand.dpstYear}}</li>\n            <li><i class=\"fa fa-graduation-cap\"></i><strong>Education:</strong> {{userOnHand.education}}</li>\n            <li><i class=\"fa fa-book\"></i><strong>School/University:</strong> {{userOnHand.school}}</li>\n            <li><i class=\"fa fa-briefcase\"></i><strong>Work place:</strong> {{userOnHand.workplace}}</li>\n            <li><i class=\"fa fa-envelope\"></i><strong>E-mail:</strong> <a [href]=\"'mailto:'+userOnHand.email\">{{userOnHand.email}}</a></li>\n            <li><i class=\"fa fa-phone\"></i><strong>Phone:</strong> <span>{{userOnHand.phone}}</span></li>\n            <li><i class=\"fa fa-comments\"></i><strong>Line id:</strong> <span>{{userOnHand.lineId}}</span></li>\n            <li><i class=\"fa fa-home\"></i><strong>Address:</strong>\n              <br>{{userOnHand.address1}}\n              <ng-container *ngIf=\"userOnHand.address2!==undefined && userOnHand.address2!=''\"><br>{{userOnHand.address2}}</ng-container>\n              <br>{{userOnHand.province}}, {{userOnHand.zip}}\n              <br>{{userOnHand.country}}\n            </li>\n          </ul>\n        </div>\n      </div>\n    </li>\n  </ul>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/page-user-panel/page-user-profile/page-user-profile.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageUserProfileComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_setting_service__ = __webpack_require__("./src/app/services/setting.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_userinfo_service__ = __webpack_require__("./src/app/services/userinfo.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var PageUserProfileComponent = /** @class */ (function () {
+    function PageUserProfileComponent(settingService, userinfoService) {
+        this.settingService = settingService;
+        this.userinfoService = userinfoService;
+        this.userOnHand = null;
+    }
+    PageUserProfileComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        var userinfo = Object.assign({}, this.userinfoService.getUserinfo());
+        this.userinfoService.getUserDetail(userinfo)
+            .then(function (result) {
+            if (result !== null && result.status) {
+                _this.userOnHand = result.data;
+            }
+        });
+    };
+    PageUserProfileComponent.prototype.viewUserPosition = function () {
+        if (this.userOnHand.position === undefined)
+            return 'N/A';
+        else
+            return this.userOnHand.position;
+    };
+    PageUserProfileComponent.prototype.viewUserAbout = function () {
+        if (this.userOnHand.about === undefined)
+            return 'N/A';
+        else
+            return this.userOnHand.about;
+    };
+    PageUserProfileComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'app-page-user-profile',
+            template: __webpack_require__("./src/app/page-user-panel/page-user-profile/page-user-profile.component.html"),
+            styles: [__webpack_require__("./src/app/page-user-panel/page-user-profile/page-user-profile.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_setting_service__["a" /* SettingService */],
+            __WEBPACK_IMPORTED_MODULE_2__services_userinfo_service__["a" /* UserinfoService */]])
+    ], PageUserProfileComponent);
+    return PageUserProfileComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/page-user-panel/page-user-setting/page-user-setting.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/page-user-panel/page-user-setting/page-user-setting.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  page-user-setting works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/page-user-panel/page-user-setting/page-user-setting.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageUserSettingComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var PageUserSettingComponent = /** @class */ (function () {
+    function PageUserSettingComponent() {
+    }
+    PageUserSettingComponent.prototype.ngOnInit = function () {
+    };
+    PageUserSettingComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'app-page-user-setting',
+            template: __webpack_require__("./src/app/page-user-panel/page-user-setting/page-user-setting.component.html"),
+            styles: [__webpack_require__("./src/app/page-user-panel/page-user-setting/page-user-setting.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], PageUserSettingComponent);
+    return PageUserSettingComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/admin.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AdminService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals__ = __webpack_require__("./src/app/globals.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__ = __webpack_require__("./node_modules/rxjs/_esm5/Subject.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
 var AdminService = /** @class */ (function () {
     function AdminService(http) {
         this.http = http;
-        this.apiUrl = globals_1.ipHost + '/admin';
-        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        this.subjectUsers = new Subject_1.Subject();
+        this.apiUrl = __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* ipHost */] + '/admin';
+        this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        this.subjectUsers = new __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__["a" /* Subject */]();
     }
     AdminService.prototype.getUsers = function (criteria) {
         var _this = this;
@@ -1104,7 +1500,7 @@ var AdminService = /** @class */ (function () {
         return this.http.get(url).toPromise()
             .then(function (response) {
             var result = response.json();
-            if (globals_1.testing)
+            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
                 console.log(result.message);
             _this.subjectUsers.next(result);
         })
@@ -1118,7 +1514,7 @@ var AdminService = /** @class */ (function () {
             .toPromise()
             .then(function (response) {
             var result = response.json();
-            if (globals_1.testing)
+            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
                 console.log(result.message);
             return result;
         })
@@ -1130,7 +1526,7 @@ var AdminService = /** @class */ (function () {
             .toPromise()
             .then(function (response) {
             var result = response.json();
-            if (globals_1.testing)
+            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
                 console.log(result.message);
             return result;
         })
@@ -1141,21 +1537,24 @@ var AdminService = /** @class */ (function () {
         return this.subjectUsers.asObservable();
     };
     AdminService = __decorate([
-        core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.Http])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
     ], AdminService);
     return AdminService;
 }());
-exports.AdminService = AdminService;
+
 
 
 /***/ }),
 
 /***/ "./src/app/services/authentication.service.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthenticationService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals__ = __webpack_require__("./src/app/globals.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1165,15 +1564,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
-var globals_1 = __webpack_require__("./src/app/globals.ts");
+
+
+
 var AuthenticationService = /** @class */ (function () {
     function AuthenticationService(http) {
         this.http = http;
-        this.apiUrl = globals_1.ipHost + '/authentication';
-        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        this.apiUrl = __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* ipHost */] + '/authentication';
+        this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
     }
     AuthenticationService.prototype.register = function (formValue) {
         var url = this.apiUrl + '/register', input = formValue;
@@ -1181,7 +1579,7 @@ var AuthenticationService = /** @class */ (function () {
             .toPromise()
             .then(function (response) {
             var result = response.json();
-            if (globals_1.testing)
+            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
                 console.log(result.message);
             return result;
         })
@@ -1192,7 +1590,7 @@ var AuthenticationService = /** @class */ (function () {
         return this.http.get(url).toPromise()
             .then(function (response) {
             var result = response.json();
-            if (globals_1.testing)
+            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
                 console.log(result.message);
             return result;
         })
@@ -1203,28 +1601,31 @@ var AuthenticationService = /** @class */ (function () {
         return this.http.get(url).toPromise()
             .then(function (response) {
             var result = response.json();
-            if (globals_1.testing)
+            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
                 console.log(result.message);
             return result;
         })
             .catch(function (err) { return null; });
     };
     AuthenticationService = __decorate([
-        core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.Http])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
     ], AuthenticationService);
     return AuthenticationService;
 }());
-exports.AuthenticationService = AuthenticationService;
+
 
 
 /***/ }),
 
 /***/ "./src/app/services/cookie.service.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CookieService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals__ = __webpack_require__("./src/app/globals.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1234,22 +1635,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
-var globals_1 = __webpack_require__("./src/app/globals.ts");
+
+
+
 var CookieService = /** @class */ (function () {
     function CookieService(http) {
         this.http = http;
-        this.apiUrl = globals_1.ipHost + '/cookie';
-        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        this.apiUrl = __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* ipHost */] + '/cookie';
+        this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
     }
     CookieService.prototype.checkRememberLogin = function () {
         var url = this.apiUrl + '/checkrememberlogin';
         return this.http.get(url).toPromise()
             .then(function (response) {
             var result = response.json();
-            if (globals_1.testing)
+            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
                 console.log(result.message);
             return result;
         })
@@ -1260,7 +1660,7 @@ var CookieService = /** @class */ (function () {
         this.http.get(url).toPromise()
             .then(function (response) {
             var result = response.json();
-            if (globals_1.testing)
+            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
                 console.log(result.message);
             return result;
         })
@@ -1271,28 +1671,29 @@ var CookieService = /** @class */ (function () {
         this.http.get(url).toPromise()
             .then(function (response) {
             var result = response.json();
-            if (globals_1.testing)
+            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
                 console.log(result.message);
             return result;
         })
             .catch(function (err) { return null; });
     };
     CookieService = __decorate([
-        core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.Http])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
     ], CookieService);
     return CookieService;
 }());
-exports.CookieService = CookieService;
+
 
 
 /***/ }),
 
 /***/ "./src/app/services/page.service.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1302,8 +1703,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+
 var PageService = /** @class */ (function () {
     function PageService() {
         this.page = 'Homepage';
@@ -1317,21 +1717,22 @@ var PageService = /** @class */ (function () {
     PageService.prototype.setSubpage = function (subpage) { this.subpage = subpage; };
     PageService.prototype.getSubpage = function () { return this.subpage; };
     PageService = __decorate([
-        core_1.Injectable(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Injectable */])(),
         __metadata("design:paramtypes", [])
     ], PageService);
     return PageService;
 }());
-exports.PageService = PageService;
+
 
 
 /***/ }),
 
 /***/ "./src/app/services/setting.service.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1341,8 +1742,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+
 var SettingService = /** @class */ (function () {
     function SettingService() {
         this.language = 'Thai'; // Thai or English
@@ -1350,21 +1750,26 @@ var SettingService = /** @class */ (function () {
     SettingService.prototype.setLanguage = function (language) { this.language = language; };
     SettingService.prototype.getLanguage = function () { return this.language; };
     SettingService = __decorate([
-        core_1.Injectable(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Injectable */])(),
         __metadata("design:paramtypes", [])
     ], SettingService);
     return SettingService;
 }());
-exports.SettingService = SettingService;
+
 
 
 /***/ }),
 
 /***/ "./src/app/services/socketio.service.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SocketioService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_socket_io_client__ = __webpack_require__("./node_modules/socket.io-client/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_socket_io_client__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_globals__ = __webpack_require__("./node_modules/globals/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_globals___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_globals__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1374,14 +1779,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var io = __webpack_require__("./node_modules/socket.io-client/lib/index.js");
-var globals_1 = __webpack_require__("./node_modules/globals/index.js");
+
+
+
 // import { AdminService } from './admin.service';
 var SocketioService = /** @class */ (function () {
     function SocketioService() {
-        this.socket = io(globals_1.ipHost);
+        this.socket = __WEBPACK_IMPORTED_MODULE_1_socket_io_client__(__WEBPACK_IMPORTED_MODULE_2_globals__["ipHost"]);
     }
     SocketioService.prototype.connect = function () {
         this.socket.on('online-users', function (onlineUsers) {
@@ -1407,21 +1811,24 @@ var SocketioService = /** @class */ (function () {
         this.socket.emit('account-delete', userId);
     };
     SocketioService = __decorate([
-        core_1.Injectable(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Injectable */])(),
         __metadata("design:paramtypes", [])
     ], SocketioService);
     return SocketioService;
 }());
-exports.SocketioService = SocketioService;
+
 
 
 /***/ }),
 
 /***/ "./src/app/services/userinfo.service.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserinfoService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals__ = __webpack_require__("./src/app/globals.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1431,16 +1838,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
-var globals_1 = __webpack_require__("./src/app/globals.ts");
+
+
+
 var UserinfoService = /** @class */ (function () {
     function UserinfoService(http) {
         this.http = http;
         this.userinfo = null;
-        this.apiUrl = globals_1.ipHost + '/user';
-        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        this.apiUrl = __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* ipHost */] + '/user';
+        this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
     }
     UserinfoService.prototype.setUserinfo = function (userinfo) { this.userinfo = userinfo; };
     UserinfoService.prototype.getUserinfo = function () { return this.userinfo; };
@@ -1450,7 +1856,7 @@ var UserinfoService = /** @class */ (function () {
         return this.http.get(url).toPromise()
             .then(function (response) {
             var result = response.json();
-            if (globals_1.testing)
+            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
                 console.log(result.message);
             _this.userinfo = result.data;
         })
@@ -1458,28 +1864,38 @@ var UserinfoService = /** @class */ (function () {
             _this.userinfo = null;
         });
     };
+    UserinfoService.prototype.getUserDetail = function (userinfo) {
+        var url = this.apiUrl + '/getuserdetail/' + userinfo._id;
+        return this.http.get(url).toPromise()
+            .then(function (response) {
+            var result = response.json();
+            if (__WEBPACK_IMPORTED_MODULE_2__globals__["b" /* testing */])
+                console.log(result.message);
+            return result;
+        })
+            .catch(function (err) { return null; });
+    };
     UserinfoService = __decorate([
-        core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.Http])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
     ], UserinfoService);
     return UserinfoService;
 }());
-exports.UserinfoService = UserinfoService;
+
 
 
 /***/ }),
 
 /***/ "./src/environments/environment.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 // The file contents for the current environment will overwrite these during build.
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.environment = {
+var environment = {
     production: false
 };
 
@@ -1487,19 +1903,22 @@ exports.environment = {
 /***/ }),
 
 /***/ "./src/main.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__("./node_modules/@angular/platform-browser-dynamic/esm5/platform-browser-dynamic.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__("./src/app/app.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("./src/environments/environment.ts");
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-var platform_browser_dynamic_1 = __webpack_require__("./node_modules/@angular/platform-browser-dynamic/esm5/platform-browser-dynamic.js");
-var app_module_1 = __webpack_require__("./src/app/app.module.ts");
-var environment_1 = __webpack_require__("./src/environments/environment.ts");
-if (environment_1.environment.production) {
-    core_1.enableProdMode();
+
+
+
+if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* enableProdMode */])();
 }
-platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(app_module_1.AppModule)
+Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
     .catch(function (err) { return console.log(err); });
 
 

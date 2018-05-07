@@ -29,4 +29,16 @@ export class UserinfoService {
       });
   }
 
+  getUserDetail(userinfo) {
+    let url = this.apiUrl + '/getuserdetail/' + userinfo._id;
+
+    return this.http.get(url).toPromise()
+      .then(response=>{
+        let result = response.json();
+        if (testing) console.log(result.message);
+        return result;
+      })
+      .catch(err=>{return null});
+  }
+
 }
