@@ -42,6 +42,18 @@ export class AdminService {
       })
       .catch(err=>{return null});
   }
+  updateUserPrivilage(userId, updatedUserinfo) {
+    let url = this.apiUrl + '/updateuserprivilage',
+        input = {userId: userId, updatedUserinfo: updatedUserinfo};
+    return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
+      .toPromise()
+      .then(response=>{
+        let result = response.json();
+        if (testing) console.log(result.message);
+        return result;
+      })
+      .catch(err=>{return null});
+  }
 
   deleteAccount(userinfo) {
     let url = this.apiUrl + '/deleteaccount',

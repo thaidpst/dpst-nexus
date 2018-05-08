@@ -113,9 +113,10 @@ export class PageAdminUserTableComponent implements OnInit {
     }
   }
 
+  goBackToUserTable() {this.subpage = 'Table'; this.userOnHand = null;}
+
   // Delete user process
   tryDeleteAccount(userinfo) {this.subpage = 'Try delete'; this.userOnHand = userinfo;}
-  tryDeleteCancel() {this.subpage = 'Table'; this.userOnHand = null;}
   deleteAccount() {
     if (this.userOnHand!==null) {
       this.adminService.deleteAccount(this.userOnHand).then(result=>{
@@ -139,7 +140,6 @@ export class PageAdminUserTableComponent implements OnInit {
         }
       });
   }
-  ViewUserBack() {this.subpage = 'Table'; this.userOnHand = null;}
   viewUserPosition() {
     if (this.userOnHand.position===undefined) return 'N/A';
     else return this.userOnHand.position;
@@ -147,6 +147,33 @@ export class PageAdminUserTableComponent implements OnInit {
   viewUserAbout() {
     if (this.userOnHand.about===undefined) return 'N/A';
     else return this.userOnHand.about;
+  }
+
+  // Edit user information process
+  adminEditUserinfo(userinfo) {
+    this.userinfoService.getUserDetail(userinfo)
+      .then(result=>{
+        if (result!==null && result.status) {
+          this.userOnHand = result.data;        
+          this.subpage = 'Edit user'; 
+        }
+      });
+  }
+  userDetailUpdatedDone(result) {
+    if (result.status) {
+      this.subpage = 'Table';
+    }
+  }
+
+  // Admin privilage process
+  goToAdminPrivilageSetting() {this.subpage = 'Admin setting';}
+  userPrivilageUpdatedDone(result) {
+    if (result.status) {
+      this.adminService.getUsers(this.criteria);
+      this.socketioService.accountPrivilage(this.userOnHand.userId);
+      this.userOnHand = null;
+      this.subpage = 'Table';
+    }
   }
 
   ngOnDestroy() {

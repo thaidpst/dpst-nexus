@@ -38,6 +38,9 @@ export class SocketioService {
   accountStatus(userId) {
     this.socket.emit('account-status', userId);
   }
+  accountPrivilage(userId) {
+    this.socket.emit('account-privilage', userId);
+  }
   deleteAccount(userId) {
     this.socket.emit('account-delete', userId);
   }

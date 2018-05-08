@@ -32,11 +32,15 @@ exports = module.exports = function(io) {
             io.emit('online-users', onlineUsers);
         });
 
+        // Announcement to users
         socket.on('account-status', userId=>{
             io.emit('announce-account-status', userId);
         });
         socket.on('account-delete', userId=>{
             io.emit('announce-account-delete', userId);
+        });
+        socket.on('account-privilage', userId=>{
+            io.emit('announce-account-privilage', userId);
         });
     
         socket.on('disconnect', ()=>{

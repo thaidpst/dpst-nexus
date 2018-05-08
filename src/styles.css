@@ -6,16 +6,17 @@ html, body {height:100%; margin:0;}
     .political-main-wrapper {margin-bottom:-107px;} 
 } */
 
-
 a {cursor: pointer;}
-
 .ban, .pen, .hello-user {text-transform: none;}
 .ban, .req-message {color: red;}
-.pen {color: orange;}
+.pen, .edit-icon {color: orange;}
 .hello-user {color: #228ae6;}
 
+.warning-btn {border:3px solid orange; background-color:#ffc947;}
+.warning-btn:hover {color:orange; background-color:#ffffff;}
 .delete-btn {border:3px solid red; background-color:#ff6f60;}
 .delete-btn:hover {color:red; background-color:#ffffff;}
+
 
 /* Disable double click */
 * {

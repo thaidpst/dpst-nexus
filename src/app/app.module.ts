@@ -32,6 +32,7 @@ import { PageUserSettingComponent } from './page-user-panel/page-user-setting/pa
 import { PageUserHistoryComponent } from './page-user-panel/page-user-history/page-user-history.component';
 import { ProfileFormComponent } from './forms/profile-form/profile-form.component';
 import { ProfileEditFormComponent } from './forms/profile-edit-form/profile-edit-form.component';
+import { AdminPrivilageSettingFormComponent } from './forms/admin-privilage-setting-form/admin-privilage-setting-form.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { ProfileEditFormComponent } from './forms/profile-edit-form/profile-edit
     PageUserSettingComponent,
     PageUserHistoryComponent,
     ProfileFormComponent,
-    ProfileEditFormComponent
+    ProfileEditFormComponent,
+    AdminPrivilageSettingFormComponent
   ],
   imports: [
     BrowserModule,
