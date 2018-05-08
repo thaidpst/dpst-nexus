@@ -17,44 +17,35 @@
 
                                 <!-- Homepage -->
                                 <li [ngClass]="{'active':pageService.getPage()=='Homepage'}"><a (click)="pageService.setPage('Homepage'); unactive();">
-                                    <ng-container *ngIf="settingService.getLanguage()=='Thai'">หน้าแรก</ng-container>
-                                    <ng-container *ngIf="settingService.getLanguage()=='English'">HomePage</ng-container>
+                                    {{'HomePage' | translate:settingService.getLanguage() }}
                                 </a></li>
 
                                 <!-- Log in -->
                                 <li [ngClass]="{'active':pageService.getPage()=='Log in'}" *ngIf="userinfoService.getUserinfo()===null">
                                     <a (click)="pageService.setPage('Log in'); unactive();">
-                                        <ng-container *ngIf="settingService.getLanguage()=='Thai'">เข้าสู่ระบบ</ng-container>
-                                        <ng-container *ngIf="settingService.getLanguage()=='English'">Log in</ng-container>
+                                        {{'Log in' | translate:settingService.getLanguage() }}
                                     </a>
                                 </li>
 
                                 <!-- Register -->
                                 <li [ngClass]="{'active':pageService.getPage()=='Register'}" *ngIf="userinfoService.getUserinfo()===null">
                                     <a (click)="pageService.setPage('Register'); unactive();">
-                                        <ng-container *ngIf="settingService.getLanguage()=='Thai'">สมัครสมาชิก</ng-container>
-                                        <ng-container *ngIf="settingService.getLanguage()=='English'">Register</ng-container>
+                                        {{'Register' | translate:settingService.getLanguage() }}
                                     </a>
                                 </li>
 
                                 <!-- Check status -->
                                 <li [ngClass]="{'active':pageService.getPage()=='Check status'}" *ngIf="userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().status!='Active'">
                                     <a>
-                                        <ng-container *ngIf="settingService.getLanguage()=='Thai'">สถานะ: 
+                                        {{'Status' | translate:settingService.getLanguage() }}:
                                             <span [ngClass]="{'ban':userinfoService.getUserinfo().status=='Ban', 'pen':userinfoService.getUserinfo().status=='Pending'}">{{userinfoService.getUserinfo().status}}</span>
-                                        </ng-container>
-                                        <ng-container *ngIf="settingService.getLanguage()=='English'">Status:
-                                            <span [ngClass]="{'ban':userinfoService.getUserinfo().status=='Ban', 'pen':userinfoService.getUserinfo().status=='Pending'}">{{userinfoService.getUserinfo().status}}</span>
-                                        </ng-container>
                                     </a><span class="has-subnav status-nav" (click)="toggleSubnav('.status-nav')"><i class="fa fa-angle-down"></i></span>
                                     <ul class="sub-menu level-2 status-nav">
                                         <li><a (click)="pageService.setPage('Check status'); unactive();">
-                                            <ng-container *ngIf="settingService.getLanguage()=='Thai'">คืออะไร</ng-container>
-                                            <ng-container *ngIf="settingService.getLanguage()=='English'">What is this?</ng-container>
+                                            {{'What is this?' | translate:settingService.getLanguage() }}
                                         </a></li>
                                         <li><a (click)="memberLogOut(); unactive();">
-                                            <ng-container *ngIf="settingService.getLanguage()=='Thai'">ออกจากระบบ</ng-container>
-                                            <ng-container *ngIf="settingService.getLanguage()=='English'">Log out</ng-container>
+                                            {{'Log out' | translate:settingService.getLanguage() }}
                                         </a></li>
                                     </ul>
                                 </li>
@@ -62,21 +53,15 @@
                                 <!-- User panel -->
                                 <li [ngClass]="{'active':pageService.getPage()=='Profile'}" *ngIf="userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().status=='Active'">
                                     <a>
-                                        <ng-container *ngIf="settingService.getLanguage()=='Thai'">สวัสดี 
+                                        {{'Hello,' | translate:settingService.getLanguage() }}
                                             <span class="hello-user">{{userinfoService.getUserinfo().username}}</span>
-                                        </ng-container>
-                                        <ng-container *ngIf="settingService.getLanguage()=='English'">Hello,
-                                            <span class="hello-user">{{userinfoService.getUserinfo().username}}</span>
-                                        </ng-container>
                                     </a><span class="has-subnav profile-nav"><i class="fa fa-angle-down"></i></span>
                                     <ul class="sub-menu level-2 profile-nav">
                                         <li><a (click)="pageService.setPage('User panel'); pageService.setSubpage('Profile'); unactive();">
-                                            <ng-container *ngIf="settingService.getLanguage()=='Thai'">ประวัติส่วนตัว</ng-container>
-                                            <ng-container *ngIf="settingService.getLanguage()=='English'">Profile</ng-container>
+                                            {{'Profile' | translate:settingService.getLanguage() }}
                                         </a></li>
                                         <li><a (click)="pageService.setPage('User panel'); pageService.setSubpage('History'); unactive();">
-                                            <ng-container *ngIf="settingService.getLanguage()=='Thai'">ประวัติการใช้งาน</ng-container>
-                                            <ng-container *ngIf="settingService.getLanguage()=='English'">History</ng-container>
+                                            {{'History' | translate:settingService.getLanguage() }}
                                         </a></li>
 
                                         <!-- Admin panel -->
@@ -87,8 +72,7 @@
                                             </a>
                                         </li>
                                         <li><a (click)="memberLogOut(); unactive();">
-                                            <ng-container *ngIf="settingService.getLanguage()=='Thai'">ออกจากระบบ</ng-container>
-                                            <ng-container *ngIf="settingService.getLanguage()=='English'">Log out</ng-container>
+                                            {{'Log out' | translate:settingService.getLanguage() }}
                                         </a></li>
                                     </ul>
                                 </li>
@@ -96,15 +80,13 @@
                                 <!-- Forms -->
                                 <li [ngClass]="{'active':pageService.getPage()=='Forms'}" *ngIf="userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().status=='Active'">
                                     <a (click)="pageService.setPage('Forms'); unactive();">
-                                        <ng-container *ngIf="settingService.getLanguage()=='Thai'">แบบฟอร์ม</ng-container>
-                                        <ng-container *ngIf="settingService.getLanguage()=='English'">Forms</ng-container>
+                                        {{'Forms' | translate:settingService.getLanguage() }}
                                     </a>
                                 </li>
 
                                 <!-- Contact -->
                                 <li [ngClass]="{'active':pageService.getPage()=='Contact'}"><a (click)="pageService.setPage('Contact'); unactive();">
-                                    <ng-container *ngIf="settingService.getLanguage()=='Thai'">ติดต่อเรา</ng-container>
-                                    <ng-container *ngIf="settingService.getLanguage()=='English'">Contact Us</ng-container>
+                                    {{'Contact Us' | translate:settingService.getLanguage() }}
                                 </a></li>
 
                                 <!-- Language -->

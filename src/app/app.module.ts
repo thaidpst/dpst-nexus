@@ -32,6 +32,8 @@ import { PageUserSettingComponent } from './page-user-panel/page-user-setting/pa
 import { PageUserHistoryComponent } from './page-user-panel/page-user-history/page-user-history.component';
 import { ProfileFormComponent } from './forms/profile-form/profile-form.component';
 import { ProfileEditFormComponent } from './forms/profile-edit-form/profile-edit-form.component';
+import { LanguageService } from './languages/language.service';
+import { TranslatePipe } from './languages/translate.pipe';
 
 
 @NgModule({
@@ -54,7 +56,8 @@ import { ProfileEditFormComponent } from './forms/profile-edit-form/profile-edit
     PageUserSettingComponent,
     PageUserHistoryComponent,
     ProfileFormComponent,
-    ProfileEditFormComponent
+    ProfileEditFormComponent,
+    TranslatePipe
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,8 @@ import { ProfileEditFormComponent } from './forms/profile-edit-form/profile-edit
     AuthenticationService,
     UserinfoService,
     AdminService,
-    CookieService
+    CookieService,
+    LanguageService
   ],
   bootstrap: [
     AppComponent
