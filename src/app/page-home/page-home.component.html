@@ -20,37 +20,17 @@
                     <div class="col-md-6 right">
                         <div class="political-banner-form">
 
-                            <ng-container *ngIf="settingService.getLanguage()=='Thai' && userinfoService.getUserinfo()===null">
-                                <h1 style="line-height:55px;">ยินดีต้อนรับเข้าสู่ระบบจัดการข้อมูลของ พสวท.</h1>
-                                <h2>สมัครสมาชิกเพื่อเข้าใช้งาน: </h2>
-                                <form>
-                                    <ul>
-                                        <li><input type="text" value="" placeholder="ชื่อของคุณ"></li>
-                                        <li><input type="email" value="" placeholder="E-mail adress ของคุณ"></li>
-                                        <li><input type="submit" value="สมัครสมาชิก" (click)="pageService.setPage('Register')"></li>
-                                    </ul>
-                                </form>
-                            </ng-container>
-                            <ng-container *ngIf="settingService.getLanguage()=='English' && userinfoService.getUserinfo()===null">
-                                <h1 style="line-height:55px;">Welcome to DPST Database Manager</h1>
-                                <h2>Register to our community: </h2>
-                                <form>
-                                    <ul>
-                                        <li><input type="text" value="" placeholder="Your name"></li>
-                                        <li><input type="email" value="" placeholder="Your E-mail adress"></li>
-                                        <li><input type="submit" value="Register" (click)="pageService.setPage('Register')"></li>
-                                    </ul>
-                                </form>
-                            </ng-container>
-
                             <!-- Log in welcome -->
-                            <ng-container *ngIf="settingService.getLanguage()=='Thai' && userinfoService.getUserinfo()!==null">
-                                <h1 style="line-height:55px;">ยินดีต้อนรับเข้าสู่ระบบจัดการข้อมูลของ พสวท.</h1>
-                            
-                            </ng-container>
-                            <ng-container *ngIf="settingService.getLanguage()=='English' && userinfoService.getUserinfo()!==null">
-                                <h1 style="line-height:55px;">Welcome to DPST Database Manager</h1>
-                                
+                            <h1 style="line-height:55px;">{{'Welcome to DPST Database Manager' | translate:settingService.getLanguage() }}</h1>
+                            <ng-container *ngIf="userinfoService.getUserinfo()===null">
+                                <h2>{{'Register to our community' | translate:settingService.getLanguage() }}: </h2>
+                                <form>
+                                    <ul>
+                                        <li><input type="text" value="" placeholder="{{'Your name' | translate:settingService.getLanguage() }}"></li>
+                                        <li><input type="email" value="" placeholder="{{'Your E-mail address' | translate:settingService.getLanguage() }}"></li>
+                                        <li><input type="submit" value="{{'Register' | translate:settingService.getLanguage() }}" (click)="pageService.setPage('Register')"></li>
+                                    </ul>
+                                </form>
                             </ng-container>
                         
                       </div>
@@ -60,7 +40,6 @@
         </div>
     </div>
 </div>
-
 <div class="political-main-content" style="padding-bottom:0;">
 		<div class="political-main-section political-service-listfull">
         <div class="container">
@@ -68,10 +47,10 @@
                 <div class="col-md-6">
                   <div class="political-service-list">
 
-                      <ul *ngIf="settingService.getLanguage()=='Thai'">
+                      <ul>
                           <li>
                               <i class="icon church-interface"></i>
-                              <h3>เกี่ยวกับ Application</h3>
+                              <h3>{{'About Application' | translate:settingService.getLanguage() }}</h3>
                               <p>
                                   This web application will help DPST to manage the data of DPST students and teachers
                                   <strong>faster, easier, and efficiently</strong>.
@@ -79,7 +58,7 @@
                           </li>
                           <li>
                               <i class="icon church-arrow2"></i>
-                              <h3>เป้าหมาย</h3>
+                              <h3>{{'Mission' | translate:settingService.getLanguage() }}</h3>
                               <p>
                                   We hope to help building the DPST community, 
                                   and this application can connect DPST people with others.
@@ -87,33 +66,7 @@
                           </li>
                           <li>
                               <i class="icon church-eye"></i>
-                              <h3>วิธีใช้งาน</h3>
-                              <p>
-                                  It is easy. You just need to register and 
-                                  <strong style="cursor:pointer;" (click)="pageService.setPage('Register')">become a member</strong>.
-                              </p>
-                          </li>
-                      </ul>
-                      <ul *ngIf="settingService.getLanguage()=='English'">
-                          <li>
-                              <i class="icon church-interface"></i>
-                              <h3>About Application</h3>
-                              <p>
-                                  This web application will help DPST to manage the data of DPST students and teachers
-                                  <strong>faster, easier, and efficiently</strong>.
-                              </p>
-                          </li>
-                          <li>
-                              <i class="icon church-arrow2"></i>
-                              <h3>Mission</h3>
-                              <p>
-                                  We hope to help building the DPST community, 
-                                  and this application can connect DPST people with others.
-                              </p>
-                          </li>
-                          <li>
-                              <i class="icon church-eye"></i>
-                              <h3>How to Use</h3>
+                              <h3>{{'How to Use' | translate:settingService.getLanguage() }}</h3>
                               <p>
                                   It is easy. You just need to register and 
                                   <strong style="cursor:pointer;" (click)="pageService.setPage('Register')">become a member</strong>.

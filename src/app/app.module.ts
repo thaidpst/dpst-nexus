@@ -33,6 +33,8 @@ import { PageUserHistoryComponent } from './page-user-panel/page-user-history/pa
 import { ProfileFormComponent } from './forms/profile-form/profile-form.component';
 import { ProfileEditFormComponent } from './forms/profile-edit-form/profile-edit-form.component';
 import { AdminPrivilageSettingFormComponent } from './forms/admin-privilage-setting-form/admin-privilage-setting-form.component';
+import { LanguageService } from './languages/language.service';
+import { TranslatePipe } from './languages/translate.pipe';
 
 
 @NgModule({
@@ -56,7 +58,8 @@ import { AdminPrivilageSettingFormComponent } from './forms/admin-privilage-sett
     PageUserHistoryComponent,
     ProfileFormComponent,
     ProfileEditFormComponent,
-    AdminPrivilageSettingFormComponent
+    AdminPrivilageSettingFormComponent,
+    TranslatePipe
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,8 @@ import { AdminPrivilageSettingFormComponent } from './forms/admin-privilage-sett
     AuthenticationService,
     UserinfoService,
     AdminService,
-    CookieService
+    CookieService,
+    LanguageService
   ],
   bootstrap: [
     AppComponent
