@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
+import { PageService } from '../../services/page.service';
 import { UserinfoService } from '../../services/userinfo.service';
 
 @Component({
@@ -12,10 +13,12 @@ export class PageUserProfileComponent implements OnInit {
   private userDetail = null;
 
   constructor(
-    private userinfoService: UserinfoService
+    private userinfoService: UserinfoService,
+    private pageService: PageService
   ) { }
 
   ngOnInit() {
+    this.pageService.setPage('Profile');
     let userinfo = Object.assign({}, this.userinfoService.getUserinfo());
     this.userinfoService.getUserDetail(userinfo)
       .then(result=>{

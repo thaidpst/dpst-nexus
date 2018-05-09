@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { SocketioService } from '../services/socketio.service';
 import { PageService } from '../services/page.service';
@@ -23,17 +24,21 @@ export class PageLoginComponent implements OnInit {
     private settingService: SettingService,
     private authService: AuthenticationService,
     private userinfoService: UserinfoService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router
   ) { }
 
   ngOnInit() {
+    if (this.userinfoService.getUserinfo() !== null)
+      this.router.navigate(['/']);
   }
 
   memberLogIn(form: NgForm) {
     this.authService.login(form.value)
-      .then(result=>{
+      .then(result => {
         if (result.status) {
-          if (form.value.rememberme==true) this.cookieService.setUserLoginCookie(result.data);
+          if (form.value.rememberme === true)
+            this.cookieService.setUserLoginCookie(result.data);
           else this.cookieService.clearUserLoginCookie();
 
           this.loginFail = false;
@@ -47,7 +52,7 @@ export class PageLoginComponent implements OnInit {
   loginSuccess(userInfo) {
     this.socketioService.login(userInfo.username);
     this.userinfoService.setUserinfo(userInfo);
-    this.pageService.setPage('Homepage');
+    this.router.navigate(['/']);
   }
 
 }

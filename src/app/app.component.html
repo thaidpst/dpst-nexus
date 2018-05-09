@@ -2,29 +2,10 @@
 
   <app-header-navbar></app-header-navbar>
 
-  <ng-container *ngIf="pageService.getPage()=='Homepage'">
-    <app-page-home></app-page-home>
-  </ng-container>
-
-  <ng-container *ngIf="pageService.getPage()=='Log in'">
-    <app-page-login></app-page-login>
-  </ng-container>
-
-  <ng-container *ngIf="pageService.getPage()=='Register'">
-    <app-page-register></app-page-register>
-  </ng-container>
-
-  <ng-container *ngIf="pageService.getPage()=='Contact'">
-    <app-page-contact></app-page-contact>
-  </ng-container>
-
-  <ng-container *ngIf="pageService.getPage()=='Check status'">
-    <app-page-check-status></app-page-check-status>
-  </ng-container>
+  <router-outlet></router-outlet>
 
   <!-- User panel -->
-  <ng-container *ngIf="pageService.getPage()=='User panel' && userinfoService.getUserinfo()!==null">
-    <app-page-user-panel></app-page-user-panel>
+  <ng-container *ngIf="userinfoService.getUserinfo()!==null">
   </ng-container>
 
   <!-- Admin panel -->

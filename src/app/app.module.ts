@@ -1,16 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 // Services
-import { SocketioService } from './services/socketio.service';
+import { AdminService } from './services/admin.service';
+import { AuthenticationService } from './services/authentication.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { CookieService } from './services/cookie.service';
+import { LanguageService } from './languages/language.service';
 import { PageService } from './services/page.service';
 import { SettingService } from './services/setting.service';
-import { AuthenticationService } from './services/authentication.service';
+import { SocketioService } from './services/socketio.service';
 import { UserinfoService } from './services/userinfo.service';
-import { AdminService } from './services/admin.service';
-import { CookieService } from './services/cookie.service';
 
 // Components
 import { AppComponent } from './app.component';
@@ -32,8 +34,12 @@ import { PageUserSettingComponent } from './page-user-panel/page-user-setting/pa
 import { PageUserHistoryComponent } from './page-user-panel/page-user-history/page-user-history.component';
 import { ProfileFormComponent } from './forms/profile-form/profile-form.component';
 import { ProfileEditFormComponent } from './forms/profile-edit-form/profile-edit-form.component';
-import { LanguageService } from './languages/language.service';
+
 import { TranslatePipe } from './languages/translate.pipe';
+
+import { AppRoutingModule } from './/app-routing.module';
+import { PageAdminPanelRoutingModule } from './page-admin-panel/page-admin-panel-routing.module';
+import { PageUserPanelRoutingModule } from './page-user-panel/page-user-panel-routing.module';
 
 
 @NgModule({
@@ -62,7 +68,10 @@ import { TranslatePipe } from './languages/translate.pipe';
   imports: [
     BrowserModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    PageUserPanelRoutingModule,
+    PageAdminPanelRoutingModule,
+    AppRoutingModule
   ],
   providers: [
     SocketioService,
@@ -72,7 +81,8 @@ import { TranslatePipe } from './languages/translate.pipe';
     UserinfoService,
     AdminService,
     CookieService,
-    LanguageService
+    LanguageService,
+    AuthGuardService
   ],
   bootstrap: [
     AppComponent

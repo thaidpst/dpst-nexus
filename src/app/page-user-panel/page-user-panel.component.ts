@@ -10,20 +10,13 @@ import { SettingService } from '../services/setting.service';
 })
 export class PageUserPanelComponent implements OnInit {
 
+  pageName: string;
+
   constructor(
-    private pageService: PageService,
-    private settingService: SettingService
+    private settingService: SettingService,
+    private pageService: PageService
   ) { }
 
   ngOnInit() {
   }
-
-  subpageTranslation() {
-    if (this.pageService.getSubpage()=='Profile') return 'ประวัติส่วนตัว';
-    else if (this.pageService.getSubpage()=='Edit profile') return 'เเก้ไขประวัติส่วนตัว';
-    else if (this.pageService.getSubpage()=='History') return 'ประวัติการใช้งาน';
-    else if (this.pageService.getSubpage()=='Setting') return 'ตั้งค่า';
-    else return '';
-  }
-
 }

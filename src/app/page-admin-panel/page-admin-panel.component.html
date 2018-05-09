@@ -5,9 +5,9 @@
                 <div class="political-subheader-wrap">
                     <h1>Admin Panel</h1>
                     <ul class="political-breadcrumb">
-                        <li><a (click)="pageService.setPage('Homepage')">Homepage</a></li>
+                        <li><a routerLink="/">{{'Homepage' | translate:settingService.getLanguage() }}</a></li>
                         <li>Admin Panel</li>
-                        <li class="active">{{pageService.getSubpage()}}</li>
+                        <li class="active">{{pageService.getPage()}}</li>
                     </ul>
                 </div>
             </div>
@@ -25,29 +25,19 @@
                     <div class="widget widget_cetagories">
                         <h2 class="political-widget-heading">Admin Menu</h2>
                         <ul>
-                            <li [ngClass]="{'active':pageService.getSubpage()=='User table'}">
-                                <a (click)="pageService.setSubpage('User table')">User Table</a></li>
-                            <li [ngClass]="{'active':pageService.getSubpage()=='Statistic'}">
-                                <a (click)="pageService.setSubpage('Statistic')">Statistic</a></li>
-                            <li [ngClass]="{'active':pageService.getSubpage()=='Email blast'}">
-                                <a (click)="pageService.setSubpage('Email blast')">Email Blast</a></li>
+                            <li routerLinkActive="active">
+                                <a routerLink="user-table">User Table</a></li>
+                            <li routerLinkActive="active">
+                                <a routerLink="stats">Statistics</a></li>
+                            <li routerLinkActive="active">
+                                <a routerLink="email-blast">Email Blast</a></li>
                         </ul>
                     </div>
                 </aside>
 
                 <!-- Admin panel subpages -->
                 <div class="col-md-9">
-
-                    <ng-container *ngIf="pageService.getSubpage()=='User table'">
-                        <app-page-admin-user-table></app-page-admin-user-table>
-                    </ng-container>
-                    <ng-container *ngIf="pageService.getSubpage()=='Statistic'">
-                        <app-page-admin-statistic></app-page-admin-statistic>
-                    </ng-container>
-                    <ng-container *ngIf="pageService.getSubpage()=='Email blast'">
-                        <app-page-admin-email-blast></app-page-admin-email-blast>
-                    </ng-container>
-
+                    <router-outlet></router-outlet>
                 </div>
 
             </div>
