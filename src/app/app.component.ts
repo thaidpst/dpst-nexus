@@ -26,17 +26,23 @@ export class AppComponent {
   ngOnInit() {
     this.socketioService.connect();
 
+    // Get announcement from Socket.io
     this.socketioService.getSocket().on('announce-account-status', function(userId) {
       if (this.userinfoService.getUserinfo()!==null && userId==this.userinfoService.getUserinfo()._id) {
         this.userinfoService.update();
         this.pageService.setPage('Check status');
       }
     }.bind(this));
-
     this.socketioService.getSocket().on('announce-account-delete', function(userId) {
       if (this.userinfoService.getUserinfo()!==null && userId==this.userinfoService.getUserinfo()._id) {
         this.socketioService.logout();
         this.userinfoService.setUserinfo(null);
+        this.pageService.setPage('Homepage');
+      }
+    }.bind(this));
+    this.socketioService.getSocket().on('announce-account-privilage', function(userId) {
+      if (this.userinfoService.getUserinfo()!==null && userId==this.userinfoService.getUserinfo()._id) {
+        this.userinfoService.update();
         this.pageService.setPage('Homepage');
       }
     }.bind(this));

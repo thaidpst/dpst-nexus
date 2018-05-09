@@ -1,6 +1,5 @@
 th {color:#000000;}
 td {font-weight:300;}
-
 .fa {cursor:pointer;}
 
 .show-per-page, .select-sort, input.search[type=text] {height:38px; padding:3px;}
@@ -17,5 +16,6 @@ input.search[type=text] {
 }
 
 .top-option {padding:0 15px; float:right;}
+.pagination-div {margin:20px 0;}
 
 .back-btn {float:right; margin-bottom:20px;}

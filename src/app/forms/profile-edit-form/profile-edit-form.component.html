@@ -1,32 +1,32 @@
 <div class="political-team political-team-list">
   <form #editProfile="ngForm" (ngSubmit)="editProfileDetail(editProfile)">
     <ul class="row">
-      <li class="col-md-12">
+      <li class="col-md-12 full-view-panel">
         <div class="political-team-list-wrap">
-          <figure><img [src]="userDetail.profileUrl" alt="Profile image not available"></figure>
+          <figure><img [src]="userProfileImage()" alt="Profile image not available"></figure>
           <div class="political-team-list-text">
             <h2 style="margin-bottom:15px;">{{userDetail.firstname}} {{userDetail.lastname}}</h2>
-            <span style="width:100%;">{{'Position' | translate:settingService.getLanguage() }}: 
-              <input class="profile-input" type="text" name="position" [ngModel]="defaultValue(userDetail.position)" placeholder="{{'Your position' | translate:settingService.getLanguage() }}" ngModel></span>
+            <span style="float:left;">{{'Position' | translate:settingService.getLanguage() }}: </span>
+              <span style="display:block; overflow:hidden; padding-left: 5px"><input class="profile-input" type="text" name="position" [ngModel]="defaultValue(userDetail.position)" placeholder="{{'Your position' | translate:settingService.getLanguage() }}" ngModel></span>
             <p style="float:none; margin:5px 0 10px 0;">
               <textarea class="profile-input profile-about" name="about" [ngModel]="defaultValue(userDetail.about)" placeholder="{{'About you' | translate:settingService.getLanguage() }}" ngModel></textarea>
             </p>
             <ul class="political-team-info">
-              <li><i class="fa fa-globe"></i><strong>{{'DPST #' | translate:settingService.getLanguage() }} #</strong>
-                <input class="profile-input" type="text" name="dpstYear" [ngModel]="defaultValue(userDetail.dpstYear)" placeholder="{{'Your DPST #' | translate:settingService.getLanguage() }}" ngModel></li>
+              <li><i class="fa fa-globe"></i><strong>{{'DPST #' | translate:settingService.getLanguage() }}</strong>
+                <span style="display:block; overflow:hidden; padding-left: 5px"><input class="profile-input" type="text" name="dpstYear" [ngModel]="defaultValue(userDetail.dpstYear)" placeholder="{{'Your DPST #' | translate:settingService.getLanguage() }}" ngModel></span></li>
               <li><i class="fa fa-graduation-cap"></i><strong>{{'Education' | translate:settingService.getLanguage() }}:</strong>
-                <input class="profile-input" type="text" name="education" [ngModel]="defaultValue(userDetail.education)" placeholder="{{'Your education' | translate:settingService.getLanguage() }}" ngModel></li>
+                <span style="display:block; overflow:hidden; padding-left: 5px"><input class="profile-input" type="text" name="education" [ngModel]="defaultValue(userDetail.education)" placeholder="{{'Your education' | translate:settingService.getLanguage() }}" ngModel></span></li>
               <li><i class="fa fa-ravelry"></i><strong>{{'Major' | translate:settingService.getLanguage() }}:</strong>
-                <input class="profile-input" type="text" name="major" [ngModel]="defaultValue(userDetail.mojor)" placeholder="{{'Your field of study' | translate:settingService.getLanguage() }}" ngModel></li>
+                <span style="display:block; overflow:hidden; padding-left: 5px"><input class="profile-input" type="text" name="major" [ngModel]="defaultValue(userDetail.mojor)" placeholder="{{'Your field of study' | translate:settingService.getLanguage() }}" ngModel></span></li>
               <li><i class="fa fa-book"></i><strong>{{'School/University' | translate:settingService.getLanguage() }}:</strong>
-                <input class="profile-input" type="text" name="school" [ngModel]="defaultValue(userDetail.school)" placeholder="{{'Your school/university' | translate:settingService.getLanguage() }}" ngModel></li>
+                <span style="display:block; overflow:hidden; padding-left: 5px"><input class="profile-input" type="text" name="school" [ngModel]="defaultValue(userDetail.school)" placeholder="{{'Your school/university' | translate:settingService.getLanguage() }}" ngModel></span></li>
               <li><i class="fa fa-briefcase"></i><strong>{{'Workplace' | translate:settingService.getLanguage() }}:</strong> 
-                <input class="profile-input" type="text" name="workplace" [ngModel]="defaultValue(userDetail.workplace)" placeholder="{{'Your workplace' | translate:settingService.getLanguage() }}" ngModel></li>
+                <span style="display:block; overflow:hidden; padding-left: 5px"><input class="profile-input" type="text" name="workplace" [ngModel]="defaultValue(userDetail.workplace)" placeholder="{{'Your workplace' | translate:settingService.getLanguage() }}" ngModel></span></li>
               <li><i class="fa fa-envelope"></i><strong>{{'E-mail' | translate:settingService.getLanguage() }}:</strong> <a [href]="'mailto:'+userDetail.email">{{userDetail.email}}</a></li>
               <li><i class="fa fa-phone"></i><strong>{{'Phone' | translate:settingService.getLanguage() }}:</strong> 
-                <input class="profile-input" type="text" name="phone" [ngModel]="defaultValue(userDetail.phone)" placeholder="{{'Your telephone number' | translate:settingService.getLanguage() }}" ngModel></li>
+                <span style="display:block; overflow:hidden; padding-left: 5px"><input class="profile-input" type="text" name="phone" [ngModel]="defaultValue(userDetail.phone)" placeholder="{{'Your telephone number' | translate:settingService.getLanguage() }}" ngModel></span></li>
               <li><i class="fa fa-comments"></i><strong>Line ID:</strong>
-                <input class="profile-input" type="text" name="lineId" [ngModel]="defaultValue(userDetail.lineId)" placeholder="{{'Your Line ID' | translate:settingService.getLanguage() }}" ngModel></li>
+                <span style="display:block; overflow:hidden; padding-left: 5px"><input class="profile-input" type="text" name="lineId" [ngModel]="defaultValue(userDetail.lineId)" placeholder="{{'Your Line ID' | translate:settingService.getLanguage() }}" ngModel></span></li>
               <li><i class="fa fa-home"></i><strong>{{'Address' | translate:settingService.getLanguage() }}:</strong>
                 <br><input class="profile-input profile-ad1" type="text" name="address1" [ngModel]="defaultValue(userDetail.address1)" placeholder="{{'Your address' | translate:settingService.getLanguage() }}" ngModel>
                 <br><input class="profile-input profile-ad1" type="text" name="address2" [ngModel]="defaultValue(userDetail.address2)" placeholder="{{'Your address line 2' | translate:settingService.getLanguage() }}" ngModel>

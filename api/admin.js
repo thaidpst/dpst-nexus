@@ -84,5 +84,22 @@ router.post('/deleteaccount', (req, res)=>{
         });      
 });
 
+router.post('/updateuserprivilage', (req, res)=>{
+    let userId = req.db.id(req.body.input.userId),
+        updatedUserinfo = req.body.input.updatedUserinfo;
+    let dbUserUsers = req.db.get('users');
+
+    dbUserUsers.findOne({ _id: userId })
+        .then(check1=>{
+            if (check1===null) res.json({status:false, message:'Update user info fail: Cannot find the account.', data:0});
+            else {
+                let result = {...check1, ...updatedUserinfo};
+                dbUserUsers.update({ _id: userId }, result, { multi: false })
+                    .then(()=>{res.json({status:true, message:'The user info has been updated successfully.', data:1})});
+            }
+        })
+        .catch(err1=>{res.json({status:false, message:'Update user info error: '+err1, data:null})}); 
+});
+
 
 module.exports = router;

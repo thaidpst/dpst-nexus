@@ -12,7 +12,7 @@
                         <a href="#menu" class="menu-link active" (click)="unactiveSubMenu()">
                             <span style="margin-right:0;"></span>
                         </a>
-                        <nav id="menu" class="menu navbar navbar-default" (mouseleave)="autoCloseNavbar()">
+                        <nav id="menu" class="menu navbar navbar-default">
                             <ul class="level-1 navbar-nav">
 
                                 <!-- Homepage -->
@@ -110,8 +110,9 @@
                                     </ul>
                                 </li> -->
                                 <li>
-                                    <a>Language</a><span class="has-subnav"><i class="fa fa-angle-down"></i></span>
-                                    <ul class="sub-menu level-2">
+                                    <a (click)="toggleSubnav('.language')">Language</a>
+                                    <span class="has-subnav language" style="pointer-events:none;"><i class="fa fa-angle-down"></i></span>
+                                    <ul class="sub-menu level-2 language">
                                         <li><a (click)="settingService.setLanguage('Thai'); unactive();">Thai</a></li>
                                         <li><a (click)="settingService.setLanguage('English'); unactive();">English</a></li>
                                     </ul>

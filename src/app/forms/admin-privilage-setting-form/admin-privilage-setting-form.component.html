@@ -1,0 +1,60 @@
+
+<div *ngIf="!restricted()" class="political-team political-team-list">
+  <form #editAdmin="ngForm" (ngSubmit)="editAdminPrivilage(editAdmin)" ngNativeValidate>
+    <ul class="row">
+      <li class="col-md-12 full-view-panel">
+        <div class="political-team-list-wrap">
+
+          <h1><strong>Admin Privilage Setting</strong></h1>
+          <h3 style="margin-bottom:25px;">Username:
+            <strong><span class="hello-user">{{userinfo.username}}</span></strong>
+          </h3>
+          
+          <div class="political-team-list-text">
+            <ul class="political-team-info">
+              <li><strong>Firstname:</strong>
+                <input class="profile-input" type="text" name="firstname" [ngModel]="defaultValue(userinfo.firstname)" placeholder="Firstname" ngModel required></li>
+              <li><strong>Lastname:</strong>
+                <input class="profile-input" type="text" name="lastname" [ngModel]="defaultValue(userinfo.lastname)" placeholder="Lastname" ngModel required></li>
+              <li><strong>E-mail:</strong>
+                <input class="profile-input" type="text" name="email" [ngModel]="defaultValue(userinfo.email)" placeholder="Your e-mail address" ngModel required
+                style="width:calc(55% + 28px);"></li>
+              <li><strong>Level:</strong>
+                <ng-container *ngIf="selfAccount">{{levels[10 - userinfo.level].desc}}</ng-container>
+                <select *ngIf="!selfAccount" name="level" [(ngModel)]="levelSelection" required>
+                  <option *ngFor="let level of possibleLevel;" [value]="level.value">{{level.desc}}</option>
+                </select>              
+              <li class="submit-li">
+                <input *ngIf="settingService.getLanguage()=='Thai'" class="political-simple-btn" type="submit" value="เเก้ไขการเข้าถึง">
+                <input *ngIf="settingService.getLanguage()=='English'" class="political-simple-btn" type="submit" value="Update privilage">
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </form>
+</div>
+
+<div *ngIf="restricted()" class="political-team political-team-list">
+  <ul class="row">
+    <li class="col-md-12 full-view-panel">
+      <div class="political-team-list-wrap">
+
+        <h1><strong>Admin Privilage</strong></h1>
+        <h3 style="margin-bottom:25px;">Username:
+          <strong><span class="hello-user">{{userinfo.username}}</span></strong>
+        </h3>
+        
+        <div class="political-team-list-text">
+          <ul class="political-team-info">
+            <li><strong>Firstname:</strong> {{userinfo.firstname}}</li>
+            <li><strong>Lastname:</strong> {{userinfo.lastname}}</li>
+            <li><strong>E-mail:</strong> {{userinfo.email}}</li>
+            <li><strong>Level:</strong> {{levels[10 - userinfo.level].desc}}</li>
+          </ul>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

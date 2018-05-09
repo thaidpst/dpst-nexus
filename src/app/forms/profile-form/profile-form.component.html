@@ -1,9 +1,9 @@
 
 <div class="political-team political-team-list">
   <ul class="row">
-    <li class="col-md-12">
+    <li class="col-md-12 full-view-panel">
       <div class="political-team-list-wrap">
-        <figure><img [src]="userDetail.profileUrl" alt="Profile image not available"></figure>
+        <figure><img [src]="userProfileImage()" alt="Profile image not available"></figure>
         <div class="political-team-list-text">
           <h2>{{userDetail.firstname}} {{userDetail.lastname}}</h2>
           <span>{{'Position' | translate:settingService.getLanguage() }}: {{viewUserPosition()}}</span>

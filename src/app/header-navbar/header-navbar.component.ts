@@ -43,10 +43,6 @@ export class HeaderNavbarComponent implements OnInit {
     let toggle = !this.host.select(selector).classed('active');
     this.host.selectAll(selector).classed('active', toggle);
   }
-  autoCloseNavbar() {
-    // this.host.select('.menu-link').classed('active', true);
-    // this.host.select('.navbar').classed('active', false);
-  }
 
   memberLogOut() {
     this.socketioService.logout();

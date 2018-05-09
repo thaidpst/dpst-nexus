@@ -27,4 +27,9 @@ export class ProfileFormComponent implements OnInit {
     else return this.userDetail.about;
   }
 
+  userProfileImage() {
+    if (this.userDetail.profileUrl===undefined || this.userDetail.profileUrl===null || this.userDetail.profileUrl=='') return 'assets/img/profile/base.jpg';
+    else return this.userDetail.profileUrl;
+  }
+
 }

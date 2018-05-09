@@ -36,6 +36,11 @@ export class ProfileEditFormComponent implements OnInit {
     else return value;
   }
 
+  userProfileImage() {
+    if (this.userDetail.profileUrl===undefined || this.userDetail.profileUrl===null || this.userDetail.profileUrl=='') return 'assets/img/profile/base.jpg';
+    else return this.userDetail.profileUrl;
+  }
+
   editProfileDetail(form: NgForm) {
     let keys = Object.keys(form.value),
         updatedUserDetail = {};
@@ -55,6 +60,5 @@ export class ProfileEditFormComponent implements OnInit {
         this.userDetailUpdated.emit(result);
       });
   }
-
-
+  
 }

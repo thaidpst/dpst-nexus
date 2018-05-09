@@ -48,7 +48,7 @@ db.createCollection("userDetail", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
-            required: [ "userId", "profileUrl" ],
+            required: [ "userId" ],
             properties: {
                 userId: {
                     bsonType: "objectId",
@@ -56,7 +56,7 @@ db.createCollection("userDetail", {
                 },
                 profileUrl: {
                     bsonType: "string",
-                    description: "must be a string and is required"
+                    description: "must be a string and is not required"
                 },
                 about: {
                     bsonType: "string",
@@ -154,16 +154,13 @@ db.users.insert({
 
 let user1 = db.users.findOne({username: "TofuMaster"})._id;
 db.userDetail.insert({
-    userId: user1,
-    profileUrl: 'assets/img/profile/base.jpg'
+    userId: user1
 });
 let user2 = db.users.findOne({username: "nui"})._id;
 db.userDetail.insert({
-    userId: user2,
-    profileUrl: 'assets/img/profile/base.jpg'
+    userId: user2
 });
 let user3 = db.users.findOne({username: "chinissai"})._id;
 db.userDetail.insert({
-    userId: user3,
-    profileUrl: 'assets/img/profile/base.jpg'
+    userId: user3
 });

@@ -35,6 +35,8 @@ import { PageUserHistoryComponent } from './page-user-panel/page-user-history/pa
 import { ProfileFormComponent } from './forms/profile-form/profile-form.component';
 import { ProfileEditFormComponent } from './forms/profile-edit-form/profile-edit-form.component';
 
+import { AdminPrivilageSettingFormComponent } from './forms/admin-privilage-setting-form/admin-privilage-setting-form.component';
+
 import { TranslatePipe } from './languages/translate.pipe';
 
 import { AppRoutingModule } from './/app-routing.module';
@@ -63,6 +65,7 @@ import { PageUserPanelRoutingModule } from './page-user-panel/page-user-panel-ro
     PageUserHistoryComponent,
     ProfileFormComponent,
     ProfileEditFormComponent,
+    AdminPrivilageSettingFormComponent,
     TranslatePipe
   ],
   imports: [
