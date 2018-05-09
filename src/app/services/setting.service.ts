@@ -7,7 +7,7 @@ export class SettingService {
 
   constructor() { }
 
-  setLanguage(language) {this.language = language}
-  getLanguage() {return this.language}
+  setLanguage(language) { this.language = language; }
+  getLanguage() { return this.language; }
 
 }

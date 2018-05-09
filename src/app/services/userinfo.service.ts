@@ -12,46 +12,46 @@ export class UserinfoService {
 
   constructor(private http: Http) { }
 
-  setUserinfo(userinfo) {this.userinfo = userinfo}
-  getUserinfo() {return this.userinfo}
+  setUserinfo(userinfo) { this.userinfo = userinfo; }
+  getUserinfo() { return this.userinfo; }
 
   update() {
-    let url = this.apiUrl + '/update/' + this.userinfo._id;
+    const url = this.apiUrl + '/update/' + this.userinfo._id;
 
     return this.http.get(url).toPromise()
-      .then(response=>{
-        let result = response.json();
+      .then(response => {
+        const result = response.json();
         if (testing) console.log(result.message);
         this.userinfo = result.data;
       })
-      .catch(err=>{
+      .catch(err => {
         this.userinfo = null;
       });
   }
 
   getUserDetail(userinfo) {
-    let url = this.apiUrl + '/getuserdetail/' + userinfo._id;
+    const url = this.apiUrl + '/getuserdetail/' + userinfo._id;
 
     return this.http.get(url).toPromise()
-      .then(response=>{
-        let result = response.json();
+      .then(response => {
+        const result = response.json();
         if (testing) console.log(result.message);
         return result;
       })
-      .catch(err=>{return null});
+      .catch(err => null);
   }
 
   updateUserDetail(userId, updatedUserDetail) {
-    let url = this.apiUrl + '/updateuserdetail',
-        input = {userId: userId, updatedUserDetail: updatedUserDetail};
+    const url = this.apiUrl + '/updateuserdetail',
+      input = { userId: userId, updatedUserDetail: updatedUserDetail };
     return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
       .toPromise()
-      .then(response=>{
-        let result = response.json();
+      .then(response => {
+        const result = response.json();
         if (testing) console.log(result.message);
         return result;
       })
-      .catch(err=>{return null});
+      .catch(err => null);
   }
 
 }

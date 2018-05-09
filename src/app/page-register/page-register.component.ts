@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { SocketioService } from '../services/socketio.service';
-import { PageService } from '../services/page.service';
 import { SettingService } from '../services/setting.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { UserinfoService } from '../services/userinfo.service';
 import { AdminService } from '../services/admin.service';
 import { CookieService } from '../services/cookie.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-page-register',
@@ -23,11 +23,11 @@ export class PageRegisterComponent implements OnInit {
 
   constructor(
     private socketioService: SocketioService,
-    private pageService: PageService,
     private settingService: SettingService,
     private authService: AuthenticationService,
     private userinfoService: UserinfoService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -38,7 +38,7 @@ export class PageRegisterComponent implements OnInit {
       this.passNotMatch = true; this.passTooShort = false; this.usernameInUse = false; this.emailInUse = false;
     } else {
       this.authService.register(form.value)
-        .then(response =>  {
+        .then(response => {
           if (response.status) {
             this.registerSuccess(form.value);
             form.resetForm();
@@ -49,14 +49,12 @@ export class PageRegisterComponent implements OnInit {
               this.passTooShort = true;
               this.usernameInUse = false;
               this.emailInUse = false;
-            }
-            else if (response.data == -1) {
+            } else if (response.data == -1) {
               this.passNotMatch = false;
               this.passTooShort = false;
               this.usernameInUse = true;
               this.emailInUse = false;
-            }
-            else if (response.data == -2) {
+            } else if (response.data == -2) {
               this.passNotMatch = false;
               this.passTooShort = false;
               this.usernameInUse = false;
@@ -69,10 +67,10 @@ export class PageRegisterComponent implements OnInit {
   registerSuccess(formValue) {
     this.socketioService.newMember(formValue.username);
     this.authService.login(formValue)
-      .then(result =>  {
+      .then(result => {
         this.socketioService.login(result.data.username);
         this.userinfoService.setUserinfo(result.data);
-        this.pageService.setPage('Check status');
+        this.router.navigate(['/check-status']);
         this.cookieService.setUserLoginCookie(result.data);
       });
   }

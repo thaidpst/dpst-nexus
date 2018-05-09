@@ -11,38 +11,38 @@ export class CookieService {
   constructor(private http: Http) { }
 
   checkRememberLogin() {
-    let url = this.apiUrl + '/checkrememberlogin';
+    const url = this.apiUrl + '/checkrememberlogin';
 
     return this.http.get(url).toPromise()
-      .then(response=>{
-        let result = response.json();
+      .then(response => {
+        const result = response.json();
         if (testing) console.log(result.message);
         return result;
       })
-      .catch(err=>{return null});
+      .catch(err => null);
   }
 
   setUserLoginCookie(userinfo) {
-    let url = this.apiUrl + '/setlogincookie/' + userinfo.username + '/' + userinfo._id;
+    const url = this.apiUrl + '/setlogincookie/' + userinfo.username + '/' + userinfo._id;
 
     this.http.get(url).toPromise()
-      .then(response=>{
-        let result = response.json();
+      .then(response => {
+        const result = response.json();
         if (testing) console.log(result.message);
         return result;
       })
-      .catch(err=>{return null});
+      .catch(err => null);
   }
   clearUserLoginCookie() {
-    let url = this.apiUrl + '/clearlogincookie';
+    const url = this.apiUrl + '/clearlogincookie';
 
     this.http.get(url).toPromise()
-      .then(response=>{
-        let result = response.json();
+      .then(response => {
+        const result = response.json();
         if (testing) console.log(result.message);
         return result;
       })
-      .catch(err=>{return null});
+      .catch(err => null);
   }
 
 }

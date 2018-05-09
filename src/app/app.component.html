@@ -9,8 +9,7 @@
   </ng-container>
 
   <!-- Admin panel -->
-  <ng-container *ngIf="pageService.getPage()=='Admin panel' && userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().level>=8">
-    <app-page-admin-panel></app-page-admin-panel>
+  <ng-container *ngIf="userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().level>=8">
   </ng-container>
   
   <!-- <div>{{socketioService.getOnlineUsers()}}</div> -->  

@@ -11,39 +11,39 @@ export class AuthenticationService {
   constructor(private http: Http) { }
 
   register(formValue) {
-    let url = this.apiUrl + '/register',
-        input = formValue;
+    const url = this.apiUrl + '/register',
+      input = formValue;
     return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
       .toPromise()
-      .then(response=>{
-        let result = response.json();
+      .then(response => {
+        const result = response.json();
         if (testing) console.log(result.message);
         return result;
       })
-      .catch(err=>{return null});
+      .catch(err => null);
   }
 
   login(formValue) {
-    let url = this.apiUrl + '/login/' + formValue.username + '/' + formValue.password;
-    
+    const url = this.apiUrl + '/login/' + formValue.username + '/' + formValue.password;
+
     return this.http.get(url).toPromise()
-      .then(response=>{
-        let result = response.json();
+      .then(response => {
+        const result = response.json();
         if (testing) console.log(result.message);
         return result;
       })
-      .catch(err=>{return null});
+      .catch(err => null);
   }
   loginWithCookie(cookie) {
-    let url = this.apiUrl + '/loginwithcookie/' + cookie.username + '/' + cookie._id;
-    
+    const url = this.apiUrl + '/loginwithcookie/' + cookie.username + '/' + cookie._id;
+
     return this.http.get(url).toPromise()
-      .then(response=>{
-        let result = response.json();
+      .then(response => {
+        const result = response.json();
         if (testing) console.log(result.message);
         return result;
       })
-      .catch(err=>{return null});
+      .catch(err => null);
   }
 
 }

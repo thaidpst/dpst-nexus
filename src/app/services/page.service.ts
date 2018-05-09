@@ -12,9 +12,9 @@ export class PageService {
     this.page = page;
     this.subpage = '';
   }
-  getPage() {return this.page}
+  getPage() { return this.page; }
 
-  setSubpage(subpage) {this.subpage = subpage}
-  getSubpage() {return this.subpage}
+  setSubpage(subpage) { this.subpage = subpage; }
+  getSubpage() { return this.subpage; }
 
 }

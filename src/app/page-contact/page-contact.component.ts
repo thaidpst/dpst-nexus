@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 // import { } from '@types/googlemaps';
 import { NgForm } from '@angular/forms';
 
-import { PageService } from '../services/page.service';
 import { SettingService } from '../services/setting.service';
 
 @Component({
@@ -16,7 +15,6 @@ export class PageContactComponent implements OnInit {
   // private map: google.maps.Map;
 
   constructor(
-    private pageService: PageService,
     private settingService: SettingService
   ) { }
 
