@@ -113,6 +113,8 @@ export const LANG_TH_TRANS = {
     'ส่งข้อความ',
   'status':
     'สถานะ',
+  'update privileges':
+    'แก้ไขระดับผู้ใช้',
   'update your profile':
     'บันทึกประวัติส่วนตัว',
   'used for logging in':
