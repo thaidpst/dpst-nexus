@@ -48,16 +48,11 @@ export class AppComponent {
     }.bind(this));
 
     // Check remember me login
-    this.cookieService.checkRememberLogin()
-      .then(result => {
-        if (result.status) {
-          this.authenticationService.loginWithCookie(result.data)
-            .then(result2 => {
-              if (result2.status) {
-                this.socketioService.login(result2.data.username);
-                this.userinfoService.setUserinfo(result2.data);
-              }
-            });
+    this.authenticationService.authenticate()
+      .then(userInfo => {
+        if (userInfo) {
+          this.socketioService.login(userInfo.username);
+          this.userinfoService.setUserinfo(userInfo);
         }
       });
   }
