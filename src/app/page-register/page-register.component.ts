@@ -34,19 +34,34 @@ export class PageRegisterComponent implements OnInit {
   }
 
   registerMember(form: NgForm) {
-    if (form.value.password != form.value.confirmPassword) {
+    if (form.value.password !== form.value.confirmPassword) {
       this.passNotMatch = true; this.passTooShort = false; this.usernameInUse = false; this.emailInUse = false;
     } else {
       this.authService.register(form.value)
-        .then(response=>{
+        .then(response =>  {
           if (response.status) {
-            this.registerSuccess(form.value);            
+            this.registerSuccess(form.value);
             form.resetForm();
             this.passNotMatch = false; this.passTooShort = false; this.usernameInUse = false; this.emailInUse = false;
           } else {
-            if (response.data==0) {this.passNotMatch = false; this.passTooShort = true; this.usernameInUse = false; this.emailInUse = false;}
-            else if (response.data==-1) {this.passNotMatch = false; this.passTooShort = false; this.usernameInUse = true; this.emailInUse = false;}
-            else if (response.data==-2) {this.passNotMatch = false; this.passTooShort = false; this.usernameInUse = false; this.emailInUse = true;}
+            if (response.data == 0) {
+              this.passNotMatch = false;
+              this.passTooShort = true;
+              this.usernameInUse = false;
+              this.emailInUse = false;
+            }
+            else if (response.data == -1) {
+              this.passNotMatch = false;
+              this.passTooShort = false;
+              this.usernameInUse = true;
+              this.emailInUse = false;
+            }
+            else if (response.data == -2) {
+              this.passNotMatch = false;
+              this.passTooShort = false;
+              this.usernameInUse = false;
+              this.emailInUse = true;
+            }
           }
         });
     }
@@ -54,7 +69,7 @@ export class PageRegisterComponent implements OnInit {
   registerSuccess(formValue) {
     this.socketioService.newMember(formValue.username);
     this.authService.login(formValue)
-      .then(result=>{
+      .then(result =>  {
         this.socketioService.login(result.data.username);
         this.userinfoService.setUserinfo(result.data);
         this.pageService.setPage('Check status');

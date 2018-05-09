@@ -21,10 +21,10 @@ export class PageUserEditProfileComponent implements OnInit {
 
   ngOnInit() {
     this.pageService.setPage('Edit Profile');
-    let userinfo = Object.assign({}, this.userinfoService.getUserinfo());
+    const userinfo = Object.assign({}, this.userinfoService.getUserinfo());
     this.userinfoService.getUserDetail(userinfo)
-      .then(result=>{
-        if (result!==null && result.status) {
+      .then(result =>  {
+        if (result !== null && result.status) {
           this.userDetail = result.data;
         }
       });

@@ -106,8 +106,8 @@ export class PageAdminUserTableComponent implements OnInit {
   }
   tableSearch(keyword) {
     keyword = keyword.trim();
-    if ((this.criteria.search == 'EmptyNone' && keyword == '') || this.criteria.search == keyword) {}
-    else if (keyword == '') {
+    if ((this.criteria.search === 'EmptyNone' && keyword === '') || this.criteria.search === keyword) {
+    } else if (keyword === '') {
       this.criteria.search = 'EmptyNone';
       this.adminService.getUsers(this.criteria);
     } else {

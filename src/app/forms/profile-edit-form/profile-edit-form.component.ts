@@ -23,42 +23,43 @@ export class ProfileEditFormComponent implements OnInit {
   }
 
   viewUserPosition() {
-    if (this.userDetail.position===undefined) return 'N/A';
+    if (this.userDetail.position === undefined) return 'N/A';
     else return this.userDetail.position;
   }
   viewUserAbout() {
-    if (this.userDetail.about===undefined) return 'N/A';
+    if (this.userDetail.about === undefined) return 'N/A';
     else return this.userDetail.about;
   }
 
   defaultValue(value) {
-    if (value===undefined) return '';
+    if (value === undefined) return '';
     else return value;
   }
 
   userProfileImage() {
-    if (this.userDetail.profileUrl===undefined || this.userDetail.profileUrl===null || this.userDetail.profileUrl=='') return 'assets/img/profile/base.jpg';
+    if (this.userDetail.profileUrl === undefined || this.userDetail.profileUrl === null || this.userDetail.profileUrl === '')
+      return 'assets/img/profile/base.jpg';
     else return this.userDetail.profileUrl;
   }
 
   editProfileDetail(form: NgForm) {
-    let keys = Object.keys(form.value),
+    const keys = Object.keys(form.value),
         updatedUserDetail = {};
 
-    for (let i=0; i<keys.length; i++) {
-      if (form.value[keys[i]]!='') {
+    for (let i = 0; i < keys.length; i++) {
+      if (form.value[keys[i]] !== '') {
         let cleanValue = form.value[keys[i]].replace(new RegExp('"', 'g'), '');
         cleanValue = cleanValue.trim();
         updatedUserDetail[keys[i]] = cleanValue;
       }
     }
-    
-    let userinfo = Object.assign({}, this.userDetail),
+
+    const userinfo = Object.assign({}, this.userDetail),
         userId = userinfo.userId;
     this.userinfoService.updateUserDetail(userId, updatedUserDetail)
-      .then(result=>{
+      .then(result =>  {
         this.userDetailUpdated.emit(result);
       });
   }
-  
+
 }

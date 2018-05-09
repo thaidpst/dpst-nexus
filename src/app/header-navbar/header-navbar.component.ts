@@ -40,7 +40,7 @@ export class HeaderNavbarComponent implements OnInit {
   }
 
   toggleSubnav(selector) {
-    let toggle = !this.host.select(selector).classed('active');
+    const toggle = !this.host.select(selector).classed('active');
     this.host.selectAll(selector).classed('active', toggle);
   }
 
