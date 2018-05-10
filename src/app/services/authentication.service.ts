@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { ipHost, testing } from '../globals';
@@ -11,10 +10,9 @@ import { UserinfoService } from './userinfo.service';
 export class AuthenticationService {
 
   private apiUrl = ipHost + '/authentication';
-  private headers = new Headers({ 'Content-Type': 'application/json' });
+  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(
-    private http: Http,
     private httpClient: HttpClient,
     private userinfoService: UserinfoService
   ) { }
@@ -33,24 +31,22 @@ export class AuthenticationService {
   register(formValue) {
     const url = this.apiUrl + '/register',
       input = formValue;
-    return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
+    return this.httpClient.post<JsonResponse>(url, JSON.stringify({ 'input': input }), { headers: this.headers })
       .toPromise()
       .then(response => {
-        const result = response.json();
-        if (testing) console.log(result.message);
-        return result;
+        if (testing) console.log(response.message);
+        return response;
       })
       .catch(err => null);
   }
 
   login(formValue) {
-    const url = this.apiUrl + '/login/' + formValue.username + '/' + formValue.password;
+    const url = this.apiUrl + '/login';
 
-    return this.http.get(url).toPromise()
+    return this.httpClient.post<JsonResponse>(url, JSON.stringify(formValue), { headers: this.headers }).toPromise()
       .then(response => {
-        const result = response.json();
-        if (testing) console.log(result.message);
-        return result;
+        if (testing) console.log(response.message);
+        return response;
       })
       .catch(err => null);
   }

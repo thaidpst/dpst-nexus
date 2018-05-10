@@ -115,9 +115,9 @@ router.post('/register', (req, res) => {
   }
 });
 
-router.get('/login/:username/:password', (req, res) => {
-  let username = req.params.username,
-    password = req.params.password;
+router.post('/login', (req, res) => {
+  let username = req.body.username,
+    password = req.body.password;
   let dbUsers = req.db.get('users');
 
   dbUsers.findOne({
