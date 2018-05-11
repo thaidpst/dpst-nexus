@@ -27,9 +27,11 @@
                         <ul>
                             <li [ngClass]="{'active':pageService.getSubpage()=='User table'}">
                                 <a (click)="pageService.setSubpage('User table')">User Table</a></li>
-                            <li [ngClass]="{'active':pageService.getSubpage()=='Statistic'}">
+                            <li *ngIf="userinfoService.getUserinfo().level>7"
+                            [ngClass]="{'active':pageService.getSubpage()=='Statistic'}">
                                 <a (click)="pageService.setSubpage('Statistic')">Statistic</a></li>
-                            <li [ngClass]="{'active':pageService.getSubpage()=='Email blast'}">
+                            <li *ngIf="userinfoService.getUserinfo().level>7"
+                            [ngClass]="{'active':pageService.getSubpage()=='Email blast'}">
                                 <a (click)="pageService.setSubpage('Email blast')">Email Blast</a></li>
                         </ul>
                     </div>

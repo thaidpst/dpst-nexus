@@ -46,6 +46,7 @@ export class PageAdminUserTableComponent implements OnInit {
         }
       }
     });
+    this.adminService.getUsers(this.criteria);
 
     this.socketioService.getSocket().on('update-new-users', function() {
       this.adminService.getUsers(this.criteria);
@@ -56,8 +57,6 @@ export class PageAdminUserTableComponent implements OnInit {
     this.socketioService.getSocket().on('announce-account-delete', function() {
       this.adminService.getUsers(this.criteria);
     }.bind(this));
-
-    this.adminService.getUsers(this.criteria);
   }
 
   setAccountStatus(userinfo, status) {

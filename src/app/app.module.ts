@@ -11,6 +11,11 @@ import { AuthenticationService } from './services/authentication.service';
 import { UserinfoService } from './services/userinfo.service';
 import { AdminService } from './services/admin.service';
 import { CookieService } from './services/cookie.service';
+import { LanguageService } from './languages/language.service';
+import { FormService } from './services/form.service';
+
+// Pipes
+import { TranslatePipe } from './languages/translate.pipe';
 
 // Components
 import { AppComponent } from './app.component';
@@ -33,8 +38,9 @@ import { PageUserHistoryComponent } from './page-user-panel/page-user-history/pa
 import { ProfileFormComponent } from './forms/profile-form/profile-form.component';
 import { ProfileEditFormComponent } from './forms/profile-edit-form/profile-edit-form.component';
 import { AdminPrivilageSettingFormComponent } from './forms/admin-privilage-setting-form/admin-privilage-setting-form.component';
-import { LanguageService } from './languages/language.service';
-import { TranslatePipe } from './languages/translate.pipe';
+import { PageGovFormsComponent } from './page-gov-forms/page-gov-forms.component';
+import { GovForm1Component } from './gov-forms/gov-form1/gov-form1.component';
+import { GovFormsComponent } from './gov-forms/gov-forms.component';
 
 
 @NgModule({
@@ -59,7 +65,10 @@ import { TranslatePipe } from './languages/translate.pipe';
     ProfileFormComponent,
     ProfileEditFormComponent,
     AdminPrivilageSettingFormComponent,
-    TranslatePipe
+    TranslatePipe,
+    PageGovFormsComponent,
+    GovForm1Component,
+    GovFormsComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +83,8 @@ import { TranslatePipe } from './languages/translate.pipe';
     UserinfoService,
     AdminService,
     CookieService,
-    LanguageService
+    LanguageService,
+    FormService
   ],
   bootstrap: [
     AppComponent

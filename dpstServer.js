@@ -43,10 +43,12 @@ const authentication = require('./api/authentication');
 const admin = require('./api/admin');
 const user = require('./api/user');
 const cookie = require('./api/cookie');
+const form = require('./api/form');
 app.use('/authentication', authentication);
 app.use('/admin', admin);
 app.use('/user', user);
 app.use('/cookie', cookie);
+app.use('/form', form);
 
 // Send all other requests to the Angular app
 app.get('*', (req, res)=>{

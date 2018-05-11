@@ -38,7 +38,7 @@ db.createCollection("users", {
                 status: {
                     enum: [ 'Ban', 'Pending', 'Active' ],
                     description: "can only be one of the enum values and is required"
-                },
+                }
             }
         }
     },
@@ -52,7 +52,7 @@ db.createCollection("userDetail", {
             properties: {
                 userId: {
                     bsonType: "objectId",
-                    description: "must be a ObjectId in users collection(_id) and is require"
+                    description: "must be a ObjectId in users collection(_id) and is required"
                 },
                 profileUrl: {
                     bsonType: "string",
@@ -120,6 +120,87 @@ db.createCollection("userDetail", {
     validationAction: "warn"
 });
 
+db.createCollection("govForms", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: [ "nameTH" ],
+            uniqueItems: [ "creatorId", "category", "nameTH", "accessCode", "status" ],
+            properties: {
+                creatorId: {
+                    bsonType: "objectId",
+                    description: "must be a ObjectId in users collection(_id) and is required"
+                },
+                category: {
+                    bsonType: "array",
+                    description: "must be an array of category number and is requied"
+                },
+                nameTH: {
+                    bsonType: "string",
+                    description: "must be a string and is required"
+                },
+                nameEN: {
+                    bsonType: "string",
+                    description: "must be a string and is not required"
+                },
+                previewUrl: {
+                    bsonType: "string",
+                    description: "must be a string and is not required"
+                },
+                accessCode: {
+                    bsonType: "string",
+                    description: "must be a string and is required"
+                },
+                govOwner: {
+                    bsonType: "string",
+                    description: "must be a string and is not required"
+                },
+                status: {
+                    enum: [ 'Active', 'Inactive' ],
+                    description: "can only be one of the enum values and is required"
+                }
+            }
+        }
+    },
+    validationAction: "warn"
+});
+db.createCollection("submittedGovForms", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: [ "nameTH" ],
+            uniqueItems: [ "userId", "formId", "formValue", "status" ],
+            properties: {
+                userId: {
+                    bsonType: "objectId",
+                    description: "must be a ObjectId in users collection(_id) and is required"
+                },
+                formId: {
+                    bsonType: "formId",
+                    description: "must be a ObjectId in govForms collection(_id) and is required"
+                },
+                formValue: {
+                    bsonType: "object",
+                    description: "must be an object and is requied"
+                },
+                status: {
+                    enum: [ 'Not approved', 'Pending', 'Approved' ],
+                    description: "can only be one of the enum values and is required"
+                },
+                approverId: {
+                    bsonType: "objectId",
+                    description: "must be a ObjectId in users collection(_id) and is not required"
+                },
+                checkDate: {
+                    bsonType: "date",
+                    description: "must be a date and is not required"
+                }
+            }
+        }
+    },
+    validationAction: "warn"
+});
+
 //  Initialize data
 db.users.insert({
     username : "TofuMaster",
@@ -156,6 +237,22 @@ let user1 = db.users.findOne({username: "TofuMaster"})._id;
 db.userDetail.insert({
     userId: user1
 });
+db.govForms.insert({
+    creatorId: user1, category: ['Form category 1'],
+    nameTH: 'แบบตอบรับ ประชุมชี้แจงมัธยม 9-10 พค', 
+    accessCode: 'gov-form1', status: 'Active'
+});
+db.govForms.insert({
+    creatorId: user1, category: ['Form category 1', 'Form category 3'],
+    nameTH: 'Aaaaaaaaaaaaaaaaa', 
+    accessCode: 'gov-form2', status: 'Inactive'
+});
+db.govForms.insert({
+    creatorId: user1, category: ['Form category 2'],
+    nameTH: 'Bbbbbbbbbbbbbbbb', 
+    accessCode: 'gov-form3', status: 'Inactive'
+});
+
 let user2 = db.users.findOne({username: "nui"})._id;
 db.userDetail.insert({
     userId: user2

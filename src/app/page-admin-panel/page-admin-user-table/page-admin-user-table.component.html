@@ -125,10 +125,9 @@
   <h3 style="margin-bottom:20px;">ชื่อผู้ใช้งาน: <span class="hello-user" style="font-weight:600;">{{userOnHand.username}}</span></h3>
   <input type="submit" class="political-simple-btn delete-btn" value="ลบข้อมูลผู้ใช้" (click)="deleteAccount()">
   <input type="submit" class="political-simple-btn" value="ยกเลิก" (click)="goBackToUserTable()">
-      
 </div>
 <div *ngIf="subpage=='Try delete' && settingService.getLanguage()=='English'" class="political-blog-large">
-  <h1 style="margin-bottom:20px;"><strong>You are about to <span class="ban">DELETE</span> a user</strong></h1>
+  <h1 style="margin-bottom:20px;"><strong>You are about to <span class="ban">DELETE</span> a user.</strong></h1>
   <h3 style="margin-bottom:20px;">Username: <span class="hello-user" style="font-weight:600;">{{userOnHand.username}}</span></h3>
   <input type="submit" class="political-simple-btn delete-btn" value="DELETE" (click)="deleteAccount()">
   <input type="submit" class="political-simple-btn" value="Cancel" (click)="goBackToUserTable()">

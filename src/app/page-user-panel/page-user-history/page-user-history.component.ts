@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+
+import { SocketioService } from '../../services/socketio.service';
+import { PageService } from '../../services/page.service';
+import { SettingService } from '../../services/setting.service';
+import { UserinfoService } from '../../services/userinfo.service';
+import { FormService } from '../../services/form.service';
 
 @Component({
   selector: 'app-page-user-history',
@@ -7,9 +14,125 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageUserHistoryComponent implements OnInit {
 
-  constructor() { }
+  private getSubmittedFormsSubscription: Subscription;
+  private criteria = {
+    page: 0, start: 0, limit: 25, totalSubmittedForms: 0,
+    sort: 'None', search: 'EmptyNone'
+  };
+  private pagination = [];
+  private submittedForms = null;
+
+  private subpage = 'History';
+
+  private formOnHand = null;
+
+  constructor(
+    private socketioService: SocketioService,
+    private pageService: PageService,
+    private settingService: SettingService,
+    private userinfoService: UserinfoService,
+    private formService: FormService
+  ) { }
 
   ngOnInit() {
+    this.getSubmittedFormsSubscription = this.formService.observeSubmittedForms().subscribe(result=>{
+      if (result.status) {
+        this.submittedForms = result.data;
+        this.criteria.totalSubmittedForms = result.totalSubmittedForms;
+
+        this.pagination = [];
+        let count = 0;
+        while (count*this.criteria.limit < this.criteria.totalSubmittedForms) {
+          this.pagination.push(count);          
+          count += 1;
+        }
+      }
+    });
+    this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+  }
+  dateFromObjectId(objectId) {
+    let date = new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+    return date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear();
+  }
+
+
+  formLimitChange(limit) {
+    this.criteria.page = 0;
+    this.criteria.start = 0;
+    this.criteria.limit = limit;
+    this.criteria.totalSubmittedForms = 0;
+    this.pagination = [];
+    this.submittedForms = null;
+    this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+  }
+  paginationChangePage(page) {
+    this.criteria.page = page;
+    this.criteria.start = page * this.criteria.limit;
+    this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+  }
+  previouseFormPage() {
+    if (this.criteria.page > 0) {
+      this.criteria.page -= 1;
+      this.criteria.start = this.criteria.page * this.criteria.limit;
+      this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+    }
+  }
+  nextFormPage() {
+    if ((this.criteria.page+1)*this.criteria.limit < this.criteria.totalSubmittedForms) {
+      this.criteria.page += 1;
+      this.criteria.start = this.criteria.page * this.criteria.limit;
+      this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+    }
+  }
+  formSortChange(sort) {
+    this.criteria.sort = sort;
+    this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+  }
+  formSearch(keyword) {
+    keyword = keyword.trim();
+    if ((this.criteria.search=='EmptyNone' && keyword=='') || this.criteria.search==keyword) {}
+    else if (keyword=='') {
+      this.criteria.search = 'EmptyNone';
+      this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+    } else {      
+      this.criteria.search = keyword;
+      this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+    }
+  }
+
+  goBackToSubmittedForm() {this.subpage = 'History'; this.formOnHand = null;}
+
+  // Delete form process
+  tryDeleteForm(form) {this.subpage = 'Try delete'; this.formOnHand = form;}
+  deleteSubmittedForm() {
+    if (this.formOnHand!==null) {
+      this.formService.deleteSubmittedForm(this.userinfoService.getUserinfo()._id, this.formOnHand).then(result=>{
+        if (result.status) {
+          this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+          // this.socketioService.deleteAccount(this.userOnHand._id);
+          this.formOnHand = null;
+          this.subpage = 'History';
+        }
+      });
+    }
+  }
+
+  // Edit form process
+  editSubmittedForm(form) {
+    this.pageService.setPage('Government form');
+    this.pageService.setSubpage(form.form.accessCode);
+    this.formService.setMode('Edit', form);
+  }
+
+  // View form process
+  viewSubmittedForm(form) {
+    this.pageService.setPage('Government form');
+    this.pageService.setSubpage(form.form.accessCode);
+    this.formService.setMode('View', form);
+  }
+
+  ngOnDestroy() {
+    this.getSubmittedFormsSubscription.unsubscribe();
   }
 
 }

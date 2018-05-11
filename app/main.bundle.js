@@ -27,7 +27,7 @@ module.exports = ""
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"political-main-wrapper\">\n\n  <app-header-navbar></app-header-navbar>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Homepage'\">\n    <app-page-home></app-page-home>\n  </ng-container>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Log in'\">\n    <app-page-login></app-page-login>\n  </ng-container>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Register'\">\n    <app-page-register></app-page-register>\n  </ng-container>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Contact'\">\n    <app-page-contact></app-page-contact>\n  </ng-container>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Check status'\">\n    <app-page-check-status></app-page-check-status>\n  </ng-container>\n\n  <!-- User panel -->\n  <ng-container *ngIf=\"pageService.getPage()=='User panel' && userinfoService.getUserinfo()!==null\">\n    <app-page-user-panel></app-page-user-panel>\n  </ng-container>\n\n  <!-- Admin panel -->\n  <ng-container *ngIf=\"pageService.getPage()=='Admin panel' && userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().level>=8\">\n    <app-page-admin-panel></app-page-admin-panel>\n  </ng-container>\n  \n  <!-- <div>{{socketioService.getOnlineUsers()}}</div> -->  \n</div>\n\n<app-footer></app-footer>\n"
+module.exports = "<div class=\"political-main-wrapper\">\n\n  <app-header-navbar></app-header-navbar>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Homepage'\">\n    <app-page-home></app-page-home>\n  </ng-container>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Log in'\">\n    <app-page-login></app-page-login>\n  </ng-container>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Register'\">\n    <app-page-register></app-page-register>\n  </ng-container>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Contact'\">\n    <app-page-contact></app-page-contact>\n  </ng-container>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Check status'\">\n    <app-page-check-status></app-page-check-status>\n  </ng-container>\n\n  <ng-container *ngIf=\"pageService.getPage()=='Forms'\">\n    <app-page-gov-forms></app-page-gov-forms>\n  </ng-container>\n\n  <!-- User panel -->\n  <ng-container *ngIf=\"pageService.getPage()=='User panel' && userinfoService.getUserinfo()!==null\">\n    <app-page-user-panel></app-page-user-panel>\n  </ng-container>\n\n  <!-- Admin panel -->\n  <ng-container *ngIf=\"pageService.getPage()=='Admin panel' && userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().level>=7\">\n    <app-page-admin-panel></app-page-admin-panel>\n  </ng-container>\n\n  <!-- Government form filling -->\n  <ng-container *ngIf=\"pageService.getPage()=='Government form'\">\n    <app-gov-forms></app-gov-forms>\n  </ng-container>\n  \n  <!-- <div>{{socketioService.getOnlineUsers()}}</div> -->  \n</div>\n\n<app-footer></app-footer>\n"
 
 /***/ }),
 
@@ -141,6 +141,10 @@ var authentication_service_1 = __webpack_require__("./src/app/services/authentic
 var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
 var admin_service_1 = __webpack_require__("./src/app/services/admin.service.ts");
 var cookie_service_1 = __webpack_require__("./src/app/services/cookie.service.ts");
+var language_service_1 = __webpack_require__("./src/app/languages/language.service.ts");
+var form_service_1 = __webpack_require__("./src/app/services/form.service.ts");
+// Pipes
+var translate_pipe_1 = __webpack_require__("./src/app/languages/translate.pipe.ts");
 // Components
 var app_component_1 = __webpack_require__("./src/app/app.component.ts");
 var header_navbar_component_1 = __webpack_require__("./src/app/header-navbar/header-navbar.component.ts");
@@ -162,8 +166,9 @@ var page_user_history_component_1 = __webpack_require__("./src/app/page-user-pan
 var profile_form_component_1 = __webpack_require__("./src/app/forms/profile-form/profile-form.component.ts");
 var profile_edit_form_component_1 = __webpack_require__("./src/app/forms/profile-edit-form/profile-edit-form.component.ts");
 var admin_privilage_setting_form_component_1 = __webpack_require__("./src/app/forms/admin-privilage-setting-form/admin-privilage-setting-form.component.ts");
-var language_service_1 = __webpack_require__("./src/app/languages/language.service.ts");
-var translate_pipe_1 = __webpack_require__("./src/app/languages/translate.pipe.ts");
+var page_gov_forms_component_1 = __webpack_require__("./src/app/page-gov-forms/page-gov-forms.component.ts");
+var gov_form1_component_1 = __webpack_require__("./src/app/gov-forms/gov-form1/gov-form1.component.ts");
+var gov_forms_component_1 = __webpack_require__("./src/app/gov-forms/gov-forms.component.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -190,7 +195,10 @@ var AppModule = /** @class */ (function () {
                 profile_form_component_1.ProfileFormComponent,
                 profile_edit_form_component_1.ProfileEditFormComponent,
                 admin_privilage_setting_form_component_1.AdminPrivilageSettingFormComponent,
-                translate_pipe_1.TranslatePipe
+                translate_pipe_1.TranslatePipe,
+                page_gov_forms_component_1.PageGovFormsComponent,
+                gov_form1_component_1.GovForm1Component,
+                gov_forms_component_1.GovFormsComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -205,7 +213,8 @@ var AppModule = /** @class */ (function () {
                 userinfo_service_1.UserinfoService,
                 admin_service_1.AdminService,
                 cookie_service_1.CookieService,
-                language_service_1.LanguageService
+                language_service_1.LanguageService,
+                form_service_1.FormService
             ],
             bootstrap: [
                 app_component_1.AppComponent
@@ -574,6 +583,198 @@ exports.testing = true;
 
 /***/ }),
 
+/***/ "./src/app/gov-forms/gov-form1/gov-form1.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ".form-container {\r\n    position: relative; \r\n    padding: 30px 0 60px 0;\r\n    margin-left: 55px;\r\n    margin-bottom: 20px;\r\n    width: 75vw;\r\n}\r\n.input-container {\r\n    position: absolute; \r\n    top: 30px; width:calc(100%);\r\n}\r\n@media screen and (max-width:1100px) {.form-container {margin-left: 100px;}}\r\n@media screen and (max-width:992px) {.form-container {margin-left: 20px;}}\r\n@media screen and (max-width:900px) {.form-container {margin-left: 70px;}}\r\n@media screen and (max-width:600px) {.form-container {margin-left: 60px;}}\r\n@media screen and (max-width:500px) {.form-container {margin-left: 50px;}}\r\n@media screen and (max-width:400px) {.form-container {margin-left: 40px;}}\r\n@media screen and (max-width:300px) {.form-container {margin-left: 25px;}}\r\n.fill {\r\n    position: absolute;\r\n    height: 2.2vw;\r\n    border: 1px solid #dbdbdb;\r\n    width: 10%;\r\n    background: none;\r\n}\r\n.fill:disabled, .radio:disabled {border: none; pointer-events: none;}\r\n.fill[type=text] {\r\n    color: #575757;\r\n    font-size: 1.3vw;\r\n}\r\n.fill:focus {\r\n    border: 2px solid #228ae6;\r\n    background: #f8ff9c;\r\n}\r\n.checkbox {margin:0; width: 2vw;}\r\n.fill[type=text][disabled] {color: #000000;}\r\n.fullname {\r\n    position: absolute; text-align: center; color: #000000; \r\n    font-size: 1.4vw; margin-top: -1.4vw;\r\n}"
+
+/***/ }),
+
+/***/ "./src/app/gov-forms/gov-form1/gov-form1.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<!-- All of the form components should follow this structure. -->\n<!-- If you have any question, contact me at sarun_sla@hotmail.com (Sarun Seepun) -->\n\n<h2 *ngIf=\"form===null || userDetail===null\" style=\"width:100%; text-align:center;\">Loading the form detail...</h2>\n<ng-container *ngIf=\"form!==null && userDetail!==null\">\n\n<!-- Form header -->\n<div class=\"political-subheader\"><div class=\"container\"><div class=\"row\"><div class=\"col-md-12\"><div class=\"political-subheader-wrap\">\n  <h1>{{form.nameTH}}</h1>\n  <ul class=\"political-breadcrumb\">\n    <li><a (click)=\"pageService.setPage('Homepage')\">{{'Homepage' | translate:settingService.getLanguage()}}</a></li>\n    <li class=\"active\"><a (click)=\"pageService.setPage('Forms'); pageService.setSubpage('All forms');\" style=\"color:#555555;\">\n        {{'Forms' | translate:settingService.getLanguage()}}\n    </a></li>\n  </ul>\n</div></div></div></div></div>\n\n<!-- Form area -->\n<div class=\"political-main-section\"><div class=\"container\"><div class=\"row\"><div class=\"form-container\">\n  <img src=\"assets/img/govForms/gov-form1.jpg\" style=\"box-shadow:0px 4px 10px rgba(0,0,0,0.55);\">\n\n  <!-- Interactive form filling -->\n  <!-- New form -->\n  <form *ngIf=\"formService.getMode()=='New'\" #govForm=\"ngForm\" (ngSubmit)=\"submitGovForm(govForm)\"\n  class=\"input-container\" ngNativeValidate>\n    \n    <input value=\"\" ngModel required class=\"fill\" type=\"text\" name=\"school\"style=\"top:32.6vw; left:12vw; width:37%;\">\n\n    <input value=\"\" ngModel class=\"fill\" type=\"text\" name=\"position1\" style=\"top:35.3vw; left:21.6vw; width:62%;\">\n    <input value=\"\" ngModel class=\"fill\" type=\"text\" name=\"phone1\" style=\"top:38.3vw; left:16.6vw; width:30%;\">\n    <input value=\"\" ngModel class=\"fill\" type=\"text\" name=\"email1\" style=\"top:38.3vw; left:43.6vw; width:32.7%;\">\n    <input value=\"\" ngModel class=\"fill\" type=\"text\" name=\"thaiId1\" style=\"top:41.4vw; left:36vw; width:43%;\">\n    <input value=\"1\" ngModel required class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:45vw; left:16.2vw;\">\n    <input value=\"2\" ngModel required class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:47.8vw; left:16.2vw;\">\n    <input value=\"\" ngModel class=\"fill\" type=\"text\" name=\"date1\" style=\"top:44.5vw; left:53.2vw; width:8%;\">\n\n    <input value=\"\" ngModel class=\"fill\" type=\"text\" name=\"position2\" style=\"top:50vw; left:24vw; width:58.8%;\">\n    <input value=\"\" ngModel class=\"fill\" type=\"text\" name=\"phone2\" style=\"top:53vw; left:16.6vw; width:30%;\">\n    <input value=\"\" ngModel class=\"fill\" type=\"text\" name=\"email2\" style=\"top:53vw; left:43.6vw; width:32.7%;\">\n    <input value=\"\" ngModel class=\"fill\" type=\"text\" name=\"thaiId2\" style=\"top:56.1vw; left:36vw; width:43%;\">\n    <input value=\"3\" ngModel required class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:59.8vw; left:16.2vw;\">\n    <input value=\"4\" ngModel required class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:62.5vw; left:16.2vw;\">\n    <input value=\"\" ngModel class=\"fill\" type=\"text\" name=\"date2\" style=\"top:59.2vw; left:53.2vw; width:8%;\">\n\n    <input value=\"\" ngModel class=\"fill\" type=\"text\" name=\"position3\" style=\"top:64.7vw; left:16.5vw; width:69%;\">\n    <input value=\"\" ngModel class=\"fill\" type=\"text\" name=\"phone3\" style=\"top:67.7vw; left:16.6vw; width:30%;\">\n    <input value=\"\" ngModel class=\"fill\" type=\"text\" name=\"email3\" style=\"top:67.7vw; left:43.6vw; width:32.7%;\">\n    <input value=\"\" ngModel class=\"fill\" type=\"text\" name=\"thaiId3\" style=\"top:70.8vw; left:36vw; width:43%;\">\n    <input value=\"5\" ngModel required class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:74.5vw; left:16.2vw;\">\n    <input value=\"6\" ngModel required class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:77.2vw; left:16.2vw;\">\n    <input value=\"\" ngModel class=\"fill\" type=\"text\" name=\"date3\" style=\"top:73.9vw; left:53.2vw; width:8%;\">\n\n    <input value=\"\" ngModel required class=\"fill\" type=\"text\" name=\"signature\" style=\"top:86.15vw; left:44.5vw; width:26.1%;\">\n    <div class=\"fullname\" style=\"top:90.65vw; left:58.5%; width:27.5%;\">{{userDetail.firstname}} {{userDetail.lastname}}</div>\n\n    <!-- Important button set -->\n    <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">\n      <input class=\"political-simple-btn warning-btn\" type=\"submit\" value=\"ส่งแบบฟอร์ม\" \n      style=\"position:absolute; top:calc(106.1vw + 23px); left:calc(75vw - 157px);\">\n      <input class=\"political-simple-btn\" type=\"button\" value=\"กลับไปเลือกเเบบฟอร์ม\" (click)=\"goToFormsPage()\"\n      style=\"position:absolute; top:calc(106.1vw + 23px); left:calc(75vw - 380px);\">\n    </ng-container>\n    <ng-container *ngIf=\"settingService.getLanguage()=='English'\">\n      <input class=\"political-simple-btn warning-btn\" type=\"submit\" value=\"Submit form\" \n      style=\"position:absolute; top:calc(106.1vw + 23px); left:calc(75vw - 157px);\">\n      <input class=\"political-simple-btn\" type=\"button\" value=\"Back to Forms\" (click)=\"goToFormsPage()\"\n      style=\"position:absolute; top:calc(106.1vw + 23px); left:calc(75vw - 335px);\">\n    </ng-container>\n  </form>\n\n  <!-- Edit form -->\n  <form *ngIf=\"formService.getMode()=='Edit'\" #govForm=\"ngForm\" (ngSubmit)=\"editSubmittedGovForm(govForm)\"\n  class=\"input-container\" ngNativeValidate>\n    \n    <input [ngModel]=\"default(formService.getForm().formValue.school)\" ngModel required class=\"fill\" type=\"text\" name=\"school\" style=\"top:32.6vw; left:12vw; width:37%;\">\n\n    <input [ngModel]=\"default(formService.getForm().formValue.position1)\" ngModel class=\"fill\" type=\"text\" name=\"position1\" style=\"top:35.3vw; left:21.6vw; width:62%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.phone1)\" ngModel class=\"fill\" type=\"text\" name=\"phone1\" style=\"top:38.3vw; left:16.6vw; width:30%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.email1)\" ngModel class=\"fill\" type=\"text\" name=\"email1\" style=\"top:38.3vw; left:43.6vw; width:32.7%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.thaiId1)\" ngModel class=\"fill\" type=\"text\" name=\"thaiId1\" style=\"top:41.4vw; left:36vw; width:43%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.radgroup)\" value=\"1\" ngModel required class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:45vw; left:16.2vw;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.radgroup)\" value=\"2\" ngModel required class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:47.8vw; left:16.2vw;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.date1)\" ngModel class=\"fill\" type=\"text\" name=\"date1\" style=\"top:44.5vw; left:53.2vw; width:8%;\">\n\n    <input [ngModel]=\"default(formService.getForm().formValue.position2)\" ngModel class=\"fill\" type=\"text\" name=\"position2\" style=\"top:50vw; left:24vw; width:58.8%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.phone2)\" ngModel class=\"fill\" type=\"text\" name=\"phone2\" style=\"top:53vw; left:16.6vw; width:30%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.email2)\" ngModel class=\"fill\" type=\"text\" name=\"email2\" style=\"top:53vw; left:43.6vw; width:32.7%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.thaiId2)\" ngModel class=\"fill\" type=\"text\" name=\"thaiId2\" style=\"top:56.1vw; left:36vw; width:43%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.radgroup)\" value=\"3\" ngModel required class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:59.8vw; left:16.2vw;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.radgroup)\" value=\"4\" ngModel required class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:62.5vw; left:16.2vw;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.date2)\" ngModel class=\"fill\" type=\"text\" name=\"date2\" style=\"top:59.2vw; left:53.2vw; width:8%;\">\n\n    <input [ngModel]=\"default(formService.getForm().formValue.position3)\" ngModel class=\"fill\" type=\"text\" name=\"position3\" style=\"top:64.7vw; left:16.5vw; width:69%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.phone3)\" ngModel class=\"fill\" type=\"text\" name=\"phone3\" style=\"top:67.7vw; left:16.6vw; width:30%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.email3)\" ngModel class=\"fill\" type=\"text\" name=\"email3\" style=\"top:67.7vw; left:43.6vw; width:32.7%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.thaiId3)\" ngModel class=\"fill\" type=\"text\" name=\"thaiId3\"  style=\"top:70.8vw; left:36vw; width:43%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.radgroup)\" value=\"5\" ngModel required class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:74.5vw; left:16.2vw;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.radgroup)\" value=\"6\" ngModel required class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:77.2vw; left:16.2vw;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.date3)\" ngModel class=\"fill\" type=\"text\" name=\"date3\" style=\"top:73.9vw; left:53.2vw; width:8%;\">\n\n    <input [ngModel]=\"default(formService.getForm().formValue.signature)\" ngModel required class=\"fill\" type=\"text\" name=\"signature\" style=\"top:86.15vw; left:44.5vw; width:26.1%;\">\n    <div class=\"fullname\" style=\"top:90.65vw; left:58.5%; width:27.5%;\">{{userDetail.firstname}} {{userDetail.lastname}}</div>\n\n    <!-- Important button set -->\n    <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">\n      <input class=\"political-simple-btn warning-btn\" type=\"submit\" value=\"แก้ไขแบบฟอร์ม\" \n      style=\"position:absolute; top:calc(106.1vw + 23px); left:calc(75vw - 174px);\">\n      <input *ngIf=\"formService.getRole()=='User'\" class=\"political-simple-btn\" type=\"button\" value=\"กลับไปประวัติการใช้งาน\" (click)=\"goToUserHistoryPage()\"\n      style=\"position:absolute; top:calc(106.1vw + 23px); left:calc(75vw - 405px);\">\n      <input *ngIf=\"formService.getRole()=='Admin'\" class=\"political-simple-btn\" type=\"button\" value=\"กลับไป Admin panel\" (click)=\"goToAdminPanel()\"\n      style=\"position:absolute; top:calc(106.1vw + 23px); left:calc(75vw - 385px);\">\n    </ng-container>\n    <ng-container *ngIf=\"settingService.getLanguage()=='English'\">\n      <input class=\"political-simple-btn warning-btn\" type=\"submit\" value=\"Edit form\" \n      style=\"position:absolute; top:calc(106.1vw + 23px); left:calc(75vw - 135px);\">\n      <input *ngIf=\"formService.getRole()=='User'\" class=\"political-simple-btn\" type=\"button\" value=\"Back to user history\" (click)=\"goToUserHistoryPage()\"\n      style=\"position:absolute; top:calc(106.1vw + 23px); left:calc(75vw - 350px);\">\n      <input *ngIf=\"formService.getRole()=='Admin'\" class=\"political-simple-btn\" type=\"button\" value=\"Back to admin panel\" (click)=\"goToAdminPanel()\"\n      style=\"position:absolute; top:calc(106.1vw + 23px); left:calc(75vw - 350px);\">\n    </ng-container>\n  </form>\n\n  <!-- View form -->\n  <form *ngIf=\"formService.getMode()=='View'\" class=\"input-container\">\n    \n    <input [ngModel]=\"default(formService.getForm().formValue.school)\" disabled class=\"fill\" type=\"text\" name=\"school\" style=\"top:32.6vw; left:12vw; width:37%;\">\n\n    <input [ngModel]=\"default(formService.getForm().formValue.position1)\" disabled class=\"fill\" type=\"text\" name=\"position1\" style=\"top:35.3vw; left:21.6vw; width:62%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.phone1)\" disabled class=\"fill\" type=\"text\" name=\"phone1\" style=\"top:38.3vw; left:16.6vw; width:30%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.email1)\" disabled class=\"fill\" type=\"text\" name=\"email1\" style=\"top:38.3vw; left:43.6vw; width:32.7%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.thaiId1)\" disabled class=\"fill\" type=\"text\" name=\"thaiId1\" style=\"top:41.4vw; left:36vw; width:43%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.radgroup)\" value=\"1\" disabled class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:45vw; left:16.2vw;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.radgroup)\" value=\"2\" disabled class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:47.8vw; left:16.2vw;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.date1)\" disabled class=\"fill\" type=\"text\" name=\"date1\" style=\"top:44.5vw; left:53.2vw; width:8%;\">\n\n    <input [ngModel]=\"default(formService.getForm().formValue.position2)\" disabled class=\"fill\" type=\"text\" name=\"position2\" style=\"top:50vw; left:24vw; width:58.8%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.phone2)\" disabled class=\"fill\" type=\"text\" name=\"phone2\" style=\"top:53vw; left:16.6vw; width:30%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.email2)\" disabled class=\"fill\" type=\"text\" name=\"email2\" style=\"top:53vw; left:43.6vw; width:32.7%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.thaiId2)\" disabled class=\"fill\" type=\"text\" name=\"thaiId2\" style=\"top:56.1vw; left:36vw; width:43%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.radgroup)\" value=\"3\" disabled class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:59.8vw; left:16.2vw;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.radgroup)\" value=\"4\" disabled class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:62.5vw; left:16.2vw;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.date2)\" disabled class=\"fill\" type=\"text\" name=\"date2\" style=\"top:59.2vw; left:53.2vw; width:8%;\">\n\n    <input [ngModel]=\"default(formService.getForm().formValue.position3)\" disabled class=\"fill\" type=\"text\" name=\"position3\" style=\"top:64.7vw; left:16.5vw; width:69%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.phone3)\" disabled class=\"fill\" type=\"text\" name=\"phone3\" style=\"top:67.7vw; left:16.6vw; width:30%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.email3)\" disabled class=\"fill\" type=\"text\" name=\"email3\" style=\"top:67.7vw; left:43.6vw; width:32.7%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.thaiId3)\" disabled class=\"fill\" type=\"text\" name=\"thaiId3\"  style=\"top:70.8vw; left:36vw; width:43%;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.radgroup)\" value=\"5\" disabled class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:74.5vw; left:16.2vw;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.radgroup)\" value=\"6\" disabled class=\"fill checkbox\" type=\"radio\" name=\"radgroup\" style=\"top:77.2vw; left:16.2vw;\">\n    <input [ngModel]=\"default(formService.getForm().formValue.date3)\" disabled class=\"fill\" type=\"text\" name=\"date3\" style=\"top:73.9vw; left:53.2vw; width:8%;\">\n\n    <input [ngModel]=\"default(formService.getForm().formValue.signature)\" disabled class=\"fill\" type=\"text\" name=\"signature\" style=\"top:86.15vw; left:44.5vw; width:26.1%;\">\n    <div class=\"fullname\" style=\"top:90.65vw; left:58.5%; width:27.5%;\">{{userDetail.firstname}} {{userDetail.lastname}}</div>\n\n    <!-- Important button set -->\n    <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">\n      <input *ngIf=\"formService.getRole()=='User'\" class=\"political-simple-btn\" type=\"button\" value=\"กลับไปประวัติการใช้งาน\" (click)=\"goToUserHistoryPage()\"\n      style=\"position:absolute; top:calc(106.1vw + 23px); left:calc(75vw - 225px);\">\n      <input *ngIf=\"formService.getRole()=='Admin'\" class=\"political-simple-btn\" type=\"button\" value=\"กลับไป Admin panel\" (click)=\"goToAdminPanel()\"\n      style=\"position:absolute; top:calc(106.1vw + 23px); left:calc(75vw - 207px);\">\n    </ng-container>\n    <ng-container *ngIf=\"settingService.getLanguage()=='English'\">\n      <input *ngIf=\"formService.getRole()=='User'\" class=\"political-simple-btn\" type=\"button\" value=\"Back to user history\" (click)=\"goToUserHistoryPage()\"\n      style=\"position:absolute; top:calc(106.1vw + 23px); left:calc(75vw - 209px);\">\n      <input *ngIf=\"formService.getRole()=='Admin'\" class=\"political-simple-btn\" type=\"button\" value=\"Back to admin panel\" (click)=\"goToAdminPanel()\"\n      style=\"position:absolute; top:calc(106.1vw + 23px); left:calc(75vw - 210px);\">\n    </ng-container>\n  </form>\n\n</div></div></div></div>\n\n</ng-container>"
+
+/***/ }),
+
+/***/ "./src/app/gov-forms/gov-form1/gov-form1.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
+var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
+var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
+var form_service_1 = __webpack_require__("./src/app/services/form.service.ts");
+var GovForm1Component = /** @class */ (function () {
+    function GovForm1Component(pageService, settingService, userinfoService, formService) {
+        this.pageService = pageService;
+        this.settingService = settingService;
+        this.userinfoService = userinfoService;
+        this.formService = formService;
+        this.accessCode = 'gov-form1';
+        this.form = null;
+        this.userDetail = null;
+        this.formSubmitted = new core_1.EventEmitter();
+    }
+    GovForm1Component.prototype.ngOnInit = function () {
+        var _this = this;
+        this.formService.getFormDetail(this.accessCode)
+            .then(function (result) { if (result.status)
+            _this.form = result.data; });
+        var userinfo = Object.assign({}, this.userinfoService.getUserinfo());
+        this.userinfoService.getUserDetail(userinfo)
+            .then(function (result) { if (result.status)
+            _this.userDetail = result.data; });
+    };
+    GovForm1Component.prototype.default = function (value) {
+        if (value === undefined)
+            return '';
+        else
+            return value;
+    };
+    GovForm1Component.prototype.goToFormsPage = function () {
+        this.pageService.setPage('Forms');
+        this.pageService.setSubpage('All forms');
+        this.formService.setMode();
+    };
+    GovForm1Component.prototype.goToUserHistoryPage = function () {
+        this.pageService.setPage('User panel');
+        this.pageService.setSubpage('History');
+        this.formService.setMode();
+    };
+    GovForm1Component.prototype.goToAdminPanel = function () {
+        if (this.userinfoService.getUserinfo().level >= 7) {
+            this.pageService.setPage('Admin panel');
+            this.pageService.setSubpage('User table');
+            this.formService.setMode();
+        }
+        else {
+            this.pageService.setPage('Homepage');
+            this.formService.setMode();
+        }
+    };
+    GovForm1Component.prototype.submitGovForm = function (govForm) {
+        var _this = this;
+        this.formService.submitForm(this.userDetail.userId, this.form._id, govForm.value)
+            .then(function (result) {
+            _this.formService.setMode();
+            _this.formSubmitted.emit(result);
+        });
+    };
+    GovForm1Component.prototype.editSubmittedGovForm = function (govForm) {
+        var _this = this;
+        if (this.formService.getForm() !== null) {
+            this.formService.editSubmittedGovForm(this.formService.getForm()._id, govForm.value)
+                .then(function (result) {
+                if (result.status) {
+                    if (_this.userinfoService.getUserinfo().level >= 7 && _this.formService.getRole() == 'Admin') {
+                        _this.pageService.setPage('Admin panel');
+                        _this.pageService.setSubpage('User table');
+                        _this.formService.setMode();
+                    }
+                    else {
+                        _this.pageService.setPage('User panel');
+                        _this.pageService.setSubpage('History');
+                        _this.formService.setMode();
+                    }
+                }
+            });
+        }
+    };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", core_1.EventEmitter)
+    ], GovForm1Component.prototype, "formSubmitted", void 0);
+    GovForm1Component = __decorate([
+        core_1.Component({
+            selector: 'app-gov-form1',
+            template: __webpack_require__("./src/app/gov-forms/gov-form1/gov-form1.component.html"),
+            styles: [__webpack_require__("./src/app/gov-forms/gov-form1/gov-form1.component.css")]
+        }),
+        __metadata("design:paramtypes", [page_service_1.PageService,
+            setting_service_1.SettingService,
+            userinfo_service_1.UserinfoService,
+            form_service_1.FormService])
+    ], GovForm1Component);
+    return GovForm1Component;
+}());
+exports.GovForm1Component = GovForm1Component;
+
+
+/***/ }),
+
+/***/ "./src/app/gov-forms/gov-forms.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/gov-forms/gov-forms.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "\n<!-- Forms -->\n<app-gov-form1 *ngIf=\"pageService.getSubpage()=='gov-form1'\" (formSubmitted)=\"formSubmitted($event)\"></app-gov-form1>\n\n\n<!-- Submitted confirmation -->\n<div *ngIf=\"pageService.getSubpage()=='Form submitted confirmation'\" class=\"political-main-content\">\n    <div class=\"political-main-section\">\n        <div class=\"container\">\n            <div class=\"row\" *ngIf=\"settingService.getLanguage()=='Thai'\">\n                <h2 style=\"margin-bottom:30px;\">\n                    เราได้รับแบบฟอร์มของคุณเรียบร้อยแล้ว เจ้าหน้าที่ของเรากำลังตรวจสอบความถูกต้อง ขอบคุณครับ\n                </h2>\n                <input class=\"political-simple-btn back-btn\" type=\"submit\" \n                    (click)=\"pageService.setPage('Homepage')\" value=\"ไปหน้าเเรก\">\n                <input class=\"political-simple-btn back-btn\" type=\"submit\" \n                    (click)=\"pageService.setPage('Forms')\" value=\"ไปหน้าเเบบฟอร์ม\">\n                <input class=\"political-simple-btn back-btn\" type=\"submit\" \n                    (click)=\"pageService.setPage('User panel'); pageService.setSubpage('History');\"\n                    value=\"ไปหน้าประวัติการใช้งาน\">\n            </div>\n            <div class=\"row\" *ngIf=\"settingService.getLanguage()=='English'\">\n                <h2 style=\"margin-bottom:30px;\">\n                    The form is submitted successfully. Our staff will check your form shortly. Thank you.\n                </h2>\n                <input class=\"political-simple-btn back-btn\" type=\"submit\" \n                    (click)=\"pageService.setPage('Homepage')\" value=\"Go to Homepage\">\n                <input class=\"political-simple-btn back-btn\" type=\"submit\" \n                    (click)=\"pageService.setPage('Forms')\" value=\"Go to Forms\">\n                <input class=\"political-simple-btn back-btn\" type=\"submit\" \n                    (click)=\"pageService.setPage('User panel'); pageService.setSubpage('History');\"\n                    value=\"Go to your history\">\n            </div>\n        </div>\n    </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/gov-forms/gov-forms.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
+var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
+var GovFormsComponent = /** @class */ (function () {
+    function GovFormsComponent(pageService, settingService) {
+        this.pageService = pageService;
+        this.settingService = settingService;
+    }
+    GovFormsComponent.prototype.ngOnInit = function () {
+    };
+    GovFormsComponent.prototype.formSubmitted = function (result) {
+        if (result.status) {
+            this.pageService.setSubpage('Form submitted confirmation');
+        }
+    };
+    GovFormsComponent = __decorate([
+        core_1.Component({
+            selector: 'app-gov-forms',
+            template: __webpack_require__("./src/app/gov-forms/gov-forms.component.html"),
+            styles: [__webpack_require__("./src/app/gov-forms/gov-forms.component.css")]
+        }),
+        __metadata("design:paramtypes", [page_service_1.PageService,
+            setting_service_1.SettingService])
+    ], GovFormsComponent);
+    return GovFormsComponent;
+}());
+exports.GovFormsComponent = GovFormsComponent;
+
+
+/***/ }),
+
 /***/ "./src/app/header-navbar/header-navbar.component.css":
 /***/ (function(module, exports) {
 
@@ -584,7 +785,7 @@ module.exports = ".logo img {\r\n    width: 213px !important;\r\n}\r\n\r\n.polit
 /***/ "./src/app/header-navbar/header-navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header id=\"political-header\" class=\"political-header-one\">\r\n    <div class=\"political-main-header\">\r\n        <div class=\"container\">\r\n            <div class=\"row\">\r\n\r\n                <aside class=\"col-md-3\">\r\n                    <a (click)=\"pageService.setPage('Home')\" class=\"logo\"><img src=\"assets/img/logo/base.png\" alt=\"\"></a>\r\n                </aside>\r\n\r\n                <aside class=\"col-md-9\">\r\n                    <div class=\"political-navigation\">\r\n                        <a href=\"#menu\" class=\"menu-link active\" (click)=\"unactiveSubMenu()\">\r\n                            <span style=\"margin-right:0;\"></span>\r\n                        </a>\r\n                        <nav id=\"menu\" class=\"menu navbar navbar-default\">\r\n                            <ul class=\"level-1 navbar-nav\">\r\n\r\n                                <!-- Homepage -->\r\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Homepage'}\"><a (click)=\"pageService.setPage('Homepage'); unactive();\">\r\n                                    {{'HomePage' | translate:settingService.getLanguage() }}\r\n                                </a></li>\r\n\r\n                                <!-- Log in -->\r\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Log in'}\" *ngIf=\"userinfoService.getUserinfo()===null\">\r\n                                    <a (click)=\"pageService.setPage('Log in'); unactive();\">\r\n                                        {{'Log in' | translate:settingService.getLanguage() }}\r\n                                    </a>\r\n                                </li>\r\n\r\n                                <!-- Register -->\r\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Register'}\" *ngIf=\"userinfoService.getUserinfo()===null\">\r\n                                    <a (click)=\"pageService.setPage('Register'); unactive();\">\r\n                                        {{'Register' | translate:settingService.getLanguage() }}\r\n                                    </a>\r\n                                </li>\r\n\r\n                                <!-- Check status -->\r\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Check status'}\" *ngIf=\"userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().status!='Active'\">\r\n                                    <a>\r\n                                        {{'Status' | translate:settingService.getLanguage() }}:\r\n                                            <span [ngClass]=\"{'ban':userinfoService.getUserinfo().status=='Ban', 'pen':userinfoService.getUserinfo().status=='Pending'}\">{{userinfoService.getUserinfo().status}}</span>\r\n                                    </a><span class=\"has-subnav status-nav\" (click)=\"toggleSubnav('.status-nav')\"><i class=\"fa fa-angle-down\"></i></span>\r\n                                    <ul class=\"sub-menu level-2 status-nav\">\r\n                                        <li><a (click)=\"pageService.setPage('Check status'); unactive();\">\r\n                                            {{'What is this?' | translate:settingService.getLanguage() }}\r\n                                        </a></li>\r\n                                        <li><a (click)=\"memberLogOut(); unactive();\">\r\n                                            {{'Log out' | translate:settingService.getLanguage() }}\r\n                                        </a></li>\r\n                                    </ul>\r\n                                </li>\r\n\r\n                                <!-- User panel -->\r\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Profile'}\" *ngIf=\"userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().status=='Active'\">\r\n                                    <a>\r\n                                        {{'Hello,' | translate:settingService.getLanguage() }}\r\n                                            <span class=\"hello-user\">{{userinfoService.getUserinfo().username}}</span>\r\n                                    </a><span class=\"has-subnav profile-nav\"><i class=\"fa fa-angle-down\"></i></span>\r\n                                    <ul class=\"sub-menu level-2 profile-nav\">\r\n                                        <li><a (click)=\"pageService.setPage('User panel'); pageService.setSubpage('Profile'); unactive();\">\r\n                                            {{'Profile' | translate:settingService.getLanguage() }}\r\n                                        </a></li>\r\n                                        <li><a (click)=\"pageService.setPage('User panel'); pageService.setSubpage('History'); unactive();\">\r\n                                            {{'History' | translate:settingService.getLanguage() }}\r\n                                        </a></li>\r\n\r\n                                        <!-- Admin panel -->\r\n                                        <li *ngIf=\"userinfoService.getUserinfo().level>=8\">\r\n                                            <a (click)=\"pageService.setPage('Admin panel'); pageService.setSubpage('User table'); unactive();\"\r\n                                            class=\"hello-user\" style=\"font-weight:600;\">\r\n                                                Admin Panel\r\n                                            </a>\r\n                                        </li>\r\n                                        <li><a (click)=\"memberLogOut(); unactive();\">\r\n                                            {{'Log out' | translate:settingService.getLanguage() }}\r\n                                        </a></li>\r\n                                    </ul>\r\n                                </li>\r\n\r\n                                <!-- Forms -->\r\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Forms'}\" *ngIf=\"userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().status=='Active'\">\r\n                                    <a (click)=\"pageService.setPage('Forms'); unactive();\">\r\n                                        {{'Forms' | translate:settingService.getLanguage() }}\r\n                                    </a>\r\n                                </li>\r\n\r\n                                <!-- Contact -->\r\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Contact'}\"><a (click)=\"pageService.setPage('Contact'); unactive();\">\r\n                                    {{'Contact Us' | translate:settingService.getLanguage() }}\r\n                                </a></li>\r\n\r\n                                <!-- Language -->\r\n                                <!-- <li>\r\n                                    <a>\r\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">เลือกภาษา</ng-container>\r\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Language</ng-container>\r\n                                    </a><span class=\"has-subnav\"><i class=\"fa fa-angle-down\"></i></span>\r\n                                    <ul class=\"sub-menu level-2\">\r\n                                        <li><a (click)=\"settingService.setLanguage('Thai'); unactive();\">\r\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ภาษาไทย</ng-container>\r\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Thai</ng-container>\r\n                                        </a></li>\r\n                                        <li><a (click)=\"settingService.setLanguage('English'); unactive();\">\r\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ภาษาอังกฤษ</ng-container>\r\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">English</ng-container>\r\n                                        </a></li>\r\n                                    </ul>\r\n                                </li> -->\r\n                                <li>\r\n                                    <a (click)=\"toggleSubnav('.language')\">Language</a>\r\n                                    <span class=\"has-subnav language\" style=\"pointer-events:none;\"><i class=\"fa fa-angle-down\"></i></span>\r\n                                    <ul class=\"sub-menu level-2 language\">\r\n                                        <li><a (click)=\"settingService.setLanguage('Thai'); unactive();\">Thai</a></li>\r\n                                        <li><a (click)=\"settingService.setLanguage('English'); unactive();\">English</a></li>\r\n                                    </ul>\r\n                                </li>\r\n\r\n                            </ul>\r\n                        </nav>\r\n                    </div>\r\n                </aside>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</header>"
+module.exports = "<header id=\"political-header\" class=\"political-header-one\">\r\n    <div class=\"political-main-header\">\r\n        <div class=\"container\">\r\n            <div class=\"row\">\r\n\r\n                <aside class=\"col-md-3\">\r\n                    <a (click)=\"pageService.setPage('Home')\" class=\"logo\"><img src=\"assets/img/logo/base.png\" alt=\"\"></a>\r\n                </aside>\r\n\r\n                <aside class=\"col-md-9\">\r\n                    <div class=\"political-navigation\">\r\n                        <a href=\"#menu\" class=\"menu-link active\" (click)=\"unactiveSubMenu()\">\r\n                            <span style=\"margin-right:0;\"></span>\r\n                        </a>\r\n                        <nav id=\"menu\" class=\"menu navbar navbar-default\">\r\n                            <ul class=\"level-1 navbar-nav\">\r\n\r\n                                <!-- Homepage -->\r\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Homepage'}\"><a (click)=\"pageService.setPage('Homepage'); unactive();\">\r\n                                    {{'HomePage' | translate:settingService.getLanguage() }}\r\n                                </a></li>\r\n\r\n                                <!-- Log in -->\r\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Log in'}\" *ngIf=\"userinfoService.getUserinfo()===null\">\r\n                                    <a (click)=\"pageService.setPage('Log in'); unactive();\">\r\n                                        {{'Log in' | translate:settingService.getLanguage() }}\r\n                                    </a>\r\n                                </li>\r\n\r\n                                <!-- Register -->\r\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Register'}\" *ngIf=\"userinfoService.getUserinfo()===null\">\r\n                                    <a (click)=\"pageService.setPage('Register'); unactive();\">\r\n                                        {{'Register' | translate:settingService.getLanguage() }}\r\n                                    </a>\r\n                                </li>\r\n\r\n                                <!-- Check status -->\r\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Check status'}\" *ngIf=\"userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().status!='Active'\">\r\n                                    <a (click)=\"toggleSubnav('.status-nav')\">\r\n                                        {{'Status' | translate:settingService.getLanguage() }}:\r\n                                            <span [ngClass]=\"{'ban':userinfoService.getUserinfo().status=='Ban', 'pen':userinfoService.getUserinfo().status=='Pending'}\">{{userinfoService.getUserinfo().status}}</span>\r\n                                    </a><span class=\"has-subnav status-nav\" style=\"pointer-events:none;\"><i class=\"fa fa-angle-down\"></i></span>\r\n                                    <ul class=\"sub-menu level-2 status-nav\">\r\n                                        <li><a (click)=\"pageService.setPage('Check status'); unactive();\">\r\n                                            {{'What is this?' | translate:settingService.getLanguage() }}\r\n                                        </a></li>\r\n                                        <li><a (click)=\"memberLogOut(); unactive();\">\r\n                                            {{'Log out' | translate:settingService.getLanguage() }}\r\n                                        </a></li>\r\n                                    </ul>\r\n                                </li>\r\n\r\n                                <!-- User panel -->\r\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Profile'}\" *ngIf=\"userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().status=='Active'\">\r\n                                    <a (click)=\"toggleSubnav('.profile-nav')\">\r\n                                        {{'Hello,' | translate:settingService.getLanguage() }}\r\n                                            <span class=\"hello-user\">{{userinfoService.getUserinfo().username}}</span>\r\n                                    </a><span class=\"has-subnav profile-nav\" style=\"pointer-events:none;\"><i class=\"fa fa-angle-down\"></i></span>\r\n                                    <ul class=\"sub-menu level-2 profile-nav\">\r\n                                        <li><a (click)=\"pageService.setPage('User panel'); pageService.setSubpage('Profile'); unactive();\">\r\n                                            {{'Profile' | translate:settingService.getLanguage() }}\r\n                                        </a></li>\r\n                                        <li><a (click)=\"pageService.setPage('User panel'); pageService.setSubpage('History'); unactive();\">\r\n                                            {{'History' | translate:settingService.getLanguage() }}\r\n                                        </a></li>\r\n\r\n                                        <!-- Admin panel -->\r\n                                        <li *ngIf=\"userinfoService.getUserinfo().level>=7\">\r\n                                            <a (click)=\"pageService.setPage('Admin panel'); pageService.setSubpage('User table'); unactive();\"\r\n                                            class=\"hello-user\" style=\"font-weight:600;\">\r\n                                                Admin Panel\r\n                                            </a>\r\n                                        </li>\r\n                                        <li><a (click)=\"memberLogOut(); unactive();\">\r\n                                            {{'Log out' | translate:settingService.getLanguage() }}\r\n                                        </a></li>\r\n                                    </ul>\r\n                                </li>\r\n\r\n                                <!-- Forms -->\r\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Forms'}\" *ngIf=\"userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().status=='Active'\">\r\n                                    <a (click)=\"pageService.setPage('Forms'); pageService.setSubpage('All forms'); unactive();\">\r\n                                        {{'Forms' | translate:settingService.getLanguage() }}\r\n                                    </a>\r\n                                </li>\r\n\r\n                                <!-- Contact -->\r\n                                <li [ngClass]=\"{'active':pageService.getPage()=='Contact'}\"><a (click)=\"pageService.setPage('Contact'); unactive();\">\r\n                                    {{'Contact Us' | translate:settingService.getLanguage() }}\r\n                                </a></li>\r\n\r\n                                <!-- Language -->\r\n                                <!-- <li>\r\n                                    <a>\r\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">เลือกภาษา</ng-container>\r\n                                        <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Language</ng-container>\r\n                                    </a><span class=\"has-subnav\"><i class=\"fa fa-angle-down\"></i></span>\r\n                                    <ul class=\"sub-menu level-2\">\r\n                                        <li><a (click)=\"settingService.setLanguage('Thai'); unactive();\">\r\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ภาษาไทย</ng-container>\r\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">Thai</ng-container>\r\n                                        </a></li>\r\n                                        <li><a (click)=\"settingService.setLanguage('English'); unactive();\">\r\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='Thai'\">ภาษาอังกฤษ</ng-container>\r\n                                            <ng-container *ngIf=\"settingService.getLanguage()=='English'\">English</ng-container>\r\n                                        </a></li>\r\n                                    </ul>\r\n                                </li> -->\r\n                                <li>\r\n                                    <a (click)=\"toggleSubnav('.language')\">Language</a>\r\n                                    <span class=\"has-subnav language\" style=\"pointer-events:none;\"><i class=\"fa fa-angle-down\"></i></span>\r\n                                    <ul class=\"sub-menu level-2 language\">\r\n                                        <li><a (click)=\"settingService.setLanguage('Thai'); unactive();\">Thai</a></li>\r\n                                        <li><a (click)=\"settingService.setLanguage('English'); unactive();\">English</a></li>\r\n                                    </ul>\r\n                                </li>\r\n\r\n                            </ul>\r\n                        </nav>\r\n                    </div>\r\n                </aside>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</header>"
 
 /***/ }),
 
@@ -699,7 +900,10 @@ exports.LANG_TH_TRANS = {
     'workplace': 'สถานที่ทำงาน',
     'wrong username or password': 'ชื่อผู้ใช้งานหรือรหัสผ่านผิด',
     'your e-mail address': 'อีเมลของคุณ',
-    'your name': 'ชื่อของคุณ'
+    'your name': 'ชื่อของคุณ',
+    'all forms': 'แบบฟอร์มทั้งหมด',
+    'form category': 'ประเภทแบบฟอร์ม',
+    'create date': 'จัดทำวันที่'
 };
 // {{'text' | translate:settingService.getLanguage() }}
 
@@ -851,7 +1055,7 @@ module.exports = "li.active a {color:#228ae6; font-weight:600;}"
 /***/ "./src/app/page-admin-panel/page-admin-panel.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"political-subheader\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <div class=\"political-subheader-wrap\">\r\n                    <h1>Admin Panel</h1>\r\n                    <ul class=\"political-breadcrumb\">\r\n                        <li><a (click)=\"pageService.setPage('Homepage')\">Homepage</a></li>\r\n                        <li>Admin Panel</li>\r\n                        <li class=\"active\">{{pageService.getSubpage()}}</li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"political-main-content\">\r\n    <div class=\"political-main-section\">\r\n        <div class=\"container\">\r\n            <div class=\"row\">\r\n\r\n                <!-- Admin panel sidbar -->\r\n                <aside class=\"col-md-3\">\r\n                    <div class=\"widget widget_cetagories\">\r\n                        <h2 class=\"political-widget-heading\">Admin Menu</h2>\r\n                        <ul>\r\n                            <li [ngClass]=\"{'active':pageService.getSubpage()=='User table'}\">\r\n                                <a (click)=\"pageService.setSubpage('User table')\">User Table</a></li>\r\n                            <li [ngClass]=\"{'active':pageService.getSubpage()=='Statistic'}\">\r\n                                <a (click)=\"pageService.setSubpage('Statistic')\">Statistic</a></li>\r\n                            <li [ngClass]=\"{'active':pageService.getSubpage()=='Email blast'}\">\r\n                                <a (click)=\"pageService.setSubpage('Email blast')\">Email Blast</a></li>\r\n                        </ul>\r\n                    </div>\r\n                </aside>\r\n\r\n                <!-- Admin panel subpages -->\r\n                <div class=\"col-md-9\">\r\n\r\n                    <ng-container *ngIf=\"pageService.getSubpage()=='User table'\">\r\n                        <app-page-admin-user-table></app-page-admin-user-table>\r\n                    </ng-container>\r\n                    <ng-container *ngIf=\"pageService.getSubpage()=='Statistic'\">\r\n                        <app-page-admin-statistic></app-page-admin-statistic>\r\n                    </ng-container>\r\n                    <ng-container *ngIf=\"pageService.getSubpage()=='Email blast'\">\r\n                        <app-page-admin-email-blast></app-page-admin-email-blast>\r\n                    </ng-container>\r\n\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"political-subheader\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <div class=\"political-subheader-wrap\">\r\n                    <h1>Admin Panel</h1>\r\n                    <ul class=\"political-breadcrumb\">\r\n                        <li><a (click)=\"pageService.setPage('Homepage')\">Homepage</a></li>\r\n                        <li>Admin Panel</li>\r\n                        <li class=\"active\">{{pageService.getSubpage()}}</li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"political-main-content\">\r\n    <div class=\"political-main-section\">\r\n        <div class=\"container\">\r\n            <div class=\"row\">\r\n\r\n                <!-- Admin panel sidbar -->\r\n                <aside class=\"col-md-3\">\r\n                    <div class=\"widget widget_cetagories\">\r\n                        <h2 class=\"political-widget-heading\">Admin Menu</h2>\r\n                        <ul>\r\n                            <li [ngClass]=\"{'active':pageService.getSubpage()=='User table'}\">\r\n                                <a (click)=\"pageService.setSubpage('User table')\">User Table</a></li>\r\n                            <li *ngIf=\"userinfoService.getUserinfo().level>7\"\r\n                            [ngClass]=\"{'active':pageService.getSubpage()=='Statistic'}\">\r\n                                <a (click)=\"pageService.setSubpage('Statistic')\">Statistic</a></li>\r\n                            <li *ngIf=\"userinfoService.getUserinfo().level>7\"\r\n                            [ngClass]=\"{'active':pageService.getSubpage()=='Email blast'}\">\r\n                                <a (click)=\"pageService.setSubpage('Email blast')\">Email Blast</a></li>\r\n                        </ul>\r\n                    </div>\r\n                </aside>\r\n\r\n                <!-- Admin panel subpages -->\r\n                <div class=\"col-md-9\">\r\n\r\n                    <ng-container *ngIf=\"pageService.getSubpage()=='User table'\">\r\n                        <app-page-admin-user-table></app-page-admin-user-table>\r\n                    </ng-container>\r\n                    <ng-container *ngIf=\"pageService.getSubpage()=='Statistic'\">\r\n                        <app-page-admin-statistic></app-page-admin-statistic>\r\n                    </ng-container>\r\n                    <ng-container *ngIf=\"pageService.getSubpage()=='Email blast'\">\r\n                        <app-page-admin-email-blast></app-page-admin-email-blast>\r\n                    </ng-container>\r\n\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -873,10 +1077,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
 var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
+var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
 var PageAdminPanelComponent = /** @class */ (function () {
-    function PageAdminPanelComponent(pageService, settingService) {
+    function PageAdminPanelComponent(pageService, settingService, userinfoService) {
         this.pageService = pageService;
         this.settingService = settingService;
+        this.userinfoService = userinfoService;
     }
     PageAdminPanelComponent.prototype.ngOnInit = function () {
     };
@@ -887,7 +1093,8 @@ var PageAdminPanelComponent = /** @class */ (function () {
             styles: [__webpack_require__("./src/app/page-admin-panel/page-admin-panel.component.css")]
         }),
         __metadata("design:paramtypes", [page_service_1.PageService,
-            setting_service_1.SettingService])
+            setting_service_1.SettingService,
+            userinfo_service_1.UserinfoService])
     ], PageAdminPanelComponent);
     return PageAdminPanelComponent;
 }());
@@ -956,7 +1163,7 @@ module.exports = "th {color:#000000;}\r\ntd {font-weight:300;}\r\n.fa {cursor:po
 /***/ "./src/app/page-admin-panel/page-admin-user-table/page-admin-user-table.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"subpage=='Table'\" class=\"political-blog-large\">\r\n\r\n  <!-- Selection criteria -->\r\n  <div class=\"political-pagination\" style=\"color:#000; margin:0 0 25px 0;\">\r\n\r\n      <div class=\"top-option\">\r\n        <input #keyword class=\"search\" type=\"text\" (keyup.enter)=\"tableSearch(keyword.value)\">\r\n        <input type=\"submit\" class=\"political-simple-btn\" value=\"Search\" (click)=\"tableSearch(keyword.value)\">\r\n      </div>\r\n\r\n      <div class=\"top-option\">\r\n        Sort by\r\n        <select class=\"select-sort\" (change)=\"tableSortChange($event.target.value)\">\r\n          <option value=\"None\" selected=\"selected\">None</option>\r\n          <option value=\"Firstname increasing\">Firstname increasing</option>\r\n          <option value=\"Firstname decreasing\">Firstname decreasing</option>\r\n          <option value=\"Level increasing\">Level increasing</option>\r\n          <option value=\"Level decreasing\">Level decreasing</option>\r\n          <option value=\"Status increasing\">Status increasing</option>\r\n          <option value=\"Status decreasing\">Status decreasing</option>\r\n          <option value=\"Register date increasing\">Register date increasing</option>\r\n          <option value=\"Register date decreasing\">Register date decreasing</option>\r\n        </select>\r\n      </div>\r\n\r\n      <div class=\"top-option\">\r\n        Show per page\r\n        <select class=\"show-per-page\" (change)=\"tableLimitChange($event.target.value)\">\r\n          <option value=\"10\">10</option>\r\n          <option value=\"25\" selected=\"selected\">25</option>\r\n          <option value=\"50\">50</option>\r\n          <option value=\"100\">100</option>\r\n        </select>\r\n      </div>\r\n        \r\n  </div>\r\n\r\n  <ul class=\"row\">\r\n    <li class=\"col-md-12\">\r\n\r\n      <table><tbody>\r\n        <tr>\r\n          <th>Username</th>\r\n          <th>Firstname</th>\r\n          <th>Lastname</th>\r\n          <th>E-mail address</th>\r\n          <th>Level</th>\r\n          <th>Status</th>\r\n          <th>Actions</th>\r\n        </tr>\r\n\r\n        <ng-container *ngIf=\"users===null\">\r\n          <tr><td colspan=\"8\">No user data found.</td></tr>\r\n        </ng-container>\r\n        <ng-container *ngIf=\"users!==null\">\r\n          <tr *ngFor=\"let user of users;\">\r\n            <td>{{user.username}}</td>\r\n            <td>{{user.firstname}}</td>\r\n            <td>{{user.lastname}}</td>\r\n            <td>{{user.email}}</td>\r\n            <td>{{user.level}}</td>\r\n            <td [ngClass]=\"{'ban':user.status=='Ban', 'pen':user.status=='Pending', 'hello-user':user.status=='Active'}\">{{user.status}}</td>\r\n            \r\n            <!-- Admin options based on level -->\r\n            <!-- Lower users -->\r\n            <td *ngIf=\"user.level < userinfoService.getUserinfo().level\">\r\n              <i *ngIf=\"user.status!='Active'\" class=\"fa fa-check-square-o hello-user\" aria-hidden=\"true\"\r\n                (click)=\"setAccountStatus(user, 'Active')\">&nbsp;</i>\r\n              <i *ngIf=\"user.status!='Ban'\" class=\"fa fa-times pen\" aria-hidden=\"true\"\r\n                (click)=\"setAccountStatus(user, 'Ban')\">&nbsp;</i>\r\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\r\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\r\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>&nbsp;\r\n              <i class=\"fa fa-pencil-square-o edit-icon\" aria-hidden=\"true\"\r\n                (click)=\"adminEditUserinfo(user)\"></i>&nbsp;\r\n              <i class=\"fa fa-trash ban\" aria-hidden=\"true\"\r\n                (click)=\"tryDeleteAccount(user)\"></i>\r\n            </td>\r\n            <!-- Higher users -->\r\n            <td *ngIf=\"user.level > userinfoService.getUserinfo().level\">\r\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\r\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\r\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>\r\n            </td>\r\n            <!-- Yourself -->\r\n            <td *ngIf=\"user.level==userinfoService.getUserinfo().level && user._id==userinfoService.getUserinfo()._id\">\r\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\r\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\r\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>&nbsp;\r\n              <i class=\"fa fa-pencil-square-o edit-icon\" aria-hidden=\"true\"\r\n                (click)=\"adminEditUserinfo(user)\"></i>\r\n            </td>\r\n            <!-- Same level users, not you -->\r\n            <td *ngIf=\"user.level==userinfoService.getUserinfo().level && user._id!=userinfoService.getUserinfo()._id\">\r\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\r\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\r\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>\r\n            </td>\r\n\r\n          </tr>\r\n        </ng-container>\r\n\r\n      </tbody></table>\r\n\r\n      <!-- Pagination -->\r\n      <div class=\"political-pagination pagination-div\">\r\n        <ul class=\"page-numbers\">\r\n            <li><a class=\"previous page-numbers\" (click)=\"previouseTablePage()\"><span aria-label=\"Next\"><i class=\"fa fa-angle-left\"></i></span></a></li>\r\n            <li *ngFor=\"let page of pagination;\">\r\n              <a *ngIf=\"page!=criteria.page\" class=\"page-numbers\"\r\n              (click)=\"paginationChangePage(page)\">{{page+1}}</a>\r\n              <span *ngIf=\"page==criteria.page\" class=\"page-numbers current\">{{page+1}}</span>\r\n            </li>\r\n            <li><a class=\"next page-numbers\" (click)=\"nextTablePage()\"><span aria-label=\"Next\"><i class=\"fa fa-angle-right\"></i></span></a></li>\r\n        </ul>\r\n      </div>\r\n\r\n    </li>\r\n  </ul>\r\n</div>\r\n\r\n<!-- Delete user panel -->\r\n<div *ngIf=\"subpage=='Try delete' && settingService.getLanguage()=='Thai'\" class=\"political-blog-large\">\r\n  <h1 style=\"margin-bottom:20px;\"><strong>คุณกำลังจะทำการ<span class=\"ban\">ลบข้อมูลผู้ใช้</span></strong></h1>\r\n  <h3 style=\"margin-bottom:20px;\">ชื่อผู้ใช้งาน: <span class=\"hello-user\" style=\"font-weight:600;\">{{userOnHand.username}}</span></h3>\r\n  <input type=\"submit\" class=\"political-simple-btn delete-btn\" value=\"ลบข้อมูลผู้ใช้\" (click)=\"deleteAccount()\">\r\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"ยกเลิก\" (click)=\"goBackToUserTable()\">\r\n      \r\n</div>\r\n<div *ngIf=\"subpage=='Try delete' && settingService.getLanguage()=='English'\" class=\"political-blog-large\">\r\n  <h1 style=\"margin-bottom:20px;\"><strong>You are about to <span class=\"ban\">DELETE</span> a user</strong></h1>\r\n  <h3 style=\"margin-bottom:20px;\">Username: <span class=\"hello-user\" style=\"font-weight:600;\">{{userOnHand.username}}</span></h3>\r\n  <input type=\"submit\" class=\"political-simple-btn delete-btn\" value=\"DELETE\" (click)=\"deleteAccount()\">\r\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"Cancel\" (click)=\"goBackToUserTable()\">\r\n</div>\r\n\r\n<!-- View user profile -->\r\n<ng-container *ngIf=\"subpage=='View user' && userOnHand!==null\">\r\n  <input *ngIf=\"settingService.getLanguage()=='Thai'\" class=\"political-simple-btn back-btn\" type=\"submit\" \r\n    (click)=\"goBackToUserTable()\" value=\"ย้อนกลับไป\">\r\n  <input *ngIf=\"settingService.getLanguage()=='English'\" class=\"political-simple-btn back-btn\" type=\"submit\" \r\n    (click)=\"goBackToUserTable()\" value=\"Go back\">\r\n  <app-profile-form [userDetail]=\"userOnHand\"></app-profile-form>\r\n</ng-container>\r\n\r\n<!-- Edit user information -->\r\n<ng-container *ngIf=\"subpage=='Edit user' && userOnHand!==null\">\r\n  <input *ngIf=\"settingService.getLanguage()=='Thai'\" class=\"political-simple-btn back-btn\" type=\"submit\" \r\n    (click)=\"goBackToUserTable()\" value=\"ย้อนกลับไป\">\r\n  <input *ngIf=\"settingService.getLanguage()=='English'\" class=\"political-simple-btn back-btn\" type=\"submit\" \r\n    (click)=\"goBackToUserTable()\" value=\"Go back\">\r\n  <input class=\"political-simple-btn warning-btn\" type=\"submit\" style=\"float:right; margin-right:10px;\"\r\n    (click)=\"goToAdminPrivilageSetting()\" value=\"Admin pivilage setting\">\r\n  <app-profile-edit-form [userDetail]=\"userOnHand\"\r\n    (userDetailUpdated)=\"userDetailUpdatedDone($event)\"></app-profile-edit-form>\r\n</ng-container>\r\n\r\n<!-- Admin privilage setting -->\r\n<ng-container *ngIf=\"subpage=='Admin setting' && userOnHand!==null\">\r\n  <input *ngIf=\"settingService.getLanguage()=='Thai'\" class=\"political-simple-btn back-btn\" type=\"submit\" \r\n    (click)=\"goBackToUserTable()\" value=\"ย้อนกลับไป\">\r\n  <input *ngIf=\"settingService.getLanguage()=='English'\" class=\"political-simple-btn back-btn\" type=\"submit\" \r\n    (click)=\"goBackToUserTable()\" value=\"Go back\">\r\n  <app-admin-privilage-setting-form [userinfo]=\"userOnHand\"\r\n  (userinfoUpdated)=\"userPrivilageUpdatedDone($event)\"></app-admin-privilage-setting-form>\r\n</ng-container>"
+module.exports = "<div *ngIf=\"subpage=='Table'\" class=\"political-blog-large\">\r\n\r\n  <!-- Selection criteria -->\r\n  <div class=\"political-pagination\" style=\"color:#000; margin:0 0 25px 0;\">\r\n\r\n      <div class=\"top-option\">\r\n        <input #keyword class=\"search\" type=\"text\" (keyup.enter)=\"tableSearch(keyword.value)\">\r\n        <input type=\"submit\" class=\"political-simple-btn\" value=\"Search\" (click)=\"tableSearch(keyword.value)\">\r\n      </div>\r\n\r\n      <div class=\"top-option\">\r\n        Sort by\r\n        <select class=\"select-sort\" (change)=\"tableSortChange($event.target.value)\">\r\n          <option value=\"None\" selected=\"selected\">None</option>\r\n          <option value=\"Firstname increasing\">Firstname increasing</option>\r\n          <option value=\"Firstname decreasing\">Firstname decreasing</option>\r\n          <option value=\"Level increasing\">Level increasing</option>\r\n          <option value=\"Level decreasing\">Level decreasing</option>\r\n          <option value=\"Status increasing\">Status increasing</option>\r\n          <option value=\"Status decreasing\">Status decreasing</option>\r\n          <option value=\"Register date increasing\">Register date increasing</option>\r\n          <option value=\"Register date decreasing\">Register date decreasing</option>\r\n        </select>\r\n      </div>\r\n\r\n      <div class=\"top-option\">\r\n        Show per page\r\n        <select class=\"show-per-page\" (change)=\"tableLimitChange($event.target.value)\">\r\n          <option value=\"10\">10</option>\r\n          <option value=\"25\" selected=\"selected\">25</option>\r\n          <option value=\"50\">50</option>\r\n          <option value=\"100\">100</option>\r\n        </select>\r\n      </div>\r\n        \r\n  </div>\r\n\r\n  <ul class=\"row\">\r\n    <li class=\"col-md-12\">\r\n\r\n      <table><tbody>\r\n        <tr>\r\n          <th>Username</th>\r\n          <th>Firstname</th>\r\n          <th>Lastname</th>\r\n          <th>E-mail address</th>\r\n          <th>Level</th>\r\n          <th>Status</th>\r\n          <th>Actions</th>\r\n        </tr>\r\n\r\n        <ng-container *ngIf=\"users===null\">\r\n          <tr><td colspan=\"8\">No user data found.</td></tr>\r\n        </ng-container>\r\n        <ng-container *ngIf=\"users!==null\">\r\n          <tr *ngFor=\"let user of users;\">\r\n            <td>{{user.username}}</td>\r\n            <td>{{user.firstname}}</td>\r\n            <td>{{user.lastname}}</td>\r\n            <td>{{user.email}}</td>\r\n            <td>{{user.level}}</td>\r\n            <td [ngClass]=\"{'ban':user.status=='Ban', 'pen':user.status=='Pending', 'hello-user':user.status=='Active'}\">{{user.status}}</td>\r\n            \r\n            <!-- Admin options based on level -->\r\n            <!-- Lower users -->\r\n            <td *ngIf=\"user.level < userinfoService.getUserinfo().level\">\r\n              <i *ngIf=\"user.status!='Active'\" class=\"fa fa-check-square-o hello-user\" aria-hidden=\"true\"\r\n                (click)=\"setAccountStatus(user, 'Active')\">&nbsp;</i>\r\n              <i *ngIf=\"user.status!='Ban'\" class=\"fa fa-times pen\" aria-hidden=\"true\"\r\n                (click)=\"setAccountStatus(user, 'Ban')\">&nbsp;</i>\r\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\r\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\r\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>&nbsp;\r\n              <i class=\"fa fa-pencil-square-o edit-icon\" aria-hidden=\"true\"\r\n                (click)=\"adminEditUserinfo(user)\"></i>&nbsp;\r\n              <i class=\"fa fa-trash ban\" aria-hidden=\"true\"\r\n                (click)=\"tryDeleteAccount(user)\"></i>\r\n            </td>\r\n            <!-- Higher users -->\r\n            <td *ngIf=\"user.level > userinfoService.getUserinfo().level\">\r\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\r\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\r\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>\r\n            </td>\r\n            <!-- Yourself -->\r\n            <td *ngIf=\"user.level==userinfoService.getUserinfo().level && user._id==userinfoService.getUserinfo()._id\">\r\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\r\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\r\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>&nbsp;\r\n              <i class=\"fa fa-pencil-square-o edit-icon\" aria-hidden=\"true\"\r\n                (click)=\"adminEditUserinfo(user)\"></i>\r\n            </td>\r\n            <!-- Same level users, not you -->\r\n            <td *ngIf=\"user.level==userinfoService.getUserinfo().level && user._id!=userinfoService.getUserinfo()._id\">\r\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\r\n                (click)=\"viewUserinfo(user)\"></i>&nbsp;\r\n              <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>\r\n            </td>\r\n\r\n          </tr>\r\n        </ng-container>\r\n\r\n      </tbody></table>\r\n\r\n      <!-- Pagination -->\r\n      <div class=\"political-pagination pagination-div\">\r\n        <ul class=\"page-numbers\">\r\n            <li><a class=\"previous page-numbers\" (click)=\"previouseTablePage()\"><span aria-label=\"Next\"><i class=\"fa fa-angle-left\"></i></span></a></li>\r\n            <li *ngFor=\"let page of pagination;\">\r\n              <a *ngIf=\"page!=criteria.page\" class=\"page-numbers\"\r\n              (click)=\"paginationChangePage(page)\">{{page+1}}</a>\r\n              <span *ngIf=\"page==criteria.page\" class=\"page-numbers current\">{{page+1}}</span>\r\n            </li>\r\n            <li><a class=\"next page-numbers\" (click)=\"nextTablePage()\"><span aria-label=\"Next\"><i class=\"fa fa-angle-right\"></i></span></a></li>\r\n        </ul>\r\n      </div>\r\n\r\n    </li>\r\n  </ul>\r\n</div>\r\n\r\n<!-- Delete user panel -->\r\n<div *ngIf=\"subpage=='Try delete' && settingService.getLanguage()=='Thai'\" class=\"political-blog-large\">\r\n  <h1 style=\"margin-bottom:20px;\"><strong>คุณกำลังจะทำการ<span class=\"ban\">ลบข้อมูลผู้ใช้</span></strong></h1>\r\n  <h3 style=\"margin-bottom:20px;\">ชื่อผู้ใช้งาน: <span class=\"hello-user\" style=\"font-weight:600;\">{{userOnHand.username}}</span></h3>\r\n  <input type=\"submit\" class=\"political-simple-btn delete-btn\" value=\"ลบข้อมูลผู้ใช้\" (click)=\"deleteAccount()\">\r\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"ยกเลิก\" (click)=\"goBackToUserTable()\">\r\n</div>\r\n<div *ngIf=\"subpage=='Try delete' && settingService.getLanguage()=='English'\" class=\"political-blog-large\">\r\n  <h1 style=\"margin-bottom:20px;\"><strong>You are about to <span class=\"ban\">DELETE</span> a user.</strong></h1>\r\n  <h3 style=\"margin-bottom:20px;\">Username: <span class=\"hello-user\" style=\"font-weight:600;\">{{userOnHand.username}}</span></h3>\r\n  <input type=\"submit\" class=\"political-simple-btn delete-btn\" value=\"DELETE\" (click)=\"deleteAccount()\">\r\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"Cancel\" (click)=\"goBackToUserTable()\">\r\n</div>\r\n\r\n<!-- View user profile -->\r\n<ng-container *ngIf=\"subpage=='View user' && userOnHand!==null\">\r\n  <input *ngIf=\"settingService.getLanguage()=='Thai'\" class=\"political-simple-btn back-btn\" type=\"submit\" \r\n    (click)=\"goBackToUserTable()\" value=\"ย้อนกลับไป\">\r\n  <input *ngIf=\"settingService.getLanguage()=='English'\" class=\"political-simple-btn back-btn\" type=\"submit\" \r\n    (click)=\"goBackToUserTable()\" value=\"Go back\">\r\n  <app-profile-form [userDetail]=\"userOnHand\"></app-profile-form>\r\n</ng-container>\r\n\r\n<!-- Edit user information -->\r\n<ng-container *ngIf=\"subpage=='Edit user' && userOnHand!==null\">\r\n  <input *ngIf=\"settingService.getLanguage()=='Thai'\" class=\"political-simple-btn back-btn\" type=\"submit\" \r\n    (click)=\"goBackToUserTable()\" value=\"ย้อนกลับไป\">\r\n  <input *ngIf=\"settingService.getLanguage()=='English'\" class=\"political-simple-btn back-btn\" type=\"submit\" \r\n    (click)=\"goBackToUserTable()\" value=\"Go back\">\r\n  <input class=\"political-simple-btn warning-btn\" type=\"submit\" style=\"float:right; margin-right:10px;\"\r\n    (click)=\"goToAdminPrivilageSetting()\" value=\"Admin pivilage setting\">\r\n  <app-profile-edit-form [userDetail]=\"userOnHand\"\r\n    (userDetailUpdated)=\"userDetailUpdatedDone($event)\"></app-profile-edit-form>\r\n</ng-container>\r\n\r\n<!-- Admin privilage setting -->\r\n<ng-container *ngIf=\"subpage=='Admin setting' && userOnHand!==null\">\r\n  <input *ngIf=\"settingService.getLanguage()=='Thai'\" class=\"political-simple-btn back-btn\" type=\"submit\" \r\n    (click)=\"goBackToUserTable()\" value=\"ย้อนกลับไป\">\r\n  <input *ngIf=\"settingService.getLanguage()=='English'\" class=\"political-simple-btn back-btn\" type=\"submit\" \r\n    (click)=\"goBackToUserTable()\" value=\"Go back\">\r\n  <app-admin-privilage-setting-form [userinfo]=\"userOnHand\"\r\n  (userinfoUpdated)=\"userPrivilageUpdatedDone($event)\"></app-admin-privilage-setting-form>\r\n</ng-container>"
 
 /***/ }),
 
@@ -1009,6 +1216,7 @@ var PageAdminUserTableComponent = /** @class */ (function () {
                 }
             }
         });
+        this.adminService.getUsers(this.criteria);
         this.socketioService.getSocket().on('update-new-users', function () {
             this.adminService.getUsers(this.criteria);
         }.bind(this));
@@ -1018,7 +1226,6 @@ var PageAdminUserTableComponent = /** @class */ (function () {
         this.socketioService.getSocket().on('announce-account-delete', function () {
             this.adminService.getUsers(this.criteria);
         }.bind(this));
-        this.adminService.getUsers(this.criteria);
     };
     PageAdminUserTableComponent.prototype.setAccountStatus = function (userinfo, status) {
         var _this = this;
@@ -1285,6 +1492,159 @@ var PageContactComponent = /** @class */ (function () {
     return PageContactComponent;
 }());
 exports.PageContactComponent = PageContactComponent;
+
+
+/***/ }),
+
+/***/ "./src/app/page-gov-forms/page-gov-forms.component.css":
+/***/ (function(module, exports) {
+
+module.exports = "li.active a {color:#228ae6; font-weight:600;}\r\n\r\n.political-compaign-grid-text {padding:15px 15px 10px 15px; cursor:pointer;}\r\n\r\n.gov-form-preview {border:1px solid #929292;}\r\n\r\n.form-owner {margin:10px 0 5px 0; width:100%; text-align:left;}\r\n\r\n.form-name {font-size:17px; margin-bottom:7px; line-height:23px;}\r\n\r\n.form-date {margin:0; font-size:13px;}\r\n\r\nth {color:#000000;}\r\n\r\ntd {font-weight:300;}\r\n\r\n.fa {cursor:pointer;}\r\n\r\n.show-per-page, .select-sort, input.search[type=text] {height:38px; padding:3px;}\r\n\r\n.show-per-page {width:60px;}\r\n\r\n.select-sort {width:190px;}\r\n\r\ninput.search[type=text] {\r\n    font-size: 16px;\r\n    border: 1px solid #dfdfdf;\r\n    width: 180px;\r\n    color: #5a5a5a;\r\n    font-weight: 300;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n}\r\n\r\n.top-option {padding:0 15px; float:right;}\r\n\r\n.pagination-div {margin:20px 0;}\r\n\r\n.back-btn {float:right; margin-bottom:20px;}"
+
+/***/ }),
+
+/***/ "./src/app/page-gov-forms/page-gov-forms.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"political-subheader\">\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n\n                <div class=\"political-subheader-wrap\">\n                    <h1>{{'Forms' | translate:settingService.getLanguage() }}</h1>\n                    <ul class=\"political-breadcrumb\">\n                        <li><a (click)=\"pageService.setPage('Homepage')\">{{'Homepage' | translate:settingService.getLanguage() }}</a></li>\n                        <li>{{'Forms' | translate:settingService.getLanguage() }}</li>\n                        <li class=\"active\">{{pageService.getSubpage() | translate:settingService.getLanguage() }}</li>\n                    </ul>\n                </div>\n\n            </div>\n        </div>\n    </div>\n</div>\n\n<div class=\"political-main-content\">\n    <div class=\"political-main-section\">\n        <div class=\"container\">\n            <div class=\"row\">\n\n                <!-- Admin panel sidbar -->\n                <aside class=\"col-md-3\">\n                    <div class=\"widget widget_cetagories\">\n                        <h2 class=\"political-widget-heading\">{{'Form category' | translate:settingService.getLanguage() }}</h2>\n                        <ul>\n                            <li [ngClass]=\"{'active':pageService.getSubpage()=='All forms'}\">\n                                <a (click)=\"pageService.setSubpage('All forms'); changeFormCategory('All forms');\">\n                                    {{'All Forms' | translate:settingService.getLanguage() }}\n                                </a></li>\n                            <li [ngClass]=\"{'active':pageService.getSubpage()=='Form category 1'}\">\n                                <a (click)=\"pageService.setSubpage('Form category 1'); changeFormCategory('Form category 1');\">\n                                    {{'Form category 1' | translate:settingService.getLanguage() }}\n                                </a></li>\n                            <li [ngClass]=\"{'active':pageService.getSubpage()=='Form category 2'}\">\n                                <a (click)=\"pageService.setSubpage('Form category 2'); changeFormCategory('Form category 2');\">\n                                    {{'Form category 2' | translate:settingService.getLanguage() }}\n                                </a></li>\n                            <li [ngClass]=\"{'active':pageService.getSubpage()=='Form category 3'}\">\n                                <a (click)=\"pageService.setSubpage('Form category 3'); changeFormCategory('Form category 3');\">\n                                    {{'Form category 3' | translate:settingService.getLanguage() }}\n                                </a></li>\n                        </ul>\n                    </div>\n                </aside>\n\n                <!-- Form display -->\n                <div class=\"col-md-9\">\n\n                    <!-- Selection criteria -->\n                    <div class=\"political-pagination\" style=\"color:#000; margin:0 0 25px 0;\">\n\n                        <div class=\"top-option\">\n                            <input #keyword class=\"search\" type=\"text\" (keyup.enter)=\"formSearch(keyword.value)\">\n                            <input type=\"submit\" class=\"political-simple-btn\" value=\"Search\" (click)=\"formSearch(keyword.value)\">\n                        </div>\n\n                        <div class=\"top-option\">\n                            Sort by\n                            <select class=\"select-sort\" (change)=\"formSortChange($event.target.value)\">\n                            <option value=\"None\" selected=\"selected\">None</option>\n                            <option value=\"Name increasing\">Name increasing</option>\n                            <option value=\"Name decreasing\">Name decreasing</option>\n                            <option value=\"Owner increasing\">Owner increasing</option>\n                            <option value=\"Owner decreasing\">Owner decreasing</option>\n                            <option value=\"Created date increasing\">Created date increasing</option>\n                            <option value=\"Created date decreasing\">Created date decreasing</option>\n                            </select>\n                        </div>\n\n                        <div class=\"top-option\">\n                            Show per page\n                            <select class=\"show-per-page\" (change)=\"formLimitChange($event.target.value)\">\n                            <option value=\"1\">1</option>\n                            <option value=\"10\">10</option>\n                            <option value=\"25\" selected=\"selected\">25</option>\n                            <option value=\"50\">50</option>\n                            <option value=\"100\">100</option>\n                            </select>\n                        </div>\n                            \n                    </div>\n\n                    <div class=\"political-compaign political-compaign-grid\">\n                        <h2 *ngIf=\"forms===null\">Loading forms...</h2>\n                        <h2 *ngIf=\"forms!==null && forms.length==0\">No forms available.</h2>\n\n                        <ul *ngIf=\"forms!==null\" class=\"row\">\n\n                          <!-- Form preview -->\n                            <li *ngFor=\"let form of forms;\" class=\"col-md-4\">\n                              <div class=\"political-compaign-grid-text\" (click)=\"goToForm(form)\">\n                                <figure class=\"gov-form-preview\"><a>\n                                  <img [src]=\"formPreview(form)\" alt=\"\">\n                                  <span><i class=\"fa fa-pencil\"></i> Fill Form</span>\n                                </a></figure>\n\n                                <small class=\"form-owner\">{{formOwner(form)}} Form</small>\n                                <h3 class=\"form-name\">{{form.nameTH}}</h3>\n                                <span class=\"form-date\">\n                                  {{'Create date' | translate:settingService.getLanguage() }}:\n                                  <small>{{dateFromObjectId(form._id)}}</small>\n                                </span>\n                              </div>\n                            </li>\n\n                        </ul>\n                    </div>\n\n                    <!-- Pagination -->\n                    <div class=\"political-pagination pagination-div\">\n                        <ul class=\"page-numbers\">\n                            <li><a class=\"previous page-numbers\" (click)=\"previouseFormPage()\"><span aria-label=\"Next\"><i class=\"fa fa-angle-left\"></i></span></a></li>\n                            <li *ngFor=\"let page of pagination;\">\n                                <a *ngIf=\"page!=criteria.page\" class=\"page-numbers\"\n                                (click)=\"paginationChangePage(page)\">{{page+1}}</a>\n                                <span *ngIf=\"page==criteria.page\" class=\"page-numbers current\">{{page+1}}</span>\n                            </li>\n                            <li><a class=\"next page-numbers\" (click)=\"nextFormPage()\"><span aria-label=\"Next\"><i class=\"fa fa-angle-right\"></i></span></a></li>\n                        </ul>\n                    </div>\n                </div>\n\n            </div>\n        </div>\n    </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/page-gov-forms/page-gov-forms.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
+var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
+var form_service_1 = __webpack_require__("./src/app/services/form.service.ts");
+var PageGovFormsComponent = /** @class */ (function () {
+    function PageGovFormsComponent(pageService, settingService, formService) {
+        this.pageService = pageService;
+        this.settingService = settingService;
+        this.formService = formService;
+        this.criteria = {
+            page: 0, start: 0, limit: 25, totalForms: 0,
+            sort: 'None', search: 'EmptyNone', category: 'None'
+        };
+        this.pagination = [];
+        this.forms = null;
+    }
+    PageGovFormsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.getFormsSubscription = this.formService.observeForms().subscribe(function (result) {
+            if (result.status) {
+                _this.forms = result.data;
+                _this.criteria.totalForms = result.totalForms;
+                _this.pagination = [];
+                var count = 0;
+                while (count * _this.criteria.limit < _this.criteria.totalForms) {
+                    _this.pagination.push(count);
+                    count += 1;
+                }
+            }
+        });
+        this.formService.getActiveForms(this.criteria);
+    };
+    PageGovFormsComponent.prototype.formPreview = function (form) {
+        if (form.previewUrl === undefined || form.previewUrl === null || form.previewUrl == '')
+            return 'assets/img/formPreview/base.jpg';
+        else
+            return form.previewUrl;
+    };
+    PageGovFormsComponent.prototype.formOwner = function (form) {
+        if (form.owner === undefined || form.owner === null || form.owner == '')
+            return 'DPST.';
+        else
+            return form.owner;
+    };
+    PageGovFormsComponent.prototype.dateFromObjectId = function (objectId) {
+        var date = new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+        return date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear();
+    };
+    PageGovFormsComponent.prototype.changeFormCategory = function (category) {
+        if (category == 'All forms')
+            this.criteria.category = 'None';
+        else
+            this.criteria.category = category;
+        this.formService.getActiveForms(this.criteria);
+    };
+    PageGovFormsComponent.prototype.goToForm = function (form) {
+        this.pageService.setPage('Government form');
+        this.pageService.setSubpage(form.accessCode);
+        this.formService.setMode();
+    };
+    PageGovFormsComponent.prototype.formLimitChange = function (limit) {
+        this.criteria.page = 0;
+        this.criteria.start = 0;
+        this.criteria.limit = limit;
+        this.criteria.totalForms = 0;
+        this.pagination = [];
+        this.forms = null;
+        this.formService.getActiveForms(this.criteria);
+    };
+    PageGovFormsComponent.prototype.paginationChangePage = function (page) {
+        this.criteria.page = page;
+        this.criteria.start = page * this.criteria.limit;
+        this.formService.getActiveForms(this.criteria);
+    };
+    PageGovFormsComponent.prototype.previouseFormPage = function () {
+        if (this.criteria.page > 0) {
+            this.criteria.page -= 1;
+            this.criteria.start = this.criteria.page * this.criteria.limit;
+            this.formService.getActiveForms(this.criteria);
+        }
+    };
+    PageGovFormsComponent.prototype.nextFormPage = function () {
+        if ((this.criteria.page + 1) * this.criteria.limit < this.criteria.totalForms) {
+            this.criteria.page += 1;
+            this.criteria.start = this.criteria.page * this.criteria.limit;
+            this.formService.getActiveForms(this.criteria);
+        }
+    };
+    PageGovFormsComponent.prototype.formSortChange = function (sort) {
+        this.criteria.sort = sort;
+        this.formService.getActiveForms(this.criteria);
+    };
+    PageGovFormsComponent.prototype.formSearch = function (keyword) {
+        keyword = keyword.trim();
+        if ((this.criteria.search == 'EmptyNone' && keyword == '') || this.criteria.search == keyword) { }
+        else if (keyword == '') {
+            this.criteria.search = 'EmptyNone';
+            this.formService.getActiveForms(this.criteria);
+        }
+        else {
+            this.criteria.search = keyword;
+            this.formService.getActiveForms(this.criteria);
+        }
+    };
+    PageGovFormsComponent.prototype.ngOnDestroy = function () {
+        this.getFormsSubscription.unsubscribe();
+    };
+    PageGovFormsComponent = __decorate([
+        core_1.Component({
+            selector: 'app-page-gov-forms',
+            template: __webpack_require__("./src/app/page-gov-forms/page-gov-forms.component.html"),
+            styles: [__webpack_require__("./src/app/page-gov-forms/page-gov-forms.component.css")]
+        }),
+        __metadata("design:paramtypes", [page_service_1.PageService,
+            setting_service_1.SettingService,
+            form_service_1.FormService])
+    ], PageGovFormsComponent);
+    return PageGovFormsComponent;
+}());
+exports.PageGovFormsComponent = PageGovFormsComponent;
 
 
 /***/ }),
@@ -1634,14 +1994,14 @@ exports.PageUserEditProfileComponent = PageUserEditProfileComponent;
 /***/ "./src/app/page-user-panel/page-user-history/page-user-history.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "th {color:#000000;}\r\ntd {font-weight:300;}\r\n.fa {cursor:pointer;}\r\n.show-per-page, .select-sort, input.search[type=text] {height:38px; padding:3px;}\r\n.show-per-page {width:60px;}\r\n.select-sort {width:190px;}\r\ninput.search[type=text] {\r\n    font-size: 16px;\r\n    border: 1px solid #dfdfdf;\r\n    width: 180px;\r\n    color: #5a5a5a;\r\n    font-weight: 300;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n}\r\n.top-option {padding:0 15px; float:right;}\r\n.pagination-div {margin:20px 0;}\r\n.back-btn {float:right; margin-bottom:20px;}\r\n"
 
 /***/ }),
 
 /***/ "./src/app/page-user-panel/page-user-history/page-user-history.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  page-user-history works!\n</p>\n"
+module.exports = "<div *ngIf=\"subpage=='History'\" class=\"political-blog-large\">\n\n  <!-- Selection criteria -->\n  <div class=\"political-pagination\" style=\"color:#000; margin:0 0 25px 0;\">\n\n      <div class=\"top-option\">\n        <input #keyword class=\"search\" type=\"text\" (keyup.enter)=\"formSearch(keyword.value)\">\n        <input type=\"submit\" class=\"political-simple-btn\" value=\"Search\" (click)=\"formSearch(keyword.value)\">\n      </div>\n\n      <div class=\"top-option\">\n        Sort by\n        <select class=\"select-sort\" (change)=\"formSortChange($event.target.value)\">\n          <option value=\"None\" selected=\"selected\">None</option>\n          <option value=\"Status increasing\">Status increasing</option>\n          <option value=\"Status decreasing\">Status decreasing</option>\n          <option value=\"Submitted date increasing\">Submitted date increasing</option>\n          <option value=\"Submitted date decreasing\">Submitted date decreasing</option>\n        </select>\n      </div>\n\n      <div class=\"top-option\">\n        Show per page\n        <select class=\"show-per-page\" (change)=\"formLimitChange($event.target.value)\">\n          <option value=\"1\">1</option>\n          <option value=\"10\">10</option>\n          <option value=\"25\" selected=\"selected\">25</option>\n          <option value=\"50\">50</option>\n          <option value=\"100\">100</option>\n        </select>\n      </div>\n        \n  </div>\n\n  <ul class=\"row\">\n    <li class=\"col-md-12\">\n\n      <table><tbody>\n        <tr>\n          <th>Form Name</th>\n          <th>Submitted Date</th>\n          <th>Status</th>\n          <th>Actions</th>\n        </tr>\n\n        <ng-container *ngIf=\"submittedForms===null || submittedForms.length==0\">\n          <tr><td colspan=\"4\">No submitted form found.</td></tr>\n        </ng-container>\n        <ng-container *ngIf=\"submittedForms!==null && submittedForms.length>0\">\n          <tr *ngFor=\"let form of submittedForms;\">\n            <td>{{form.form.nameTH}}</td>\n            <td>{{dateFromObjectId(form._id)}}</td>\n            <td [ngClass]=\"{'ban':form.status=='Not approved', 'pen':form.status=='Pending', 'hello-user':form.status=='Approved'}\">\n              {{form.status}}\n            </td>\n\n            <!-- Approved forms -->\n            <td *ngIf=\"form.status=='Approved'\">\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewSubmittedForm(form)\"></i>\n            </td>\n            <!-- Pending forms -->\n            <td *ngIf=\"form.status=='Pending'\">\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewSubmittedForm(form)\"></i>&nbsp;\n              <i class=\"fa fa-pencil-square-o edit-icon\" aria-hidden=\"true\"\n                (click)=\"editSubmittedForm(form)\"></i>&nbsp;\n              <i class=\"fa fa-trash ban\" aria-hidden=\"true\"\n                (click)=\"tryDeleteForm(form)\"></i>\n            </td>\n            <!-- Not approved forms -->\n            <td *ngIf=\"form.status=='Not approved'\">\n              <i class=\"fa fa-address-book-o hello-user\" aria-hidden=\"true\"\n                (click)=\"viewSubmittedForm(form)\"></i>\n            </td>\n\n          </tr>\n        </ng-container>\n\n      </tbody></table>\n\n      <!-- Pagination -->\n      <div class=\"political-pagination pagination-div\">\n        <ul class=\"page-numbers\">\n            <li><a class=\"previous page-numbers\" (click)=\"previouseFormPage()\"><span aria-label=\"Next\"><i class=\"fa fa-angle-left\"></i></span></a></li>\n            <li *ngFor=\"let page of pagination;\">\n              <a *ngIf=\"page!=criteria.page\" class=\"page-numbers\"\n              (click)=\"paginationChangePage(page)\">{{page+1}}</a>\n              <span *ngIf=\"page==criteria.page\" class=\"page-numbers current\">{{page+1}}</span>\n            </li>\n            <li><a class=\"next page-numbers\" (click)=\"nextFormPage()\"><span aria-label=\"Next\"><i class=\"fa fa-angle-right\"></i></span></a></li>\n        </ul>\n      </div>\n\n    </li>\n  </ul>\n</div>\n\n<!-- Delete user panel -->\n<div *ngIf=\"subpage=='Try delete' && settingService.getLanguage()=='Thai'\" class=\"political-blog-large\">\n  <h1 style=\"margin-bottom:20px;\"><strong>คุณกำลังจะทำการ<span class=\"ban\">ลบแบบฟอร์ม</span>ของคุณ</strong></h1>\n  <h3 style=\"margin-bottom:20px;\">แบบฟอร์ม: <span class=\"hello-user\" style=\"font-weight:600;\">{{formOnHand.form.nameTH}}</span></h3>\n  <input type=\"submit\" class=\"political-simple-btn delete-btn\" value=\"ลบข้อแบบฟอร์ม\" (click)=\"deleteSubmittedForm()\">\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"ยกเลิก\" (click)=\"goBackToSubmittedForm()\">\n</div>\n<div *ngIf=\"subpage=='Try delete' && settingService.getLanguage()=='English'\" class=\"political-blog-large\">\n  <h1 style=\"margin-bottom:20px;\"><strong>You are about to <span class=\"ban\">DELETE</span> your submitted form.</strong></h1>\n  <h3 style=\"margin-bottom:20px;\">Form: <span class=\"hello-user\" style=\"font-weight:600;\">{{formOnHand.form.nameTH}}</span></h3>\n  <input type=\"submit\" class=\"political-simple-btn delete-btn\" value=\"DELETE FORM\" (click)=\"deleteSubmittedForm()\">\n  <input type=\"submit\" class=\"political-simple-btn\" value=\"Cancel\" (click)=\"goBackToSubmittedForm()\">\n</div>"
 
 /***/ }),
 
@@ -1661,10 +2021,121 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var socketio_service_1 = __webpack_require__("./src/app/services/socketio.service.ts");
+var page_service_1 = __webpack_require__("./src/app/services/page.service.ts");
+var setting_service_1 = __webpack_require__("./src/app/services/setting.service.ts");
+var userinfo_service_1 = __webpack_require__("./src/app/services/userinfo.service.ts");
+var form_service_1 = __webpack_require__("./src/app/services/form.service.ts");
 var PageUserHistoryComponent = /** @class */ (function () {
-    function PageUserHistoryComponent() {
+    function PageUserHistoryComponent(socketioService, pageService, settingService, userinfoService, formService) {
+        this.socketioService = socketioService;
+        this.pageService = pageService;
+        this.settingService = settingService;
+        this.userinfoService = userinfoService;
+        this.formService = formService;
+        this.criteria = {
+            page: 0, start: 0, limit: 25, totalSubmittedForms: 0,
+            sort: 'None', search: 'EmptyNone'
+        };
+        this.pagination = [];
+        this.submittedForms = null;
+        this.subpage = 'History';
+        this.formOnHand = null;
     }
     PageUserHistoryComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.getSubmittedFormsSubscription = this.formService.observeSubmittedForms().subscribe(function (result) {
+            if (result.status) {
+                _this.submittedForms = result.data;
+                _this.criteria.totalSubmittedForms = result.totalSubmittedForms;
+                _this.pagination = [];
+                var count = 0;
+                while (count * _this.criteria.limit < _this.criteria.totalSubmittedForms) {
+                    _this.pagination.push(count);
+                    count += 1;
+                }
+            }
+        });
+        this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+    };
+    PageUserHistoryComponent.prototype.dateFromObjectId = function (objectId) {
+        var date = new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+        return date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear();
+    };
+    PageUserHistoryComponent.prototype.formLimitChange = function (limit) {
+        this.criteria.page = 0;
+        this.criteria.start = 0;
+        this.criteria.limit = limit;
+        this.criteria.totalSubmittedForms = 0;
+        this.pagination = [];
+        this.submittedForms = null;
+        this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+    };
+    PageUserHistoryComponent.prototype.paginationChangePage = function (page) {
+        this.criteria.page = page;
+        this.criteria.start = page * this.criteria.limit;
+        this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+    };
+    PageUserHistoryComponent.prototype.previouseFormPage = function () {
+        if (this.criteria.page > 0) {
+            this.criteria.page -= 1;
+            this.criteria.start = this.criteria.page * this.criteria.limit;
+            this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+        }
+    };
+    PageUserHistoryComponent.prototype.nextFormPage = function () {
+        if ((this.criteria.page + 1) * this.criteria.limit < this.criteria.totalSubmittedForms) {
+            this.criteria.page += 1;
+            this.criteria.start = this.criteria.page * this.criteria.limit;
+            this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+        }
+    };
+    PageUserHistoryComponent.prototype.formSortChange = function (sort) {
+        this.criteria.sort = sort;
+        this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+    };
+    PageUserHistoryComponent.prototype.formSearch = function (keyword) {
+        keyword = keyword.trim();
+        if ((this.criteria.search == 'EmptyNone' && keyword == '') || this.criteria.search == keyword) { }
+        else if (keyword == '') {
+            this.criteria.search = 'EmptyNone';
+            this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+        }
+        else {
+            this.criteria.search = keyword;
+            this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+        }
+    };
+    PageUserHistoryComponent.prototype.goBackToSubmittedForm = function () { this.subpage = 'History'; this.formOnHand = null; };
+    // Delete form process
+    PageUserHistoryComponent.prototype.tryDeleteForm = function (form) { this.subpage = 'Try delete'; this.formOnHand = form; };
+    PageUserHistoryComponent.prototype.deleteSubmittedForm = function () {
+        var _this = this;
+        if (this.formOnHand !== null) {
+            this.formService.deleteSubmittedForm(this.userinfoService.getUserinfo()._id, this.formOnHand).then(function (result) {
+                if (result.status) {
+                    _this.formService.getSubmittedForms(_this.userinfoService.getUserinfo()._id, _this.criteria);
+                    // this.socketioService.deleteAccount(this.userOnHand._id);
+                    _this.formOnHand = null;
+                    _this.subpage = 'History';
+                }
+            });
+        }
+    };
+    // Edit form process
+    PageUserHistoryComponent.prototype.editSubmittedForm = function (form) {
+        this.pageService.setPage('Government form');
+        this.pageService.setSubpage(form.form.accessCode);
+        this.formService.setMode('Edit', form);
+    };
+    // View form process
+    PageUserHistoryComponent.prototype.viewSubmittedForm = function (form) {
+        this.pageService.setPage('Government form');
+        this.pageService.setSubpage(form.form.accessCode);
+        this.formService.setMode('View', form);
+    };
+    PageUserHistoryComponent.prototype.ngOnDestroy = function () {
+        this.getSubmittedFormsSubscription.unsubscribe();
     };
     PageUserHistoryComponent = __decorate([
         core_1.Component({
@@ -1672,7 +2143,11 @@ var PageUserHistoryComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/page-user-panel/page-user-history/page-user-history.component.html"),
             styles: [__webpack_require__("./src/app/page-user-panel/page-user-history/page-user-history.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [socketio_service_1.SocketioService,
+            page_service_1.PageService,
+            setting_service_1.SettingService,
+            userinfo_service_1.UserinfoService,
+            form_service_1.FormService])
     ], PageUserHistoryComponent);
     return PageUserHistoryComponent;
 }());
@@ -1888,7 +2363,7 @@ var AdminService = /** @class */ (function () {
     AdminService.prototype.getUsers = function (criteria) {
         var _this = this;
         var url = this.apiUrl + '/getusers/' + criteria.start + '/' + criteria.limit + '/'
-            + criteria.sort + '/' + criteria.search;
+            + criteria.sort + '/' + criteria.search.replace(/\//g, '');
         return this.http.get(url).toPromise()
             .then(function (response) {
             var result = response.json();
@@ -2084,6 +2559,152 @@ var CookieService = /** @class */ (function () {
     return CookieService;
 }());
 exports.CookieService = CookieService;
+
+
+/***/ }),
+
+/***/ "./src/app/services/form.service.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+var globals_1 = __webpack_require__("./src/app/globals.ts");
+var Subject_1 = __webpack_require__("./node_modules/rxjs/_esm5/Subject.js");
+var FormService = /** @class */ (function () {
+    function FormService(http) {
+        this.http = http;
+        this.apiUrl = globals_1.ipHost + '/form';
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        this.subjectForms = new Subject_1.Subject();
+        this.subjectSubmittedForms = new Subject_1.Subject();
+        this.mode = 'New'; // New, Edit, View
+        this.form = null;
+        this.role = 'User'; // User, Admin
+    }
+    FormService.prototype.setMode = function (mode, form, role) {
+        if (mode === void 0) { mode = 'New'; }
+        if (form === void 0) { form = null; }
+        if (role === void 0) { role = 'User'; }
+        if (form === null) {
+            this.mode = 'New';
+            this.form = null;
+            this.role = 'User';
+        }
+        else {
+            this.mode = mode;
+            this.form = form;
+            this.role = role;
+        }
+    };
+    FormService.prototype.getMode = function () { return this.mode; };
+    FormService.prototype.getForm = function () { return this.form; };
+    FormService.prototype.getRole = function () { return this.role; };
+    FormService.prototype.getActiveForms = function (criteria) {
+        var _this = this;
+        var url = this.apiUrl + '/getactiveforms/' + criteria.category + '/'
+            + criteria.start + '/' + criteria.limit + '/'
+            + criteria.sort + '/' + criteria.search.replace(/\//g, '');
+        return this.http.get(url).toPromise()
+            .then(function (response) {
+            var result = response.json();
+            if (globals_1.testing)
+                console.log(result.message);
+            _this.subjectForms.next(result);
+        })
+            .catch(function (err) {
+            _this.subjectForms.next(err);
+        });
+    };
+    FormService.prototype.getFormDetail = function (accessCode) {
+        var url = this.apiUrl + '/getformdetail/' + accessCode;
+        return this.http.get(url).toPromise()
+            .then(function (response) {
+            var result = response.json();
+            if (globals_1.testing)
+                console.log(result.message);
+            return result;
+        })
+            .catch(function (err) { return null; });
+    };
+    FormService.prototype.getSubmittedForms = function (userId, criteria) {
+        var _this = this;
+        var url = this.apiUrl + '/getsubmittedforms/' + userId + '/'
+            + criteria.start + '/' + criteria.limit + '/'
+            + criteria.sort + '/' + criteria.search.replace(/\//g, '');
+        ;
+        return this.http.get(url).toPromise()
+            .then(function (response) {
+            var result = response.json();
+            if (globals_1.testing)
+                console.log(result.message);
+            _this.subjectSubmittedForms.next(result);
+        })
+            .catch(function (err) {
+            _this.subjectSubmittedForms.next(err);
+        });
+    };
+    FormService.prototype.submitForm = function (userId, formId, formValue) {
+        var url = this.apiUrl + '/submit', input = { userId: userId, formId: formId, formValue: formValue };
+        return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
+            .toPromise()
+            .then(function (response) {
+            var result = response.json();
+            if (globals_1.testing)
+                console.log(result.message);
+            return result;
+        })
+            .catch(function (err) { return null; });
+    };
+    FormService.prototype.deleteSubmittedForm = function (userId, form) {
+        var url = this.apiUrl + '/deletesubmittedform', input = { userId: userId, formId: form._id };
+        return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
+            .toPromise()
+            .then(function (response) {
+            var result = response.json();
+            if (globals_1.testing)
+                console.log(result.message);
+            return result;
+        })
+            .catch(function (err) { return null; });
+    };
+    FormService.prototype.editSubmittedGovForm = function (formId, formValue) {
+        var url = this.apiUrl + '/editform', input = { formId: formId, formValue: formValue };
+        return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
+            .toPromise()
+            .then(function (response) {
+            var result = response.json();
+            if (globals_1.testing)
+                console.log(result.message);
+            return result;
+        })
+            .catch(function (err) { return null; });
+    };
+    // Observable
+    FormService.prototype.observeForms = function () {
+        return this.subjectForms.asObservable();
+    };
+    FormService.prototype.observeSubmittedForms = function () {
+        return this.subjectSubmittedForms.asObservable();
+    };
+    FormService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http])
+    ], FormService);
+    return FormService;
+}());
+exports.FormService = FormService;
 
 
 /***/ }),

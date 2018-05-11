@@ -17,7 +17,7 @@ export class AdminService {
 
   getUsers(criteria) {
     let url = this.apiUrl + '/getusers/' + criteria.start + '/' + criteria.limit + '/' 
-      + criteria.sort + '/' + criteria.search;
+      + criteria.sort + '/' + criteria.search.replace(/\//g, '');
 
     return this.http.get(url).toPromise()
       .then(response=>{

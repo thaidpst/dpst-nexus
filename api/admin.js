@@ -37,7 +37,7 @@ router.get('/getusers/:start/:limit/:sort/:search', (req, res)=>{
             limit: limit, skip: start, sort: sortObj
         })
         .then(check1=>{
-            dbUsers.count()
+            dbUsers.count(query)
                 .then(totalUsers=>{
                     res.json({
                         status: true, 
