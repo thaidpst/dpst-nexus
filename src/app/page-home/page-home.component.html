@@ -28,7 +28,7 @@
                                     <ul>
                                         <li><input type="text" value="" placeholder="{{'Your name' | translate:settingService.getLanguage() }}"></li>
                                         <li><input type="email" value="" placeholder="{{'Your E-mail address' | translate:settingService.getLanguage() }}"></li>
-                                        <li><input type="submit" value="{{'Register' | translate:settingService.getLanguage() }}" (click)="pageService.setPage('Register')"></li>
+                                        <li><input type="submit" value="{{'Register' | translate:settingService.getLanguage() }}" (click)="router.navigate(['/register'])"></li>
                                     </ul>
                                 </form>
                             </ng-container>
@@ -69,7 +69,7 @@
                               <h3>{{'How to Use' | translate:settingService.getLanguage() }}</h3>
                               <p>
                                   It is easy. You just need to register and 
-                                  <strong style="cursor:pointer;" (click)="pageService.setPage('Register')">become a member</strong>.
+                                  <a routerLink="/register"><strong style="cursor:pointer;">become a member</strong></a>.
                               </p>
                           </li>
                       </ul>

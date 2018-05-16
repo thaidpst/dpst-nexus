@@ -65,6 +65,8 @@ export const LANG_TH_TRANS = {
     'หน้าแรก',
   'how to use':
     'วิธีใช้งาน',
+  'incorrect username or password':
+    'ชื่อผู้ใช้งานหรือรหัสผ่านผิด',
   'ipst<br>924 sukhumvit rd<br>phra khanong, khlong toei<br>bangkok 10110 thailand':
     'สสวท.<br>924 ถนนสุขุมวิท<br>แขวงพระโขนง เขตคลองเตย<br>กรุงเทพมหานคร 10110',
   'if you have any concerns, please ':
@@ -133,8 +135,6 @@ export const LANG_TH_TRANS = {
     'คืออะไร',
   'workplace':
     'สถานที่ทำงาน',
-  'wrong username or password':
-    'ชื่อผู้ใช้งานหรือรหัสผ่านผิด',
   'you are about to ':
     'คุณกำลังจะ',
   'your account has been approved, and you can use our service.':

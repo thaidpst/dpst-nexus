@@ -10,7 +10,6 @@ import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { CookieService } from './services/cookie.service';
 import { LanguageService } from './languages/language.service';
-import { PageService } from './services/page.service';
 import { SettingService } from './services/setting.service';
 import { SocketioService } from './services/socketio.service';
 import { UserinfoService } from './services/userinfo.service';
@@ -80,7 +79,6 @@ import { PageUserPanelRoutingModule } from './page-user-panel/page-user-panel-ro
   ],
   providers: [
     SocketioService,
-    PageService,
     SettingService,
     AuthenticationService,
     UserinfoService,

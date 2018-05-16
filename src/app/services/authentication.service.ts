@@ -42,8 +42,9 @@ export class AuthenticationService {
 
   login(formValue) {
     const url = this.apiUrl + '/login';
-
-    return this.httpClient.post<JsonResponse>(url, JSON.stringify(formValue), { headers: this.headers }).toPromise()
+    return this.httpClient.post<JsonResponse>(url, JSON.stringify(formValue),
+      { headers: this.headers })
+      .toPromise()
       .then(response => {
         if (testing) console.log(response.message);
         return response;

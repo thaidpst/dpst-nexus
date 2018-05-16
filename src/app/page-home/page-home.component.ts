@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { PageService } from '../services/page.service';
 import { SettingService } from '../services/setting.service';
 import { UserinfoService } from '../services/userinfo.service';
 
@@ -12,9 +12,9 @@ import { UserinfoService } from '../services/userinfo.service';
 export class PageHomeComponent implements OnInit {
 
   constructor(
-    private pageService: PageService,
     private settingService: SettingService,
-    private userinfoService: UserinfoService
+    private userinfoService: UserinfoService,
+    private router: Router
   ) { }
 
   ngOnInit() {

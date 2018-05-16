@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { SocketioService } from '../services/socketio.service';
-import { PageService } from '../services/page.service';
 import { SettingService } from '../services/setting.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { UserinfoService } from '../services/userinfo.service';
@@ -17,10 +16,10 @@ import { CookieService } from '../services/cookie.service';
 export class PageLoginComponent implements OnInit {
 
   private loginFail = false;
+  private loginMsg: string;
 
   constructor(
     private socketioService: SocketioService,
-    private pageService: PageService,
     private settingService: SettingService,
     private authService: AuthenticationService,
     private userinfoService: UserinfoService,
@@ -46,6 +45,7 @@ export class PageLoginComponent implements OnInit {
           form.resetForm();
         } else {
           this.loginFail = true;
+          this.loginMsg = result.data;
         }
       });
   }

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PageService } from '../../services/page.service';
-
 @Component({
   selector: 'app-page-user-history',
   templateUrl: './page-user-history.component.html',
@@ -9,10 +7,9 @@ import { PageService } from '../../services/page.service';
 })
 export class PageUserHistoryComponent implements OnInit {
 
-  constructor(private pageService: PageService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.pageService.setPage('History');
   }
 
 }

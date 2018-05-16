@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { PageService } from '../services/page.service';
 import { SettingService } from '../services/setting.service';
 
 @Component({
@@ -14,9 +14,13 @@ export class PageUserPanelComponent implements OnInit {
 
   constructor(
     private settingService: SettingService,
-    private pageService: PageService
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.route.data
+      .subscribe(data => {
+        this.pageName = data.pagename;
+      });
   }
 }

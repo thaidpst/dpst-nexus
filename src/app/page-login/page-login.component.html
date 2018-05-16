@@ -25,17 +25,18 @@
                   <input class="reg-input" type="text" name="username" value="" ngModel required></li>
                 <li><div class="input-label">{{'Password' | translate:settingService.getLanguage() }}</div>
                   <input class="reg-input" type="password" name="password" value="" ngModel required>
-                  <div class="error-message"><span *ngIf="loginFail">* {{'Wrong username or password' | translate:settingService.getLanguage() }}</span></div>
+                  <div class="error-message"><span *ngIf="loginFail">* {{loginMsg | translate:settingService.getLanguage() }}</span></div>
                 </li>
                 <li class="last-input">
                   <input name="rememberme" type="checkbox" ngModel> {{'Remember me' | translate:settingService.getLanguage() }}
                 </li>
                 <li class="last-input" style="text-align:right;">
-                  {{'Forgot' | translate:settingService.getLanguage() }} <a (click)="pageService.setPage('Forgot username')">{{'username' | translate:settingService.getLanguage() }}</a> / 
-                  <a (click)="pageService.setPage('Forgot password')">{{'password' | translate:settingService.getLanguage() }}</a> ?
+                  {{'Forgot' | translate:settingService.getLanguage() }}
+                  <a routerLink="/recover/username">{{'username' | translate:settingService.getLanguage() }}</a> / 
+                  <a routerLink="/recover/password">{{'password' | translate:settingService.getLanguage() }}</a> ?
                 </li>
               </ul>
-              <div style="text-align:center;"><input type="submit" value="{{'Log In' | translate:settingService.getLanguage() }}" class=""></div>
+              <div style="text-align:center;"><input type="submit" value="{{'Log in' | translate:settingService.getLanguage() }}" class=""></div>
             </form>
 
           </div>

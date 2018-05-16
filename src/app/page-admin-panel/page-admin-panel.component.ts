@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { PageService } from '../services/page.service';
 import { SettingService } from '../services/setting.service';
 
 @Component({
@@ -10,13 +10,17 @@ import { SettingService } from '../services/setting.service';
 })
 export class PageAdminPanelComponent implements OnInit {
 
+  pageName: string;
+
   constructor(
-    private pageService: PageService,
-    private settingService: SettingService
+    private settingService: SettingService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-
+    this.route.data
+      .subscribe(data => {
+        this.pageName = data.pagename;
+      });
   }
-
 }

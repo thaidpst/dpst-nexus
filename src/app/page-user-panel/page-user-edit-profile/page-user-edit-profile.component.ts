@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { PageService } from '../../services/page.service';
 import { UserinfoService } from '../../services/userinfo.service';
 
 @Component({
@@ -14,16 +13,14 @@ export class PageUserEditProfileComponent implements OnInit {
   private userDetail = null;
 
   constructor(
-    private pageService: PageService,
     private userinfoService: UserinfoService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.pageService.setPage('Edit Profile');
     const userinfo = Object.assign({}, this.userinfoService.getUserinfo());
     this.userinfoService.getUserDetail(userinfo)
-      .then(result =>  {
+      .then(result => {
         if (result !== null && result.status) {
           this.userDetail = result.data;
         }

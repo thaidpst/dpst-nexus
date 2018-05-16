@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { PageService } from '../../services/page.service';
 import { UserinfoService } from '../../services/userinfo.service';
 
 @Component({
@@ -14,14 +14,13 @@ export class PageUserProfileComponent implements OnInit {
 
   constructor(
     private userinfoService: UserinfoService,
-    private pageService: PageService
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.pageService.setPage('Profile');
     const userinfo = Object.assign({}, this.userinfoService.getUserinfo());
     this.userinfoService.getUserDetail(userinfo)
-      .then(result =>  {
+      .then(result => {
         if (result !== null && result.status) {
           this.userDetail = result.data;
         }
