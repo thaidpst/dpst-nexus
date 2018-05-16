@@ -123,39 +123,33 @@ router.post('/login', (req, res) => {
   dbUsers.findOne({
     username : username
   })
-    .then(check1 => {
-      if (check1 === null) res.json({
-          status : false,
-          message : 'Login fail: Wrong username or password.',
-          data : 0
-        });else {
-        let hash = crypto.pbkdf2Sync(password, check1.salt, 1000, 64, 'sha512').toString('hex');
-        if (hash === check1.password) {
-          res.json({
-            status : true,
-            message : 'Login successfully!',
-            data : {
-              _id : check1._id,
-              username : check1.username,
-              level : check1.level,
-              firstname : check1.firstname,
-              lastname : check1.lastname,
-              email : check1.email,
-              status : check1.status
-            }
-          });
-        } else res.json({
-            status : false,
-            message : 'Login fail: Wrong username or password.',
-            data : 0
-          });
-      }
+    .then(userRecord => {
+      if (!userRecord)
+        throw Error('Incorrect username or password');
+
+      let hash = crypto.pbkdf2Sync(password, userRecord.salt, 1000, 64, 'sha512').toString('hex');
+      if (hash !== userRecord.password)
+        throw Error('Incorrect username or password');
+
+      res.json({
+        status : true,
+        message : 'login successful',
+        data : {
+          _id : userRecord._id,
+          username : userRecord.username,
+          level : userRecord.level,
+          firstname : userRecord.firstname,
+          lastname : userRecord.lastname,
+          email : userRecord.email,
+          status : userRecord.status
+        }
+      });
     })
-    .catch(err1 => {
+    .catch(err => {
       res.json({
         status : false,
-        message : 'Login Error: ' + err1,
-        data : null
+        message : 'login failed: ' + err.message,
+        data : err.message
       })
     })
 });
@@ -181,7 +175,7 @@ router.get('/authenticate', (req, res) => {
           }
         });
       } else {
-        logout(res, 'authentication failed: Wrong username.');
+        logout(res, 'authentication failed: Mismatched username.');
       }
     }).catch(err => logout(res, 'authentication failed: ' + err));
   }
