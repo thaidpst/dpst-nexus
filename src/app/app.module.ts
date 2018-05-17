@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -85,8 +85,13 @@ import { PageUserPanelRoutingModule } from './page-user-panel/page-user-panel-ro
     AdminService,
     CookieService,
     LanguageService,
-    AuthGuardService
-  ],
+    AuthGuardService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (userInfoService: UserinfoService) => function() { return userInfoService.init(); },
+      deps: [UserinfoService],
+      multi: true
+    }],
   bootstrap: [
     AppComponent
   ]

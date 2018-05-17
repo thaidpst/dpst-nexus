@@ -178,6 +178,12 @@ router.get('/authenticate', (req, res) => {
         logout(res, 'authentication failed: Mismatched username.');
       }
     }).catch(err => logout(res, 'authentication failed: ' + err));
+  } else {
+    res.json({
+      status : true,
+      message : 'not logged in',
+      data : null
+    });
   }
 });
 

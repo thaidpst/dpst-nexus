@@ -1,19 +1,34 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { ipHost, testing } from '../globals';
+import { UserInfo } from '../schemas/user-info';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class UserinfoService {
 
-  private userinfo = null;
+  private userinfo: UserInfo;
 
   private apiUrl = ipHost + '/user';
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
-  constructor(private http: Http) { }
+  constructor(private http: Http,
+    private authenticationService: AuthenticationService
+  ) { }
 
-  setUserinfo(userinfo) { this.userinfo = userinfo; }
-  getUserinfo() { return this.userinfo; }
+  init(): Promise<void> {
+    // Check remember me login
+    return this.authenticationService.authenticate()
+      .then(userInfo => this.setUserinfo(userInfo));
+  }
+
+  setUserinfo(userinfo) {
+    this.userinfo = userinfo;
+  }
+
+  getUserinfo(): UserInfo {
+    return this.userinfo;
+  }
 
   update() {
     const url = this.apiUrl + '/update/' + this.userinfo._id;

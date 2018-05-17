@@ -1,7 +1,6 @@
 import { Component, OnInit, enableProdMode } from '@angular/core';
 
 import { SocketioService } from './services/socketio.service';
-import { AuthenticationService } from './services/authentication.service';
 import { UserinfoService } from './services/userinfo.service';
 import { CookieService } from './services/cookie.service';
 import { Router } from '@angular/router';
@@ -17,7 +16,6 @@ export class AppComponent {
 
   constructor(
     private socketioService: SocketioService,
-    private authenticationService: AuthenticationService,
     private userinfoService: UserinfoService,
     private cookieService: CookieService,
     private router: Router
@@ -46,15 +44,6 @@ export class AppComponent {
         this.router.navigate(['/']);
       }
     }.bind(this));
-
-    // Check remember me login
-    this.authenticationService.authenticate()
-      .then(userInfo => {
-        if (userInfo) {
-          this.socketioService.login(userInfo.username);
-          this.userinfoService.setUserinfo(userInfo);
-        }
-      });
   }
 
 }

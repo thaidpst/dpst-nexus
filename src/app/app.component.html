@@ -4,13 +4,9 @@
 
   <router-outlet></router-outlet>
 
-  <!-- User panel -->
-  <ng-container *ngIf="userinfoService.getUserinfo()!==null">
-  </ng-container>
+  <!-- User panel *ngIf="userinfoService.getUserinfo()!==null" -->
 
-  <!-- Admin panel -->
-  <ng-container *ngIf="userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().level>=8">
-  </ng-container>
+  <!-- Admin panel *ngIf="userinfoService.getUserinfo()!==null && userinfoService.getUserinfo().level>=8" -->
   
   <!-- <div>{{socketioService.getOnlineUsers()}}</div> -->  
 </div>

@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ipHost, testing } from '../globals';
 import { JsonResponse } from '../schemas/json-response';
 import { UserInfo } from '../schemas/user-info';
-import { UserinfoService } from './userinfo.service';
 
 @Injectable()
 export class AuthenticationService {
@@ -14,15 +13,14 @@ export class AuthenticationService {
 
   constructor(
     private httpClient: HttpClient,
-    private userinfoService: UserinfoService
   ) { }
 
-  authenticate() {
+  authenticate(): Promise<UserInfo> {
     const url = this.apiUrl + '/authenticate';
     return this.httpClient.get<JsonResponse>(url).toPromise()
       .then(response => {
         if (testing) console.log(response.message);
-        if (response.status) return response.data;
+        if (response.status) return response.data as UserInfo;
         return null;
       })
       .catch(err => null);
