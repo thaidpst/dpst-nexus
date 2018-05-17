@@ -1,3 +1,4 @@
+import { TranslateComponent } from '../languages/translate.component';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
@@ -14,7 +15,7 @@ import { Router } from '@angular/router';
   templateUrl: './page-register.component.html',
   styleUrls: ['./page-register.component.css']
 })
-export class PageRegisterComponent implements OnInit {
+export class PageRegisterComponent extends TranslateComponent implements OnInit {
 
   private passNotMatch = false;
   private passTooShort = false;
@@ -22,13 +23,15 @@ export class PageRegisterComponent implements OnInit {
   private emailInUse = false;
 
   constructor(
+    settings: SettingService,
     private socketioService: SocketioService,
-    private settingService: SettingService,
     private authService: AuthenticationService,
     private userinfoService: UserinfoService,
     private cookieService: CookieService,
     private router: Router
-  ) { }
+  ) {
+    super(settings);
+  }
 
   ngOnInit() {
   }

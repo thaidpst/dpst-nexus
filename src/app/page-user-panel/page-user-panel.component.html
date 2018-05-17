@@ -4,11 +4,11 @@
             <div class="col-md-12">
 
                 <div class="political-subheader-wrap">
-                    <h1>{{'User Panel' | translate:settingService.getLanguage() }}</h1>
+                    <h1>{{'User Panel' | translate:language }}</h1>
                     <ul class="political-breadcrumb">
-                        <li><a routerLink="/">{{'Homepage' | translate:settingService.getLanguage() }}</a></li>
-                        <li>{{'User Panel' | translate:settingService.getLanguage() }}</li>
-                        <li class="active">{{pageName | translate:settingService.getLanguage() }}</li>
+                        <li><a routerLink="/">{{'Homepage' | translate:language }}</a></li>
+                        <li>{{'User Panel' | translate:language }}</li>
+                        <li class="active">{{pageName | translate:language }}</li>
                     </ul>
                 </div>
 
@@ -25,16 +25,16 @@
                 <!-- User panel sidebar -->
                 <aside class="col-md-3">
                     <div class="widget widget_cetagories">
-                        <h2 class="political-widget-heading">{{'User Menu' | translate:settingService.getLanguage() }}</h2>
+                        <h2 class="political-widget-heading">{{'User Menu' | translate:language }}</h2>
                         <ul>
                             <li routerLinkActive="active">
-                                <a routerLink="profile">{{'Profile' | translate:settingService.getLanguage() }}</a></li>
+                                <a routerLink="profile">{{'Profile' | translate:language }}</a></li>
                             <li routerLinkActive="active">
-                                <a routerLink="edit-profile">{{'Edit Profile' | translate:settingService.getLanguage() }}</a></li>
+                                <a routerLink="edit-profile">{{'Edit Profile' | translate:language }}</a></li>
                             <li routerLinkActive="active">
-                                <a routerLink="history">{{'History' | translate:settingService.getLanguage() }}</a></li>
+                                <a routerLink="history">{{'History' | translate:language }}</a></li>
                             <li routerLinkActive="active">
-                                <a routerLink="settings">{{'Settings' | translate:settingService.getLanguage() }}</a></li>
+                                <a routerLink="settings">{{'Settings' | translate:language }}</a></li>
                         </ul>
                     </div>
                 </aside>

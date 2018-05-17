@@ -1,3 +1,4 @@
+import { TranslateComponent } from '../languages/translate.component';
 import { Component, OnInit } from '@angular/core';
 
 import { SettingService } from '../services/setting.service';
@@ -8,12 +9,14 @@ import { UserinfoService } from '../services/userinfo.service';
   templateUrl: './page-check-status.component.html',
   styleUrls: ['./page-check-status.component.css']
 })
-export class PageCheckStatusComponent implements OnInit {
+export class PageCheckStatusComponent extends TranslateComponent implements OnInit {
 
   constructor(
-    private settingService: SettingService,
+    settings: SettingService,
     private userinfoService: UserinfoService
-  ) { }
+  ) {
+    super(settings);
+  }
 
   ngOnInit() {
   }

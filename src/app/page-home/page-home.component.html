@@ -21,14 +21,14 @@
                         <div class="political-banner-form">
 
                             <!-- Log in welcome -->
-                            <h1 style="line-height:55px;">{{'Welcome to DPST Database Manager' | translate:settingService.getLanguage() }}</h1>
+                            <h1 style="line-height:55px;">{{'Welcome to DPST Database Manager' | translate:language }}</h1>
                             <ng-container *ngIf="userinfoService.getUserinfo()===null">
-                                <h2>{{'Register to our community' | translate:settingService.getLanguage() }}: </h2>
+                                <h2>{{'Register to our community' | translate:language }}: </h2>
                                 <form>
                                     <ul>
-                                        <li><input type="text" value="" placeholder="{{'Your name' | translate:settingService.getLanguage() }}"></li>
-                                        <li><input type="email" value="" placeholder="{{'Your E-mail address' | translate:settingService.getLanguage() }}"></li>
-                                        <li><input type="submit" value="{{'Register' | translate:settingService.getLanguage() }}" (click)="router.navigate(['/register'])"></li>
+                                        <li><input type="text" value="" placeholder="{{'Your name' | translate:language }}"></li>
+                                        <li><input type="email" value="" placeholder="{{'Your E-mail address' | translate:language }}"></li>
+                                        <li><input type="submit" value="{{'Register' | translate:language }}" (click)="router.navigate(['/register'])"></li>
                                     </ul>
                                 </form>
                             </ng-container>
@@ -50,7 +50,7 @@
                       <ul>
                           <li>
                               <i class="icon church-interface"></i>
-                              <h3>{{'About Application' | translate:settingService.getLanguage() }}</h3>
+                              <h3>{{'About Application' | translate:language }}</h3>
                               <p>
                                   This web application will help DPST to manage the data of DPST students and teachers
                                   <strong>faster, easier, and efficiently</strong>.
@@ -58,7 +58,7 @@
                           </li>
                           <li>
                               <i class="icon church-arrow2"></i>
-                              <h3>{{'Mission' | translate:settingService.getLanguage() }}</h3>
+                              <h3>{{'Mission' | translate:language }}</h3>
                               <p>
                                   We hope to help building the DPST community, 
                                   and this application can connect DPST people with others.
@@ -66,7 +66,7 @@
                           </li>
                           <li>
                               <i class="icon church-eye"></i>
-                              <h3>{{'How to Use' | translate:settingService.getLanguage() }}</h3>
+                              <h3>{{'How to Use' | translate:language }}</h3>
                               <p>
                                   It is easy. You just need to register and 
                                   <a routerLink="/register"><strong style="cursor:pointer;">become a member</strong></a>.

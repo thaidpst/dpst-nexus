@@ -5,7 +5,7 @@
             <div class="political-fancy-title">
               <div class="container">
                 <div class="row">
-                  <div class="col-md-12"><h2>{{'Get in Touch' | translate:settingService.getLanguage() }}</h2></div>
+                  <div class="col-md-12"><h2>{{'Get in Touch' | translate:language }}</h2></div>
                 </div>
               </div>
             </div>
@@ -18,21 +18,21 @@
                       <li class="col-md-3">
                         <div class="political-contact-text">
                           <i class="icon church-location-pin"></i>
-                          <h6>{{'Meet Us' | translate:settingService.getLanguage() }}</h6>
-                          <p [innerHTML]="'IPST<br>924 Sukhumvit Rd<br>Phra Khanong, Khlong Toei<br>Bangkok 10110 Thailand' | translate:settingService.getLanguage()"></p>
+                          <h6>{{'Meet Us' | translate:language }}</h6>
+                          <p [innerHTML]="'IPST<br>924 Sukhumvit Rd<br>Phra Khanong, Khlong Toei<br>Bangkok 10110 Thailand' | translate:language"></p>
                         </div>
                       </li>
                       <li class="col-md-3">
                         <div class="political-contact-text">
                           <i class="icon church-phone-call"></i>
-                          <h6>{{'Call Us' | translate:settingService.getLanguage() }}</h6>
-                          <p>{{'+66 2 392 4021' | translate:settingService.getLanguage() }}</p>
+                          <h6>{{'Call Us' | translate:language }}</h6>
+                          <p>{{'+66 2 392 4021' | translate:language }}</p>
                         </div>
                       </li>
                       <li class="col-md-3">
                         <div class="political-contact-text">
                           <i class="icon church-envelope"></i>
-                          <h6>{{'E-mail Us' | translate:settingService.getLanguage() }}</h6>
+                          <h6>{{'E-mail Us' | translate:language }}</h6>
                           <a href="mailto:nsric@ipst.ac.th">nsric@ipst.ac.th</a>
                           <a href="mailto:sarun_sla@hotmail.com">sarun_sla@hotmail.com</a>
                         </div>
@@ -40,8 +40,8 @@
                       <li class="col-md-3">
                         <div class="political-contact-text">
                           <i class="icon church-print"></i>
-                          <h6>{{'Fax Us' | translate:settingService.getLanguage() }}</h6>
-                          <p>{{'+66 2 381 0750' | translate:settingService.getLanguage() }}</p>
+                          <h6>{{'Fax Us' | translate:language }}</h6>
+                          <p>{{'+66 2 381 0750' | translate:language }}</p>
                         </div>
                       </li>
                     </ul>
@@ -57,18 +57,18 @@
             
             <div class="col-md-8">
               <div class="political-contact-form">
-                <h2 class="political-section-heading">{{'Message Us Now' | translate:settingService.getLanguage() }}</h2>
+                <h2 class="political-section-heading">{{'Message Us Now' | translate:language }}</h2>
                 <p>
-                  {{'After we received your message, we will reply to you within 2 business days. Thank you!' | translate:settingService.getLanguage() }}
+                  {{'After we received your message, we will reply to you within 2 business days. Thank you!' | translate:language }}
                 </p>
 
                 <form #form="ngForm" (ngSubmit)="sendMessage(form)" ngNativeValidate>
                   <ul>
-                    <li><input class="reg-input" type="text" name="name" value="" placeholder="{{'Your name' | translate:settingService.getLanguage() }}" ngModel required></li>
-                    <li><input class="reg-input" type="email" name="email" value="" placeholder="{{'Your e-mail address' | translate:settingService.getLanguage() }}" ngModel required></li>
-                    <li class="political-full-form"><textarea name="message" placeholder="{{'Message' | translate:settingService.getLanguage() }}" ngModel required></textarea></li>
+                    <li><input class="reg-input" type="text" name="name" value="" placeholder="{{'Your name' | translate:language }}" ngModel required></li>
+                    <li><input class="reg-input" type="email" name="email" value="" placeholder="{{'Your e-mail address' | translate:language }}" ngModel required></li>
+                    <li class="political-full-form"><textarea name="message" placeholder="{{'Message' | translate:language }}" ngModel required></textarea></li>
                   </ul>
-                  <div style="text-align:center;"><input type="submit" value="{{'Send Message' | translate:settingService.getLanguage() }}" class=""></div>
+                  <div style="text-align:center;"><input type="submit" value="{{'Send Message' | translate:language }}" class=""></div>
                 </form>
 
               </div>

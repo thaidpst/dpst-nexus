@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h2>{{'Register' | translate:settingService.getLanguage() }}</h2>
+            <h2>{{'Register' | translate:language }}</h2>
           </div>
         </div>
       </div>
@@ -19,32 +19,32 @@
 
             <form #register="ngForm" (ngSubmit)="registerMember(register)" ngNativeValidate>
               <ul>
-                <li><div class="input-label">{{'First name' | translate:settingService.getLanguage() }}</div>
+                <li><div class="input-label">{{'First name' | translate:language }}</div>
                   <input class="reg-input" type="text" name="firstname" value="" ngModel required></li>
-                <li><div class="input-label">{{'Last name' | translate:settingService.getLanguage() }}</div>
+                <li><div class="input-label">{{'Last name' | translate:language }}</div>
                   <input class="reg-input" type="text" name="lastname" value="" ngModel required></li>
                 <li>
                   <div class="input-label">
-                    {{'Username' | translate:settingService.getLanguage() }}
-                    ({{'used for logging in' | translate:settingService.getLanguage() }})
+                    {{'Username' | translate:language }}
+                    ({{'used for logging in' | translate:language }})
                   </div>
                   <input class="reg-input" type="text" name="username" value="" ngModel required>
-                  <div class="error-message" *ngIf="usernameInUse">* {{'Username is already in use' | translate:settingService.getLanguage() }}</div>
+                  <div class="error-message" *ngIf="usernameInUse">* {{'Username is already in use' | translate:language }}</div>
                 </li>
-                <li><div class="input-label">{{'E-mail address' | translate:settingService.getLanguage() }}</div>
+                <li><div class="input-label">{{'E-mail address' | translate:language }}</div>
                   <input class="reg-input" type="email" name="email" value="" ngModel required>
-                  <div class="error-message" *ngIf="emailInUse">* {{'E-mail is already in use' | translate:settingService.getLanguage() }}</div>
+                  <div class="error-message" *ngIf="emailInUse">* {{'E-mail is already in use' | translate:language }}</div>
                 </li>
-                <li><div class="input-label">{{'Password' | translate:settingService.getLanguage() }} ({{'5 letters minimum' | translate:settingService.getLanguage() }})</div>
+                <li><div class="input-label">{{'Password' | translate:language }} ({{'5 letters minimum' | translate:language }})</div>
                   <input class="reg-input" type="password" name="password" value="" ngModel required>
-                  <div class="error-message" *ngIf="passTooShort">* {{'Password is too short' | translate:settingService.getLanguage() }}</div>
+                  <div class="error-message" *ngIf="passTooShort">* {{'Password is too short' | translate:language }}</div>
                 </li>
-                <li><div class="input-label">{{'Confirm password' | translate:settingService.getLanguage() }}</div>
+                <li><div class="input-label">{{'Confirm password' | translate:language }}</div>
                   <input class="reg-input" type="password" name="confirmPassword" value="" ngModel required>
-                  <div class="error-message" *ngIf="passNotMatch">* {{'Password does not match' | translate:settingService.getLanguage() }}</div>
+                  <div class="error-message" *ngIf="passNotMatch">* {{'Password does not match' | translate:language }}</div>
                 </li>
               </ul>
-              <div style="text-align:center"><input type="submit" value="{{'Register' | translate:settingService.getLanguage() }}" class=""></div>
+              <div style="text-align:center"><input type="submit" value="{{'Register' | translate:language }}" class=""></div>
             </form>
 
           </div>

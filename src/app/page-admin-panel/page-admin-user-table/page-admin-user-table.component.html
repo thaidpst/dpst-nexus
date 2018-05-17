@@ -121,23 +121,23 @@
 
 <!-- Delete user panel -->
 <div *ngIf="subpage=='Try delete'" class="political-blog-large">
-  <h1 style="margin-bottom:20px;"><strong>{{'You are about to ' | translate:settingService.getLanguage() }}<span class="ban">{{'DELETE a user' | translate:settingService.getLanguage() }}</span></strong></h1>
-  <h3 style="margin-bottom:20px;">{{'Username' | translate:settingService.getLanguage() }}: <span class="hello-user" style="font-weight:600;">{{userOnHand.username}}</span></h3>
-  <input type="submit" class="political-simple-btn delete-btn" value="{{'DELETE' | translate:settingService.getLanguage() }}" (click)="deleteAccount()">
-  <input type="submit" class="political-simple-btn" value="{{'Cancel' | translate:settingService.getLanguage() }}" (click)="goBackToUserTable()">
+  <h1 style="margin-bottom:20px;"><strong>{{'You are about to ' | translate:language }}<span class="ban">{{'DELETE a user' | translate:language }}</span></strong></h1>
+  <h3 style="margin-bottom:20px;">{{'Username' | translate:language }}: <span class="hello-user" style="font-weight:600;">{{userOnHand.username}}</span></h3>
+  <input type="submit" class="political-simple-btn delete-btn" value="{{'DELETE' | translate:language }}" (click)="deleteAccount()">
+  <input type="submit" class="political-simple-btn" value="{{'Cancel' | translate:language }}" (click)="goBackToUserTable()">
 </div>
 
 <!-- View user profile -->
 <ng-container *ngIf="subpage=='View user' && userOnHand!==null">
   <input class="political-simple-btn back-btn" type="submit" 
-    (click)="goBackToUserTable()" value="{{'Go back' | translate:settingService.getLanguage() }}">
+    (click)="goBackToUserTable()" value="{{'Go back' | translate:language }}">
   <app-profile-form [userDetail]="userOnHand"></app-profile-form>
 </ng-container>
 
 <!-- Edit user information -->
 <ng-container *ngIf="subpage=='Edit user' && userOnHand!==null">
   <input class="political-simple-btn back-btn" type="submit" 
-    (click)="goBackToUserTable()" value="{{'Go back' | translate:settingService.getLanguage() }}">
+    (click)="goBackToUserTable()" value="{{'Go back' | translate:language }}">
   <input class="political-simple-btn warning-btn" type="submit" style="float:right; margin-right:10px;"
     (click)="goToAdminPrivilageSetting()" value="Admin pivilage setting">
   <app-profile-edit-form [userDetail]="userOnHand"
@@ -147,7 +147,7 @@
 <!-- Admin privilage setting -->
 <ng-container *ngIf="subpage=='Admin setting' && userOnHand!==null">
   <input class="political-simple-btn back-btn" type="submit" 
-    (click)="goBackToUserTable()" value="{{'Go back' | translate:settingService.getLanguage() }}">
+    (click)="goBackToUserTable()" value="{{'Go back' | translate:language }}">
   <app-admin-privilage-setting-form [userinfo]="userOnHand"
   (userinfoUpdated)="userPrivilageUpdatedDone($event)"></app-admin-privilage-setting-form>
 </ng-container>

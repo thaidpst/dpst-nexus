@@ -6,7 +6,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h2>{{'Log In' | translate:settingService.getLanguage() }}</h2>
+            <h2>{{'Log In' | translate:language }}</h2>
           </div>
         </div>
       </div>
@@ -21,22 +21,22 @@
             
             <form #login="ngForm" (ngSubmit)="memberLogIn(login)" ngNativeValidate>
               <ul>
-                <li><div class="input-label">{{'Username' | translate:settingService.getLanguage() }}</div>
+                <li><div class="input-label">{{'Username' | translate:language }}</div>
                   <input class="reg-input" type="text" name="username" value="" ngModel required></li>
-                <li><div class="input-label">{{'Password' | translate:settingService.getLanguage() }}</div>
+                <li><div class="input-label">{{'Password' | translate:language }}</div>
                   <input class="reg-input" type="password" name="password" value="" ngModel required>
-                  <div class="error-message"><span *ngIf="loginFail">* {{loginMsg | translate:settingService.getLanguage() }}</span></div>
+                  <div class="error-message"><span *ngIf="loginFail">* {{loginMsg | translate:language }}</span></div>
                 </li>
                 <li class="last-input">
-                  <input name="rememberme" type="checkbox" ngModel> {{'Remember me' | translate:settingService.getLanguage() }}
+                  <input name="rememberme" type="checkbox" ngModel> {{'Remember me' | translate:language }}
                 </li>
                 <li class="last-input" style="text-align:right;">
-                  {{'Forgot' | translate:settingService.getLanguage() }}
-                  <a routerLink="/recover/username">{{'username' | translate:settingService.getLanguage() }}</a> / 
-                  <a routerLink="/recover/password">{{'password' | translate:settingService.getLanguage() }}</a> ?
+                  {{'Forgot' | translate:language }}
+                  <a routerLink="/recover/username">{{'username' | translate:language }}</a> / 
+                  <a routerLink="/recover/password">{{'password' | translate:language }}</a> ?
                 </li>
               </ul>
-              <div style="text-align:center;"><input type="submit" value="{{'Log in' | translate:settingService.getLanguage() }}" class=""></div>
+              <div style="text-align:center;"><input type="submit" value="{{'Log in' | translate:language }}" class=""></div>
             </form>
 
           </div>

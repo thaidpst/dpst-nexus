@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h2>{{'Status' | translate:settingService.getLanguage() }}:
+            <h2>{{'Status' | translate:language }}:
               <span [ngClass]="{'ban':userinfoService.getUserinfo().status=='Ban', 'pen':userinfoService.getUserinfo().status=='Pending', 'hello-user':userinfoService.getUserinfo().status=='Active'}">{{userinfoService.getUserinfo().status}}</span>
             </h2>
           </div>
@@ -19,20 +19,20 @@
 
           <div class="col-md-8">
             <div class="political-contact-form">
-              {{'Hello,' | translate:settingService.getLanguage() }} <span>{{userinfoService.getUserinfo().username}}</span>{{'.' | translate:settingService.getLanguage() }}
+              {{'Hello,' | translate:language }} <span>{{userinfoService.getUserinfo().username}}</span>{{'.' | translate:language }}
               
               <br><br>
               <ng-container *ngIf="userinfoService.getUserinfo().status=='Active'">
-                {{'Your account has been approved, and you can use our service.' | translate:settingService.getLanguage() }}
+                {{'Your account has been approved, and you can use our service.' | translate:language }}
               </ng-container>
               <ng-container *ngIf="userinfoService.getUserinfo().status=='Pending'">
-                {{'Your account has been created. Please wait for our administrators to approve your account before you can use our service.' | translate:settingService.getLanguage() }}
+                {{'Your account has been created. Please wait for our administrators to approve your account before you can use our service.' | translate:language }}
               </ng-container>
               <ng-container *ngIf="userinfoService.getUserinfo().status=='Ban'">
-                {{'Your account is currently banned.' | translate:settingService.getLanguage() }}
+                {{'Your account is currently banned.' | translate:language }}
               </ng-container>
 
-              <br><br>{{'If you have any concerns, please ' | translate:settingService.getLanguage() }}<a routerLink="/contact">{{'contact us' | translate:settingService.getLanguage() }}</a>{{'.' | translate:settingService.getLanguage() }}
+              <br><br>{{'If you have any concerns, please ' | translate:language }}<a routerLink="/contact">{{'contact us' | translate:language }}</a>{{'.' | translate:language }}
             </div>
           </div>
 

@@ -1,3 +1,4 @@
+import { TranslateComponent } from '../languages/translate.component';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,13 +10,15 @@ import { UserinfoService } from '../services/userinfo.service';
   templateUrl: './page-home.component.html',
   styleUrls: ['./page-home.component.css']
 })
-export class PageHomeComponent implements OnInit {
+export class PageHomeComponent extends TranslateComponent implements OnInit {
 
   constructor(
-    private settingService: SettingService,
+    settings: SettingService,
     private userinfoService: UserinfoService,
     private router: Router
-  ) { }
+  ) {
+    super(settings);
+  }
 
   ngOnInit() {
   }

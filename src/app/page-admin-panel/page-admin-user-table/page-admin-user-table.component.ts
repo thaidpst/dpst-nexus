@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { SocketioService } from '../../services/socketio.service';
@@ -6,12 +6,14 @@ import { SettingService } from '../../services/setting.service';
 import { UserinfoService } from '../../services/userinfo.service';
 import { AdminService } from '../../services/admin.service';
 
+import { TranslateComponent } from '../../languages/translate.component';
+
 @Component({
   selector: 'app-page-admin-user-table',
   templateUrl: './page-admin-user-table.component.html',
   styleUrls: ['./page-admin-user-table.component.css']
 })
-export class PageAdminUserTableComponent implements OnInit {
+export class PageAdminUserTableComponent extends TranslateComponent implements OnInit, OnDestroy {
 
   private getUsersSubscription: Subscription;
   private criteria = {
@@ -26,11 +28,13 @@ export class PageAdminUserTableComponent implements OnInit {
   private userOnHand = null;
 
   constructor(
+    settings: SettingService,
     private socketioService: SocketioService,
-    private settingService: SettingService,
     private userinfoService: UserinfoService,
     private adminService: AdminService,
-  ) { }
+  ) {
+    super(settings);
+  }
 
   ngOnInit() {
     this.getUsersSubscription = this.adminService.observeUsers().subscribe(result => {

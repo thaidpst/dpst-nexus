@@ -2,18 +2,22 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { SettingService } from '../../services/setting.service';
 
+import { TranslateComponent } from '../../languages/translate.component';
+
 @Component({
   selector: 'app-profile-form',
   templateUrl: './profile-form.component.html',
   styleUrls: ['./profile-form.component.css']
 })
-export class ProfileFormComponent implements OnInit {
+export class ProfileFormComponent extends TranslateComponent implements OnInit {
 
   @Input() userDetail;
 
   constructor(
-    private settingService: SettingService
-  ) { }
+    settings: SettingService
+  ) {
+    super(settings);
+  }
 
   ngOnInit() {
   }

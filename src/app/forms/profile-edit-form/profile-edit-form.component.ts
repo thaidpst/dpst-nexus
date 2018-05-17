@@ -1,3 +1,4 @@
+import { TranslateComponent } from '../../languages/translate.component';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
@@ -9,15 +10,17 @@ import { UserinfoService } from '../../services/userinfo.service';
   templateUrl: './profile-edit-form.component.html',
   styleUrls: ['./profile-edit-form.component.css']
 })
-export class ProfileEditFormComponent implements OnInit {
+export class ProfileEditFormComponent extends TranslateComponent implements OnInit {
 
   @Input() userDetail;
   @Output() userDetailUpdated: EventEmitter<any> = new EventEmitter();
 
   constructor(
-    private settingService: SettingService,
+    settings: SettingService,
     private userinfoService: UserinfoService
-  ) { }
+  ) {
+    super(settings);
+  }
 
   ngOnInit() {
   }
@@ -44,7 +47,7 @@ export class ProfileEditFormComponent implements OnInit {
 
   editProfileDetail(form: NgForm) {
     const keys = Object.keys(form.value),
-        updatedUserDetail = {};
+      updatedUserDetail = {};
 
     for (let i = 0; i < keys.length; i++) {
       if (form.value[keys[i]] !== '') {
@@ -55,9 +58,9 @@ export class ProfileEditFormComponent implements OnInit {
     }
 
     const userinfo = Object.assign({}, this.userDetail),
-        userId = userinfo.userId;
+      userId = userinfo.userId;
     this.userinfoService.updateUserDetail(userId, updatedUserDetail)
-      .then(result =>  {
+      .then(result => {
         this.userDetailUpdated.emit(result);
       });
   }

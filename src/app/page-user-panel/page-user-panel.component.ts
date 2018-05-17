@@ -1,3 +1,4 @@
+import { TranslateComponent } from '../languages/translate.component';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -8,14 +9,16 @@ import { SettingService } from '../services/setting.service';
   templateUrl: './page-user-panel.component.html',
   styleUrls: ['./page-user-panel.component.css']
 })
-export class PageUserPanelComponent implements OnInit {
+export class PageUserPanelComponent extends TranslateComponent implements OnInit {
 
   pageName: string;
 
   constructor(
-    private settingService: SettingService,
+    settings: SettingService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    super(settings);
+  }
 
   ngOnInit() {
     this.route.data

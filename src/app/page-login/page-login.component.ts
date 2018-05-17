@@ -1,3 +1,4 @@
+import { TranslateComponent } from '../languages/translate.component';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,19 +14,21 @@ import { CookieService } from '../services/cookie.service';
   templateUrl: './page-login.component.html',
   styleUrls: ['./page-login.component.css']
 })
-export class PageLoginComponent implements OnInit {
+export class PageLoginComponent extends TranslateComponent implements OnInit {
 
   private loginFail = false;
   private loginMsg: string;
 
   constructor(
+    settings: SettingService,
     private socketioService: SocketioService,
-    private settingService: SettingService,
     private authService: AuthenticationService,
     private userinfoService: UserinfoService,
     private cookieService: CookieService,
     private router: Router
-  ) { }
+  ) {
+    super(settings);
+  }
 
   ngOnInit() {
   }

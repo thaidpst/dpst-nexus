@@ -17,21 +17,21 @@
 
                                 <!-- Homepage -->
                                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/" (click)="unactive();">
-                                    {{'HomePage' | translate:settingService.getLanguage() }}
+                                    {{'HomePage' | translate:language }}
                                 </a></li>
 
                               <ng-container *ngIf="!userinfoService.isLoggedIn">
                                 <!-- Log in -->
                                 <li routerLinkActive="active">
                                     <a routerLink="/login" (click)="unactive();">
-                                        {{'Log in' | translate:settingService.getLanguage() }}
+                                        {{'Log in' | translate:language }}
                                     </a>
                                 </li>
 
                                 <!-- Register -->
                                 <li routerLinkActive="active">
                                     <a routerLink="/register" (click)="unactive();">
-                                        {{'Register' | translate:settingService.getLanguage() }}
+                                        {{'Register' | translate:language }}
                                     </a>
                                 </li>
                               </ng-container>
@@ -40,15 +40,15 @@
                                 <!-- Check status -->
                                 <li routerLinkActive="active" *ngIf="userinfoService.getUserinfo().status!='Active'">
                                     <a (click)="toggleSubnav('.status-nav')">
-                                        {{'Status' | translate:settingService.getLanguage() }}:
+                                        {{'Status' | translate:language }}:
                                             <span [ngClass]="{'ban':userinfoService.getUserinfo().status=='Ban', 'pen':userinfoService.getUserinfo().status=='Pending'}">{{userinfoService.getUserinfo().status}}</span>
                                     </a><span class="has-subnav status-nav" style="pointer-events:none;"><i class="fa fa-angle-down"></i></span>
                                     <ul class="sub-menu level-2 status-nav">
                                         <li><a routerLink="/check-status" (click)="unactive();">
-                                            {{'What is this?' | translate:settingService.getLanguage() }}
+                                            {{'What is this?' | translate:language }}
                                         </a></li>
                                         <li><a (click)="memberLogOut(); unactive();">
-                                            {{'Log out' | translate:settingService.getLanguage() }}
+                                            {{'Log out' | translate:language }}
                                         </a></li>
                                     </ul>
                                 </li>
@@ -56,15 +56,15 @@
                                 <!-- User panel -->
                                 <li routerLinkActive="active" *ngIf="userinfoService.getUserinfo().status=='Active'">
                                     <a (click)="toggleSubnav('.profile-nav')">
-                                        {{'Hello,' | translate:settingService.getLanguage() }}
+                                        {{'Hello,' | translate:language }}
                                             <span class="hello-user">{{userinfoService.getUserinfo().username}}</span>
                                     </a><span class="has-subnav profile-nav" style="pointer-events:none;"><i class="fa fa-angle-down"></i></span>
                                     <ul class="sub-menu level-2 profile-nav">
                                         <li routerLinkActive="active"><a routerLink="/user-panel/profile" (click)="unactive();">
-                                            {{'Profile' | translate:settingService.getLanguage() }}
+                                            {{'Profile' | translate:language }}
                                         </a></li>
                                         <li routerLinkActive="active"><a routerLink="/user-panel/history" (click)="unactive();">
-                                            {{'History' | translate:settingService.getLanguage() }}
+                                            {{'History' | translate:language }}
                                         </a></li>
 
                                         <!-- Admin panel -->
@@ -74,7 +74,7 @@
                                             </a>
                                         </li>
                                         <li><a (click)="memberLogOut(); unactive();">
-                                            {{'Log out' | translate:settingService.getLanguage() }}
+                                            {{'Log out' | translate:language }}
                                         </a></li>
                                     </ul>
                                 </li>
@@ -82,14 +82,14 @@
                                 <!-- Forms -->
                                 <li routerLinkActive="active" *ngIf="userinfoService.getUserinfo().status=='Active'">
                                     <a routerLink="/forms" (click)="unactive();">
-                                        {{'Forms' | translate:settingService.getLanguage() }}
+                                        {{'Forms' | translate:language }}
                                     </a>
                                 </li>
                               </ng-container>
 
                                 <!-- Contact -->
                                 <li routerLinkActive="active"><a routerLink="/contact" (click)="unactive();">
-                                    {{'Contact Us' | translate:settingService.getLanguage() }}
+                                    {{'Contact Us' | translate:language }}
                                 </a></li>
 
                                 <!-- Language -->
@@ -113,8 +113,8 @@
                                     <a (click)="toggleSubnav('.language')">Language</a>
                                     <span class="has-subnav language" style="pointer-events:none;"><i class="fa fa-angle-down"></i></span>
                                     <ul class="sub-menu level-2 language">
-                                        <li><a (click)="settingService.setLanguage('Thai'); unactive();">Thai</a></li>
-                                        <li><a (click)="settingService.setLanguage('English'); unactive();">English</a></li>
+                                        <li><a (click)="settings.setLanguage('Thai'); unactive();">Thai</a></li>
+                                        <li><a (click)="settings.setLanguage('English'); unactive();">English</a></li>
                                     </ul>
                                 </li>
 

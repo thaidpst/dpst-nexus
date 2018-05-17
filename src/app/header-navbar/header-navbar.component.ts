@@ -7,23 +7,26 @@ import { SettingService } from '../services/setting.service';
 import { UserinfoService } from '../services/userinfo.service';
 import { CookieService } from '../services/cookie.service';
 
+import { TranslateComponent } from '../languages/translate.component';
+
 @Component({
   selector: 'app-header-navbar',
   templateUrl: './header-navbar.component.html',
   styleUrls: ['./header-navbar.component.css']
 })
-export class HeaderNavbarComponent implements OnInit {
+export class HeaderNavbarComponent extends TranslateComponent implements OnInit {
 
   private host;
 
   constructor(
+    settings: SettingService,
     private elementRef: ElementRef,
     private socketioService: SocketioService,
-    private settingService: SettingService,
     private userinfoService: UserinfoService,
     private cookieService: CookieService,
     private router: Router
   ) {
+    super(settings);
     this.host = d3.select(this.elementRef.nativeElement);
   }
 
