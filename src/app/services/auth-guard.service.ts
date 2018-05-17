@@ -1,17 +1,59 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild, Router } from '@angular/router';
 
 import { UserinfoService } from './userinfo.service';
 
 @Injectable()
-export class AuthGuardService implements CanActivate, CanActivateChild {
-
-  constructor(private userinfoService: UserinfoService) { }
+export class GuestRouteGuard implements CanActivate {
+  constructor(
+    private userinfoService: UserinfoService,
+    private router: Router
+  ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    console.log('AuthGuard#canActivate called');
-    return true; // TODO
-    // return this.userinfoService.getUserinfo() !== null;
+    if (this.userinfoService.isLoggedIn) {
+      this.router.navigate(['/']);
+      return false;
+    }
+    return true;
+  }
+}
+
+@Injectable()
+export class UserRouteGuard implements CanActivate, CanActivateChild {
+
+  constructor(
+    private userinfoService: UserinfoService,
+    private router: Router
+  ) { }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    if (!this.userinfoService.isLoggedIn) {
+      this.router.navigate(['/']);
+      return false;
+    }
+    return true;
+  }
+
+  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    return this.canActivate(childRoute, state);
+  }
+}
+
+@Injectable()
+export class AdminRouteGuard implements CanActivate, CanActivateChild {
+
+  constructor(
+    private userinfoService: UserinfoService,
+    private router: Router
+  ) { }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    if (!this.userinfoService.isLoggedIn || this.userinfoService.userLevel < 8) {
+      this.router.navigate(['/']);
+      return false;
+    }
+    return true;
   }
 
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {

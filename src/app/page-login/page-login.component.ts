@@ -28,8 +28,6 @@ export class PageLoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.userinfoService.getUserinfo() !== null)
-      this.router.navigate(['/']);
   }
 
   memberLogIn(form: NgForm) {

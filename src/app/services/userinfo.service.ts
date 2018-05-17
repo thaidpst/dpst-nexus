@@ -26,6 +26,14 @@ export class UserinfoService {
     this.userinfo = userinfo;
   }
 
+  get isLoggedIn(): boolean {
+    return this.userinfo !== null;
+  }
+
+  get userLevel(): number {
+    return this.userinfo.level || -1;
+  }
+
   getUserinfo(): UserInfo {
     return this.userinfo;
   }

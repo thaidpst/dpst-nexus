@@ -37,6 +37,7 @@ export class PageContactComponent implements OnInit {
   }
 
   sendMessage(form: NgForm) {
+    // TODO
     console.log(form.value);
     form.resetForm();
   }

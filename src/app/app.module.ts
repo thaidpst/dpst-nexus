@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 // Services
 import { AdminService } from './services/admin.service';
 import { AuthenticationService } from './services/authentication.service';
-import { AuthGuardService } from './services/auth-guard.service';
 import { CookieService } from './services/cookie.service';
 import { LanguageService } from './languages/language.service';
 import { SettingService } from './services/setting.service';
@@ -85,7 +84,6 @@ import { PageUserPanelRoutingModule } from './page-user-panel/page-user-panel-ro
     AdminService,
     CookieService,
     LanguageService,
-    AuthGuardService,
     {
       provide: APP_INITIALIZER,
       useFactory: (userInfoService: UserinfoService) => function() { return userInfoService.init(); },
