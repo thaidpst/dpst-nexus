@@ -9,7 +9,7 @@ router.get('/getusers/:start/:limit/:sort/:search', (req, res) => {
     search = req.params.search;
   let dbUsers = req.db.get('users');
 
-  let sortObj = {};
+  let sortObj = { _id: -1 };
   if (sort == 'Firstname increasing') sortObj = { firstname: 1 };
   else if (sort == 'Firstname decreasing') sortObj = { firstname: -1 };
   else if (sort == 'Level increasing') sortObj = { level: 1 };

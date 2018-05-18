@@ -11,7 +11,7 @@ import { SettingService } from '../services/setting.service';
 })
 export class PageUserPanelComponent extends TranslateComponent implements OnInit {
 
-  pageName: string;
+  private _pageName: string;
 
   constructor(
     settings: SettingService,
@@ -20,10 +20,14 @@ export class PageUserPanelComponent extends TranslateComponent implements OnInit
     super(settings);
   }
 
+  get pageName(): string {
+    return this._pageName;
+  }
+
   ngOnInit() {
     this.route.data
       .subscribe(data => {
-        this.pageName = data.pagename;
+        this._pageName = data.pagename;
       });
   }
 }

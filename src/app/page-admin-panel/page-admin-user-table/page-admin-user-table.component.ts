@@ -50,18 +50,17 @@ export class PageAdminUserTableComponent extends TranslateComponent implements O
         }
       }
     });
+    this.adminService.getUsers(this.criteria);
 
     this.socketioService.getSocket().on('update-new-users', function() {
       this.adminService.getUsers(this.criteria);
     }.bind(this));
-    this.socketioService.getSocket().on('announce-account-status', function() {
+    this.socketioService.getSocket().on('announce-admin-account-status', function() {
       this.adminService.getUsers(this.criteria);
     }.bind(this));
     this.socketioService.getSocket().on('announce-account-delete', function() {
       this.adminService.getUsers(this.criteria);
     }.bind(this));
-
-    this.adminService.getUsers(this.criteria);
   }
 
   setAccountStatus(userinfo, status) {
@@ -182,6 +181,11 @@ export class PageAdminUserTableComponent extends TranslateComponent implements O
 
   ngOnDestroy() {
     this.getUsersSubscription.unsubscribe();
+
+    // Unbind Socket.io
+    this.socketioService.getSocket().removeAllListeners('update-new-users');
+    this.socketioService.getSocket().removeAllListeners('announce-admin-account-status');
+    this.socketioService.getSocket().removeAllListeners('announce-account-delete');
   }
 
 }

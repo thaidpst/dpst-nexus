@@ -28,7 +28,7 @@ export class UserRouteGuard implements CanActivate, CanActivateChild {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (!this.userinfoService.isLoggedIn) {
+    if (!this.userinfoService.isLoggedIn || !this.userinfoService.isActive) {
       this.router.navigate(['/']);
       return false;
     }
@@ -49,7 +49,7 @@ export class AdminRouteGuard implements CanActivate, CanActivateChild {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (!this.userinfoService.isLoggedIn || this.userinfoService.userLevel < 8) {
+    if (!this.userinfoService.isLoggedIn || !this.userinfoService.isActive || !this.userinfoService.isAdmin) {
       this.router.navigate(['/']);
       return false;
     }

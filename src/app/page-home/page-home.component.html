@@ -22,7 +22,7 @@
 
                             <!-- Log in welcome -->
                             <h1 style="line-height:55px;">{{'Welcome to DPST Database Manager' | translate:language }}</h1>
-                            <ng-container *ngIf="userinfoService.isLoggedIn">
+                            <ng-container *ngIf="!userinfoService.isLoggedIn">
                                 <h2>{{'Register to our community' | translate:language }}: </h2>
                                 <form>
                                     <ul>

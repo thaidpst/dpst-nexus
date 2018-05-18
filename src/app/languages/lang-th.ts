@@ -168,7 +168,12 @@ export const LANG_TH_TRANS = {
   'your workplace':
     'สถานที่ทำงานของคุณ',
   'zip code':
-    'รหัสไปรษณีย์'
+    'รหัสไปรษณีย์',
+  'all forms': 'แบบฟอร์มทั้งหมด',
+  'form category': 'ประเภทแบบฟอร์ม',
+  'create date': 'จัดทำวันที่',
+  'attendance forms': 'แบบฟอร์มเข้าร่วมงาน',
+  'disbursement forms': 'แบบฟอร์มเบิกค่าใช้จ่าย'
 };
 
 // {{'text' | translate:settingService.getLanguage() }}

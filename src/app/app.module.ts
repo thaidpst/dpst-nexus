@@ -12,6 +12,11 @@ import { LanguageService } from './languages/language.service';
 import { SettingService } from './services/setting.service';
 import { SocketioService } from './services/socketio.service';
 import { UserinfoService } from './services/userinfo.service';
+import { FormService } from './services/form.service';
+import { FileuploadService } from './services/fileupload.service';
+
+// Pipes
+import { TranslatePipe } from './languages/translate.pipe';
 
 // Components
 import { AppComponent } from './app.component';
@@ -33,14 +38,17 @@ import { PageUserSettingComponent } from './page-user-panel/page-user-setting/pa
 import { PageUserHistoryComponent } from './page-user-panel/page-user-history/page-user-history.component';
 import { ProfileFormComponent } from './forms/profile-form/profile-form.component';
 import { ProfileEditFormComponent } from './forms/profile-edit-form/profile-edit-form.component';
-
 import { AdminPrivilageSettingFormComponent } from './forms/admin-privilage-setting-form/admin-privilage-setting-form.component';
-
-import { TranslatePipe } from './languages/translate.pipe';
+import { PageGovFormsComponent } from './page-gov-forms/page-gov-forms.component';
+import { GovForm1Component } from './gov-forms/gov-form1/gov-form1.component';
+import { GovFormsComponent } from './gov-forms/gov-forms.component';
+import { PageAdminUserFormsComponent } from './page-admin-panel/page-admin-user-forms/page-admin-user-forms.component';
+import { PageAdminManageFormsComponent } from './page-admin-panel/page-admin-manage-forms/page-admin-manage-forms.component';
 
 import { AppRoutingModule } from './/app-routing.module';
 import { PageAdminPanelRoutingModule } from './page-admin-panel/page-admin-panel-routing.module';
 import { PageUserPanelRoutingModule } from './page-user-panel/page-user-panel-routing.module';
+import { GovFormsRoutingModule } from './gov-forms/gov-forms-routing.module';
 
 
 @NgModule({
@@ -65,13 +73,19 @@ import { PageUserPanelRoutingModule } from './page-user-panel/page-user-panel-ro
     ProfileFormComponent,
     ProfileEditFormComponent,
     AdminPrivilageSettingFormComponent,
-    TranslatePipe
+    TranslatePipe,
+    PageGovFormsComponent,
+    GovForm1Component,
+    GovFormsComponent,
+    PageAdminUserFormsComponent,
+    PageAdminManageFormsComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     HttpClientModule,
     FormsModule,
+    GovFormsRoutingModule,
     PageUserPanelRoutingModule,
     PageAdminPanelRoutingModule,
     AppRoutingModule
@@ -84,12 +98,15 @@ import { PageUserPanelRoutingModule } from './page-user-panel/page-user-panel-ro
     AdminService,
     CookieService,
     LanguageService,
+    FormService,
+    FileuploadService,
     {
       provide: APP_INITIALIZER,
       useFactory: (userInfoService: UserinfoService) => function() { return userInfoService.init(); },
       deps: [UserinfoService],
       multi: true
-    }],
+    }
+  ],
   bootstrap: [
     AppComponent
   ]

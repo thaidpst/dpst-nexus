@@ -1,46 +1,60 @@
 <div class="political-subheader">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="political-subheader-wrap">
-                    <h1>Admin Panel</h1>
-                    <ul class="political-breadcrumb">
-                        <li><a routerLink="/">{{'Homepage' | translate:language }}</a></li>
-                        <li>Admin Panel</li>
-                        <li class="active">{{pageName}}</li>
-                    </ul>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="political-subheader-wrap">
+          <h1>Admin Panel</h1>
+          <ul class="political-breadcrumb">
+            <li>
+              <a routerLink="/">{{'Homepage' | translate:language }}</a>
+            </li>
+            <li>Admin Panel</li>
+            <li class="active">{{pageName}}</li>
+          </ul>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="political-main-content">
-    <div class="political-main-section">
-        <div class="container">
-            <div class="row">
+  <div class="political-main-section">
+    <div class="container">
+      <div class="row">
 
-                <!-- Admin panel sidbar -->
-                <aside class="col-md-3">
-                    <div class="widget widget_cetagories">
-                        <h2 class="political-widget-heading">Admin Menu</h2>
-                        <ul>
-                            <li routerLinkActive="active">
-                                <a routerLink="user-table">User Table</a></li>
-                            <li routerLinkActive="active">
-                                <a routerLink="stats">Statistics</a></li>
-                            <li routerLinkActive="active">
-                                <a routerLink="email-blast">Email Blast</a></li>
-                        </ul>
-                    </div>
-                </aside>
+        <!-- Admin panel sidbar -->
+        <aside class="col-md-3">
+          <div class="widget widget_cetagories">
+            <h2 class="political-widget-heading">Admin Menu</h2>
+            <ul>
+              <li routerLinkActive="active">
+                <a routerLink="user-table">User Table</a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="submitted-forms">
+                  Submitted Forms
+                  <div *ngIf="pendingFormNumber>0" class="warning-circle">{{pendingFormNumber}}</div>
+                </a>
+              </li>
+              <li routerLinkActive="active" *ngIf="userinfoService.getUserinfo().level>7">
+                <a routerLink="manage-forms">Manage Forms</a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="stats">Statistics</a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="email-blast">Email Blast</a>
+              </li>
+            </ul>
+          </div>
+        </aside>
 
-                <!-- Admin panel subpages -->
-                <div class="col-md-9">
-                    <router-outlet></router-outlet>
-                </div>
-
-            </div>
+        <!-- Admin panel subpages -->
+        <div class="col-md-9">
+          <router-outlet></router-outlet>
         </div>
+
+      </div>
     </div>
+  </div>
 </div>

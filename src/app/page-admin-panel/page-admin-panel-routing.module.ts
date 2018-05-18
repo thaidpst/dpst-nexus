@@ -5,7 +5,9 @@ import { AdminRouteGuard } from '../services/auth-guard.service';
 
 import { PageAdminEmailBlastComponent } from './page-admin-email-blast/page-admin-email-blast.component';
 import { PageAdminPanelComponent } from './page-admin-panel.component';
+import { PageAdminManageFormsComponent } from './page-admin-manage-forms/page-admin-manage-forms.component';
 import { PageAdminStatisticComponent } from './page-admin-statistic/page-admin-statistic.component';
+import { PageAdminUserFormsComponent } from './page-admin-user-forms/page-admin-user-forms.component';
 import { PageAdminUserTableComponent } from './page-admin-user-table/page-admin-user-table.component';
 import { Observable } from 'rxjs/Observable';
 
@@ -29,6 +31,14 @@ const routes: Routes = [
       {
         path: 'user-table', component: PageAdminUserTableComponent,
         data: { pagename: 'User Table' }, resolve: { pagename: AdminPanelResolver }
+      },
+      {
+        path: 'submitted-forms', component: PageAdminUserFormsComponent,
+        data: { pagename: 'Submitted Forms' }, resolve: { pagename: AdminPanelResolver }
+      },
+      {
+        path: 'manage-forms', component: PageAdminManageFormsComponent,
+        data: { pagename: 'Manage Forms' }, resolve: { pagename: AdminPanelResolver }
       },
       {
         path: 'stats', component: PageAdminStatisticComponent,

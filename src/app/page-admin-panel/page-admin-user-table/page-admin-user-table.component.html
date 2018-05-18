@@ -66,7 +66,7 @@
             <td *ngIf="user.level < userinfoService.getUserinfo().level">
               <i *ngIf="user.status!='Active'" class="fa fa-check-square-o hello-user" aria-hidden="true"
                 (click)="setAccountStatus(user, 'Active')">&nbsp;</i>
-              <i *ngIf="user.status!='Ban'" class="fa fa-times pen" aria-hidden="true"
+              <i *ngIf="user.status!='Ban'" class="fa fa-times ban" aria-hidden="true"
                 (click)="setAccountStatus(user, 'Ban')">&nbsp;</i>
               <i class="fa fa-address-book-o hello-user" aria-hidden="true"
                 (click)="viewUserinfo(user)"></i>&nbsp;

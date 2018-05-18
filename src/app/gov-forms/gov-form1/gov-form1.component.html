@@ -1,0 +1,166 @@
+<!-- All of the form components should follow this structure. -->
+<!-- If you have any question, contact me at sarun_sla@hotmail.com (Sarun Seepun) -->
+
+<ng-container *ngIf="!_formSubmitted">
+<h2 *ngIf="form===null || userDetail===null" style="width:100%; text-align:center;">Loading the form detail...</h2>
+<ng-container *ngIf="form!==null && userDetail!==null">
+
+<!-- Form header -->
+<div class="political-subheader"><div class="container"><div class="row"><div class="col-md-12"><div class="political-subheader-wrap">
+  <h1>{{form.nameTH}}</h1>
+  <ul class="political-breadcrumb">
+    <li><a routerLink="/">{{'Homepage' | translate:language}}</a></li>
+    <li class="active"><a routerLink="/forms" style="color:#555555;">
+        {{'Forms' | translate:language}}
+    </a></li>
+  </ul>
+</div></div></div></div></div>
+
+<!-- Form area -->
+<div class="political-main-section"><div class="container"><div class="row"><div class="form-container">
+  <img *ngFor="let formImage of formImages;" [src]="formImage" style="box-shadow:0px 4px 10px rgba(0,0,0,0.55);">
+
+  <!-- Interactive form filling -->
+  <!-- USer new form -->
+  <form *ngIf="formService.getMode()=='New' && formService.getRole()!='Admin'"
+  #govForm="ngForm" (ngSubmit)="submitGovForm(govForm)" class="input-container" ngNativeValidate>
+
+    <input value="" ngModel required class="fill" type="text" name="school"style="top:32.6vw; left:12vw; width:37%;">
+
+    <input value="" ngModel class="fill" type="text" name="position1" style="top:35.3vw; left:21.6vw; width:62%;">
+    <input value="" ngModel class="fill" type="text" name="phone1" style="top:38.3vw; left:16.6vw; width:30%;">
+    <input value="" ngModel class="fill" type="text" name="email1" style="top:38.3vw; left:43.6vw; width:32.7%;">
+    <input value="" ngModel class="fill" type="text" name="thaiId1" style="top:41.4vw; left:36vw; width:43%;">
+    <input value="1" ngModel required class="fill checkbox" type="radio" name="radgroup" style="top:45vw; left:16.2vw;">
+    <input value="2" ngModel required class="fill checkbox" type="radio" name="radgroup" style="top:47.8vw; left:16.2vw;">
+    <input value="" ngModel class="fill" type="text" name="date1" style="top:44.5vw; left:53.2vw; width:8%;">
+
+    <input value="" ngModel class="fill" type="text" name="position2" style="top:50vw; left:24vw; width:58.8%;">
+    <input value="" ngModel class="fill" type="text" name="phone2" style="top:53vw; left:16.6vw; width:30%;">
+    <input value="" ngModel class="fill" type="text" name="email2" style="top:53vw; left:43.6vw; width:32.7%;">
+    <input value="" ngModel class="fill" type="text" name="thaiId2" style="top:56.1vw; left:36vw; width:43%;">
+    <input value="3" ngModel required class="fill checkbox" type="radio" name="radgroup" style="top:59.8vw; left:16.2vw;">
+    <input value="4" ngModel required class="fill checkbox" type="radio" name="radgroup" style="top:62.5vw; left:16.2vw;">
+    <input value="" ngModel class="fill" type="text" name="date2" style="top:59.2vw; left:53.2vw; width:8%;">
+
+    <input value="" ngModel class="fill" type="text" name="position3" style="top:64.7vw; left:16.5vw; width:69%;">
+    <input value="" ngModel class="fill" type="text" name="phone3" style="top:67.7vw; left:16.6vw; width:30%;">
+    <input value="" ngModel class="fill" type="text" name="email3" style="top:67.7vw; left:43.6vw; width:32.7%;">
+    <input value="" ngModel class="fill" type="text" name="thaiId3" style="top:70.8vw; left:36vw; width:43%;">
+    <input value="5" ngModel required class="fill checkbox" type="radio" name="radgroup" style="top:74.5vw; left:16.2vw;">
+    <input value="6" ngModel required class="fill checkbox" type="radio" name="radgroup" style="top:77.2vw; left:16.2vw;">
+    <input value="" ngModel class="fill" type="text" name="date3" style="top:73.9vw; left:53.2vw; width:8%;">
+
+    <input value="" ngModel required class="fill" type="text" name="signature" style="text-align:center; top:86.15vw; left:44.5vw; width:26.1%;">
+    <div class="fullname" style="top:90.65vw; left:58.5%; width:27.5%;">{{userDetail.firstname}} {{userDetail.lastname}}</div>
+
+    <!-- Important button set -->
+    <div *ngIf="language=='Thai'" class="button-container">
+      <input class="political-simple-btn warning-btn" type="submit" value="ส่งแบบฟอร์ม">
+      <input class="political-simple-btn" type="button" value="กลับไปเลือกเเบบฟอร์ม" (click)="goToFormsPage()">
+    </div>
+    <div *ngIf="language=='English'" class="button-container">
+      <input class="political-simple-btn warning-btn" type="submit" value="Submit form">
+      <input class="political-simple-btn" type="button" value="Back to Forms" (click)="goToFormsPage()">
+    </div>
+  </form>
+
+  <!-- User edit form -->
+  <form *ngIf="formService.getMode()=='Edit' && formService.getRole()!='Admin' && loadForm!==null"
+  #govForm="ngForm" (ngSubmit)="editSubmittedGovForm(govForm)" class="input-container" ngNativeValidate>
+
+    <input [ngModel]="default(loadForm.formValue.school)" ngModel required class="fill" type="text" name="school" style="top:32.6vw; left:12vw; width:37%;">
+
+    <input [ngModel]="default(loadForm.formValue.position1)" ngModel class="fill" type="text" name="position1" style="top:35.3vw; left:21.6vw; width:62%;">
+    <input [ngModel]="default(loadForm.formValue.phone1)" ngModel class="fill" type="text" name="phone1" style="top:38.3vw; left:16.6vw; width:30%;">
+    <input [ngModel]="default(loadForm.formValue.email1)" ngModel class="fill" type="text" name="email1" style="top:38.3vw; left:43.6vw; width:32.7%;">
+    <input [ngModel]="default(loadForm.formValue.thaiId1)" ngModel class="fill" type="text" name="thaiId1" style="top:41.4vw; left:36vw; width:43%;">
+    <input [ngModel]="default(loadForm.formValue.radgroup)" value="1" ngModel required class="fill checkbox" type="radio" name="radgroup" style="top:45vw; left:16.2vw;">
+    <input [ngModel]="default(loadForm.formValue.radgroup)" value="2" ngModel required class="fill checkbox" type="radio" name="radgroup" style="top:47.8vw; left:16.2vw;">
+    <input [ngModel]="default(loadForm.formValue.date1)" ngModel class="fill" type="text" name="date1" style="top:44.5vw; left:53.2vw; width:8%;">
+
+    <input [ngModel]="default(loadForm.formValue.position2)" ngModel class="fill" type="text" name="position2" style="top:50vw; left:24vw; width:58.8%;">
+    <input [ngModel]="default(loadForm.formValue.phone2)" ngModel class="fill" type="text" name="phone2" style="top:53vw; left:16.6vw; width:30%;">
+    <input [ngModel]="default(loadForm.formValue.email2)" ngModel class="fill" type="text" name="email2" style="top:53vw; left:43.6vw; width:32.7%;">
+    <input [ngModel]="default(loadForm.formValue.thaiId2)" ngModel class="fill" type="text" name="thaiId2" style="top:56.1vw; left:36vw; width:43%;">
+    <input [ngModel]="default(loadForm.formValue.radgroup)" value="3" ngModel required class="fill checkbox" type="radio" name="radgroup" style="top:59.8vw; left:16.2vw;">
+    <input [ngModel]="default(loadForm.formValue.radgroup)" value="4" ngModel required class="fill checkbox" type="radio" name="radgroup" style="top:62.5vw; left:16.2vw;">
+    <input [ngModel]="default(loadForm.formValue.date2)" ngModel class="fill" type="text" name="date2" style="top:59.2vw; left:53.2vw; width:8%;">
+
+    <input [ngModel]="default(loadForm.formValue.position3)" ngModel class="fill" type="text" name="position3" style="top:64.7vw; left:16.5vw; width:69%;">
+    <input [ngModel]="default(loadForm.formValue.phone3)" ngModel class="fill" type="text" name="phone3" style="top:67.7vw; left:16.6vw; width:30%;">
+    <input [ngModel]="default(loadForm.formValue.email3)" ngModel class="fill" type="text" name="email3" style="top:67.7vw; left:43.6vw; width:32.7%;">
+    <input [ngModel]="default(loadForm.formValue.thaiId3)" ngModel class="fill" type="text" name="thaiId3"  style="top:70.8vw; left:36vw; width:43%;">
+    <input [ngModel]="default(loadForm.formValue.radgroup)" value="5" ngModel required class="fill checkbox" type="radio" name="radgroup" style="top:74.5vw; left:16.2vw;">
+    <input [ngModel]="default(loadForm.formValue.radgroup)" value="6" ngModel required class="fill checkbox" type="radio" name="radgroup" style="top:77.2vw; left:16.2vw;">
+    <input [ngModel]="default(loadForm.formValue.date3)" ngModel class="fill" type="text" name="date3" style="top:73.9vw; left:53.2vw; width:8%;">
+
+    <input [ngModel]="default(loadForm.formValue.signature)" ngModel required class="fill" type="text" name="signature" style="text-align:center; top:86.15vw; left:44.5vw; width:26.1%;">
+    <div class="fullname" style="top:90.65vw; left:58.5%; width:27.5%;">{{userDetail.firstname}} {{userDetail.lastname}}</div>
+
+    <!-- Important button set -->
+    <div *ngIf="language=='Thai'" class="button-container">
+      <input class="political-simple-btn warning-btn" type="submit" value="แก้ไขแบบฟอร์ม">
+      <input class="political-simple-btn" type="button" value="กลับไปประวัติการใช้งาน" (click)="goToUserHistoryPage()">
+      <input class="political-simple-btn delete-btn" type="button" value="ลบเเบบฟอร์ม" (click)="deleteSubmittedForm()">
+    </div>
+    <div *ngIf="language=='English'" class="button-container">
+      <input class="political-simple-btn warning-btn" type="submit" value="Edit form">
+      <input class="political-simple-btn" type="button" value="Back to user history" (click)="goToUserHistoryPage()">
+      <input class="political-simple-btn delete-btn" type="button" value="Delete form" (click)="deleteSubmittedForm()">
+    </div>
+  </form>
+
+  <!-- View form -->
+  <form *ngIf="(formService.getMode()=='View' || formService.getMode()=='ByPass') && loadForm!==null" class="input-container">
+
+    <input [ngModel]="default(loadForm.formValue.school)" disabled class="fill" type="text" name="school" style="top:32.6vw; left:12vw; width:37%;">
+
+    <input [ngModel]="default(loadForm.formValue.position1)" disabled class="fill" type="text" name="position1" style="top:35.3vw; left:21.6vw; width:62%;">
+    <input [ngModel]="default(loadForm.formValue.phone1)" disabled class="fill" type="text" name="phone1" style="top:38.3vw; left:16.6vw; width:30%;">
+    <input [ngModel]="default(loadForm.formValue.email1)" disabled class="fill" type="text" name="email1" style="top:38.3vw; left:43.6vw; width:32.7%;">
+    <input [ngModel]="default(loadForm.formValue.thaiId1)" disabled class="fill" type="text" name="thaiId1" style="top:41.4vw; left:36vw; width:43%;">
+    <input [ngModel]="default(loadForm.formValue.radgroup)" value="1" disabled class="fill checkbox" type="radio" name="radgroup" style="top:45vw; left:16.2vw;">
+    <input [ngModel]="default(loadForm.formValue.radgroup)" value="2" disabled class="fill checkbox" type="radio" name="radgroup" style="top:47.8vw; left:16.2vw;">
+    <input [ngModel]="default(loadForm.formValue.date1)" disabled class="fill" type="text" name="date1" style="top:44.5vw; left:53.2vw; width:8%;">
+
+    <input [ngModel]="default(loadForm.formValue.position2)" disabled class="fill" type="text" name="position2" style="top:50vw; left:24vw; width:58.8%;">
+    <input [ngModel]="default(loadForm.formValue.phone2)" disabled class="fill" type="text" name="phone2" style="top:53vw; left:16.6vw; width:30%;">
+    <input [ngModel]="default(loadForm.formValue.email2)" disabled class="fill" type="text" name="email2" style="top:53vw; left:43.6vw; width:32.7%;">
+    <input [ngModel]="default(loadForm.formValue.thaiId2)" disabled class="fill" type="text" name="thaiId2" style="top:56.1vw; left:36vw; width:43%;">
+    <input [ngModel]="default(loadForm.formValue.radgroup)" value="3" disabled class="fill checkbox" type="radio" name="radgroup" style="top:59.8vw; left:16.2vw;">
+    <input [ngModel]="default(loadForm.formValue.radgroup)" value="4" disabled class="fill checkbox" type="radio" name="radgroup" style="top:62.5vw; left:16.2vw;">
+    <input [ngModel]="default(loadForm.formValue.date2)" disabled class="fill" type="text" name="date2" style="top:59.2vw; left:53.2vw; width:8%;">
+
+    <input [ngModel]="default(loadForm.formValue.position3)" disabled class="fill" type="text" name="position3" style="top:64.7vw; left:16.5vw; width:69%;">
+    <input [ngModel]="default(loadForm.formValue.phone3)" disabled class="fill" type="text" name="phone3" style="top:67.7vw; left:16.6vw; width:30%;">
+    <input [ngModel]="default(loadForm.formValue.email3)" disabled class="fill" type="text" name="email3" style="top:67.7vw; left:43.6vw; width:32.7%;">
+    <input [ngModel]="default(loadForm.formValue.thaiId3)" disabled class="fill" type="text" name="thaiId3"  style="top:70.8vw; left:36vw; width:43%;">
+    <input [ngModel]="default(loadForm.formValue.radgroup)" value="5" disabled class="fill checkbox" type="radio" name="radgroup" style="top:74.5vw; left:16.2vw;">
+    <input [ngModel]="default(loadForm.formValue.radgroup)" value="6" disabled class="fill checkbox" type="radio" name="radgroup" style="top:77.2vw; left:16.2vw;">
+    <input [ngModel]="default(loadForm.formValue.date3)" disabled class="fill" type="text" name="date3" style="top:73.9vw; left:53.2vw; width:8%;">
+
+    <input [ngModel]="default(loadForm.formValue.signature)" disabled class="fill" type="text" name="signature" style="text-align:center; top:86.15vw; left:44.5vw; width:26.1%;">
+    <div class="fullname" style="top:90.65vw; left:58.5%; width:27.5%;">{{userDetail.firstname}} {{userDetail.lastname}}</div>
+
+    <!-- Important button set -->
+    <div *ngIf="formService.getRole()!='Admin'" class="button-container">
+      <input *ngIf="language=='Thai'" class="political-simple-btn"
+      type="button" value="กลับไปประวัติการใช้งาน" (click)="goToUserHistoryPage()">
+      <input *ngIf="language=='English'" class="political-simple-btn"
+      type="button" value="Back to user history" (click)="goToUserHistoryPage()">
+    </div>
+    <div *ngIf="formService.getRole()=='Admin'" class="button-container">
+      <input class="political-simple-btn" type="button" value="Back to admin forms" (click)="backToAdminForms()">
+      <input *ngIf="loadForm.status!='Approved'" class="political-simple-btn"
+      type="button" value="Approve" (click)="adminSetSubmittedFormStatus('Approved')">
+      <input *ngIf="loadForm.status!='Not approved'" class="political-simple-btn warning-btn"
+      type="button" value="Not approved" (click)="adminSetSubmittedFormStatus('Not approved')">
+      <input class="political-simple-btn delete-btn" type="button" value="Delete form" (click)="adminDeleteSubmittedForm()">
+    </div>
+  </form>
+
+</div></div></div></div>
+
+</ng-container>
+</ng-container>

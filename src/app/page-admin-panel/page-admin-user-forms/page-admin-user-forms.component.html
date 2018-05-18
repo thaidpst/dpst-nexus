@@ -1,0 +1,195 @@
+<ng-container *ngIf="currentForm===null && formOnHand===null">
+  <!-- Selection criteria -->
+  <div class="political-pagination" style="color:#000; margin:0 0 10px 0;">
+    <div class="top-option">
+        <input #keyword class="search" type="text" (keyup.enter)="formSearch(keyword.value)">
+        <input type="submit" class="political-simple-btn" value="Search" (click)="formSearch(keyword.value)">
+    </div>
+
+    <div class="top-option">
+        Sort by
+        <select class="select-sort" (change)="formSortChange($event.target.value)">
+        <option value="None" selected="selected">None</option>
+        <option value="Name increasing">Name increasing</option>
+        <option value="Name decreasing">Name decreasing</option>
+        <option value="Owner increasing">Owner increasing</option>
+        <option value="Owner decreasing">Owner decreasing</option>
+        <option value="Created date increasing">Created date increasing</option>
+        <option value="Created date decreasing">Created date decreasing</option>
+        </select>
+    </div>
+  </div>
+  <div class="political-pagination" style="color:#000; margin:0 0 25px 0;">
+    <div class="top-option">
+        Show per page
+        <select class="show-per-page" (change)="formLimitChange($event.target.value)">
+          <option value="10">10</option>
+          <option value="25" selected="selected">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+    </div>
+
+    <div class="top-option">
+        Catagory
+        <select class="select-sort" (change)="changeFormCategory($event.target.value)">
+          <option value="All forms" selected="selected">
+            <ng-container *ngIf="language=='English'">All forms</ng-container>
+            <ng-container *ngIf="language=='Thai'">แบบฟอร์มทั้งหมด</ng-container>
+          </option>
+          <option *ngFor="let category of formCategory;" [value]="category.categoryEN">
+            <ng-container *ngIf="language=='English'">{{category.categoryEN}}</ng-container>
+            <ng-container *ngIf="language=='Thai'">{{category.categoryTH}}</ng-container>
+          </option>
+        </select>
+    </div>
+  </div>
+
+  <div class="political-compaign political-compaign-grid">
+    <h2 *ngIf="adminForms===null">Loading forms...</h2>
+    <h2 *ngIf="adminForms!==null && adminForms.length==0">No forms available.</h2>
+
+    <ul *ngIf="adminForms!==null && adminForms.length>0" class="row">
+
+      <!-- Form preview -->
+        <li *ngFor="let form of adminForms;" class="col-md-4">
+          <div class="political-compaign-grid-text" (click)="goToFormSubmissionTable(form)">
+            <figure class="gov-form-preview"><a>
+              <img [src]="formPreview(form)" alt="">
+              <span><i class="fa fa-pencil"></i> Check out</span>
+            </a></figure>
+
+            <small class="form-owner">{{formOwner(form)}} Form</small>
+            <h3 class="form-name">{{form.nameTH}}</h3>
+            <span class="form-date">
+              {{'Create date' | translate:language }}:
+              <small>{{dateFromObjectId(form._id)}}</small>
+            </span>
+            <div *ngIf="form.pendingNumber>0" class="pending-warning">{{form.pendingNumber}}</div>
+          </div>
+        </li>
+
+    </ul>
+  </div>
+
+  <!-- Pagination -->
+  <div class="political-pagination pagination-div">
+    <ul class="page-numbers">
+        <li><a class="previous page-numbers" (click)="previouseFormPage()"><span aria-label="Next"><i class="fa fa-angle-left"></i></span></a></li>
+        <li *ngFor="let page of pagination;">
+            <a *ngIf="page!=criteria.page" class="page-numbers"
+            (click)="paginationChangePage(page)">{{page+1}}</a>
+            <span *ngIf="page==criteria.page" class="page-numbers current">{{page+1}}</span>
+        </li>
+        <li><a class="next page-numbers" (click)="nextFormPage()"><span aria-label="Next"><i class="fa fa-angle-right"></i></span></a></li>
+    </ul>
+  </div>
+</ng-container>
+
+<!-- Form table -->
+<ng-container *ngIf="currentForm!==null && formOnHand===null">
+  <div class="political-pagination" style="color:#000; text-align:left; margin-top:0; font-size:26px;">
+    {{currentForm.nameTH}}
+  </div>
+
+  <!-- Selection criteria -->
+  <div class="political-pagination" style="color:#000; margin:0 0 25px 0;">
+    <div class="top-option">
+      <input type="submit" class="political-simple-btn" value="Go back to forms" (click)="goBackToFormPage()">
+    </div>
+
+    <div class="top-option">
+        Sort by
+        <select class="select-sort" (change)="submittedFormSortChange($event.target.value)">
+        <option value="None" selected="selected">None</option>
+        <option value="Status increasing">Status increasing</option>
+        <option value="Status decreasing">Status decreasing</option>
+        <option value="Submitted date increasing">Submitted date increasing</option>
+        <option value="Submitted date decreasing">Submitted date decreasing</option>
+        </select>
+    </div>
+
+    <div class="top-option">
+        Show per page
+        <select class="show-per-page" (change)="submittedFormLimitChange($event.target.value)">
+        <option value="1">1</option>
+        <option value="10">10</option>
+        <option value="25" selected="selected">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        </select>
+    </div>
+  </div>
+
+  <div class="political-compaign political-compaign-grid">
+    <ul class="row">
+      <li class="col-md-12" style="margin-bottom:0;">
+        <table><tbody>
+          <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>E-mail address</th>
+            <th>Submitted date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+          <tr *ngIf="submittedForms===null"><td colspan="6">Loading submitted forms...</td></tr>
+          <tr *ngIf="submittedForms!==null && submittedForms.length==0">
+            <td colspan="6">No submitted forms found.</td></tr>
+          <ng-container *ngIf="submittedForms!==null && submittedForms.length>0">
+              <tr *ngFor="let form of submittedForms;">
+                <td>{{form.firstname}}</td>
+                <td>{{form.lastname}}</td>
+                <td>{{form.email}}</td>
+                <td>{{dateFromObjectId(form._id)}}</td>
+                <td [ngClass]="{'ban':form.status=='Not approved', 'pen':form.status=='Pending', 'hello-user':form.status=='Approved'}">{{form.status}}</td>
+                <td>
+                  <i *ngIf="form.status!='Approved'" class="fa fa-check-square-o hello-user" aria-hidden="true"
+                    (click)="setSubmittedFormStatus(form, 'Approved')">&nbsp;</i>
+                  <i *ngIf="form.status!='Not approved'" class="fa fa-times ban" aria-hidden="true"
+                    (click)="setSubmittedFormStatus(form, 'Not approved')">&nbsp;</i>
+                  <i class="fa fa-address-book-o hello-user" aria-hidden="true"
+                    (click)="viewSubmittedForm(form)"></i>&nbsp;
+                  <i class="fa fa-trash ban" aria-hidden="true"
+                    (click)="tryToDeleteSubmittedForm(form)"></i>
+                </td>
+              </tr>
+          </ng-container>
+        </tbody></table>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Pagination -->
+  <div class="political-pagination pagination-div">
+    <ul class="page-numbers">
+        <li><a class="previous page-numbers" (click)="previouseSubmittedFormPage()"><span aria-label="Next"><i class="fa fa-angle-left"></i></span></a></li>
+        <li *ngFor="let page of pagination;">
+            <a *ngIf="page!=tableCriteria.page" class="page-numbers"
+            (click)="paginationSubmittedChangePage(page)">{{page+1}}</a>
+            <span *ngIf="page==tableCriteria.page" class="page-numbers current">{{page+1}}</span>
+        </li>
+        <li><a class="next page-numbers" (click)="nextSubmittedFormPage()"><span aria-label="Next"><i class="fa fa-angle-right"></i></span></a></li>
+    </ul>
+  </div>
+</ng-container>
+
+<!-- Delete submitted form process -->
+<ng-container *ngIf="formOnHand!==null && language=='Thai'">
+  <div class="political-pagination" style="color:#000; text-align:left; margin-top:0; font-size:26px;">
+    {{currentForm.nameTH}}
+  </div>
+  <h1 style="margin-bottom:20px;"><strong>คุณกำลังจะทำการ<span class="ban">ลบแบบฟอร์ม</span>ของคุณ
+    <span class="hello-user">{{formOnHand.firstname}} {{formOnHand.lastname}}</span></strong></h1>
+  <input type="submit" class="political-simple-btn delete-btn" value="ลบข้อแบบฟอร์ม" (click)="deleteSubmittedForm()">
+  <input type="submit" class="political-simple-btn" value="ยกเลิก" (click)="goBackToSubmittedFormTable()">
+</ng-container>
+<ng-container *ngIf="formOnHand!==null && language=='English'">
+  <div class="political-pagination" style="color:#000; text-align:left; margin-top:0; font-size:26px;">
+    {{currentForm.nameTH}}
+  </div>
+  <h1 style="margin-bottom:20px;"><strong>You are about to <span class="ban">DELETE</span> the submitted form of
+    <span class="hello-user">{{formOnHand.firstname}} {{formOnHand.lastname}}</span></strong></h1>
+  <input type="submit" class="political-simple-btn delete-btn" value="DELETE FORM" (click)="deleteSubmittedForm()">
+  <input type="submit" class="political-simple-btn" value="Cancel" (click)="goBackToSubmittedFormTable()">
+</ng-container>

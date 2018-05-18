@@ -16,8 +16,8 @@ export class AdminService {
   constructor(private http: Http) { }
 
   getUsers(criteria) {
-    const url = this.apiUrl + '/getusers/' + criteria.start + '/' + criteria.limit + '/'
-      + criteria.sort + '/' + criteria.search;
+    const url = this.apiUrl + '/getusers/' + criteria.start + '/' + criteria.limit + '/' 
+      + criteria.sort + '/' + criteria.search.replace(/\//g, '');
 
     return this.http.get(url).toPromise()
       .then(response => {

@@ -13,6 +13,7 @@ import { PageUserProfileComponent } from './page-user-panel/page-user-profile/pa
 
 import { GuestRouteGuard, UserRouteGuard } from './services/auth-guard.service';
 import { UserinfoService } from './services/userinfo.service';
+import { PageGovFormsComponent } from './page-gov-forms/page-gov-forms.component';
 
 const routes: Routes = [
   { path: '', component: PageHomeComponent },
@@ -29,6 +30,10 @@ const routes: Routes = [
     canActivate: [UserRouteGuard]
   },
   { path: 'contact', component: PageContactComponent },
+  { // Government forms
+    path: 'forms', component: PageGovFormsComponent,
+    canActivate: [UserRouteGuard]
+  },
   { path: '**', redirectTo: '' }
 ];
 

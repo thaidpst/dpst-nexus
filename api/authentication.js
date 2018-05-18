@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 let crypto = require('crypto');
 
-
+// Use POST for security reason
 router.post('/register', (req, res) => {
   let input = req.body.input;
   let dbUsers = req.db.get('users'),
