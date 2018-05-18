@@ -15,14 +15,14 @@ app.use(cookieParser());
 
 //CORS middleware
 var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Origin', 'http://localhost:7000');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, X-Requested-With, Accept');
-    res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:7000');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, X-Requested-With, Accept');
+  res.header('Access-Control-Allow-Credentials', true);
 
-    next();
-}
+  next();
+};
 app.use(allowCrossDomain);
 
 // Make our db accessible to our router
@@ -30,8 +30,8 @@ const mongo = require('mongodb');
 const monk = require('monk');
 const db = monk('localhost:7001/DPSTdatabase');
 app.use((req,res,next)=>{
-    req.db = db;
-    next();
+  req.db = db;
+  next();
 });
 
 // Angular output folder
@@ -50,7 +50,7 @@ app.use('/cookie', cookie);
 
 // Send all other requests to the Angular app
 app.get('*', (req, res)=>{
-    res.sendFile(path.join(__dirname, 'app/index.html'));
+  res.sendFile(path.join(__dirname, 'app/index.html'));
 });
 
 //Set Port

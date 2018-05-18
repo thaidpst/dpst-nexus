@@ -16,8 +16,7 @@ import { CookieService } from '../services/cookie.service';
 })
 export class PageLoginComponent extends TranslateComponent implements OnInit {
 
-  private loginFail = false;
-  private loginMsg: string;
+  private _loginMsg: string;
 
   constructor(
     settings: SettingService,
@@ -33,6 +32,10 @@ export class PageLoginComponent extends TranslateComponent implements OnInit {
   ngOnInit() {
   }
 
+  get loginMsg(): string {
+    return this._loginMsg;
+  }
+
   memberLogIn(form: NgForm) {
     this.authService.login(form.value)
       .then(result => {
@@ -41,12 +44,11 @@ export class PageLoginComponent extends TranslateComponent implements OnInit {
             this.cookieService.setUserLoginCookie(result.data);
           else this.cookieService.clearUserLoginCookie();
 
-          this.loginFail = false;
+          this._loginMsg = null;
           this.loginSuccess(result.data);
           form.resetForm();
         } else {
-          this.loginFail = true;
-          this.loginMsg = result.data;
+          this._loginMsg = result.data;
         }
       });
   }

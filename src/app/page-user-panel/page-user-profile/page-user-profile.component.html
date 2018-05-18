@@ -1,7 +1,7 @@
-<div *ngIf="userDetail===null" class="political-team political-team-list">
+<div *ngIf="!userDetail" class="political-team political-team-list">
   <h3>Loading your data...</h3>
 </div>
 
-<ng-container *ngIf="userDetail!==null">
+<ng-container *ngIf="userDetail">
   <app-profile-form [userDetail]="userDetail"></app-profile-form>
 </ng-container>

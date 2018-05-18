@@ -22,7 +22,7 @@
 
                             <!-- Log in welcome -->
                             <h1 style="line-height:55px;">{{'Welcome to DPST Database Manager' | translate:language }}</h1>
-                            <ng-container *ngIf="userinfoService.getUserinfo()===null">
+                            <ng-container *ngIf="userinfoService.isLoggedIn">
                                 <h2>{{'Register to our community' | translate:language }}: </h2>
                                 <form>
                                     <ul>
@@ -32,7 +32,7 @@
                                     </ul>
                                 </form>
                             </ng-container>
-                        
+
                       </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                               <i class="icon church-arrow2"></i>
                               <h3>{{'Mission' | translate:language }}</h3>
                               <p>
-                                  We hope to help building the DPST community, 
+                                  We hope to help building the DPST community,
                                   and this application can connect DPST people with others.
                               </p>
                           </li>
@@ -68,7 +68,7 @@
                               <i class="icon church-eye"></i>
                               <h3>{{'How to Use' | translate:language }}</h3>
                               <p>
-                                  It is easy. You just need to register and 
+                                  It is easy. You just need to register and
                                   <a routerLink="/register"><strong style="cursor:pointer;">become a member</strong></a>.
                               </p>
                           </li>

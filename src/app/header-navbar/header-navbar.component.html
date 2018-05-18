@@ -38,7 +38,7 @@
 
                               <ng-container *ngIf="userinfoService.isLoggedIn">
                                 <!-- Check status -->
-                                <li routerLinkActive="active" *ngIf="userinfoService.getUserinfo().status!='Active'">
+                                <li routerLinkActive="active" *ngIf="!userinfoService.isActive">
                                     <a (click)="toggleSubnav('.status-nav')">
                                         {{'Status' | translate:language }}:
                                             <span [ngClass]="{'ban':userinfoService.getUserinfo().status=='Ban', 'pen':userinfoService.getUserinfo().status=='Pending'}">{{userinfoService.getUserinfo().status}}</span>
@@ -54,7 +54,7 @@
                                 </li>
 
                                 <!-- User panel -->
-                                <li routerLinkActive="active" *ngIf="userinfoService.getUserinfo().status=='Active'">
+                                <li routerLinkActive="active" *ngIf="userinfoService.isActive">
                                     <a (click)="toggleSubnav('.profile-nav')">
                                         {{'Hello,' | translate:language }}
                                             <span class="hello-user">{{userinfoService.getUserinfo().username}}</span>
@@ -68,7 +68,7 @@
                                         </a></li>
 
                                         <!-- Admin panel -->
-                                        <li routerLinkActive="active" *ngIf="userinfoService.getUserinfo().level >= 8">
+                                        <li routerLinkActive="active" *ngIf="userinfoService.isAdmin">
                                             <a routerLink="/admin-panel/user-table" (click)="unactive();" style="font-weight:600;">
                                                 Admin Panel
                                             </a>
@@ -80,7 +80,7 @@
                                 </li>
 
                                 <!-- Forms -->
-                                <li routerLinkActive="active" *ngIf="userinfoService.getUserinfo().status=='Active'">
+                                <li routerLinkActive="active" *ngIf="userinfoService.isActive">
                                     <a routerLink="/forms" (click)="unactive();">
                                         {{'Forms' | translate:language }}
                                     </a>

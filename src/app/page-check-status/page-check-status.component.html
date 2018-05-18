@@ -20,9 +20,9 @@
           <div class="col-md-8">
             <div class="political-contact-form">
               {{'Hello,' | translate:language }} <span>{{userinfoService.getUserinfo().username}}</span>{{'.' | translate:language }}
-              
+
               <br><br>
-              <ng-container *ngIf="userinfoService.getUserinfo().status=='Active'">
+              <ng-container *ngIf="userinfoService.isActive">
                 {{'Your account has been approved, and you can use our service.' | translate:language }}
               </ng-container>
               <ng-container *ngIf="userinfoService.getUserinfo().status=='Pending'">

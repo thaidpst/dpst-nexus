@@ -30,8 +30,12 @@ export class UserinfoService {
     return this.userinfo !== null;
   }
 
-  get userLevel(): number {
-    return this.userinfo.level || -1;
+  get isAdmin(): boolean {
+    return this.userinfo.level >= 8;
+  }
+
+  get isActive(): boolean {
+    return this.userinfo.status === 'Active';
   }
 
   getUserinfo(): UserInfo {
