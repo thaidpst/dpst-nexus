@@ -13,6 +13,7 @@ import { AdminService } from './services/admin.service';
 import { CookieService } from './services/cookie.service';
 import { LanguageService } from './languages/language.service';
 import { FormService } from './services/form.service';
+import { FileuploadService } from './services/fileupload.service';
 
 // Pipes
 import { TranslatePipe } from './languages/translate.pipe';
@@ -41,6 +42,8 @@ import { AdminPrivilageSettingFormComponent } from './forms/admin-privilage-sett
 import { PageGovFormsComponent } from './page-gov-forms/page-gov-forms.component';
 import { GovForm1Component } from './gov-forms/gov-form1/gov-form1.component';
 import { GovFormsComponent } from './gov-forms/gov-forms.component';
+import { PageAdminUserFormsComponent } from './page-admin-panel/page-admin-user-forms/page-admin-user-forms.component';
+import { PageAdminManageFormsComponent } from './page-admin-panel/page-admin-manage-forms/page-admin-manage-forms.component';
 
 
 @NgModule({
@@ -68,7 +71,9 @@ import { GovFormsComponent } from './gov-forms/gov-forms.component';
     TranslatePipe,
     PageGovFormsComponent,
     GovForm1Component,
-    GovFormsComponent
+    GovFormsComponent,
+    PageAdminUserFormsComponent,
+    PageAdminManageFormsComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +89,8 @@ import { GovFormsComponent } from './gov-forms/gov-forms.component';
     AdminService,
     CookieService,
     LanguageService,
-    FormService
+    FormService,
+    FileuploadService
   ],
   bootstrap: [
     AppComponent

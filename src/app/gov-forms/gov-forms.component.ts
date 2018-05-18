@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { PageService } from '../services/page.service';
 import { SettingService } from '../services/setting.service';
+import { SocketioService } from '../services/socketio.service';
 
 @Component({
   selector: 'app-gov-forms',
@@ -12,7 +13,8 @@ export class GovFormsComponent implements OnInit {
 
   constructor(
     private pageService: PageService,
-    private settingService: SettingService
+    private settingService: SettingService,
+    private socketioService: SocketioService
   ) { }
 
   ngOnInit() {
@@ -21,6 +23,7 @@ export class GovFormsComponent implements OnInit {
   formSubmitted(result) {
     if (result.status) {
       this.pageService.setSubpage('Form submitted confirmation');
+      this.socketioService.userFormSubmitted(result.data);
     }
   }
 

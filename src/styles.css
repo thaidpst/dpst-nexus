@@ -17,6 +17,11 @@ a {cursor: pointer;}
 .delete-btn {border:3px solid red; background-color:#ff6f60;}
 .delete-btn:hover {color:red; background-color:#ffffff;}
 
+.warning-circle {
+    float: right; background: orange; padding: 5px 10px; font-weight: 600;
+    color: #ffffff; border-radius: 15px;
+}
+
 
 /* Disable double click */
 * {

@@ -25,6 +25,9 @@ var allowCrossDomain = function(req, res, next) {
 }
 app.use(allowCrossDomain);
 
+const cors = require('cors');
+app.use(cors());
+
 // Make our db accessible to our router
 const mongo = require('mongodb');
 const monk = require('monk');
@@ -44,13 +47,18 @@ const admin = require('./api/admin');
 const user = require('./api/user');
 const cookie = require('./api/cookie');
 const form = require('./api/form');
+const fileupload = require('./api/fileupload');
 app.use('/authentication', authentication);
 app.use('/admin', admin);
 app.use('/user', user);
 app.use('/cookie', cookie);
 app.use('/form', form);
+app.use('/fileupload', fileupload);
 
 // Send all other requests to the Angular app
+app.get('../', (req, res)=>{
+    res.sendFile(path.join(__dirname, 'public'));
+});
 app.get('*', (req, res)=>{
     res.sendFile(path.join(__dirname, 'app/index.html'));
 });

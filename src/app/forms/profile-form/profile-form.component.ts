@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { SettingService } from '../../services/setting.service';
 
@@ -12,7 +13,8 @@ export class ProfileFormComponent implements OnInit {
   @Input() userDetail;
 
   constructor(
-    private settingService: SettingService
+    private settingService: SettingService,
+    private domSanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -29,7 +31,12 @@ export class ProfileFormComponent implements OnInit {
 
   userProfileImage() {
     if (this.userDetail.profileUrl===undefined || this.userDetail.profileUrl===null || this.userDetail.profileUrl=='') return 'assets/img/profile/base.jpg';
-    else return this.userDetail.profileUrl;
+    else {
+      let imgPath = this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../public/profile/' + this.userDetail.profileUrl
+      );
+      return imgPath;
+    }
   }
 
 }

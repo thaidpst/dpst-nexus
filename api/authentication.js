@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 let crypto = require('crypto');
 
-
+// Use POST for security reason
 router.post('/register', (req, res)=>{
     let input = req.body.input;
     let dbUsers = req.db.get('users'),
@@ -61,9 +61,9 @@ router.post('/register', (req, res)=>{
     }
 });
 
-router.get('/login/:username/:password', (req, res)=>{
-    let username = req.params.username,
-        password = req.params.password;
+router.post('/login', (req, res)=>{
+    let username = req.body.input.username,
+        password = req.body.input.password;
     let dbUsers = req.db.get('users');
 
     dbUsers.findOne({ username: username })
@@ -90,9 +90,9 @@ router.get('/login/:username/:password', (req, res)=>{
         })
         .catch(err1=>{res.json({status:false, message:'Login Error: '+err1, data:null})})
 });
-router.get('/loginwithcookie/:username/:userId', (req, res)=>{
-    let username = req.params.username,
-        userId = req.db.id(req.params.userId);
+router.post('/loginwithcookie', (req, res)=>{
+    let username = req.body.input.username,
+        userId = req.db.id(req.body.input.userId);
     let dbUsers = req.db.get('users');
 
     dbUsers.findOne({ _id: userId, username: username })

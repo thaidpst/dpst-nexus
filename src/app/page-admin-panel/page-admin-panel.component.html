@@ -27,6 +27,15 @@
                         <ul>
                             <li [ngClass]="{'active':pageService.getSubpage()=='User table'}">
                                 <a (click)="pageService.setSubpage('User table')">User Table</a></li>
+                            <li [ngClass]="{'active':pageService.getSubpage()=='Submitted forms'}">
+                                <a (click)="pageService.setSubpage('Submitted forms')">
+                                    Submitted Forms 
+                                    <div *ngIf="pendingFormNumber>0" class="warning-circle">{{pendingFormNumber}}</div>
+                                </a>
+                            </li>
+                            <li *ngIf="userinfoService.getUserinfo().level>7"
+                            [ngClass]="{'active':pageService.getSubpage()=='Manage forms'}">
+                                <a (click)="pageService.setSubpage('Manage forms')">Manage Forms</a></li>
                             <li *ngIf="userinfoService.getUserinfo().level>7"
                             [ngClass]="{'active':pageService.getSubpage()=='Statistic'}">
                                 <a (click)="pageService.setSubpage('Statistic')">Statistic</a></li>
@@ -42,6 +51,12 @@
 
                     <ng-container *ngIf="pageService.getSubpage()=='User table'">
                         <app-page-admin-user-table></app-page-admin-user-table>
+                    </ng-container>
+                    <ng-container *ngIf="pageService.getSubpage()=='Submitted forms'">
+                        <app-page-admin-user-forms></app-page-admin-user-forms>
+                    </ng-container>
+                    <ng-container *ngIf="pageService.getSubpage()=='Manage forms'">
+                        <app-page-admin-manage-forms></app-page-admin-manage-forms>
                     </ng-container>
                     <ng-container *ngIf="pageService.getSubpage()=='Statistic'">
                         <app-page-admin-statistic></app-page-admin-statistic>

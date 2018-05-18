@@ -1,0 +1,40 @@
+li.active a {color:#228ae6; font-weight:600;}
+
+.political-compaign-grid-text {padding:15px 15px 10px 15px; cursor:pointer; position: relative;}
+.gov-form-preview {border:1px solid #929292;}
+.form-owner {margin:10px 0 5px 0; width:100%; text-align:left;}
+.form-name {font-size:17px; margin-bottom:7px; line-height:23px;}
+.form-date {margin:0; font-size:13px;}
+
+th {color:#000000;}
+td {font-weight:300;}
+.fa {cursor:pointer;}
+
+.show-per-page, .select-sort, input.search[type=text] {height:38px; padding:3px;}
+.show-per-page {width:60px;}
+.select-sort {width:190px;}
+input.search[type=text] {
+    font-size: 16px;
+    border: 1px solid #dfdfdf;
+    width: 180px;
+    color: #5a5a5a;
+    font-weight: 300;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.top-option {padding:0 15px; float:right;}
+.pagination-div {margin:20px 0;}
+
+.back-btn {float:right; margin-bottom:20px;}
+
+.pending-warning {
+    position: absolute;
+    top: 0; right: 0;
+    background: orange;
+    width: 35px;
+    text-align: center;
+    font-weight: 600;
+    color: #ffffff;
+    border-radius: 20px;
+}

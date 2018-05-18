@@ -24,9 +24,11 @@ export class AuthenticationService {
   }
 
   login(formValue) {
-    let url = this.apiUrl + '/login/' + formValue.username + '/' + formValue.password;
+    let url = this.apiUrl + '/login',
+        input = {username: formValue.username, password: formValue.password};
     
-    return this.http.get(url).toPromise()
+    return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
+      .toPromise()
       .then(response=>{
         let result = response.json();
         if (testing) console.log(result.message);
@@ -35,9 +37,11 @@ export class AuthenticationService {
       .catch(err=>{return null});
   }
   loginWithCookie(cookie) {
-    let url = this.apiUrl + '/loginwithcookie/' + cookie.username + '/' + cookie._id;
+    let url = this.apiUrl + '/loginwithcookie',
+        input = {username: cookie.username, userId: cookie._id};
     
-    return this.http.get(url).toPromise()
+    return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
+      .toPromise()
       .then(response=>{
         let result = response.json();
         if (testing) console.log(result.message);

@@ -31,18 +31,20 @@
                                 <a (click)="pageService.setSubpage('All forms'); changeFormCategory('All forms');">
                                     {{'All Forms' | translate:settingService.getLanguage() }}
                                 </a></li>
-                            <li [ngClass]="{'active':pageService.getSubpage()=='Form category 1'}">
-                                <a (click)="pageService.setSubpage('Form category 1'); changeFormCategory('Form category 1');">
-                                    {{'Form category 1' | translate:settingService.getLanguage() }}
-                                </a></li>
-                            <li [ngClass]="{'active':pageService.getSubpage()=='Form category 2'}">
-                                <a (click)="pageService.setSubpage('Form category 2'); changeFormCategory('Form category 2');">
-                                    {{'Form category 2' | translate:settingService.getLanguage() }}
-                                </a></li>
-                            <li [ngClass]="{'active':pageService.getSubpage()=='Form category 3'}">
-                                <a (click)="pageService.setSubpage('Form category 3'); changeFormCategory('Form category 3');">
-                                    {{'Form category 3' | translate:settingService.getLanguage() }}
-                                </a></li>
+                            <ng-container *ngIf="settingService.getLanguage()=='Thai'">
+                                <li *ngFor="let category of formCatagory;" 
+                                [ngClass]="{'active':pageService.getSubpage()==category.categoryEN}">
+                                    <a (click)="pageService.setSubpage(category.categoryEN); changeFormCategory(category.categoryEN);">
+                                        {{category.categoryTH}}
+                                    </a></li>
+                            </ng-container>
+                            <ng-container *ngIf="settingService.getLanguage()=='English'">
+                                <li *ngFor="let category of formCatagory;" 
+                                [ngClass]="{'active':pageService.getSubpage()==category.categoryEN}">
+                                    <a (click)="pageService.setSubpage(category.categoryEN); changeFormCategory(category.categoryEN);">
+                                        {{category.categoryEN}}
+                                    </a></li>
+                            </ng-container>
                         </ul>
                     </div>
                 </aside>
@@ -88,7 +90,7 @@
                         <h2 *ngIf="forms===null">Loading forms...</h2>
                         <h2 *ngIf="forms!==null && forms.length==0">No forms available.</h2>
 
-                        <ul *ngIf="forms!==null" class="row">
+                        <ul *ngIf="forms!==null && forms.length>0" class="row">
 
                           <!-- Form preview -->
                             <li *ngFor="let form of forms;" class="col-md-4">

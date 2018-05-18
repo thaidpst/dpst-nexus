@@ -39,7 +39,6 @@ export class PageUserHistoryComponent implements OnInit {
       if (result.status) {
         this.submittedForms = result.data;
         this.criteria.totalSubmittedForms = result.totalSubmittedForms;
-
         this.pagination = [];
         let count = 0;
         while (count*this.criteria.limit < this.criteria.totalSubmittedForms) {
@@ -49,12 +48,28 @@ export class PageUserHistoryComponent implements OnInit {
       }
     });
     this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+
+    // Get announcement from Socket.io
+    this.socketioService.getSocket().on('announce-form-user-status', function(form) {
+      this.formTableUpdateProcess(form.userId);
+    }.bind(this));
+    this.socketioService.getSocket().on('announce-form-deleted', function(form) {
+      this.formTableUpdateProcess(form.userId);
+    }.bind(this));
   }
+  formTableUpdateProcess(formUserId) {
+    if (formUserId==this.userinfoService.getUserinfo()._id) {
+      this.subpage = 'History';
+      this.formOnHand = null;
+      this.formService.setMode();
+      this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
+    }
+  }
+  
   dateFromObjectId(objectId) {
     let date = new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
     return date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear();
   }
-
 
   formLimitChange(limit) {
     this.criteria.page = 0;
@@ -108,9 +123,10 @@ export class PageUserHistoryComponent implements OnInit {
     if (this.formOnHand!==null) {
       this.formService.deleteSubmittedForm(this.userinfoService.getUserinfo()._id, this.formOnHand).then(result=>{
         if (result.status) {
-          this.formService.getSubmittedForms(this.userinfoService.getUserinfo()._id, this.criteria);
-          // this.socketioService.deleteAccount(this.userOnHand._id);
+          this.socketioService.deletedUserForm(this.formOnHand);
           this.formOnHand = null;
+          this.pagination = [];
+          this.submittedForms = null;
           this.subpage = 'History';
         }
       });
@@ -133,6 +149,10 @@ export class PageUserHistoryComponent implements OnInit {
 
   ngOnDestroy() {
     this.getSubmittedFormsSubscription.unsubscribe();
+
+    // Unbind Socket.io
+    this.socketioService.getSocket().removeAllListeners('announce-form-user-status');
+    this.socketioService.getSocket().removeAllListeners('announce-form-deleted');
   }
 
 }

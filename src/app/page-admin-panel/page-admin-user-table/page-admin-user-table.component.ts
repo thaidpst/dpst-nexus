@@ -51,7 +51,7 @@ export class PageAdminUserTableComponent implements OnInit {
     this.socketioService.getSocket().on('update-new-users', function() {
       this.adminService.getUsers(this.criteria);
     }.bind(this));
-    this.socketioService.getSocket().on('announce-account-status', function() {
+    this.socketioService.getSocket().on('announce-admin-account-status', function() {
       this.adminService.getUsers(this.criteria);
     }.bind(this));
     this.socketioService.getSocket().on('announce-account-delete', function() {
@@ -177,6 +177,11 @@ export class PageAdminUserTableComponent implements OnInit {
 
   ngOnDestroy() {
     this.getUsersSubscription.unsubscribe();
+
+    // Unbind Socket.io
+    this.socketioService.getSocket().removeAllListeners('update-new-users');
+    this.socketioService.getSocket().removeAllListeners('announce-admin-account-status');
+    this.socketioService.getSocket().removeAllListeners('announce-account-delete');
   }
 
 }

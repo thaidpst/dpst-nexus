@@ -32,16 +32,28 @@ exports = module.exports = function(io) {
             io.emit('online-users', onlineUsers);
         });
 
-        // Announcement to users
+        // Announcement: User account changing
         socket.on('account-status', userId=>{
             io.emit('announce-account-status', userId);
+            io.emit('announce-admin-account-status', userId);
         });
-        socket.on('account-delete', userId=>{
-            io.emit('announce-account-delete', userId);
+        socket.on('account-delete', userId=>{io.emit('announce-account-delete', userId)});
+        socket.on('account-privilage', userId=>{io.emit('announce-account-privilage', userId)});
+
+        // Announcement: Forms
+        socket.on('form-submitted', formId=>{
+            io.emit('announce-form-submitted', formId);
+            io.emit('announce-form-pending-number');
         });
-        socket.on('account-privilage', userId=>{
-            io.emit('announce-account-privilage', userId);
+        socket.on('form-deleted', form=>{
+            io.emit('announce-form-deleted', form);
+            io.emit('announce-form-pending-number');
         });
+        socket.on('form-status', formId=>{
+            io.emit('announce-form-status', formId);
+            io.emit('announce-form-pending-number');
+        });
+        socket.on('form-user-status', form=>{io.emit('announce-form-user-status', form)});
     
         socket.on('disconnect', ()=>{
             onlineUsers.splice(onlineUsers.indexOf(userInfo.username), 1);

@@ -34,7 +34,9 @@ export const LANG_TH_TRANS = {
   'your name': 'ชื่อของคุณ',
   'all forms': 'แบบฟอร์มทั้งหมด',
   'form category': 'ประเภทแบบฟอร์ม',
-  'create date': 'จัดทำวันที่'
+  'create date': 'จัดทำวันที่',
+  'attendance forms': 'แบบฟอร์มเข้าร่วมงาน',
+  'Disbursement Form': 'แบบฟอร์มเบิกค่าใช้จ่าย'
 };
 
 // {{'text' | translate:settingService.getLanguage() }}

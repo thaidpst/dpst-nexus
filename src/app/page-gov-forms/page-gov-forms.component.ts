@@ -12,6 +12,8 @@ import { FormService } from '../services/form.service';
 })
 export class PageGovFormsComponent implements OnInit {
 
+  private formCatagory = [];
+
   private getFormsSubscription: Subscription;
   private criteria = {
     page: 0, start: 0, limit: 25, totalForms: 0,
@@ -27,6 +29,10 @@ export class PageGovFormsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.formService.getFormCategory().then(result=>{
+      if (result.status) this.formCatagory = result.data;
+    });
+
     this.getFormsSubscription = this.formService.observeForms().subscribe(result=>{
       if (result.status) {
         this.forms = result.data;
