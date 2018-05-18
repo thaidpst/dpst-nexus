@@ -10,18 +10,18 @@ router.post('/register', (req, res) => {
 
   if (input.password.length < 5)
     res.json({
-      status : false,
-      message : 'Register fail: Password is too short.',
-      data : 0
-    });else {
+      status: false,
+      message: 'Register fail: Password is too short.',
+      data: 0
+    }); else {
     dbUsers.findOne({
-      username : input.username
+      username: input.username
     })
       .then(check1 => {
         if (check1 === null) {
 
           dbUsers.findOne({
-            email : input.email
+            email: input.email
           })
             .then(check2 => {
               if (check2 === null) {
@@ -33,84 +33,84 @@ router.post('/register', (req, res) => {
                   ).toString('hex');
 
                 dbUsers.insert({
-                  username : input.username,
-                  password : hash,
-                  salt : salt,
-                  level : 1,
-                  firstname : input.firstname,
-                  lastname : input.lastname,
-                  email : input.email,
-                  status : 'Pending'
+                  username: input.username,
+                  password: hash,
+                  salt: salt,
+                  level: 1,
+                  firstname: input.firstname,
+                  lastname: input.lastname,
+                  email: input.email,
+                  status: 'Pending'
                 })
-                  .then(check3 => {
+                  .then(() => {
                     dbUsers.findOne({
-                      username : input.username
+                      username: input.username
                     }, {
-                      _id : 1
+                      _id: 1
                     })
                       .then(check4 => {
 
                         dbUserDetail.insert({
-                          userId : check4._id,
-                          profileUrl : 'assets/img/profile/base.jpg'
+                          userId: check4._id,
+                          profileUrl: 'assets/img/profile/base.jpg'
                         })
-                          .then(check5 => {
+                          .then(() => {
                             res.json({
-                              status : true,
-                              message : 'Register successfully!',
-                              data : 1
+                              status: true,
+                              message: 'Register successfully!',
+                              data: 1
                             });
                           })
                           .catch(err5 => {
                             res.json({
-                              status : false,
-                              message : 'Register error: ' + err5,
-                              data : null
-                            })
+                              status: false,
+                              message: 'Register error: ' + err5,
+                              data: null
+                            });
                           });
                       })
                       .catch(err4 => {
                         res.json({
-                          status : false,
-                          message : 'Register error: ' + err4,
-                          data : null
-                        })
+                          status: false,
+                          message: 'Register error: ' + err4,
+                          data: null
+                        });
                       });
                   })
                   .catch(err3 => {
                     res.json({
-                      status : false,
-                      message : 'Register error: ' + err3,
-                      data : null
-                    })
-                  })
+                      status: false,
+                      message: 'Register error: ' + err3,
+                      data: null
+                    });
+                  });
 
               } else res.json({
-                  status : false,
-                  message : 'Register fail: Email is already in use.',
-                  data : -2
-                });
+                status: false,
+                message: 'Register fail: Email is already in use.',
+                data: -2
+              });
             })
             .catch(err2 => {
               res.json({
-                status : false,
-                message : 'Register error: ' + err2,
-                data : null
-              })
+                status: false,
+                message: 'Register error: ' + err2,
+                data: null
+              });
             });
 
         } else res.json({
-            status : false,
-            message : 'Register fail: Username is already in use.',
-            data : -1
-          });
+          status: false,
+          message: 'Register fail: Username is already in use.',
+          data: -1
+        });
       })
       .catch(err1 => {
         res.json({
-          status : false,
-          message : 'Register error: ' + err1,
-          data : null
-        })
+          status: false,
+          message: 'Register error: ' + err1,
+          data: null
+        });
       });
   }
 });
@@ -121,7 +121,7 @@ router.post('/login', (req, res) => {
   let dbUsers = req.db.get('users');
 
   dbUsers.findOne({
-    username : username
+    username: username
   })
     .then(userRecord => {
       if (!userRecord)
@@ -132,26 +132,26 @@ router.post('/login', (req, res) => {
         throw Error('Incorrect username or password');
 
       res.json({
-        status : true,
-        message : 'login successful',
-        data : {
-          _id : userRecord._id,
-          username : userRecord.username,
-          level : userRecord.level,
-          firstname : userRecord.firstname,
-          lastname : userRecord.lastname,
-          email : userRecord.email,
-          status : userRecord.status
+        status: true,
+        message: 'login successful',
+        data: {
+          _id: userRecord._id,
+          username: userRecord.username,
+          level: userRecord.level,
+          firstname: userRecord.firstname,
+          lastname: userRecord.lastname,
+          email: userRecord.email,
+          status: userRecord.status
         }
       });
     })
     .catch(err => {
       res.json({
-        status : false,
-        message : 'login failed: ' + err.message,
-        data : err.message
-      })
-    })
+        status: false,
+        message: 'login failed: ' + err.message,
+        data: err.message
+      });
+    });
 });
 
 router.get('/authenticate', (req, res) => {
@@ -160,18 +160,18 @@ router.get('/authenticate', (req, res) => {
       username = req.cookies.username,
       dbUsers = req.db.get('users');
     dbUsers.findOne({
-      _id : userId,
-      username : username
+      _id: userId,
+      username: username
     }).then(userRecord => {
       if (userRecord) {
         res.json({
-          status : true,
-          message : 'authentication successful',
-          data : {
-            _id : userRecord._id,
-            username : userRecord.username,
-            status : userRecord.status,
-            level : userRecord.level
+          status: true,
+          message: 'authentication successful',
+          data: {
+            _id: userRecord._id,
+            username: userRecord.username,
+            status: userRecord.status,
+            level: userRecord.level
           }
         });
       } else {
@@ -180,9 +180,9 @@ router.get('/authenticate', (req, res) => {
     }).catch(err => logout(res, 'authentication failed: ' + err));
   } else {
     res.json({
-      status : true,
-      message : 'not logged in',
-      data : null
+      status: true,
+      message: 'not logged in',
+      data: null
     });
   }
 });
@@ -191,8 +191,8 @@ function logout(res, msg) {
   res.clearCookie('_id');
   res.clearCookie('username');
   res.json({
-    status : false,
-    message : msg
+    status: false,
+    message: msg
   });
 }
 
