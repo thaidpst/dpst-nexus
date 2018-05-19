@@ -6,15 +6,15 @@ const http = require('http');
 
 // Initialize application
 const app = express();
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 // Cookie parser
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 //CORS middleware
-var allowCrossDomain = function(req, res, next) {
+var allowCrossDomain = function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Origin', 'http://localhost:7000');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -32,7 +32,7 @@ app.use(cors());
 const mongo = require('mongodb');
 const monk = require('monk');
 const db = monk('localhost:7001/DPSTdatabase');
-app.use((req,res,next)=>{
+app.use((req, res, next) => {
   req.db = db;
   next();
 });
@@ -55,11 +55,11 @@ app.use('/cookie', cookie);
 app.use('/form', form);
 app.use('/fileupload', fileupload);
 
-// Send all other requests to the Angular app
-app.get('../', (req, res)=>{
-    res.sendFile(path.join(__dirname, 'public'));
+app.get('../', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public'));
 });
-app.get('*', (req, res)=>{
+// Send all other requests to the Angular app
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'app/index.html'));
 });
 

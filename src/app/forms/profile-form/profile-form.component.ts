@@ -34,9 +34,10 @@ export class ProfileFormComponent extends TranslateComponent implements OnInit {
   }
 
   userProfileImage() {
-    if (this.userDetail.profileUrl===undefined || this.userDetail.profileUrl===null || this.userDetail.profileUrl=='') return 'assets/img/profile/base.jpg';
+    if (this.userDetail.profileUrl === undefined || this.userDetail.profileUrl === null || this.userDetail.profileUrl === '')
+      return 'assets/img/profile/base.jpg';
     else {
-      let imgPath = this.domSanitizer.bypassSecurityTrustResourceUrl(
+      const imgPath = this.domSanitizer.bypassSecurityTrustResourceUrl(
         '../public/profile/' + this.userDetail.profileUrl
       );
       return imgPath;
