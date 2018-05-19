@@ -1,53 +1,52 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { ipHost, testing } from '../globals';
+import { JsonResponse } from '../schemas/json-response';
+import { UserInfo } from '../schemas/user-info';
 
 @Injectable()
 export class AuthenticationService {
 
   private apiUrl = ipHost + '/authentication';
-  private headers = new Headers({ 'Content-Type': 'application/json' });
+  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  constructor(private http: Http) { }
+  constructor(
+    private httpClient: HttpClient,
+  ) { }
+
+  authenticate(): Promise<UserInfo> {
+    const url = this.apiUrl + '/authenticate';
+    return this.httpClient.get<JsonResponse>(url).toPromise()
+      .then(response => {
+        if (testing) console.log(response.message);
+        if (response.status) return response.data as UserInfo;
+        return null;
+      })
+      .catch(err => null);
+  }
 
   register(formValue) {
-    let url = this.apiUrl + '/register',
-        input = formValue;
-    return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
+    const url = this.apiUrl + '/register',
+      input = formValue;
+    return this.httpClient.post<JsonResponse>(url, JSON.stringify({ 'input': input }), { headers: this.headers })
       .toPromise()
-      .then(response=>{
-        let result = response.json();
-        if (testing) console.log(result.message);
-        return result;
+      .then(response => {
+        if (testing) console.log(response.message);
+        return response;
       })
-      .catch(err=>{return null});
+      .catch(err => null);
   }
 
   login(formValue) {
-    let url = this.apiUrl + '/login',
-        input = {username: formValue.username, password: formValue.password};
-    
-    return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
+    const url = this.apiUrl + '/login';
+    return this.httpClient.post<JsonResponse>(url, JSON.stringify(formValue),
+      { headers: this.headers })
       .toPromise()
-      .then(response=>{
-        let result = response.json();
-        if (testing) console.log(result.message);
-        return result;
+      .then(response => {
+        if (testing) console.log(response.message);
+        return response;
       })
-      .catch(err=>{return null});
+      .catch(err => null);
   }
-  loginWithCookie(cookie) {
-    let url = this.apiUrl + '/loginwithcookie',
-        input = {username: cookie.username, userId: cookie._id};
-    
-    return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
-      .toPromise()
-      .then(response=>{
-        let result = response.json();
-        if (testing) console.log(result.message);
-        return result;
-      })
-      .catch(err=>{return null});
-  }
-
 }

@@ -18,9 +18,9 @@ export class SocketioService {
     }.bind(this));
     this.socket.emit('get-online-users');
   }
-  getSocket() {return this.socket}
+  getSocket() { return this.socket; }
 
-  getOnlineUsers() {return this.onlineUsers}
+  getOnlineUsers() { return this.onlineUsers; }
 
   newMember(username) {this.socket.emit('new-member', username)}
 

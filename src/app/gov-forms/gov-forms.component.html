@@ -1,34 +1,33 @@
 
 <!-- Forms -->
-<app-gov-form1 *ngIf="pageService.getSubpage()=='gov-form1'" (formSubmitted)="formSubmitted($event)"></app-gov-form1>
-
+<router-outlet></router-outlet>
 
 <!-- Submitted confirmation -->
-<div *ngIf="pageService.getSubpage()=='Form submitted confirmation'" class="political-main-content">
+<div *ngIf="_formSubmitted" class="political-main-content">
     <div class="political-main-section">
         <div class="container">
-            <div class="row" *ngIf="settingService.getLanguage()=='Thai'">
+            <div class="row" *ngIf="language=='Thai'">
                 <h2 style="margin-bottom:30px;">
                     เราได้รับแบบฟอร์มของคุณเรียบร้อยแล้ว เจ้าหน้าที่ของเรากำลังตรวจสอบความถูกต้อง ขอบคุณครับ
                 </h2>
-                <input class="political-simple-btn back-btn" type="submit" 
-                    (click)="pageService.setPage('Homepage')" value="ไปหน้าเเรก">
-                <input class="political-simple-btn back-btn" type="submit" 
-                    (click)="pageService.setPage('Forms')" value="ไปหน้าเเบบฟอร์ม">
-                <input class="political-simple-btn back-btn" type="submit" 
-                    (click)="pageService.setPage('User panel'); pageService.setSubpage('History');"
+                <input class="political-simple-btn back-btn" type="submit"
+                    (click)="router.navigate(['/'])" value="ไปหน้าเเรก">
+                <input class="political-simple-btn back-btn" type="submit"
+                    (click)="router.navigate(['/forms'])" value="ไปหน้าเเบบฟอร์ม">
+                <input class="political-simple-btn back-btn" type="submit"
+                    (click)="router.navigate(['/user-panel/history'])"
                     value="ไปหน้าประวัติการใช้งาน">
             </div>
-            <div class="row" *ngIf="settingService.getLanguage()=='English'">
+            <div class="row" *ngIf="language=='English'">
                 <h2 style="margin-bottom:30px;">
                     The form is submitted successfully. Our staff will check your form shortly. Thank you.
                 </h2>
-                <input class="political-simple-btn back-btn" type="submit" 
-                    (click)="pageService.setPage('Homepage')" value="Go to Homepage">
-                <input class="political-simple-btn back-btn" type="submit" 
-                    (click)="pageService.setPage('Forms')" value="Go to Forms">
-                <input class="political-simple-btn back-btn" type="submit" 
-                    (click)="pageService.setPage('User panel'); pageService.setSubpage('History');"
+                <input class="political-simple-btn back-btn" type="submit"
+                    (click)="router.navigate(['/'])" value="Go to Homepage">
+                <input class="political-simple-btn back-btn" type="submit"
+                    (click)="router.navigate(['/forms'])" value="Go to Forms">
+                <input class="political-simple-btn back-btn" type="submit"
+                    (click)="router.navigate(['/user-panel/history'])"
                     value="Go to your history">
             </div>
         </div>

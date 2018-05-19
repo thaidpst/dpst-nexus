@@ -5,10 +5,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h2 *ngIf="settingService.getLanguage()=='Thai'">สถานะ:
-              <span [ngClass]="{'ban':userinfoService.getUserinfo().status=='Ban', 'pen':userinfoService.getUserinfo().status=='Pending', 'hello-user':userinfoService.getUserinfo().status=='Active'}">{{userinfoService.getUserinfo().status}}</span>
-            </h2>
-            <h2 *ngIf="settingService.getLanguage()=='English'">Status:
+            <h2>{{'Status' | translate:language }}:
               <span [ngClass]="{'ban':userinfoService.getUserinfo().status=='Ban', 'pen':userinfoService.getUserinfo().status=='Pending', 'hello-user':userinfoService.getUserinfo().status=='Active'}">{{userinfoService.getUserinfo().status}}</span>
             </h2>
           </div>
@@ -20,68 +17,26 @@
         <div class="row">
           <div class="col-md-2"></div>
 
-          <div *ngIf="userinfoService.getUserinfo().status=='Active'" class="col-md-8">
-            <div *ngIf="settingService.getLanguage()=='Thai'" class="political-contact-form">
-                ยินดีต้อนรับ <span>{{userinfoService.getUserinfo().username}}</span>.
-                
-                <br><br>บัญชีของคุณได้รับการยืนยันเรียบร้อยเเล้ว ท่านจะสามารถเริ่มใช้บริการของเราได้
-  
-                <br><br>ถ้าท่านมีคำถามหรือข้อสงสัย
-                ท่านสามารถ<a (click)="pageService.setPage('Contact')">ติดต่อเรา</a>ได้ครับ
-            </div>
-            <div *ngIf="settingService.getLanguage()=='Active'" class="political-contact-form">
-              Hello, <span>{{userinfoService.getUserinfo().username}}</span>.
-              
-              <br><br>Your account has been approved, and you can use our service.
+          <div class="col-md-8">
+            <div class="political-contact-form">
+              {{'Hello,' | translate:language }} <span>{{userinfoService.getUserinfo().username}}</span>{{'.' | translate:language }}
 
-              <br><br>If You have any concerns, please 
-              <a (click)="pageService.setPage('Contact')">contact us</a>.
-            </div>
-          </div>
-          
-          <div *ngIf="userinfoService.getUserinfo().status=='Pending'" class="col-md-8">
-            <div *ngIf="settingService.getLanguage()=='Thai'" class="political-contact-form">
-                ยินดีต้อนรับ <span>{{userinfoService.getUserinfo().username}}</span>.
-                
-                <br><br>คุณได้ลงทะเบียนในระบบของเราเป็นที่เรียบร้อยเเล้ว
-                กรุณารอสักครู่ ทางเรากำลังตรวจสอบข้อมูลเเล้วจะทำการยืนยันข้อมมูลของท่าน 
-                หลังจากนั้นท่านจะสามารถเริ่มใช้บริการของเราได้
-  
-                <br><br>ถ้าท่านมีคำถามหรือข้อสงสัย
-                ท่านสามารถ<a (click)="pageService.setPage('Contact')">ติดต่อเรา</a>ได้ครับ
-            </div>
-            <div *ngIf="settingService.getLanguage()=='English'" class="political-contact-form">
-              Hello, <span>{{userinfoService.getUserinfo().username}}</span>.
-              
-              <br><br>Your account is created successfully in our database. 
-              Please wait for our administrators to approve your account.
-              Then you can use our service.
+              <br><br>
+              <ng-container *ngIf="userinfoService.isActive">
+                {{'Your account has been approved, and you can use our service.' | translate:language }}
+              </ng-container>
+              <ng-container *ngIf="userinfoService.getUserinfo().status=='Pending'">
+                {{'Your account has been created. Please wait for our administrators to approve your account before you can use our service.' | translate:language }}
+              </ng-container>
+              <ng-container *ngIf="userinfoService.getUserinfo().status=='Ban'">
+                {{'Your account is currently banned.' | translate:language }}
+              </ng-container>
 
-              <br><br>If You have any concerns, please 
-              <a (click)="pageService.setPage('Contact')">contact us</a>.
+              <br><br>{{'If you have any concerns, please ' | translate:language }}<a routerLink="/contact">{{'contact us' | translate:language }}</a>{{'.' | translate:language }}
             </div>
           </div>
 
-          <div *ngIf="userinfoService.getUserinfo().status=='Ban'" class="col-md-8">
-            <div *ngIf="settingService.getLanguage()=='Thai'" class="political-contact-form">
-                ยินดีต้อนรับ <span>{{userinfoService.getUserinfo().username}}</span>.
-                
-                <br><br>ชื่อผู้ใช้งานของท่านได้ถูกระงับการใช้งานชั่วคราว
-  
-                <br><br>ถ้าท่านมีคำถามหรือข้อสงสัย
-                ท่านสามารถ<a (click)="pageService.setPage('Contact')">ติดต่อเรา</a>ได้ครับ
-              </div>
-            <div *ngIf="settingService.getLanguage()=='English'" class="political-contact-form">
-              Hello, <span>{{userinfoService.getUserinfo().username}}</span>.
-              
-              <br><br>Your account have currently been banned.
-
-              <br><br>If You have any concerns, please 
-              <a (click)="pageService.setPage('Contact')">contact us</a>.
-            </div>
-          </div>
-          
-        </div>
+       </div>
       </div>
 
   </div>

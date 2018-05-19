@@ -1,6 +1,7 @@
 <!-- All of the form components should follow this structure. -->
 <!-- If you have any question, contact me at sarun_sla@hotmail.com (Sarun Seepun) -->
 
+<ng-container *ngIf="!_formSubmitted">
 <h2 *ngIf="form===null || userDetail===null" style="width:100%; text-align:center;">Loading the form detail...</h2>
 <ng-container *ngIf="form!==null && userDetail!==null">
 
@@ -8,9 +9,9 @@
 <div class="political-subheader"><div class="container"><div class="row"><div class="col-md-12"><div class="political-subheader-wrap">
   <h1>{{form.nameTH}}</h1>
   <ul class="political-breadcrumb">
-    <li><a (click)="pageService.setPage('Homepage')">{{'Homepage' | translate:settingService.getLanguage()}}</a></li>
-    <li class="active"><a (click)="pageService.setPage('Forms'); pageService.setSubpage('All forms');" style="color:#555555;">
-        {{'Forms' | translate:settingService.getLanguage()}}
+    <li><a routerLink="/">{{'Homepage' | translate:language}}</a></li>
+    <li class="active"><a routerLink="/forms" style="color:#555555;">
+        {{'Forms' | translate:language}}
     </a></li>
   </ul>
 </div></div></div></div></div>
@@ -21,9 +22,9 @@
 
   <!-- Interactive form filling -->
   <!-- USer new form -->
-  <form *ngIf="formService.getMode()=='New' && formService.getRole()!='Admin'" 
+  <form *ngIf="formService.getMode()=='New' && formService.getRole()!='Admin'"
   #govForm="ngForm" (ngSubmit)="submitGovForm(govForm)" class="input-container" ngNativeValidate>
-    
+
     <input value="" ngModel required class="fill" type="text" name="school"style="top:32.6vw; left:12vw; width:37%;">
 
     <input value="" ngModel class="fill" type="text" name="position1" style="top:35.3vw; left:21.6vw; width:62%;">
@@ -54,20 +55,20 @@
     <div class="fullname" style="top:90.65vw; left:58.5%; width:27.5%;">{{userDetail.firstname}} {{userDetail.lastname}}</div>
 
     <!-- Important button set -->
-    <div *ngIf="settingService.getLanguage()=='Thai'" class="button-container">
+    <div *ngIf="language=='Thai'" class="button-container">
       <input class="political-simple-btn warning-btn" type="submit" value="ส่งแบบฟอร์ม">
       <input class="political-simple-btn" type="button" value="กลับไปเลือกเเบบฟอร์ม" (click)="goToFormsPage()">
     </div>
-    <div *ngIf="settingService.getLanguage()=='English'" class="button-container">
+    <div *ngIf="language=='English'" class="button-container">
       <input class="political-simple-btn warning-btn" type="submit" value="Submit form">
       <input class="political-simple-btn" type="button" value="Back to Forms" (click)="goToFormsPage()">
     </div>
   </form>
 
   <!-- User edit form -->
-  <form *ngIf="formService.getMode()=='Edit' && formService.getRole()!='Admin' && loadForm!==null" 
+  <form *ngIf="formService.getMode()=='Edit' && formService.getRole()!='Admin' && loadForm!==null"
   #govForm="ngForm" (ngSubmit)="editSubmittedGovForm(govForm)" class="input-container" ngNativeValidate>
-    
+
     <input [ngModel]="default(loadForm.formValue.school)" ngModel required class="fill" type="text" name="school" style="top:32.6vw; left:12vw; width:37%;">
 
     <input [ngModel]="default(loadForm.formValue.position1)" ngModel class="fill" type="text" name="position1" style="top:35.3vw; left:21.6vw; width:62%;">
@@ -98,12 +99,12 @@
     <div class="fullname" style="top:90.65vw; left:58.5%; width:27.5%;">{{userDetail.firstname}} {{userDetail.lastname}}</div>
 
     <!-- Important button set -->
-    <div *ngIf="settingService.getLanguage()=='Thai'" class="button-container">
+    <div *ngIf="language=='Thai'" class="button-container">
       <input class="political-simple-btn warning-btn" type="submit" value="แก้ไขแบบฟอร์ม">
       <input class="political-simple-btn" type="button" value="กลับไปประวัติการใช้งาน" (click)="goToUserHistoryPage()">
       <input class="political-simple-btn delete-btn" type="button" value="ลบเเบบฟอร์ม" (click)="deleteSubmittedForm()">
     </div>
-    <div *ngIf="settingService.getLanguage()=='English'" class="button-container">
+    <div *ngIf="language=='English'" class="button-container">
       <input class="political-simple-btn warning-btn" type="submit" value="Edit form">
       <input class="political-simple-btn" type="button" value="Back to user history" (click)="goToUserHistoryPage()">
       <input class="political-simple-btn delete-btn" type="button" value="Delete form" (click)="deleteSubmittedForm()">
@@ -112,7 +113,7 @@
 
   <!-- View form -->
   <form *ngIf="(formService.getMode()=='View' || formService.getMode()=='ByPass') && loadForm!==null" class="input-container">
-    
+
     <input [ngModel]="default(loadForm.formValue.school)" disabled class="fill" type="text" name="school" style="top:32.6vw; left:12vw; width:37%;">
 
     <input [ngModel]="default(loadForm.formValue.position1)" disabled class="fill" type="text" name="position1" style="top:35.3vw; left:21.6vw; width:62%;">
@@ -144,16 +145,16 @@
 
     <!-- Important button set -->
     <div *ngIf="formService.getRole()!='Admin'" class="button-container">
-      <input *ngIf="settingService.getLanguage()=='Thai'" class="political-simple-btn" 
+      <input *ngIf="language=='Thai'" class="political-simple-btn"
       type="button" value="กลับไปประวัติการใช้งาน" (click)="goToUserHistoryPage()">
-      <input *ngIf="settingService.getLanguage()=='English'" class="political-simple-btn" 
+      <input *ngIf="language=='English'" class="political-simple-btn"
       type="button" value="Back to user history" (click)="goToUserHistoryPage()">
     </div>
     <div *ngIf="formService.getRole()=='Admin'" class="button-container">
       <input class="political-simple-btn" type="button" value="Back to admin forms" (click)="backToAdminForms()">
-      <input *ngIf="loadForm.status!='Approved'" class="political-simple-btn" 
+      <input *ngIf="loadForm.status!='Approved'" class="political-simple-btn"
       type="button" value="Approve" (click)="adminSetSubmittedFormStatus('Approved')">
-      <input *ngIf="loadForm.status!='Not approved'" class="political-simple-btn warning-btn" 
+      <input *ngIf="loadForm.status!='Not approved'" class="political-simple-btn warning-btn"
       type="button" value="Not approved" (click)="adminSetSubmittedFormStatus('Not approved')">
       <input class="political-simple-btn delete-btn" type="button" value="Delete form" (click)="adminDeleteSubmittedForm()">
     </div>
@@ -161,4 +162,5 @@
 
 </div></div></div></div>
 
+</ng-container>
 </ng-container>

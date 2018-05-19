@@ -18,7 +18,8 @@ export class LanguageService {
 
   translate(value: string, lang: string): string {
     if (dictionary[lang]) {
-      return dictionary[lang][value.toLowerCase()] || value;
+      const translated = dictionary[lang][value.toLowerCase()];
+      return translated !== null ? translated : value;
     }
     return value;
   }

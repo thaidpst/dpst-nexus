@@ -1,29 +1,32 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 import * as d3 from 'd3';
 
 import { SocketioService } from '../services/socketio.service';
-import { PageService } from '../services/page.service';
 import { SettingService } from '../services/setting.service';
 import { UserinfoService } from '../services/userinfo.service';
 import { CookieService } from '../services/cookie.service';
+
+import { TranslateComponent } from '../languages/translate.component';
 
 @Component({
   selector: 'app-header-navbar',
   templateUrl: './header-navbar.component.html',
   styleUrls: ['./header-navbar.component.css']
 })
-export class HeaderNavbarComponent implements OnInit {
+export class HeaderNavbarComponent extends TranslateComponent implements OnInit {
 
   private host;
 
   constructor(
+    settings: SettingService,
     private elementRef: ElementRef,
     private socketioService: SocketioService,
-    private pageService: PageService,
-    private settingService: SettingService,
     private userinfoService: UserinfoService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router
   ) {
+    super(settings);
     this.host = d3.select(this.elementRef.nativeElement);
   }
 
@@ -40,15 +43,15 @@ export class HeaderNavbarComponent implements OnInit {
   }
 
   toggleSubnav(selector) {
-    let toggle = !this.host.select(selector).classed('active')
+    const toggle = !this.host.select(selector).classed('active');
     this.host.selectAll(selector).classed('active', toggle);
   }
 
   memberLogOut() {
     this.socketioService.logout();
     this.userinfoService.setUserinfo(null);
-    this.pageService.setPage('Homepage');
     this.cookieService.clearUserLoginCookie();
+    this.router.navigate(['/']);
   }
 
 }

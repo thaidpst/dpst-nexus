@@ -29,17 +29,17 @@
           <option value="100">100</option>
         </select>
     </div>
-  
+
     <div class="top-option">
         Catagory
         <select class="select-sort" (change)="changeFormCategory($event.target.value)">
           <option value="All forms" selected="selected">
-            <ng-container *ngIf="settingService.getLanguage()=='English'">All forms</ng-container>
-            <ng-container *ngIf="settingService.getLanguage()=='Thai'">แบบฟอร์มทั้งหมด</ng-container>  
+            <ng-container *ngIf="language=='English'">All forms</ng-container>
+            <ng-container *ngIf="language=='Thai'">แบบฟอร์มทั้งหมด</ng-container>
           </option>
           <option *ngFor="let category of formCategory;" [value]="category.categoryEN">
-            <ng-container *ngIf="settingService.getLanguage()=='English'">{{category.categoryEN}}</ng-container>
-            <ng-container *ngIf="settingService.getLanguage()=='Thai'">{{category.categoryTH}}</ng-container>
+            <ng-container *ngIf="language=='English'">{{category.categoryEN}}</ng-container>
+            <ng-container *ngIf="language=='Thai'">{{category.categoryTH}}</ng-container>
           </option>
         </select>
     </div>
@@ -62,7 +62,7 @@
             <small class="form-owner">{{formOwner(form)}} Form</small>
             <h3 class="form-name">{{form.nameTH}}</h3>
             <span class="form-date">
-              {{'Create date' | translate:settingService.getLanguage() }}:
+              {{'Create date' | translate:language }}:
               <small>{{dateFromObjectId(form._id)}}</small>
             </span>
             <div *ngIf="form.pendingNumber>0" class="pending-warning">{{form.pendingNumber}}</div>
@@ -108,7 +108,7 @@
         <option value="Submitted date decreasing">Submitted date decreasing</option>
         </select>
     </div>
-    
+
     <div class="top-option">
         Show per page
         <select class="show-per-page" (change)="submittedFormLimitChange($event.target.value)">
@@ -175,7 +175,7 @@
 </ng-container>
 
 <!-- Delete submitted form process -->
-<ng-container *ngIf="formOnHand!==null && settingService.getLanguage()=='Thai'">
+<ng-container *ngIf="formOnHand!==null && language=='Thai'">
   <div class="political-pagination" style="color:#000; text-align:left; margin-top:0; font-size:26px;">
     {{currentForm.nameTH}}
   </div>
@@ -184,7 +184,7 @@
   <input type="submit" class="political-simple-btn delete-btn" value="ลบข้อแบบฟอร์ม" (click)="deleteSubmittedForm()">
   <input type="submit" class="political-simple-btn" value="ยกเลิก" (click)="goBackToSubmittedFormTable()">
 </ng-container>
-<ng-container *ngIf="formOnHand!==null && settingService.getLanguage()=='English'">
+<ng-container *ngIf="formOnHand!==null && language=='English'">
   <div class="political-pagination" style="color:#000; text-align:left; margin-top:0; font-size:26px;">
     {{currentForm.nameTH}}
   </div>

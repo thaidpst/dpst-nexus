@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { UserinfoService } from '../../services/userinfo.service';
-import { PageService } from '../../services/page.service';
 
 @Component({
   selector: 'app-page-user-edit-profile',
@@ -10,26 +10,30 @@ import { PageService } from '../../services/page.service';
 })
 export class PageUserEditProfileComponent implements OnInit {
 
-  private userDetail = null;
+  private _userDetail;
 
   constructor(
     private userinfoService: UserinfoService,
-    private pageService: PageService
+    private router: Router
   ) { }
 
+  get userDetail() {
+    return this._userDetail;
+  }
+
   ngOnInit() {
-    let userinfo = Object.assign({}, this.userinfoService.getUserinfo());
+    const userinfo = Object.assign({}, this.userinfoService.getUserinfo());
     this.userinfoService.getUserDetail(userinfo)
-      .then(result=>{
-        if (result!==null && result.status) {
-          this.userDetail = result.data;
+      .then(result => {
+        if (result !== null && result.status) {
+          this._userDetail = result.data;
         }
       });
   }
 
   userDetailUpdatedDone(result) {
     if (result.status) {
-      this.pageService.setSubpage('Profile');
+      this.router.navigate(['/user-panel/profile']);
     }
   }
 

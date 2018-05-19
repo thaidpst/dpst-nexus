@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { SocketioService } from '../../services/socketio.service';
-import { PageService } from '../../services/page.service';
 import { SettingService } from '../../services/setting.service';
 import { UserinfoService } from '../../services/userinfo.service';
 import { FormService } from '../../services/form.service';
+import { TranslateComponent } from '../../languages/translate.component';
 
 @Component({
   selector: 'app-page-admin-user-forms',
   templateUrl: './page-admin-user-forms.component.html',
   styleUrls: ['./page-admin-user-forms.component.css']
 })
-export class PageAdminUserFormsComponent implements OnInit {
+export class PageAdminUserFormsComponent extends TranslateComponent implements OnInit, OnDestroy {
 
   private pagination = [];
-  
+
   private getAdminFormsSubscription: Subscription;
-  private formCategory = [];  
+  private formCategory = [];
   private criteria = {
     page: 0, start: 0, limit: 25, totalForms: 0,
     sort: 'None', search: 'EmptyNone', category: 'None'
@@ -25,97 +26,99 @@ export class PageAdminUserFormsComponent implements OnInit {
   private adminForms = null;
 
   private getSubmittedFormsSubscription: Subscription;
-  private currentForm = null;  
-  private tableCriteria = {page: 0, start: 0, limit: 25, totalForms: 0, sort: 'None'};
+  private currentForm = null;
+  private tableCriteria = { page: 0, start: 0, limit: 25, totalForms: 0, sort: 'None' };
   private submittedForms = null;
 
   private formOnHand = null;
 
   constructor(
+    settings: SettingService,
     private socketioService: SocketioService,
-    private pageService: PageService,
-    private settingService: SettingService,
     private userinfoService: UserinfoService,
-    private formService: FormService
-  ) { }
+    private formService: FormService,
+    private router: Router
+  ) {
+    super(settings);
+  }
 
   ngOnInit() {
-    if (this.formService.getMode()=='ByPass' && this.formService.getRole()=='Admin') {
+    if (this.formService.getMode() === 'ByPass' && this.formService.getRole() === 'Admin') {
       this.tableCriteria = this.formService.getCriteria();
       this.currentForm = this.formService.getCurrentForm();
       this.formService.setMode();
     }
 
     // Subscription
-    this.getAdminFormsSubscription = this.formService.observeAdminForms().subscribe(result=>{
+    this.getAdminFormsSubscription = this.formService.observeAdminForms().subscribe(result => {
       if (result.status) {
         this.adminForms = result.data;
         this.criteria.totalForms = result.totalForms;
 
         this.pagination = [];
         let count = 0;
-        while (count*this.criteria.limit < this.criteria.totalForms) {
-          this.pagination.push(count);          
+        while (count * this.criteria.limit < this.criteria.totalForms) {
+          this.pagination.push(count);
           count += 1;
         }
       }
     });
-    this.getSubmittedFormsSubscription = this.formService.observeAdminSubmittedForms().subscribe(result=>{
+    this.getSubmittedFormsSubscription = this.formService.observeAdminSubmittedForms().subscribe(result => {
       if (result.status) {
         this.submittedForms = result.data;
         this.tableCriteria.totalForms = result.totalForms;
-        
+
         this.pagination = [];
         let count = 0;
-        while (count*this.tableCriteria.limit < this.tableCriteria.totalForms) {
-          this.pagination.push(count);          
+        while (count * this.tableCriteria.limit < this.tableCriteria.totalForms) {
+          this.pagination.push(count);
           count += 1;
         }
       }
     });
 
     // Initialize
-    this.formService.getFormCategory().then(result=>{
+    this.formService.getFormCategory().then(result => {
       if (result.status) this.formCategory = result.data;
     });
-    if (this.currentForm===null) this.formService.adminGetActiveForms(this.criteria);
+    if (this.currentForm === null) this.formService.adminGetActiveForms(this.criteria);
     else this.formService.adminGetSubmittedForms(this.currentForm, this.tableCriteria);
 
     // Get announcement from Socket.io
-    this.socketioService.getSocket().on('announce-form-submitted', function(formId) {
+    this.socketioService.getSocket().on('announce-form-submitted', function (formId) {
       this.socketioUpdateProcess(formId);
     }.bind(this));
-    this.socketioService.getSocket().on('announce-form-deleted', function(form) {
+    this.socketioService.getSocket().on('announce-form-deleted', function (form) {
       this.socketioUpdateProcess(form.formId);
     }.bind(this));
-    this.socketioService.getSocket().on('announce-form-status', function(formId) {
+    this.socketioService.getSocket().on('announce-form-status', function (formId) {
       this.socketioUpdateProcess(formId);
     }.bind(this));
   }
   socketioUpdateProcess(formId) {
-    if (this.currentForm===null && this.adminForms!==null) {
-      let formList = this.adminForms.map(d=>{return d._id});
-      if (formList.indexOf(formId)>-1) this.formService.adminGetActiveForms(this.criteria);
-    } else if (this.currentForm!==null) {
-      if (this.currentForm._id==formId) this.formService.adminGetSubmittedForms(this.currentForm, this.tableCriteria);
+    if (this.currentForm === null && this.adminForms !== null) {
+      const formList = this.adminForms.map(d => d._id);
+      if (formList.indexOf(formId) > -1) this.formService.adminGetActiveForms(this.criteria);
+    } else if (this.currentForm !== null) {
+      if (this.currentForm._id === formId) this.formService.adminGetSubmittedForms(this.currentForm, this.tableCriteria);
     }
   }
 
   // Page 1 process
   formPreview(form) {
-    if (form.previewUrl===undefined || form.previewUrl===null || form.previewUrl=='') return 'assets/img/formPreview/base.jpg';
+    if (form.previewUrl === undefined || form.previewUrl === null || form.previewUrl === '') return 'assets/img/formPreview/base.jpg';
     else return form.previewUrl;
   }
   formOwner(form) {
-    if (form.owner===undefined || form.owner===null || form.owner=='') return 'DPST.';
+    if (form.owner === undefined || form.owner === null || form.owner === '') return 'DPST.';
     else return form.owner;
   }
   dateFromObjectId(objectId) {
-    let date = new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+    const date = new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
     return date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear();
   }
   changeFormCategory(category) {
-    if (category=='All forms') this.criteria.category = 'None';
+    if (category === 'All forms') this.criteria.category = 'None';
     else this.criteria.category = category;
     this.formService.adminGetActiveForms(this.criteria);
   }
@@ -142,7 +145,7 @@ export class PageAdminUserFormsComponent implements OnInit {
     }
   }
   nextFormPage() {
-    if ((this.criteria.page+1)*this.criteria.limit < this.criteria.totalForms) {
+    if ((this.criteria.page + 1) * this.criteria.limit < this.criteria.totalForms) {
       this.criteria.page += 1;
       this.criteria.start = this.criteria.page * this.criteria.limit;
       this.formService.adminGetActiveForms(this.criteria);
@@ -154,11 +157,11 @@ export class PageAdminUserFormsComponent implements OnInit {
   }
   formSearch(keyword) {
     keyword = keyword.trim();
-    if ((this.criteria.search=='EmptyNone' && keyword=='') || this.criteria.search==keyword) {}
-    else if (keyword=='') {
+    if ((this.criteria.search === 'EmptyNone' && keyword === '') || this.criteria.search === keyword) {
+    } else if (keyword === '') {
       this.criteria.search = 'EmptyNone';
       this.formService.adminGetActiveForms(this.criteria);
-    } else {      
+    } else {
       this.criteria.search = keyword;
       this.formService.adminGetActiveForms(this.criteria);
     }
@@ -171,10 +174,10 @@ export class PageAdminUserFormsComponent implements OnInit {
   }
   goBackToFormPage() {
     this.currentForm = null;
-    this.tableCriteria = {page: 0, start: 0, limit: 25, totalForms: 0, sort: 'None'};
+    this.tableCriteria = { page: 0, start: 0, limit: 25, totalForms: 0, sort: 'None' };
     this.submittedForms = null;
     this.formService.setMode();
-    this.formService.adminGetActiveForms(this.criteria)
+    this.formService.adminGetActiveForms(this.criteria);
   }
 
   submittedFormLimitChange(limit) {
@@ -199,7 +202,7 @@ export class PageAdminUserFormsComponent implements OnInit {
     }
   }
   nextSubmittedFormPage() {
-    if ((this.tableCriteria.page+1)*this.tableCriteria.limit < this.tableCriteria.totalForms) {
+    if ((this.tableCriteria.page + 1) * this.tableCriteria.limit < this.tableCriteria.totalForms) {
       this.tableCriteria.page += 1;
       this.tableCriteria.start = this.tableCriteria.page * this.tableCriteria.limit;
       this.formService.adminGetSubmittedForms(this.currentForm, this.tableCriteria);
@@ -211,8 +214,8 @@ export class PageAdminUserFormsComponent implements OnInit {
   }
 
   setSubmittedFormStatus(form, status) {
-    let approver = Object.assign({}, this.userinfoService.getUserinfo());
-    this.formService.setSubmittedFormStatus(form, status, approver).then(result=>{
+    const approver = Object.assign({}, this.userinfoService.getUserinfo());
+    this.formService.setSubmittedFormStatus(form, status, approver).then(result => {
       if (result.status) {
         this.socketioService.submittedFormStatusChange(form);
       }
@@ -221,22 +224,21 @@ export class PageAdminUserFormsComponent implements OnInit {
   viewSubmittedForm(form) {
     if (this.userinfoService.getUserinfo().level >= 7) {
       this.formService.setMode('ByPass', form, 'Admin', this.currentForm, this.tableCriteria);
-      this.pageService.setPage('Government form');
-      this.pageService.setSubpage(this.currentForm.accessCode);
+      this.router.navigate(['/form/' + this.currentForm.accessCode]);
     } else {
-      this.pageService.setPage('Homepage');
+      this.router.navigate(['/']);
     }
   }
 
   // Delete submitted form process
-  tryToDeleteSubmittedForm(form) {this.formOnHand = form;}
+  tryToDeleteSubmittedForm(form) { this.formOnHand = form; }
   goBackToSubmittedFormTable() {
     this.formOnHand = null;
     this.formService.adminGetSubmittedForms(this.currentForm, this.tableCriteria);
   }
   deleteSubmittedForm() {
-    if (this.formOnHand!==null) {
-      this.formService.deleteSubmittedForm(this.formOnHand.userId, this.formOnHand).then(result=>{
+    if (this.formOnHand !== null) {
+      this.formService.deleteSubmittedForm(this.formOnHand.userId, this.formOnHand).then(result => {
         if (result.status) {
           this.submittedForms = null;
           this.socketioService.deletedUserForm(this.formOnHand);
@@ -249,7 +251,7 @@ export class PageAdminUserFormsComponent implements OnInit {
   ngOnDestroy() {
     this.getAdminFormsSubscription.unsubscribe();
     this.getSubmittedFormsSubscription.unsubscribe();
-    if (this.formService.getRole()!='Admin') this.formService.setMode();
+    if (this.formService.getRole() !== 'Admin') this.formService.setMode();
 
     // Unbind Socket.io
     this.socketioService.getSocket().removeAllListeners('announce-form-submitted');

@@ -1,8 +1,8 @@
+import { TranslateComponent } from '../languages/translate.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 // import { } from '@types/googlemaps';
 import { NgForm } from '@angular/forms';
 
-import { PageService } from '../services/page.service';
 import { SettingService } from '../services/setting.service';
 
 @Component({
@@ -10,15 +10,16 @@ import { SettingService } from '../services/setting.service';
   templateUrl: './page-contact.component.html',
   styleUrls: ['./page-contact.component.css']
 })
-export class PageContactComponent implements OnInit {
+export class PageContactComponent extends TranslateComponent implements OnInit {
 
   // @ViewChild('gmap') gmapElement: any;
   // private map: google.maps.Map;
 
   constructor(
-    private pageService: PageService,
-    private settingService: SettingService
-  ) { }
+    settings: SettingService
+  ) {
+    super(settings);
+  }
 
   ngOnInit() {
     // var mapOption = {
@@ -39,6 +40,7 @@ export class PageContactComponent implements OnInit {
   }
 
   sendMessage(form: NgForm) {
+    // TODO
     console.log(form.value);
     form.resetForm();
   }

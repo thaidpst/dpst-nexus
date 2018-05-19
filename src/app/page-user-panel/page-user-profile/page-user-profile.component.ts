@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { UserinfoService } from '../../services/userinfo.service';
 
@@ -9,18 +10,23 @@ import { UserinfoService } from '../../services/userinfo.service';
 })
 export class PageUserProfileComponent implements OnInit {
 
-  private userDetail = null;
+  private _userDetail;
 
   constructor(
-    private userinfoService: UserinfoService
+    private userinfoService: UserinfoService,
+    private route: ActivatedRoute
   ) { }
 
+  get userDetail() {
+    return this._userDetail;
+  }
+
   ngOnInit() {
-    let userinfo = Object.assign({}, this.userinfoService.getUserinfo());
+    const userinfo = Object.assign({}, this.userinfoService.getUserinfo());
     this.userinfoService.getUserDetail(userinfo)
-      .then(result=>{
-        if (result!==null && result.status) {
-          this.userDetail = result.data;
+      .then(result => {
+        if (result !== null && result.status) {
+          this._userDetail = result.data;
         }
       });
   }

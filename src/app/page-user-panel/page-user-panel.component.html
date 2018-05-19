@@ -3,20 +3,12 @@
         <div class="row">
             <div class="col-md-12">
 
-                <div *ngIf="settingService.getLanguage()=='Thai'" class="political-subheader-wrap">
-                    <h1>หน้าผู้ใช้งาน</h1>
+                <div class="political-subheader-wrap">
+                    <h1>{{'User Panel' | translate:language }}</h1>
                     <ul class="political-breadcrumb">
-                        <li><a (click)="pageService.setPage('Homepage')">หน้าเเรก</a></li>
-                        <li>หน้าผู้ใช้งาน</li>
-                        <li class="active">{{subpageTranslation()}}</li>
-                    </ul>
-                </div>
-                <div *ngIf="settingService.getLanguage()=='English'" class="political-subheader-wrap">
-                    <h1>User Panel</h1>
-                    <ul class="political-breadcrumb">
-                        <li><a (click)="pageService.setPage('Homepage')">Homepage</a></li>
-                        <li>User Panel</li>
-                        <li class="active">{{pageService.getSubpage()}}</li>
+                        <li><a routerLink="/">{{'Homepage' | translate:language }}</a></li>
+                        <li>{{'User Panel' | translate:language }}</li>
+                        <li class="active">{{pageName | translate:language }}</li>
                     </ul>
                 </div>
 
@@ -30,52 +22,26 @@
         <div class="container">
             <div class="row">
 
-                <!-- Admin panel sidbar -->
+                <!-- User panel sidebar -->
                 <aside class="col-md-3">
-                    <div *ngIf="settingService.getLanguage()=='Thai'" class="widget widget_cetagories">
-                        <h2 class="political-widget-heading">User Menu</h2>
+                    <div class="widget widget_cetagories">
+                        <h2 class="political-widget-heading">{{'User Menu' | translate:language }}</h2>
                         <ul>
-                            <li [ngClass]="{'active':pageService.getSubpage()=='Profile'}">
-                                <a (click)="pageService.setSubpage('Profile')">ประวัติส่วนตัว</a></li>
-                            <li [ngClass]="{'active':pageService.getSubpage()=='Edit profile'}">
-                                <a (click)="pageService.setSubpage('Edit profile')">เเก้ไขประวัติส่วนตัว</a></li>
-                            <li [ngClass]="{'active':pageService.getSubpage()=='History'}">
-                                <a (click)="pageService.setSubpage('History')">ประวัติการใช้งาน</a></li>
-                            <li [ngClass]="{'active':pageService.getSubpage()=='Setting'}">
-                                <a (click)="pageService.setSubpage('Setting')">ตั้งค่า</a></li>
-                        </ul>
-                    </div>
-                    <div *ngIf="settingService.getLanguage()=='English'" class="widget widget_cetagories">
-                        <h2 class="political-widget-heading">User Menu</h2>
-                        <ul>
-                            <li [ngClass]="{'active':pageService.getSubpage()=='Profile'}">
-                                <a (click)="pageService.setSubpage('Profile')">Profile</a></li>
-                            <li [ngClass]="{'active':pageService.getSubpage()=='Edit profile'}">
-                                <a (click)="pageService.setSubpage('Edit profile')">Edit Profile</a></li>
-                            <li [ngClass]="{'active':pageService.getSubpage()=='History'}">
-                                <a (click)="pageService.setSubpage('History')">History</a></li>
-                            <li [ngClass]="{'active':pageService.getSubpage()=='Setting'}">
-                                <a (click)="pageService.setSubpage('Setting')">Setting</a></li>
+                            <li routerLinkActive="active">
+                                <a routerLink="profile">{{'Profile' | translate:language }}</a></li>
+                            <li routerLinkActive="active">
+                                <a routerLink="edit-profile">{{'Edit Profile' | translate:language }}</a></li>
+                            <li routerLinkActive="active">
+                                <a routerLink="history">{{'History' | translate:language }}</a></li>
+                            <li routerLinkActive="active">
+                                <a routerLink="settings">{{'Settings' | translate:language }}</a></li>
                         </ul>
                     </div>
                 </aside>
 
                 <!-- User panel subpages -->
                 <div class="col-md-9">
-
-                    <ng-container *ngIf="pageService.getSubpage()=='Profile'">
-                        <app-page-user-profile></app-page-user-profile>
-                    </ng-container>
-                    <ng-container *ngIf="pageService.getSubpage()=='Edit profile'">
-                        <app-page-user-edit-profile></app-page-user-edit-profile>
-                    </ng-container>
-                    <ng-container *ngIf="pageService.getSubpage()=='History'">
-                        <app-page-user-history></app-page-user-history>
-                    </ng-container>
-                    <ng-container *ngIf="pageService.getSubpage()=='Setting'">
-                        <app-page-user-setting></app-page-user-setting>
-                    </ng-container>
-
+                    <router-outlet></router-outlet>
                 </div>
 
             </div>

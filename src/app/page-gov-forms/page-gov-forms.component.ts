@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
-import { PageService } from '../services/page.service';
 import { SettingService } from '../services/setting.service';
 import { FormService } from '../services/form.service';
+
+import { TranslateComponent } from '../languages/translate.component';
 
 @Component({
   selector: 'app-page-gov-forms',
   templateUrl: './page-gov-forms.component.html',
   styleUrls: ['./page-gov-forms.component.css']
 })
-export class PageGovFormsComponent implements OnInit {
+export class PageGovFormsComponent extends TranslateComponent implements OnInit, OnDestroy {
 
+  private _pageName = 'All forms';
   private formCatagory = [];
 
   private getFormsSubscription: Subscription;
@@ -23,25 +26,31 @@ export class PageGovFormsComponent implements OnInit {
   private forms = null;
 
   constructor(
-    private pageService: PageService,
-    private settingService: SettingService,
-    private formService: FormService
-  ) { }
+    settings: SettingService,
+    private formService: FormService,
+    private router: Router
+  ) {
+    super(settings);
+  }
+
+  get pageName(): string {
+    return this._pageName;
+  }
 
   ngOnInit() {
-    this.formService.getFormCategory().then(result=>{
+    this.formService.getFormCategory().then(result => {
       if (result.status) this.formCatagory = result.data;
     });
 
-    this.getFormsSubscription = this.formService.observeForms().subscribe(result=>{
+    this.getFormsSubscription = this.formService.observeForms().subscribe(result => {
       if (result.status) {
         this.forms = result.data;
         this.criteria.totalForms = result.totalForms;
 
         this.pagination = [];
         let count = 0;
-        while (count*this.criteria.limit < this.criteria.totalForms) {
-          this.pagination.push(count);          
+        while (count * this.criteria.limit < this.criteria.totalForms) {
+          this.pagination.push(count);
           count += 1;
         }
       }
@@ -50,26 +59,25 @@ export class PageGovFormsComponent implements OnInit {
   }
 
   formPreview(form) {
-    if (form.previewUrl===undefined || form.previewUrl===null || form.previewUrl=='') return 'assets/img/formPreview/base.jpg';
+    if (form.previewUrl === undefined || form.previewUrl === null || form.previewUrl === '') return 'assets/img/formPreview/base.jpg';
     else return form.previewUrl;
   }
   formOwner(form) {
-    if (form.owner===undefined || form.owner===null || form.owner=='') return 'DPST.';
+    if (form.owner === undefined || form.owner === null || form.owner === '') return 'DPST.';
     else return form.owner;
   }
   dateFromObjectId(objectId) {
-    let date = new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+    const date = new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
     return date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear();
   }
 
   changeFormCategory(category) {
-    if (category=='All forms') this.criteria.category = 'None';
+    if (category === 'All forms') this.criteria.category = 'None';
     else this.criteria.category = category;
     this.formService.getActiveForms(this.criteria);
   }
   goToForm(form) {
-    this.pageService.setPage('Government form');
-    this.pageService.setSubpage(form.accessCode);
+    this.router.navigate(['/forms/fill/' + form.accessCode]);
     this.formService.setMode();
   }
 
@@ -95,7 +103,7 @@ export class PageGovFormsComponent implements OnInit {
     }
   }
   nextFormPage() {
-    if ((this.criteria.page+1)*this.criteria.limit < this.criteria.totalForms) {
+    if ((this.criteria.page + 1) * this.criteria.limit < this.criteria.totalForms) {
       this.criteria.page += 1;
       this.criteria.start = this.criteria.page * this.criteria.limit;
       this.formService.getActiveForms(this.criteria);
@@ -107,11 +115,11 @@ export class PageGovFormsComponent implements OnInit {
   }
   formSearch(keyword) {
     keyword = keyword.trim();
-    if ((this.criteria.search=='EmptyNone' && keyword=='') || this.criteria.search==keyword) {}
-    else if (keyword=='') {
+    if ((this.criteria.search === 'EmptyNone' && keyword === '') || this.criteria.search === keyword) {
+    } else if (keyword === '') {
       this.criteria.search = 'EmptyNone';
       this.formService.getActiveForms(this.criteria);
-    } else {      
+    } else {
       this.criteria.search = keyword;
       this.formService.getActiveForms(this.criteria);
     }

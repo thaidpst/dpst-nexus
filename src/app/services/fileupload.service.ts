@@ -11,27 +11,27 @@ export class FileuploadService {
   constructor(private http: Http) { }
 
   deleteUserProfile(userId) {
-    let url = this.apiUrl + '/deleteuserprofile',
-        input = {userId: userId};
+    const url = this.apiUrl + '/deleteuserprofile',
+      input = { userId: userId };
     return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
       .toPromise()
-      .then(response=>{
-        let result = response.json();
+      .then(response => {
+        const result = response.json();
         if (testing) console.log(result.message);
         return result;
       })
-      .catch(err=>{return null});
+      .catch(err => null);
   }
   uploadUserProfile(userId, profileData) {
-    let url = this.apiUrl + '/uploaduserprofile?userId=' + userId;
+    const url = this.apiUrl + '/uploaduserprofile?userId=' + userId;
     return this.http.post(url, profileData)
       .toPromise()
-      .then(response=>{
-        let result = response.json();
+      .then(response => {
+        const result = response.json();
         if (testing) console.log(result.message);
         return result;
       })
-      .catch(err=>{return null});
+      .catch(err => null);
   }
 
 }

@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { SocketioService } from '../services/socketio.service';
-import { PageService } from '../services/page.service';
 import { SettingService } from '../services/setting.service';
+
+import { TranslateComponent } from '../languages/translate.component';
+
 import { UserinfoService } from '../services/userinfo.service';
 import { FormService } from '../services/form.service';
 
@@ -12,27 +15,35 @@ import { FormService } from '../services/form.service';
   templateUrl: './page-admin-panel.component.html',
   styleUrls: ['./page-admin-panel.component.css']
 })
-export class PageAdminPanelComponent implements OnInit {
+export class PageAdminPanelComponent extends TranslateComponent implements OnInit, OnDestroy {
+
+  pageName: String;
 
   private pendingFormSubscription: Subscription;
   private pendingFormNumber = 0;
 
   constructor(
+    settings: SettingService,
     private socketioService: SocketioService,
-    private pageService: PageService,
-    private settingService: SettingService,
     private userinfoService: UserinfoService,
-    private formService: FormService
-  ) { }
+    private formService: FormService,
+    private route: ActivatedRoute
+  ) {
+    super(settings);
+  }
 
   ngOnInit() {
-    this.pendingFormSubscription = this.formService.observePendingFormNumber().subscribe(result=>{
+    this.route.data
+      .subscribe(data => {
+        this.pageName = data.pagename;
+      });
+    this.pendingFormSubscription = this.formService.observePendingFormNumber().subscribe(result => {
       if (result.status) this.pendingFormNumber = result.data;
     });
     this.formService.getPendingFormNumber();
 
     // Get form announcement from Socket.io
-    this.socketioService.getSocket().on('announce-form-pending-number', function() {
+    this.socketioService.getSocket().on('announce-form-pending-number', function () {
       this.formService.getPendingFormNumber();
     }.bind(this));
   }
@@ -43,5 +54,4 @@ export class PageAdminPanelComponent implements OnInit {
     // Unbind Socket.io
     this.socketioService.getSocket().removeAllListeners('announce-form-pending-number');
   }
-
 }

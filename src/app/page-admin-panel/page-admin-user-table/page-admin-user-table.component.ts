@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { SocketioService } from '../../services/socketio.service';
@@ -6,12 +6,14 @@ import { SettingService } from '../../services/setting.service';
 import { UserinfoService } from '../../services/userinfo.service';
 import { AdminService } from '../../services/admin.service';
 
+import { TranslateComponent } from '../../languages/translate.component';
+
 @Component({
   selector: 'app-page-admin-user-table',
   templateUrl: './page-admin-user-table.component.html',
   styleUrls: ['./page-admin-user-table.component.css']
 })
-export class PageAdminUserTableComponent implements OnInit {
+export class PageAdminUserTableComponent extends TranslateComponent implements OnInit, OnDestroy {
 
   private getUsersSubscription: Subscription;
   private criteria = {
@@ -26,22 +28,24 @@ export class PageAdminUserTableComponent implements OnInit {
   private userOnHand = null;
 
   constructor(
+    settings: SettingService,
     private socketioService: SocketioService,
-    private settingService: SettingService,
     private userinfoService: UserinfoService,
-    private adminService: AdminService
-  ) { }
+    private adminService: AdminService,
+  ) {
+    super(settings);
+  }
 
   ngOnInit() {
-    this.getUsersSubscription = this.adminService.observeUsers().subscribe(result=>{
+    this.getUsersSubscription = this.adminService.observeUsers().subscribe(result => {
       if (result.status) {
         this.users = result.data;
         this.criteria.totalUsers = result.totalUsers;
 
         this.pagination = [];
         let count = 0;
-        while (count*this.criteria.limit < this.criteria.totalUsers) {
-          this.pagination.push(count);          
+        while (count * this.criteria.limit < this.criteria.totalUsers) {
+          this.pagination.push(count);
           count += 1;
         }
       }
@@ -60,7 +64,7 @@ export class PageAdminUserTableComponent implements OnInit {
   }
 
   setAccountStatus(userinfo, status) {
-    this.adminService.setAccoundStatus(userinfo, status).then(result=>{
+    this.adminService.setAccoundStatus(userinfo, status).then(result => {
       if (result.status) {
         this.adminService.getUsers(this.criteria);
         this.socketioService.accountStatus(userinfo._id);
@@ -90,7 +94,7 @@ export class PageAdminUserTableComponent implements OnInit {
     }
   }
   nextTablePage() {
-    if ((this.criteria.page+1)*this.criteria.limit < this.criteria.totalUsers) {
+    if ((this.criteria.page + 1) * this.criteria.limit < this.criteria.totalUsers) {
       this.criteria.page += 1;
       this.criteria.start = this.criteria.page * this.criteria.limit;
       this.adminService.getUsers(this.criteria);
@@ -102,23 +106,23 @@ export class PageAdminUserTableComponent implements OnInit {
   }
   tableSearch(keyword) {
     keyword = keyword.trim();
-    if ((this.criteria.search=='EmptyNone' && keyword=='') || this.criteria.search==keyword) {}
-    else if (keyword=='') {
+    if ((this.criteria.search === 'EmptyNone' && keyword === '') || this.criteria.search === keyword) {
+    } else if (keyword === '') {
       this.criteria.search = 'EmptyNone';
       this.adminService.getUsers(this.criteria);
-    } else {      
+    } else {
       this.criteria.search = keyword;
       this.adminService.getUsers(this.criteria);
     }
   }
 
-  goBackToUserTable() {this.subpage = 'Table'; this.userOnHand = null;}
+  goBackToUserTable() { this.subpage = 'Table'; this.userOnHand = null; }
 
   // Delete user process
-  tryDeleteAccount(userinfo) {this.subpage = 'Try delete'; this.userOnHand = userinfo;}
+  tryDeleteAccount(userinfo) { this.subpage = 'Try delete'; this.userOnHand = userinfo; }
   deleteAccount() {
-    if (this.userOnHand!==null) {
-      this.adminService.deleteAccount(this.userOnHand).then(result=>{
+    if (this.userOnHand !== null) {
+      this.adminService.deleteAccount(this.userOnHand).then(result => {
         if (result.status) {
           this.adminService.getUsers(this.criteria);
           this.socketioService.deleteAccount(this.userOnHand._id);
@@ -132,29 +136,29 @@ export class PageAdminUserTableComponent implements OnInit {
   // View user process
   viewUserinfo(userinfo) {
     this.userinfoService.getUserDetail(userinfo)
-      .then(result=>{
-        if (result!==null && result.status) {
-          this.userOnHand = result.data;        
-          this.subpage = 'View user'; 
+      .then(result => {
+        if (result !== null && result.status) {
+          this.userOnHand = result.data;
+          this.subpage = 'View user';
         }
       });
   }
   viewUserPosition() {
-    if (this.userOnHand.position===undefined) return 'N/A';
+    if (this.userOnHand.position === undefined) return 'N/A';
     else return this.userOnHand.position;
   }
   viewUserAbout() {
-    if (this.userOnHand.about===undefined) return 'N/A';
+    if (this.userOnHand.about === undefined) return 'N/A';
     else return this.userOnHand.about;
   }
 
   // Edit user information process
   adminEditUserinfo(userinfo) {
     this.userinfoService.getUserDetail(userinfo)
-      .then(result=>{
-        if (result!==null && result.status) {
-          this.userOnHand = result.data;        
-          this.subpage = 'Edit user'; 
+      .then(result => {
+        if (result !== null && result.status) {
+          this.userOnHand = result.data;
+          this.subpage = 'Edit user';
         }
       });
   }
@@ -165,7 +169,7 @@ export class PageAdminUserTableComponent implements OnInit {
   }
 
   // Admin privilage process
-  goToAdminPrivilageSetting() {this.subpage = 'Admin setting';}
+  goToAdminPrivilageSetting() { this.subpage = 'Admin setting'; }
   userPrivilageUpdatedDone(result) {
     if (result.status) {
       this.adminService.getUsers(this.criteria);

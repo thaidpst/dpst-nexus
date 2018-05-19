@@ -1,132 +1,143 @@
 <div class="political-subheader">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
 
-                <div class="political-subheader-wrap">
-                    <h1>{{'Forms' | translate:settingService.getLanguage() }}</h1>
-                    <ul class="political-breadcrumb">
-                        <li><a (click)="pageService.setPage('Homepage')">{{'Homepage' | translate:settingService.getLanguage() }}</a></li>
-                        <li>{{'Forms' | translate:settingService.getLanguage() }}</li>
-                        <li class="active">{{pageService.getSubpage() | translate:settingService.getLanguage() }}</li>
-                    </ul>
-                </div>
-
-            </div>
+        <div class="political-subheader-wrap">
+          <h1>{{'Forms' | translate:language }}</h1>
+          <ul class="political-breadcrumb">
+            <li>
+              <a routerLink="/">{{'Homepage' | translate:language }}</a>
+            </li>
+            <li>{{'Forms' | translate:language }}</li>
+            <li class="active">{{pageName | translate:language }}</li>
+          </ul>
         </div>
+
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="political-main-content">
-    <div class="political-main-section">
-        <div class="container">
-            <div class="row">
+  <div class="political-main-section">
+    <div class="container">
+      <div class="row">
 
-                <!-- Admin panel sidbar -->
-                <aside class="col-md-3">
-                    <div class="widget widget_cetagories">
-                        <h2 class="political-widget-heading">{{'Form category' | translate:settingService.getLanguage() }}</h2>
-                        <ul>
-                            <li [ngClass]="{'active':pageService.getSubpage()=='All forms'}">
-                                <a (click)="pageService.setSubpage('All forms'); changeFormCategory('All forms');">
-                                    {{'All Forms' | translate:settingService.getLanguage() }}
-                                </a></li>
-                            <ng-container *ngIf="settingService.getLanguage()=='Thai'">
-                                <li *ngFor="let category of formCatagory;" 
-                                [ngClass]="{'active':pageService.getSubpage()==category.categoryEN}">
-                                    <a (click)="pageService.setSubpage(category.categoryEN); changeFormCategory(category.categoryEN);">
-                                        {{category.categoryTH}}
-                                    </a></li>
-                            </ng-container>
-                            <ng-container *ngIf="settingService.getLanguage()=='English'">
-                                <li *ngFor="let category of formCatagory;" 
-                                [ngClass]="{'active':pageService.getSubpage()==category.categoryEN}">
-                                    <a (click)="pageService.setSubpage(category.categoryEN); changeFormCategory(category.categoryEN);">
-                                        {{category.categoryEN}}
-                                    </a></li>
-                            </ng-container>
-                        </ul>
-                    </div>
-                </aside>
+        <!-- Admin panel sidbar -->
+        <aside class="col-md-3">
+          <div class="widget widget_cetagories">
+            <h2 class="political-widget-heading">{{'Form category' | translate:language }}</h2>
+            <ul>
+              <li [ngClass]="{'active':pageName=='All forms'}">
+                <a (click)="_pageName = 'All forms'; changeFormCategory('All forms');">
+                  {{'All forms' | translate:language }}
+                </a>
+              </li>
+              <li *ngFor="let category of formCatagory;" [ngClass]="{'active':pageName==category.categoryEN}">
+                <a (click)="_pageName = category.categoryEN; changeFormCategory(category.categoryEN);">
+                  <ng-container *ngIf="language=='Thai'">{{category.categoryTH}}</ng-container>
+                  <ng-container *ngIf="language=='English'">{{category.categoryEN}}</ng-container>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </aside>
 
-                <!-- Form display -->
-                <div class="col-md-9">
+        <!-- Form display -->
+        <div class="col-md-9">
 
-                    <!-- Selection criteria -->
-                    <div class="political-pagination" style="color:#000; margin:0 0 25px 0;">
+          <!-- Selection criteria -->
+          <div class="political-pagination" style="color:#000; margin:0 0 25px 0;">
 
-                        <div class="top-option">
-                            <input #keyword class="search" type="text" (keyup.enter)="formSearch(keyword.value)">
-                            <input type="submit" class="political-simple-btn" value="Search" (click)="formSearch(keyword.value)">
-                        </div>
-
-                        <div class="top-option">
-                            Sort by
-                            <select class="select-sort" (change)="formSortChange($event.target.value)">
-                            <option value="None" selected="selected">None</option>
-                            <option value="Name increasing">Name increasing</option>
-                            <option value="Name decreasing">Name decreasing</option>
-                            <option value="Owner increasing">Owner increasing</option>
-                            <option value="Owner decreasing">Owner decreasing</option>
-                            <option value="Created date increasing">Created date increasing</option>
-                            <option value="Created date decreasing">Created date decreasing</option>
-                            </select>
-                        </div>
-
-                        <div class="top-option">
-                            Show per page
-                            <select class="show-per-page" (change)="formLimitChange($event.target.value)">
-                            <option value="1">1</option>
-                            <option value="10">10</option>
-                            <option value="25" selected="selected">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                            </select>
-                        </div>
-                            
-                    </div>
-
-                    <div class="political-compaign political-compaign-grid">
-                        <h2 *ngIf="forms===null">Loading forms...</h2>
-                        <h2 *ngIf="forms!==null && forms.length==0">No forms available.</h2>
-
-                        <ul *ngIf="forms!==null && forms.length>0" class="row">
-
-                          <!-- Form preview -->
-                            <li *ngFor="let form of forms;" class="col-md-4">
-                              <div class="political-compaign-grid-text" (click)="goToForm(form)">
-                                <figure class="gov-form-preview"><a>
-                                  <img [src]="formPreview(form)" alt="">
-                                  <span><i class="fa fa-pencil"></i> Fill Form</span>
-                                </a></figure>
-
-                                <small class="form-owner">{{formOwner(form)}} Form</small>
-                                <h3 class="form-name">{{form.nameTH}}</h3>
-                                <span class="form-date">
-                                  {{'Create date' | translate:settingService.getLanguage() }}:
-                                  <small>{{dateFromObjectId(form._id)}}</small>
-                                </span>
-                              </div>
-                            </li>
-
-                        </ul>
-                    </div>
-
-                    <!-- Pagination -->
-                    <div class="political-pagination pagination-div">
-                        <ul class="page-numbers">
-                            <li><a class="previous page-numbers" (click)="previouseFormPage()"><span aria-label="Next"><i class="fa fa-angle-left"></i></span></a></li>
-                            <li *ngFor="let page of pagination;">
-                                <a *ngIf="page!=criteria.page" class="page-numbers"
-                                (click)="paginationChangePage(page)">{{page+1}}</a>
-                                <span *ngIf="page==criteria.page" class="page-numbers current">{{page+1}}</span>
-                            </li>
-                            <li><a class="next page-numbers" (click)="nextFormPage()"><span aria-label="Next"><i class="fa fa-angle-right"></i></span></a></li>
-                        </ul>
-                    </div>
-                </div>
-
+            <div class="top-option">
+              <input #keyword class="search" type="text" (keyup.enter)="formSearch(keyword.value)">
+              <input type="submit" class="political-simple-btn" value="Search" (click)="formSearch(keyword.value)">
             </div>
+
+            <div class="top-option">
+              Sort by
+              <select class="select-sort" (change)="formSortChange($event.target.value)">
+                <option value="None" selected="selected">None</option>
+                <option value="Name increasing">Name increasing</option>
+                <option value="Name decreasing">Name decreasing</option>
+                <option value="Owner increasing">Owner increasing</option>
+                <option value="Owner decreasing">Owner decreasing</option>
+                <option value="Created date increasing">Created date increasing</option>
+                <option value="Created date decreasing">Created date decreasing</option>
+              </select>
+            </div>
+
+            <div class="top-option">
+              Show per page
+              <select class="show-per-page" (change)="formLimitChange($event.target.value)">
+                <option value="1">1</option>
+                <option value="10">10</option>
+                <option value="25" selected="selected">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="political-compaign political-compaign-grid">
+            <h2 *ngIf="forms===null">Loading forms...</h2>
+            <h2 *ngIf="forms!==null && forms.length==0">No forms available.</h2>
+
+            <ul *ngIf="forms!==null && forms.length>0" class="row">
+
+              <!-- Form preview -->
+              <li *ngFor="let form of forms;" class="col-md-4">
+                <a routerLink="/form/{{form.accessCode}}">
+                  <div class="political-compaign-grid-text">
+                    <figure class="gov-form-preview">
+                      <a>
+                        <img [src]="formPreview(form)" alt="">
+                        <span>
+                          <i class="fa fa-pencil"></i> Fill Form</span>
+                      </a>
+                    </figure>
+
+                    <small class="form-owner">{{formOwner(form)}} Form</small>
+                    <h3 class="form-name">{{form.nameTH}}</h3>
+                    <span class="form-date">
+                      {{'Create date' | translate:language }}:
+                      <small>{{dateFromObjectId(form._id)}}</small>
+                    </span>
+                  </div>
+                </a>
+              </li>
+
+            </ul>
+          </div>
+
+          <!-- Pagination -->
+          <div class="political-pagination pagination-div">
+            <ul class="page-numbers">
+              <li>
+                <a class="previous page-numbers" (click)="previouseFormPage()">
+                  <span aria-label="Next">
+                    <i class="fa fa-angle-left"></i>
+                  </span>
+                </a>
+              </li>
+              <li *ngFor="let page of pagination;">
+                <a *ngIf="page!=criteria.page" class="page-numbers" (click)="paginationChangePage(page)">{{page+1}}</a>
+                <span *ngIf="page==criteria.page" class="page-numbers current">{{page+1}}</span>
+              </li>
+              <li>
+                <a class="next page-numbers" (click)="nextFormPage()">
+                  <span aria-label="Next">
+                    <i class="fa fa-angle-right"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
+
+      </div>
     </div>
+  </div>
 </div>

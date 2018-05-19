@@ -1,6 +1,5 @@
-
-<div *ngIf="settingService.getLanguage()=='Thai'" class="political-team political-team-list">
-  <form #editProfile1="ngForm" (ngSubmit)="editProfileDetail(editProfile1)">
+<div class="political-team political-team-list">
+  <form #editProfile="ngForm" (ngSubmit)="editProfileDetail(editProfile)">
     <ul class="row">
       <li class="col-md-12 full-view-panel">
         <div class="political-team-list-wrap">
@@ -11,101 +10,36 @@
 
           <div class="political-team-list-text">
             <h2 style="margin-bottom:15px;">{{userDetail.firstname}} {{userDetail.lastname}}</h2>
-            <span style="width:100%;">ตำเเหน่ง: 
-              <input class="profile-input" type="text" name="position" [ngModel]="defaultValue(userDetail.position)" placeholder="ตำแหน่งของคุณ" ngModel
-              style="width:calc(55% + 58px);"></span>
+            <span style="float:left;">{{'Position' | translate:language }}: </span>
+              <span style="display:block; overflow:hidden; padding-left: 5px"><input class="profile-input" type="text" name="position" [ngModel]="defaultValue(userDetail.position)" placeholder="{{'Your position' | translate:language }}" ngModel></span>
             <p style="float:none; margin:5px 0 10px 0;">
-              <textarea class="profile-input profile-about" name="about" [ngModel]="defaultValue(userDetail.about)" placeholder="เกี่ยวกับคุณ" ngModel></textarea>
+              <textarea class="profile-input profile-about" name="about" [ngModel]="defaultValue(userDetail.about)" placeholder="{{'About you' | translate:language }}" ngModel></textarea>
             </p>
             <ul class="political-team-info">
-              <li><i class="fa fa-globe"></i><strong>พสวท. รุ่นที่</strong>
-                <input class="profile-input" type="text" name="dpstYear" [ngModel]="defaultValue(userDetail.dpstYear)" placeholder="รุ่นของคุณ" ngModel
-                style="width:calc(55% + 28px);"></li>
-              <li><i class="fa fa-graduation-cap"></i><strong>ระดับการศึกษา:</strong>
-                <input class="profile-input" type="text" name="education" [ngModel]="defaultValue(userDetail.education)" placeholder="ระดับการศึกษาของคุณ" ngModel></li>
-              <li><i class="fa fa-ravelry"></i><strong>สาขาวิชา:</strong>
-                <input class="profile-input" type="text" name="major" [ngModel]="defaultValue(userDetail.mojor)" placeholder="สาขาวิชาของคุณ" ngModel
-                style="width:calc(55% + 37px);"></li>
-              <li><i class="fa fa-book"></i><strong>สถานศีกษา:</strong>
-                <input class="profile-input" type="text" name="school" [ngModel]="defaultValue(userDetail.school)" placeholder="สถานศีกษาของคุณ" ngModel
-                style="width:calc(55% + 24px);"></li>
-              <li><i class="fa fa-briefcase"></i><strong>สถานที่ทำงาน:</strong> 
-                <input class="profile-input" type="text" name="workplace" [ngModel]="defaultValue(userDetail.workplace)" placeholder="สถานที่ทำงานของคุณ" ngModel
-                style="width:calc(55% + 6px);"></li>
-              <li><i class="fa fa-envelope"></i><strong>E-mail:</strong> <a [href]="'mailto:'+userDetail.email">{{userDetail.email}}</a></li>
-              <li><i class="fa fa-phone"></i><strong>โทรศัพท์:</strong> 
-                <input class="profile-input" type="text" name="phone" [ngModel]="defaultValue(userDetail.phone)" placeholder="เบอร์โทรศัพท์ของคุณ" ngModel
-                style="width:calc(55% + 44px);"></li>
-              <li><i class="fa fa-comments"></i><strong>Line id:</strong>
-                <input class="profile-input" type="text" name="lineId" [ngModel]="defaultValue(userDetail.lineId)" placeholder="Line id ของคุณ" ngModel
-                style="width:calc(55% + 56px);"></li>
-              <li><i class="fa fa-home"></i><strong>ที่อยู่:</strong>
-                <br><input class="profile-input profile-ad1" type="text" name="address1" [ngModel]="defaultValue(userDetail.address1)" placeholder="ที่อยู่ของคุณ" ngModel>
-                <br><input class="profile-input profile-ad1" type="text" name="address2" [ngModel]="defaultValue(userDetail.address2)" placeholder="ที่อยู่ของคุณบรรทัดที่ 2" ngModel>
-                <br><input class="profile-input profile-ad2" type="text" name="province" [ngModel]="defaultValue(userDetail.province)" placeholder="จังหวัด" ngModel> 
-                <input class="profile-input profile-ad2" type="text" name="zip" [ngModel]="defaultValue(userDetail.zip)" placeholder="รหัสไปรษณีย์" ngModel>
-                <br><input class="profile-input profile-ad1" type="text" name="country" [ngModel]="defaultValue(userDetail.country)" placeholder="ประเทศ" ngModel>
+              <li><i class="fa fa-globe"></i><strong>{{'DPST #' | translate:language }}</strong>
+                <span style="display:block; overflow:hidden; padding-left: 5px"><input class="profile-input" type="text" name="dpstYear" [ngModel]="defaultValue(userDetail.dpstYear)" placeholder="{{'Your DPST #' | translate:language }}" ngModel></span></li>
+              <li><i class="fa fa-graduation-cap"></i><strong>{{'Education' | translate:language }}:</strong>
+                <span style="display:block; overflow:hidden; padding-left: 5px"><input class="profile-input" type="text" name="education" [ngModel]="defaultValue(userDetail.education)" placeholder="{{'Your education' | translate:language }}" ngModel></span></li>
+              <li><i class="fa fa-ravelry"></i><strong>{{'Major' | translate:language }}:</strong>
+                <span style="display:block; overflow:hidden; padding-left: 5px"><input class="profile-input" type="text" name="major" [ngModel]="defaultValue(userDetail.mojor)" placeholder="{{'Your field of study' | translate:language }}" ngModel></span></li>
+              <li><i class="fa fa-book"></i><strong>{{'School/University' | translate:language }}:</strong>
+                <span style="display:block; overflow:hidden; padding-left: 5px"><input class="profile-input" type="text" name="school" [ngModel]="defaultValue(userDetail.school)" placeholder="{{'Your school/university' | translate:language }}" ngModel></span></li>
+              <li><i class="fa fa-briefcase"></i><strong>{{'Workplace' | translate:language }}:</strong> 
+                <span style="display:block; overflow:hidden; padding-left: 5px"><input class="profile-input" type="text" name="workplace" [ngModel]="defaultValue(userDetail.workplace)" placeholder="{{'Your workplace' | translate:language }}" ngModel></span></li>
+              <li><i class="fa fa-envelope"></i><strong>{{'E-mail' | translate:language }}:</strong> <a [href]="'mailto:'+userDetail.email">{{userDetail.email}}</a></li>
+              <li><i class="fa fa-phone"></i><strong>{{'Phone' | translate:language }}:</strong> 
+                <span style="display:block; overflow:hidden; padding-left: 5px"><input class="profile-input" type="text" name="phone" [ngModel]="defaultValue(userDetail.phone)" placeholder="{{'Your telephone number' | translate:language }}" ngModel></span></li>
+              <li><i class="fa fa-comments"></i><strong>Line ID:</strong>
+                <span style="display:block; overflow:hidden; padding-left: 5px"><input class="profile-input" type="text" name="lineId" [ngModel]="defaultValue(userDetail.lineId)" placeholder="{{'Your Line ID' | translate:language }}" ngModel></span></li>
+              <li><i class="fa fa-home"></i><strong>{{'Address' | translate:language }}:</strong>
+                <br><input class="profile-input profile-ad1" type="text" name="address1" [ngModel]="defaultValue(userDetail.address1)" placeholder="{{'Your address' | translate:language }}" ngModel>
+                <br><input class="profile-input profile-ad1" type="text" name="address2" [ngModel]="defaultValue(userDetail.address2)" placeholder="{{'Your address line 2' | translate:language }}" ngModel>
+                <br><input class="profile-input profile-ad2" type="text" name="province" [ngModel]="defaultValue(userDetail.province)" placeholder="{{'Province/State' | translate:language }}" ngModel> 
+                <input class="profile-input profile-ad2" type="text" name="zip" [ngModel]="defaultValue(userDetail.zip)" placeholder="{{'ZIP code' | translate:language }}" ngModel>
+                <br><input class="profile-input profile-ad1" type="text" name="country" [ngModel]="defaultValue(userDetail.country)" placeholder="{{'Country' | translate:language }}" ngModel>
               </li>
               <li>
-                <input class="political-simple-btn" type="submit" value="เเก้ไขประวัติส่วนตัว">
-              </li>
-            </ul>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </form>
-</div>
-
-<div *ngIf="settingService.getLanguage()=='English'" class="political-team political-team-list">
-  <form #editProfile2="ngForm" (ngSubmit)="editProfileDetail(editProfile2)">
-    <ul class="row">
-      <li class="col-md-12 full-view-panel">
-        <div class="political-team-list-wrap">
-          <figure style="text-align:center;">
-            <img [src]="userProfileImage()" alt="Profile image not available" style="margin-bottom:15px;">
-            <input name="userProfileImage" type="file" (change)="userProfileChange($event)" accept="image/*">
-          </figure>
-
-          <div class="political-team-list-text">
-            <h2 style="margin-bottom:15px;">{{userDetail.firstname}} {{userDetail.lastname}}</h2>
-            <span style="width:100%;">Position: 
-              <input class="profile-input-en" type="text" name="position" [ngModel]="defaultValue(userDetail.position)" placeholder="Your position" ngModel
-              style="width:calc(45% + 86px);"></span>
-            <p style="float:none; margin:5px 0 10px 0;">
-              <textarea class="profile-input profile-about" name="about" [ngModel]="defaultValue(userDetail.about)" placeholder="About you" ngModel></textarea>
-            </p>
-            <ul class="political-team-info">
-              <li><i class="fa fa-globe"></i><strong>DPST. #</strong>
-                <input class="profile-input-en" type="text" name="dpstYear" [ngModel]="defaultValue(userDetail.dpstYear)" placeholder="Your DPST. #" ngModel
-                style="width:calc(45% + 78px);"></li>
-              <li><i class="fa fa-graduation-cap"></i><strong>Education:</strong>
-                <input class="profile-input-en" type="text" name="education" [ngModel]="defaultValue(userDetail.education)" placeholder="Your education" ngModel
-                style="width:calc(45% + 55px);"></li>
-              <li><i class="fa fa-ravelry"></i><strong>Major:</strong>
-                <input class="profile-input-en" type="text" name="major" [ngModel]="defaultValue(userDetail.mojor)" placeholder="Your field of study" ngModel
-                style="width:calc(45% + 87px);"></li>
-              <li><i class="fa fa-book"></i><strong>School/University:</strong>
-                <input class="profile-input-en" type="text" name="school" [ngModel]="defaultValue(userDetail.school)" placeholder="Your school/university" ngModel></li>
-              <li><i class="fa fa-briefcase"></i><strong>Work place:</strong> 
-                <input class="profile-input-en" type="text" name="workplace" [ngModel]="defaultValue(userDetail.workplace)" placeholder="Your work place" ngModel
-                style="width:calc(45% + 46px);"></li>
-              <li><i class="fa fa-envelope"></i><strong>E-mail:</strong> <a [href]="'mailto:'+userDetail.email">{{userDetail.email}}</a></li>
-              <li><i class="fa fa-phone"></i><strong>Phone:</strong> 
-                <input class="profile-input-en" type="text" name="phone" [ngModel]="defaultValue(userDetail.phone)" placeholder="Your telephone number" ngModel
-                style="width:calc(45% + 79px);"></li>
-              <li><i class="fa fa-comments"></i><strong>Line id:</strong>
-                <input class="profile-input-en" type="text" name="lineId" [ngModel]="defaultValue(userDetail.lineId)" placeholder="Your Line id" ngModel
-                style="width:calc(45% + 77px);"></li>
-              <li><i class="fa fa-home"></i><strong>Address:</strong>
-                <br><input class="profile-input profile-ad1" type="text" name="address1" [ngModel]="defaultValue(userDetail.address1)" placeholder="Your address" ngModel>
-                <br><input class="profile-input profile-ad1" type="text" name="address2" [ngModel]="defaultValue(userDetail.address2)" placeholder="Your adress line 2" ngModel>
-                <br><input class="profile-input profile-ad2" type="text" name="province" [ngModel]="defaultValue(userDetail.province)" placeholder="Province/State" ngModel> 
-                <input class="profile-input profile-ad2" type="text" name="zip" [ngModel]="defaultValue(userDetail.zip)" placeholder="ZIP code" ngModel>
-                <br><input class="profile-input profile-ad1" type="text" name="country" [ngModel]="defaultValue(userDetail.country)" placeholder="Country" ngModel>
-              </li>
-              <li>
-                <input class="political-simple-btn" type="submit" value="Update your profile">
+                <input class="political-simple-btn" type="submit" value="{{'Update your profile' | translate:language }}">
               </li>
             </ul>
           </div>

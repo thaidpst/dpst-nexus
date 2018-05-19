@@ -1,17 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { FormsModule }   from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 // Services
-import { SocketioService } from './services/socketio.service';
-import { PageService } from './services/page.service';
-import { SettingService } from './services/setting.service';
-import { AuthenticationService } from './services/authentication.service';
-import { UserinfoService } from './services/userinfo.service';
 import { AdminService } from './services/admin.service';
+import { AuthenticationService } from './services/authentication.service';
 import { CookieService } from './services/cookie.service';
 import { LanguageService } from './languages/language.service';
+import { SettingService } from './services/setting.service';
+import { SocketioService } from './services/socketio.service';
+import { UserinfoService } from './services/userinfo.service';
 import { FormService } from './services/form.service';
 import { FileuploadService } from './services/fileupload.service';
 
@@ -44,6 +44,11 @@ import { GovForm1Component } from './gov-forms/gov-form1/gov-form1.component';
 import { GovFormsComponent } from './gov-forms/gov-forms.component';
 import { PageAdminUserFormsComponent } from './page-admin-panel/page-admin-user-forms/page-admin-user-forms.component';
 import { PageAdminManageFormsComponent } from './page-admin-panel/page-admin-manage-forms/page-admin-manage-forms.component';
+
+import { AppRoutingModule } from './/app-routing.module';
+import { PageAdminPanelRoutingModule } from './page-admin-panel/page-admin-panel-routing.module';
+import { PageUserPanelRoutingModule } from './page-user-panel/page-user-panel-routing.module';
+import { GovFormsRoutingModule } from './gov-forms/gov-forms-routing.module';
 
 
 @NgModule({
@@ -78,11 +83,15 @@ import { PageAdminManageFormsComponent } from './page-admin-panel/page-admin-man
   imports: [
     BrowserModule,
     HttpModule,
-    FormsModule
+    HttpClientModule,
+    FormsModule,
+    GovFormsRoutingModule,
+    PageUserPanelRoutingModule,
+    PageAdminPanelRoutingModule,
+    AppRoutingModule
   ],
   providers: [
     SocketioService,
-    PageService,
     SettingService,
     AuthenticationService,
     UserinfoService,
@@ -90,7 +99,13 @@ import { PageAdminManageFormsComponent } from './page-admin-panel/page-admin-man
     CookieService,
     LanguageService,
     FormService,
-    FileuploadService
+    FileuploadService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (userInfoService: UserinfoService) => function() { return userInfoService.init(); },
+      deps: [UserinfoService],
+      multi: true
+    }
   ],
   bootstrap: [
     AppComponent

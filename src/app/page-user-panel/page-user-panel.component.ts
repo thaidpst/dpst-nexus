@@ -1,6 +1,7 @@
+import { TranslateComponent } from '../languages/translate.component';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { PageService } from '../services/page.service';
 import { SettingService } from '../services/setting.service';
 
 @Component({
@@ -8,22 +9,25 @@ import { SettingService } from '../services/setting.service';
   templateUrl: './page-user-panel.component.html',
   styleUrls: ['./page-user-panel.component.css']
 })
-export class PageUserPanelComponent implements OnInit {
+export class PageUserPanelComponent extends TranslateComponent implements OnInit {
+
+  private _pageName: string;
 
   constructor(
-    private pageService: PageService,
-    private settingService: SettingService
-  ) { }
+    settings: SettingService,
+    private route: ActivatedRoute
+  ) {
+    super(settings);
+  }
+
+  get pageName(): string {
+    return this._pageName;
+  }
 
   ngOnInit() {
+    this.route.data
+      .subscribe(data => {
+        this._pageName = data.pagename;
+      });
   }
-
-  subpageTranslation() {
-    if (this.pageService.getSubpage()=='Profile') return 'ประวัติส่วนตัว';
-    else if (this.pageService.getSubpage()=='Edit profile') return 'เเก้ไขประวัติส่วนตัว';
-    else if (this.pageService.getSubpage()=='History') return 'ประวัติการใช้งาน';
-    else if (this.pageService.getSubpage()=='Setting') return 'ตั้งค่า';
-    else return '';
-  }
-
 }

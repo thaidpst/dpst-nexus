@@ -6,18 +6,18 @@
         <figure><img [src]="userProfileImage()" alt="Profile image not available"></figure>
         <div class="political-team-list-text">
           <h2>{{userDetail.firstname}} {{userDetail.lastname}}</h2>
-          <span>{{'Position' | translate:settingService.getLanguage() }}: {{viewUserPosition()}}</span>
-          <p style="float:none; margin:5px 0 10px 0;">{{'About' | translate:settingService.getLanguage() }}: {{viewUserAbout()}}</p>
+          <span>{{'Position' | translate:language }}: {{viewUserPosition()}}</span>
+          <p style="float:none; margin:5px 0 10px 0;">{{'About' | translate:language }}: {{viewUserAbout()}}</p>
           <ul class="political-team-info">
-            <li><i class="fa fa-globe"></i><strong>{{'DPST #' | translate:settingService.getLanguage() }}</strong> {{userDetail.dpstYear}}</li>
-            <li><i class="fa fa-graduation-cap"></i><strong>{{'Education' | translate:settingService.getLanguage() }}:</strong> {{userDetail.education}}</li>
-            <li><i class="fa fa-ravelry"></i><strong>{{'Major' | translate:settingService.getLanguage() }}:</strong> {{userDetail.major}}</li>
-            <li><i class="fa fa-book"></i><strong>{{'School/University' | translate:settingService.getLanguage() }}:</strong> {{userDetail.school}}</li>
-            <li><i class="fa fa-briefcase"></i><strong>{{'Workplace' | translate:settingService.getLanguage() }}:</strong> {{userDetail.workplace}}</li>
-            <li><i class="fa fa-envelope"></i><strong>{{'E-mail' | translate:settingService.getLanguage() }}:</strong> <a [href]="'mailto:'+userDetail.email">{{userDetail.email}}</a></li>
-            <li><i class="fa fa-phone"></i><strong>{{'Phone' | translate:settingService.getLanguage() }}:</strong> <span>{{userDetail.phone}}</span></li>
+            <li><i class="fa fa-globe"></i><strong>{{'DPST #' | translate:language }}</strong> {{userDetail.dpstYear}}</li>
+            <li><i class="fa fa-graduation-cap"></i><strong>{{'Education' | translate:language }}:</strong> {{userDetail.education}}</li>
+            <li><i class="fa fa-ravelry"></i><strong>{{'Major' | translate:language }}:</strong> {{userDetail.major}}</li>
+            <li><i class="fa fa-book"></i><strong>{{'School/University' | translate:language }}:</strong> {{userDetail.school}}</li>
+            <li><i class="fa fa-briefcase"></i><strong>{{'Workplace' | translate:language }}:</strong> {{userDetail.workplace}}</li>
+            <li><i class="fa fa-envelope"></i><strong>{{'E-mail' | translate:language }}:</strong> <a [href]="'mailto:'+userDetail.email">{{userDetail.email}}</a></li>
+            <li><i class="fa fa-phone"></i><strong>{{'Phone' | translate:language }}:</strong> <span>{{userDetail.phone}}</span></li>
             <li><i class="fa fa-comments"></i><strong>Line ID:</strong> <span>{{userDetail.lineId}}</span></li>
-            <li><i class="fa fa-home"></i><strong>{{'Address' | translate:settingService.getLanguage() }}:</strong>
+            <li><i class="fa fa-home"></i><strong>{{'Address' | translate:language }}:</strong>
               <br>{{userDetail.address1}}
               <ng-container *ngIf="userDetail.address2!==undefined && userDetail.address2!=''"><br>{{userDetail.address2}}</ng-container>
               <br>{{userDetail.province}} {{userDetail.zip}}

@@ -6,23 +6,23 @@ const http = require('http');
 
 // Initialize application
 const app = express();
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 // Cookie parser
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 //CORS middleware
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Origin', 'http://localhost:7000');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, X-Requested-With, Accept');
-    res.header('Access-Control-Allow-Credentials', true);
+var allowCrossDomain = function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:7000');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, X-Requested-With, Accept');
+  res.header('Access-Control-Allow-Credentials', true);
 
-    next();
-}
+  next();
+};
 app.use(allowCrossDomain);
 
 const cors = require('cors');
@@ -32,9 +32,9 @@ app.use(cors());
 const mongo = require('mongodb');
 const monk = require('monk');
 const db = monk('localhost:7001/DPSTdatabase');
-app.use((req,res,next)=>{
-    req.db = db;
-    next();
+app.use((req, res, next) => {
+  req.db = db;
+  next();
 });
 
 // Angular output folder
@@ -55,12 +55,11 @@ app.use('/cookie', cookie);
 app.use('/form', form);
 app.use('/fileupload', fileupload);
 
+app.use('/public', express.static(__dirname + '/public'));
+
 // Send all other requests to the Angular app
-app.get('../', (req, res)=>{
-    res.sendFile(path.join(__dirname, 'public'));
-});
-app.get('*', (req, res)=>{
-    res.sendFile(path.join(__dirname, 'app/index.html'));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'app/index.html'));
 });
 
 //Set Port
