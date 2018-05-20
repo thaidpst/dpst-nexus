@@ -49,6 +49,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { PageAdminPanelRoutingModule } from './page-admin-panel/page-admin-panel-routing.module';
 import { PageUserPanelRoutingModule } from './page-user-panel/page-user-panel-routing.module';
 import { GovFormsRoutingModule } from './gov-forms/gov-forms-routing.module';
+import { ProfileModule } from './profile/profile.module';
 
 
 @NgModule({
@@ -78,7 +79,7 @@ import { GovFormsRoutingModule } from './gov-forms/gov-forms-routing.module';
     GovForm1Component,
     GovFormsComponent,
     PageAdminUserFormsComponent,
-    PageAdminManageFormsComponent
+    PageAdminManageFormsComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,7 +89,8 @@ import { GovFormsRoutingModule } from './gov-forms/gov-forms-routing.module';
     GovFormsRoutingModule,
     PageUserPanelRoutingModule,
     PageAdminPanelRoutingModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ProfileModule
   ],
   providers: [
     SocketioService,

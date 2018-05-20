@@ -10,6 +10,7 @@ import { PageLoginComponent } from './page-login/page-login.component';
 import { PageRegisterComponent } from './page-register/page-register.component';
 import { PageUserHistoryComponent } from './page-user-panel/page-user-history/page-user-history.component';
 import { PageUserProfileComponent } from './page-user-panel/page-user-profile/page-user-profile.component';
+import { ProfileComponent } from './profile/profile.component';
 
 import { GuestRouteGuard, UserRouteGuard } from './services/auth-guard.service';
 import { UserinfoService } from './services/userinfo.service';
@@ -32,6 +33,10 @@ const routes: Routes = [
   { path: 'contact', component: PageContactComponent },
   { // Government forms
     path: 'forms', component: PageGovFormsComponent,
+    canActivate: [UserRouteGuard]
+  },
+  {
+    path: 'profile', component: ProfileComponent,
     canActivate: [UserRouteGuard]
   },
   { path: '**', redirectTo: '' }
