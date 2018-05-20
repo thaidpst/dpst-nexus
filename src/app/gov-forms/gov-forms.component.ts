@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SettingService } from '../services/setting.service';
@@ -12,9 +13,10 @@ import { TranslateComponent } from './../languages/translate.component';
   templateUrl: './gov-forms.component.html',
   styleUrls: ['./gov-forms.component.css']
 })
-export class GovFormsComponent extends TranslateComponent implements OnInit {
+export class GovFormsComponent extends TranslateComponent implements OnInit, OnDestroy {
 
   _formSubmitted = false;
+  private formSubmittedSubscription: Subscription;
 
   constructor(
     settings: SettingService,
@@ -26,11 +28,15 @@ export class GovFormsComponent extends TranslateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.formService.formSubmitted.subscribe(result => {
+    this.formSubmittedSubscription = this.formService.formSubmitted.subscribe(result => {
       if (result.status) {
         this._formSubmitted = true;
         this.socketioService.userFormSubmitted(result.data);
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.formSubmittedSubscription.unsubscribe();
   }
 }

@@ -18,6 +18,7 @@ import { FormService } from '../services/form.service';
 export class PageAdminPanelComponent extends TranslateComponent implements OnInit, OnDestroy {
 
   pageName: String;
+  private pageNameSubscription: Subscription;
 
   private pendingFormSubscription: Subscription;
   private pendingFormNumber = 0;
@@ -33,7 +34,7 @@ export class PageAdminPanelComponent extends TranslateComponent implements OnIni
   }
 
   ngOnInit() {
-    this.route.data
+    this.pageNameSubscription = this.route.data
       .subscribe(data => {
         this.pageName = data.pagename;
       });
@@ -49,6 +50,7 @@ export class PageAdminPanelComponent extends TranslateComponent implements OnIni
   }
 
   ngOnDestroy() {
+    this.pageNameSubscription.unsubscribe();
     this.pendingFormSubscription.unsubscribe();
 
     // Unbind Socket.io
