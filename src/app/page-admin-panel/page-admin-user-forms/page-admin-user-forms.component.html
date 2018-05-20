@@ -101,22 +101,20 @@
     <div class="top-option">
         Sort by
         <select class="select-sort" (change)="submittedFormSortChange($event.target.value)">
-        <option value="None" selected="selected">None</option>
-        <option value="Status increasing">Status increasing</option>
-        <option value="Status decreasing">Status decreasing</option>
-        <option value="Submitted date increasing">Submitted date increasing</option>
-        <option value="Submitted date decreasing">Submitted date decreasing</option>
+          <ng-container *ngFor="let p of ['None', 'Status increasing', 'Status decreasing', 'Submitted date increasing', 'Submitted date decreasing'];">
+            <option *ngIf="p==tableCriteria.sort" [value]="p" selected="selected">{{p}}</option>
+            <option *ngIf="p!=tableCriteria.sort" [value]="p">{{p}}</option>
+          </ng-container>
         </select>
     </div>
 
     <div class="top-option">
         Show per page
         <select class="show-per-page" (change)="submittedFormLimitChange($event.target.value)">
-        <option value="1">1</option>
-        <option value="10">10</option>
-        <option value="25" selected="selected">25</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
+          <ng-container *ngFor="let p of [10,25,50,100];">
+            <option *ngIf="p==tableCriteria.limit" [value]="p" selected="selected">{{p}}</option>
+            <option *ngIf="p!=tableCriteria.limit" [value]="p">{{p}}</option>
+          </ng-container>
         </select>
     </div>
   </div>

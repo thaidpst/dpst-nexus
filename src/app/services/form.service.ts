@@ -17,6 +17,7 @@ export class FormService {
 
   private subjectAdminForms = new Subject<any>();
   private subjectAdminSubmittedForms = new Subject<any>();
+  private subjectAdminGovForms = new Subject<any>();
 
   private mode = 'New'; // New, Edit, View, ByPass (Admin)
   private form = null;
@@ -181,10 +182,36 @@ export class FormService {
         this.subjectAdminSubmittedForms.next(err);
       });
   }
+  adminGetGovForms(criteria) {
+    const url = this.apiUrl + '/admingetgovforms/' + criteria.start + '/' + criteria.limit + '/'
+      + criteria.sort + '/' + criteria.search.replace(/\//g, '');
+
+    return this.http.get(url).toPromise()
+      .then(response=> {
+        const result = response.json();
+        if (testing) console.log(result.message);
+        this.subjectAdminGovForms.next(result);
+      })
+      .catch(err=> {
+        this.subjectAdminGovForms.next(err);
+      });
+  }
 
   setSubmittedFormStatus(form, status, approver) {
     const url = this.apiUrl + '/setsubmittedformstatus',
         input = {formId: form._id, status: status, approver: approver};
+    return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
+      .toPromise()
+      .then(response => {
+        const result = response.json();
+        if (testing) console.log(result.message);
+        return result;
+      })
+      .catch(err => null);
+  }
+  setGovFormStatus(form, status) {
+    const url = this.apiUrl + '/setgovformstatus',
+        input = {formId: form._id, status: status};
     return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
       .toPromise()
       .then(response => {
@@ -202,4 +229,5 @@ export class FormService {
 
   observeAdminForms(): Observable<any> {return this.subjectAdminForms.asObservable(); }
   observeAdminSubmittedForms(): Observable<any> {return this.subjectAdminSubmittedForms.asObservable(); }
+  observeAdminGovForms(): Observable<any> {return this.subjectAdminGovForms.asObservable(); }
 }

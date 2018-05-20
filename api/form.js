@@ -295,6 +295,47 @@ router.get('/admingetsubmittedforms/:formId/:start/:limit/:sort', (req, res)=>{
     })
     .catch(err1=>{res.json({status:false, message:'Get admin submitted forms error: '+err1, data:null})});
 });
+router.get('/admingetgovforms/:start/:limit/:sort/:search', (req, res)=>{
+    let start = Number(req.params.start),
+        limit = Number(req.params.limit),
+        sort = req.params.sort,
+        search = req.params.search;
+    let dbGovForms = req.db.get('govForms');
+
+    let sortObj = {_id:-1};
+    if (sort=='Name increasing') sortObj = {nameTH: 1, nameEN: 1};
+    else if (sort=='Name decreasing') sortObj = {nameTH: -1, nameEN: -1};
+    else if (sort=='Status increasing') sortObj = {status: 1};
+    else if (sort=='Status decreasing') sortObj = {status: -1};
+    else if (sort=='Created date increasing') sortObj = {_id: 1};
+    else if (sort=='Created date decreasing') sortObj = {_id: -1};
+    else if (sort=='Owner increasing') sortObj = {govOwner: 1};
+    else if (sort=='Owner decreasing') sortObj = {govOwner: -1};
+
+    let query = {};
+    if (search!='EmptyNone') {
+        query = {
+            $or: [
+                {nameTH: {$regex: search, $options: 'i'}},
+                {nameEN: {$regex: search, $options: 'i'}},
+                {status: {$regex: search, $options: 'i'}},
+                {govOwner: {$regex: search, $options: 'i'}}
+            ]
+        }
+    }
+
+    dbGovForms.find(query, {limit: limit, skip: start, sort: sortObj})
+        .then(check1=>{
+            dbGovForms.count(query)
+                .then(totalForms=>{
+                    res.json({
+                        status: true, message: 'Get gov forms successfully!', 
+                        data: check1, totalForms: totalForms
+                    });
+                });
+        })
+        .catch(err1=>{res.json({status:false, message:'Get gov forms error: '+err1, data:null})});
+});
 
 router.post('/setsubmittedformstatus', (req, res)=>{
     let formId = req.db.id(req.body.input.formId),
@@ -316,6 +357,24 @@ router.post('/setsubmittedformstatus', (req, res)=>{
             }
         })
         .catch(err1=>{res.json({status:false, message:'Set submitted form status error: '+err1, data:null})});        
+});
+router.post('/setgovformstatus', (req, res)=>{
+    let formId = req.db.id(req.body.input.formId),
+        status = req.body.input.status;
+    let dbGovForms = req.db.get('govForms');
+
+    dbGovForms.findOne({ _id: formId })
+        .then(check1=>{
+            if (check1===null) res.json({status:false, message:'Set gov form status fail: Cannot find the form.', data:0});
+            else {
+                check1.status = status;
+                dbGovForms.update({ _id: formId }, check1, { multi: false })
+                    .then(()=>{
+                        res.json({ status:true, message:'The gov form status is set successfully.', data:1});
+                    });
+            }
+        })
+        .catch(err1=>{res.json({status:false, message:'Set gov form status error: '+err1, data:null})});        
 });
 
 

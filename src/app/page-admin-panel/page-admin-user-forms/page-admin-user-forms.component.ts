@@ -107,7 +107,7 @@ export class PageAdminUserFormsComponent extends TranslateComponent implements O
   // Page 1 process
   formPreview(form) {
     if (form.previewUrl === undefined || form.previewUrl === null || form.previewUrl === '') return 'assets/img/formPreview/base.jpg';
-    else return form.previewUrl;
+    else return '../public/formPreview/' + form.previewUrl;
   }
   formOwner(form) {
     if (form.owner === undefined || form.owner === null || form.owner === '') return 'DPST.';
