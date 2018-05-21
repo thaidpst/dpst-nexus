@@ -34,4 +34,27 @@ export class FileuploadService {
       .catch(err => null);
   }
 
+  uploadGovForm(formFile) {
+    const url = this.apiUrl + '/uploadgovform'
+    return this.http.post(url, formFile)
+      .toPromise()
+      .then(response => {
+        const result = response.json();
+        if (testing) console.log(result.message);
+        return result;
+      })
+      .catch(err => null);
+  }
+  uploadGovFormPreview(formPreviewFile) {
+    const url = this.apiUrl + '/uploadgovformpreview'
+    return this.http.post(url, formPreviewFile)
+      .toPromise()
+      .then(response => {
+        const result = response.json();
+        if (testing) console.log(result.message);
+        return result;
+      })
+      .catch(err => null);
+  }
+
 }

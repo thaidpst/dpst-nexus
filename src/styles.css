@@ -22,6 +22,14 @@ a {cursor: pointer;}
     color: #ffffff; border-radius: 15px;
 }
 
+.btn-file {
+    width: 206px; height: 46px; opacity: 0; cursor: pointer; overflow: hidden; z-index: 1;
+    position: absolute; top: 0; left: calc(50% - 103px);
+}
+.btn-file + label {display: inline-block;}
+.btn-file + label {cursor: pointer;}
+.btn-file:hover + label {color: #004ba0; background: #ffffff;}
+
 
 /* Disable double click */
 * {

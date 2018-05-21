@@ -1,4 +1,4 @@
-<ng-container *ngIf="formOnHand===null">
+<ng-container *ngIf="subpage=='Table' && formOnHand===null">
   <!-- Selection criteria -->
   <div class="political-pagination" style="color:#000; margin:0 0 10px 0;">
     <div class="top-option">
@@ -18,7 +18,7 @@
   </div>
   <div class="political-pagination" style="color:#000; margin:0 0 25px 0;">
     <div class="top-option">
-      <input type="submit" class="political-simple-btn" value="Go back to forms" (click)="goBackToFormPage()">
+      <input type="submit" class="political-simple-btn" value="{{'Create a form' | translate:language }}" (click)="subpage='Create'">
     </div>
 
     <div class="top-option">
@@ -64,6 +64,8 @@
                     (click)="setGovFormStatus(form, 'Inactive')">&nbsp;</i>
                   <i class="fa fa-address-book-o hello-user" aria-hidden="true"
                     (click)="viewGovForm(form)"></i>&nbsp;
+                  <i class="fa fa-pencil-square-o edit-icon" aria-hidden="true"
+                    (click)="tryToEditGovForm(form)"></i>&nbsp;
                   <i class="fa fa-trash ban" aria-hidden="true"
                     (click)="tryToDeleteGovForm(form)"></i>
                 </td>
@@ -86,4 +88,10 @@
         <li><a class="next page-numbers" (click)="nextFormPage()"><span aria-label="Next"><i class="fa fa-angle-right"></i></span></a></li>
     </ul>
   </div>
+</ng-container>
+
+<ng-container *ngIf="subpage=='Create' && formOnHand===null">
+  <input class="political-simple-btn back-btn" type="submit" 
+    (click)="subpage='Table'" value="{{'Go back' | translate:language }}">
+  <app-create-gov-form></app-create-gov-form>
 </ng-container>

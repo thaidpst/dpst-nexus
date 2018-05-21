@@ -23,6 +23,8 @@ export class PageAdminManageFormsComponent extends TranslateComponent implements
     sort: 'None', search: 'EmptyNone'
   };
   private govForms = null;
+
+  private subpage = 'Table';
   private formOnHand = null;
 
   constructor(
@@ -105,6 +107,7 @@ export class PageAdminManageFormsComponent extends TranslateComponent implements
     }
   }
 
+  // Edit gov form process
   setGovFormStatus(form, status) {
     this.formService.setGovFormStatus(form, status).then(result => {
       if (result.status) {
@@ -121,7 +124,14 @@ export class PageAdminManageFormsComponent extends TranslateComponent implements
     // }
   }
 
-  // Delete submitted form process
+  // Create gov form process
+
+  // Edit gov form process
+  tryToEditGovForm(form) {
+
+  }
+
+  // Delete gov form process
   tryToDeleteGovForm(form) {
     //  this.formOnHand = form;
   }

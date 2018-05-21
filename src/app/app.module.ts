@@ -51,6 +51,7 @@ import { GovForm1Component } from './gov-forms/gov-form1/gov-form1.component';
 import { GovFormsComponent } from './gov-forms/gov-forms.component';
 import { PageAdminUserFormsComponent } from './page-admin-panel/page-admin-user-forms/page-admin-user-forms.component';
 import { PageAdminManageFormsComponent } from './page-admin-panel/page-admin-manage-forms/page-admin-manage-forms.component';
+import { CreateGovFormComponent } from './forms/create-gov-form/create-gov-form.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { PageAdminManageFormsComponent } from './page-admin-panel/page-admin-man
     GovForm1Component,
     GovFormsComponent,
     PageAdminUserFormsComponent,
-    PageAdminManageFormsComponent
+    PageAdminManageFormsComponent,
+    CreateGovFormComponent
   ],
   imports: [
     BrowserModule,

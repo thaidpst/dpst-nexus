@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 import { SocketioService } from '../../services/socketio.service';
@@ -23,20 +23,20 @@ import * as d3 from 'd3';
 export class GovForm1Component extends TranslateComponent implements OnInit, OnDestroy {
 
   // Inputs
-  private accessCode = 'gov-form1';
-  private requiredProof = false;
+  private accessCode = null;
+  private routerSubscription;
+  private userDetail = null;
+  readonly dpiRatio = 96 / 72;    
 
   private form = null;
-  private userDetail = null;
-  private _formSubmitted = false;
-  @Output() formSubmitted: EventEmitter<any> = new EventEmitter();
-
-  readonly dpiRatio = 96 / 72;
-  public inputList: FormInput[] = [];
+  private inputList: FormInput[] = [];
   private inputNames = [];
 
   private loadForm = null; // Keep track of this.formService.getForm()
   private checkboxValue = {};  
+
+  private _formSubmitted = false;
+  @Output() formSubmitted: EventEmitter<any> = new EventEmitter();
 
   constructor(
     settings: SettingService,
@@ -44,18 +44,25 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
     private userinfoService: UserinfoService,
     private formService: FormService,
     private router: Router,
+    private _router: ActivatedRoute,
     private elementRef: ElementRef
   ) {
     super(settings);
   }
 
   ngOnInit() {
-    this.formService.getFormDetail(this.accessCode)
-      .then(result => { if (result.status) this.form = result.data;});
+    this.routerSubscription = this._router.params.subscribe(params=>{
+      if (params.accessCode!==undefined) {
+        this.accessCode = params.accessCode;
 
-    const userinfo = Object.assign({}, this.userinfoService.getUserinfo());
-    this.userinfoService.getUserDetail(userinfo)
-      .then(result => { if (result.status) this.userDetail = result.data; });
+        this.formService.getFormDetail(this.accessCode)
+          .then(result => { if (result.status) this.form = result.data;});
+
+        const userinfo = Object.assign({}, this.userinfoService.getUserinfo());
+        this.userinfoService.getUserDetail(userinfo)
+          .then(result => { if (result.status) this.userDetail = result.data; });
+      }
+    });
 
     // Load form
     this.loadForm = Object.assign({}, this.formService.getForm());
@@ -244,6 +251,7 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
   }
 
   ngOnDestroy() {
+    this.routerSubscription.unsubscribe();
     if (this.formService.getRole() !== 'Admin' || this.formService.getMode() !== 'ByPass') this.formService.setMode();
 
     // Unbind Socket.io

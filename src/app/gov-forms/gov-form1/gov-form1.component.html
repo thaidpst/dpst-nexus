@@ -83,16 +83,9 @@
           </ng-container>
 
           <div class="button-container">
-            <ng-container *ngIf="language=='Thai'">
-              <input class="political-simple-btn warning-btn" type="submit" value="แก้ไขแบบฟอร์ม">
-              <input class="political-simple-btn" type="button" value="กลับไปประวัติการใช้งาน" (click)="goToUserHistoryPage()">
-              <input class="political-simple-btn delete-btn" type="button" value="ลบเเบบฟอร์ม" (click)="deleteSubmittedForm()">
-            </ng-container>
-            <ng-container *ngIf="language=='English'">
-              <input class="political-simple-btn warning-btn" type="submit" value="Edit form">
-              <input class="political-simple-btn" type="button" value="Back to user history" (click)="goToUserHistoryPage()">
-              <input class="political-simple-btn delete-btn" type="button" value="Delete form" (click)="deleteSubmittedForm()">
-            </ng-container>
+            <input class="political-simple-btn warning-btn" type="submit" value="{{'Edit form' | translate:language }}">
+            <input class="political-simple-btn" type="button" value="{{'Back to user history' | translate:language }}" (click)="goToUserHistoryPage()">
+            <input class="political-simple-btn delete-btn" type="button" value="{{'Delete form' | translate:language }}" (click)="deleteSubmittedForm()">
           </div>
         </form>
       </div>
@@ -123,10 +116,8 @@
 
           <div class="button-container">
             <ng-container *ngIf="formService.getRole()!='Admin'">
-              <input *ngIf="language=='Thai'" class="political-simple-btn"
-              type="button" value="กลับไปประวัติการใช้งาน" (click)="goToUserHistoryPage()">
-              <input *ngIf="language=='English'" class="political-simple-btn"
-              type="button" value="Back to user history" (click)="goToUserHistoryPage()">  
+              <input class="political-simple-btn" value="{{'Back to user history' | translate:language }}"
+              type="button" (click)="goToUserHistoryPage()">
             </ng-container>
             <ng-container *ngIf="formService.getRole()=='Admin'">
               <input class="political-simple-btn" type="button" value="Back to admin forms" (click)="backToAdminForms()">

@@ -15,7 +15,7 @@ const storageProfile = multer.diskStorage({
 });
 const uploadProfile = multer({
     storage: storageProfile,
-    limits: { fileSize: 1000000 },
+    limits: { fileSize: 5000000 },
     fileFilter: (req, file, cb)=>{
         checkProfileImage(file, cb);
     }
@@ -26,6 +26,52 @@ function checkProfileImage(file, cb) {
     let mimetype = filetypes.test(file.mimetype);
     if (mimetype && extname) return cb(null, true);
     else cb('Profile upload error: only .jpeg, .jpg, and .png are allowed for uploading.');
+    return cb(null, true);
+}
+
+// Forms storage
+const storageForms = multer.diskStorage({
+    destination: './public/forms/',
+    filename: (req, file, cb)=>{
+      cb(null, 'form' + file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
+const uploadForms = multer({
+    storage: storageForms,
+    limits: { fileSize: 10000000 },
+    fileFilter: (req, file, cb)=>{
+        checkForms(file, cb);
+    }
+});
+function checkForms(file, cb) {
+    let filetypes = /pdf/;
+    let extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    let mimetype = filetypes.test(file.mimetype);
+    if (mimetype && extname) return cb(null, true);
+    else cb('Form upload error: only .pdf is allowed for uploading.');
+    return cb(null, true);
+}
+
+// Form preview storage
+const storageFormPreview = multer.diskStorage({
+    destination: './public/formPreview/',
+    filename: (req, file, cb)=>{
+      cb(null, 'fp' + file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
+const uploadFormPreview = multer({
+    storage: storageFormPreview,
+    limits: { fileSize: 2000000 },
+    fileFilter: (req, file, cb)=>{
+        checkFormPreview(file, cb);
+    }
+});
+function checkFormPreview(file, cb) {
+    let filetypes = /jpeg|jpg|png/;
+    let extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    let mimetype = filetypes.test(file.mimetype);
+    if (mimetype && extname) return cb(null, true);
+    else cb('Form preview upload error: only .jpeg, .jpg, and .png are allowed for uploading.');
     return cb(null, true);
 }
 
@@ -66,6 +112,25 @@ router.post('/uploaduserprofile', (req, res, next)=>{
                         .then(()=>{res.json({status:true, message:'Upload user profile image successfully.', data:1})});
                 })
                 .catch(err1=>{res.json({status:false, message:'Upload user profile image error: '+err1, data:null})});
+        }
+    });
+});
+
+router.post('/uploadgovform', (req, res, next)=>{
+    let upload = uploadForms.array('pdfForm', 1);
+    upload(req, res, err=>{
+        if (err) res.json({status:false, message:'Upload gov form error: '+err, data:null});
+        else {
+            res.json({status:true, message:'Upload gov form successfully!', data:req.files[0].filename});
+        }
+    });
+});
+router.post('/uploadgovformpreview', (req, res, next)=>{
+    let upload = uploadFormPreview.array('previewUrl', 1);
+    upload(req, res, err=>{
+        if (err) res.json({status:false, message:'Upload gov form preview error: '+err, data:null});
+        else {
+            res.json({status:true, message:'Upload gov form preview successfully!', data:req.files[0].filename});
         }
     });
 });
