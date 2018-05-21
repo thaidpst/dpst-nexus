@@ -1,0 +1,32 @@
+.political-team-list-wrap .political-team-info > li {border:none;}
+
+ul {list-style-type:none;}
+::placeholder {color:#b9b9b9;}
+:-ms-input-placeholder {color:#b9b9b9;}
+::-ms-input-placeholder {color:#b9b9b9;}
+
+.profile-input {
+    background: #ffffff; 
+    border: 1px solid #a3a3a3; 
+    width: 55%; 
+    margin-left: 5px;
+}
+.profile-input[type=text] {color:#000000;}
+.profile-input[type=email] {color:#000000;}
+
+li.submit-li {width:100% !important; text-align:center; margin-top:20px;}
+select {
+    width: calc(55% + 32px);
+    padding: 2px 12px;
+    height: 32px;
+    margin-left: 5px;
+    color: #000000;
+    background: #ffffff;
+    border: 1px solid #a3a3a3; 
+}
+
+span.ban {font-weight: 600; color: red !important;}
+
+@media (max-width: 767px) {
+    .full-view-panel {width:100%;}
+}

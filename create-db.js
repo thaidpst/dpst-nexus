@@ -44,7 +44,6 @@ db.createCollection("users", {
   },
   validationAction: "warn"
 });
-
 db.createCollection("userDetail", {
   validator: {
     $jsonSchema: {
@@ -145,7 +144,7 @@ db.createCollection("govForms", {
   validator: {
     $jsonSchema: {
       bsonType: "object",
-      required: ["creatorId", "category", "nameTH", "accessCode", "status"],
+      required: ["creatorId", "category", "nameTH", "pdfForm", "requireEvidence", "accessCode", "status"],
       uniqueItems: ["nameTH"],
       properties: {
         creatorId: {
@@ -167,6 +166,14 @@ db.createCollection("govForms", {
         previewUrl: {
           bsonType: "string",
           description: "must be a string and is not required"
+        },
+        pdfForm: {
+          bsonType: "string",
+          description: "must be a string and is required"
+        },
+        requireEvidence: {
+          bsonType: "boolean",
+          description: "must be a boolean and is required"
         },
         accessCode: {
           bsonType: "string",
@@ -273,6 +280,8 @@ db.userDetail.insert({
 db.govForms.insert({
   creatorId: user1, category: ['Attendance Forms'],
   nameTH: 'แบบตอบรับ ประชุมชี้แจงมัธยม 9-10 พค',
+  pdfForm: 'ในศูนย์ แบบตอบรับ ประชุมชี้แจงมัธยม 9-10 พค.pdf',
+  requireEvidence: false,
   accessCode: 'gov-form1', status: 'Active'
 });
 

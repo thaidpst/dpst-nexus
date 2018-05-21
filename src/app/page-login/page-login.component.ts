@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { SocketioService } from '../services/socketio.service';
 import { SettingService } from '../services/setting.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { UserinfoService } from '../services/userinfo.service';
@@ -20,7 +19,6 @@ export class PageLoginComponent extends TranslateComponent implements OnInit {
 
   constructor(
     settings: SettingService,
-    private socketioService: SocketioService,
     private authService: AuthenticationService,
     private userinfoService: UserinfoService,
     private cookieService: CookieService,
@@ -53,7 +51,6 @@ export class PageLoginComponent extends TranslateComponent implements OnInit {
       });
   }
   loginSuccess(userInfo) {
-    this.socketioService.login(userInfo.username);
     this.userinfoService.setUserinfo(userInfo);
     this.router.navigate(['/']);
   }

@@ -12,9 +12,9 @@ const routes: Routes = [
     path: 'form', component: GovFormsComponent,
     children: [
       {
-        path: 'gov-form1', component: GovForm1Component,
+        path: ':accessCode', component: GovForm1Component,
       },
-      { path: '', redirectTo: '/forms', pathMatch: 'full' }
+      { path: '', redirectTo: '/forms', pathMatch: 'full' },
     ]
   }
 ];

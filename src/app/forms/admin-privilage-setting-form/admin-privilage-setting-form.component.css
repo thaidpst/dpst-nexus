@@ -12,6 +12,7 @@ ul {list-style-type:none;}
     margin-left: 5px;
 }
 .profile-input[type=text] {color:#000000;}
+.profile-input[type=email] {color:#000000;}
 
 li.submit-li {width:100% !important; text-align:center; margin-top:20px;}
 select {

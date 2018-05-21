@@ -1,52 +1,22 @@
 
-/* Government form styling */
-.form-container {
-    position: relative; 
-    padding: 30px 0 60px 0;
-    margin-left: 55px;
-    margin-bottom: 20px;
-    width: 75vw;
-}
-.input-container {
-    position: absolute; 
-    top: 30px; width:calc(100%);
-}
-@media screen and (max-width:1100px) {.form-container {margin-left: 100px;}}
-@media screen and (max-width:992px) {.form-container {margin-left: 20px;}}
-@media screen and (max-width:900px) {.form-container {margin-left: 70px;}}
-@media screen and (max-width:600px) {.form-container {margin-left: 60px;}}
-@media screen and (max-width:500px) {.form-container {margin-left: 50px;}}
-@media screen and (max-width:400px) {.form-container {margin-left: 40px;}}
-@media screen and (max-width:300px) {.form-container {margin-left: 25px;}}
+.political-main-section .container .row {position: relative; padding: 40px 0 70px 0; background: #edeced;}
 
-.fill {
-    position: absolute;
-    height: 2.2vw;
-    border: 1px solid #dbdbdb;
-    width: 10%;
-    background: none;
-}
-.fill:disabled, .radio:disabled {border: none; pointer-events: none;}
-.fill[type=text] {
-    color: #575757;
-    font-size: 1.3vw;
-}
-.fill:focus {
-    border: 2px solid #228ae6;
-    background: #f8ff9c;
-}
-.checkbox {margin:0; width: 2vw;}
+.gov-form-container {position: absolute; top: 40px; left: 188.5px;}
+.gov-form {position: relative;}
 
-.fill[type=text][disabled] {color: #000000;}
+.signature {text-align: center;}
+.form-input {position: absolute; border: 1px solid #dbdbdb; background: none;}
+.form-input:disabled {border: none; pointer-events: none;}
+.form-input[type=text] {color: #2b2b2b; font-size: 16px;}
+.checkbox {margin: 0; width: 21px !important; height: 21px !important; cursor: pointer;}
+.form-input:focus {border: 2px solid #228ae6; background: #f8ff9c;}
 
-.fullname {
-    position: absolute; text-align: center; color: #000000; 
-    font-size: 1.4vw; margin-top: -1.4vw;
-}
-
-.button-container {
-    position: absolute;
-    width: 100%;     
-    top: calc(106.1vw + 23px);
-}
+.button-container {position: absolute; width: 600px;}
 .button-container input {float: right; margin-left: 10px;}
+
+.checkbox-yes {border:1.6px solid #000000; background: #ffffff; padding: 2px;}
+.checkbox-yes div {width: 12px; height: 10px; background: #000000;}
+.checkbox-no {border:1.6px solid #000000; background: #ffffff;}
+
+@media screen and (max-width:1200px) {.gov-form-container {left: 88.5px;}}
+@media screen and (max-width:996px) {.gov-form-container {left: 0;}}

@@ -18,6 +18,14 @@ import { FileuploadService } from './services/fileupload.service';
 // Pipes
 import { TranslatePipe } from './languages/translate.pipe';
 
+// Modules
+import { AppRoutingModule } from './/app-routing.module';
+import { PageAdminPanelRoutingModule } from './page-admin-panel/page-admin-panel-routing.module';
+import { PageUserPanelRoutingModule } from './page-user-panel/page-user-panel-routing.module';
+import { GovFormsRoutingModule } from './gov-forms/gov-forms-routing.module';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ProfileModule } from './profile/profile.module';
+
 // Components
 import { AppComponent } from './app.component';
 import { HeaderNavbarComponent } from './header-navbar/header-navbar.component';
@@ -44,12 +52,7 @@ import { GovForm1Component } from './gov-forms/gov-form1/gov-form1.component';
 import { GovFormsComponent } from './gov-forms/gov-forms.component';
 import { PageAdminUserFormsComponent } from './page-admin-panel/page-admin-user-forms/page-admin-user-forms.component';
 import { PageAdminManageFormsComponent } from './page-admin-panel/page-admin-manage-forms/page-admin-manage-forms.component';
-
-import { AppRoutingModule } from './/app-routing.module';
-import { PageAdminPanelRoutingModule } from './page-admin-panel/page-admin-panel-routing.module';
-import { PageUserPanelRoutingModule } from './page-user-panel/page-user-panel-routing.module';
-import { GovFormsRoutingModule } from './gov-forms/gov-forms-routing.module';
-import { ProfileModule } from './profile/profile.module';
+import { CreateGovFormComponent } from './forms/create-gov-form/create-gov-form.component';
 
 
 @NgModule({
@@ -80,6 +83,7 @@ import { ProfileModule } from './profile/profile.module';
     GovFormsComponent,
     PageAdminUserFormsComponent,
     PageAdminManageFormsComponent,
+    CreateGovFormComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +94,8 @@ import { ProfileModule } from './profile/profile.module';
     PageUserPanelRoutingModule,
     PageAdminPanelRoutingModule,
     AppRoutingModule,
-    ProfileModule
+    ProfileModule,
+    PdfViewerModule
   ],
   providers: [
     SocketioService,

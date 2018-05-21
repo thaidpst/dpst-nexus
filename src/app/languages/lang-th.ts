@@ -173,7 +173,11 @@ export const LANG_TH_TRANS = {
   'form category': 'ประเภทแบบฟอร์ม',
   'create date': 'จัดทำวันที่',
   'attendance forms': 'แบบฟอร์มเข้าร่วมงาน',
-  'disbursement forms': 'แบบฟอร์มเบิกค่าใช้จ่าย'
+  'disbursement forms': 'แบบฟอร์มเบิกค่าใช้จ่าย',
+  'create a form': 'สร้างแบบฟอร์ม',
+  'back to user history': 'กลับไปประวัติการใช้งาน',
+  'edit form': 'แก้ไขแบบฟอร์ม',
+  'delete form': 'ลบเเบบฟอร์ม'
 };
 
 // {{'text' | translate:settingService.getLanguage() }}

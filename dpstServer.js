@@ -55,9 +55,8 @@ app.use('/cookie', cookie);
 app.use('/form', form);
 app.use('/fileupload', fileupload);
 
-app.get('../', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public'));
-});
+app.use('/public', express.static(__dirname + '/public'));
+
 // Send all other requests to the Angular app
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'app/index.html'));

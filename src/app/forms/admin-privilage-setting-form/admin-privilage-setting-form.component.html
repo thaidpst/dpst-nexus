@@ -17,7 +17,7 @@
               <li><strong>Last name:</strong>
                 <input class="profile-input" type="text" name="lastname" [ngModel]="defaultValue(userinfo.lastname)" placeholder="Last name" ngModel required></li>
               <li><strong>E-mail:</strong>
-                <input class="profile-input" type="text" name="email" [ngModel]="defaultValue(userinfo.email)" placeholder="Your e-mail address" ngModel required
+                <input class="profile-input" type="email" name="email" [ngModel]="defaultValue(userinfo.email)" placeholder="Your e-mail address" ngModel required
                 style="width:calc(55% + 28px);"></li>
               <li><strong>Level:</strong>
                 <ng-container *ngIf="selfAccount">{{levels[10 - userinfo.level].desc}}</ng-container>

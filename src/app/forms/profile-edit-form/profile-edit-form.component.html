@@ -5,7 +5,12 @@
         <div class="political-team-list-wrap">
           <figure style="text-align:center;">
             <img [src]="userProfileImage()" alt="Profile image not available" style="margin-bottom:15px;">
-            <input name="userProfileImage" type="file" (change)="userProfileChange($event)" accept="image/*">
+            <div style="position:relative;">
+              <input class="btn-file" name="userProfileImage" type="file" 
+              (change)="userProfileChange($event)" accept="image/*">
+              <label for="file" class="political-simple-btn">Choose your profile</label>
+            </div>
+            <div *ngIf="errMessage!=''" class="ban">*{{errMessage}}</div>
           </figure>
 
           <div class="political-team-list-text">

@@ -1,5 +1,5 @@
-import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, EventEmitter, Output, OnDestroy, ElementRef } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 import { SocketioService } from '../../services/socketio.service';
@@ -9,6 +9,12 @@ import { FormService } from '../../services/form.service';
 
 import { TranslateComponent } from './../../languages/translate.component';
 
+import { PDFDocumentProxy } from 'ng2-pdf-viewer';
+import { PDFAnnotationData } from 'pdfjs-dist';
+import { FormControl } from '@angular/forms';
+import { FormInput } from '../../schemas/form-input';
+import * as d3 from 'd3';
+
 @Component({
   selector: 'app-gov-form1',
   templateUrl: './gov-form1.component.html',
@@ -17,35 +23,48 @@ import { TranslateComponent } from './../../languages/translate.component';
 export class GovForm1Component extends TranslateComponent implements OnInit, OnDestroy {
 
   // Inputs
-  private accessCode = 'gov-form1';
-  private formImages = [
-    'assets/img/govForms/gov-form1.jpg'
-  ];
-  private requiredProof = false;
+  private accessCode = null;
+  private routerSubscription;
+  private userDetail = null;
+
+  readonly dpiRatio = 96 / 72;
+  private pageHeight = 0;
 
   private form = null;
-  private userDetail = null;
+  private inputList: FormInput[] = [];
+  private inputNames = [];
+
+  private loadForm = null; // Keep track of this.formService.getForm()
+  private checkboxValue = {};  
+
   private _formSubmitted = false;
   @Output() formSubmitted: EventEmitter<any> = new EventEmitter();
-  private loadForm = null; // Keep track of this.formService.getForm()
 
   constructor(
     settings: SettingService,
     private socketioService: SocketioService,
     private userinfoService: UserinfoService,
     private formService: FormService,
-    private router: Router
+    private router: Router,
+    private _router: ActivatedRoute,
+    private elementRef: ElementRef
   ) {
     super(settings);
   }
 
   ngOnInit() {
-    this.formService.getFormDetail(this.accessCode)
-      .then(result => { if (result.status) this.form = result.data; });
+    this.routerSubscription = this._router.params.subscribe(params=>{
+      if (params.accessCode!==undefined) {
+        this.accessCode = params.accessCode;
 
-    const userinfo = Object.assign({}, this.userinfoService.getUserinfo());
-    this.userinfoService.getUserDetail(userinfo)
-      .then(result => { if (result.status) this.userDetail = result.data; });
+        this.formService.getFormDetail(this.accessCode)
+          .then(result => { if (result.status) this.form = result.data;});
+
+        const userinfo = Object.assign({}, this.userinfoService.getUserinfo());
+        this.userinfoService.getUserDetail(userinfo)
+          .then(result => { if (result.status) this.userDetail = result.data; });
+      }
+    });
 
     // Load form
     this.loadForm = Object.assign({}, this.formService.getForm());
@@ -62,22 +81,112 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
     }
   }
 
+  pdfPath() {return '../public/forms/' + this.form.pdfForm;}
+  pdfLoadComplete(pdf: PDFDocumentProxy) {
+    d3.timeout(()=>{
+      let host = d3.select(this.elementRef.nativeElement);
+      let bbox1 = host.select('.canvasWrapper').node().getBoundingClientRect(),
+          bbox2 = host.select('.pdfViewer.removePageBorders').node().getBoundingClientRect();;
+      d3.select(this.elementRef.nativeElement).select('.button-container')
+        .style('width', bbox1.width+'px')
+        .style('top', (bbox2.height+20)+'px');
+
+      this.pageHeight = host.select('.page').node().getBoundingClientRect().height + 10;
+      for (let i = 1; i<=pdf.numPages; i++) {
+        let currentPage = null; // track the current page
+        pdf.getPage(i)
+          .then(p => {
+            currentPage = p;
+            console.log(p.getAnnotations())
+            return p.getAnnotations(); // get the annotations of the current page
+          })
+          .then(ann => {
+            const annotations = (<any>ann) as PDFAnnotationData[];
+  
+            annotations
+              .filter(a=>a.subtype==='Widget') // get the form field annotation only
+              .forEach(a=>{
+                // get the rectangle that represent the single field and resize it according to the current DPI
+                const fieldRect = currentPage.getViewport(this.dpiRatio)
+                  .convertToViewportRectangle(a.rect);
+  
+                this.addFormInput(a, fieldRect, i); // add the corresponding input
+              });
+          });
+      }
+    }, 200);
+  }
+  addFormInput(annotation, rect: number[] = null, page=0) {
+    if (annotation.fieldName==='ลงชื่อ') {
+      let tempAnnotation = Object.assign({}, annotation),
+          tempRect = rect.slice(0, rect.length);
+      tempAnnotation.fieldName = 'dpstSignature';
+      tempRect[1] -= 29;
+      tempRect[3] -= 29;
+      this.inputList.push(this.createFormInput(annotation, tempRect, page));
+      this.inputList.push(this.createFormInput(tempAnnotation, rect, page));
+    } else this.inputList.push(this.createFormInput(annotation, rect, page));
+  }
+  createFormInput(annotation, rect: number[] = null, page) {
+    let formControl = new FormControl(annotation.buttonValue || '');
+
+    const input = new FormInput();
+    input.name = annotation.fieldName.replace(/ /g, '-');
+    input.name = input.name.replace(/\./g, '-');
+    input.name = input.name.replace(/--/g, '-');
+    if (this.inputNames.indexOf(input.name)<0) this.inputNames.push(input.name);
+    else {
+      let repeated = this.inputNames.filter(d=>{return d==input.name});
+      this.inputNames.push(input.name);
+      input.name = input.name + repeated.length;
+    }
+
+    if (annotation.fieldType==='Tx') {
+      input.type = 'text';
+      input.value = annotation.buttonValue || '';
+    } else if (annotation.fieldType==='Btn') {
+      input.type = 'checkbox';
+      input.value = '';
+    }
+
+    if (rect) {
+      input.top = rect[1] - (rect[1] - rect[3]) + (this.pageHeight * (page - 1));
+      input.left = rect[0];
+      input.height = (rect[1] - rect[3]);
+      input.width = (rect[2] - rect[0]);
+    }
+
+    return input;
+  }
+
+  getInputPosition(formInput: FormInput) {
+    return {
+        top: `${formInput.top}px`,
+        left: `${formInput.left}px`,
+        height: `${formInput.height}px`,
+        width: `${formInput.width}px`,
+    };
+  }
+  checkboxChange(event, name) {
+    this.checkboxValue[name] = event.currentTarget.checked;
+  }
   default(value) {
     if (value === undefined) return '';
     else return value;
   }
 
   goToFormsPage() {
-    this.router.navigate(['/forms/all-forms']);
+    // this.router.navigate(['/forms/all-forms']);
+    this.router.navigate(['/forms']);
   }
   goToUserHistoryPage() {
     this.router.navigate(['/user-panel/history']);
   }
 
   submitGovForm(govForm: NgForm) {
-    this.formService.submitForm(this.userDetail.userId, this.form._id, govForm.value)
+    let values = {...govForm.value, ...this.checkboxValue};
+    this.formService.submitForm(this.userDetail.userId, this.form._id, values)
       .then(result => {
-        console.log('gov1 submitted');
         this._formSubmitted = true;
         this.formService.formSubmitted.emit(result);
         // this.formSubmitted.emit(result);
@@ -85,7 +194,12 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
   }
   editSubmittedGovForm(govForm: NgForm) {
     if (this.formService.getForm() !== null) {
-      this.formService.editSubmittedGovForm(this.formService.getForm()._id, govForm.value)
+      let checkbox = {};
+      Object.keys(this.loadForm.formValue).map(key=>{
+        if (this.loadForm.formValue[key]==true) checkbox[key] = true;
+      });
+      let values = {...govForm.value, ...checkbox, ...this.checkboxValue};
+      this.formService.editSubmittedGovForm(this.formService.getForm()._id, values)
         .then(result => {
           if (result.status) {
             this.router.navigate(['/user-panel/history']);
@@ -142,6 +256,7 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
   }
 
   ngOnDestroy() {
+    this.routerSubscription.unsubscribe();
     if (this.formService.getRole() !== 'Admin' || this.formService.getMode() !== 'ByPass') this.formService.setMode();
 
     // Unbind Socket.io

@@ -69,11 +69,12 @@
 
                                         <!-- Admin panel -->
                                         <li routerLinkActive="active" *ngIf="userinfoService.isAdmin">
-                                            <a routerLink="/admin-panel/user-table" (click)="unactive();" style="font-weight:600;">
+                                            <a routerLink="/admin-panel/user-table" (click)="unactive();" class="hello-user" 
+                                            style="font-weight:800;">
                                                 Admin Panel
                                             </a>
                                         </li>
-                                        <li><a (click)="memberLogOut(); unactive();">
+                                        <li><a (click)="memberLogOut(); unactive();" class="ban">
                                             {{'Log out' | translate:language }}
                                         </a></li>
                                     </ul>

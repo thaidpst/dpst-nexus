@@ -1,0 +1,51 @@
+
+<div *ngIf="formCategory!==null" class="political-team political-team-list">
+  <form #createGovForm="ngForm" (ngSubmit)="adminCreateGovForm(createGovForm)" ngNativeValidate>
+    <ul class="row">
+      <li class="col-md-12 full-view-panel">
+        <div class="political-team-list-wrap">
+
+          <h1><strong>{{'Create a form' | translate:language }}</strong></h1>
+          
+          <div class="political-team-list-text">
+            <ul class="political-team-info">
+              <li><strong>Thai name:</strong><span class="ban">*</span>
+                <input class="profile-input" type="text" name="nameTH" placeholder="Thai name"
+                style="width:calc(100% - 95px);" ngModel required></li>
+              <li><strong>English name:</strong><span class="ban">*</span>
+                <input class="profile-input" type="text" name="nameEN" placeholder="English name"
+                style="width:calc(100% - 125px);" ngModel required></li>
+              <li><strong>Owner:</strong>
+                <input class="profile-input" type="text" name="govOwner" placeholder="Form owner"
+                style="width:calc(100% - 62px);" ngModel></li>
+              <li><strong>Require evidence:</strong><span class="ban">*</span>
+                <select name="requireEvidence" [ngModel]="false" style="width:calc(100% - 152px);" ngModel required>
+                  <option value="false" seleced="selected">No</option>
+                  <option value="true">Yes</option>
+                </select>
+              </li>
+              <li><strong>Form PDF:</strong><span class="ban">*</span>
+                <input name="pdfForm" type="file" style="margin-top:3px;"
+                (change)="choosePdfForm($event)" accept="application/pdf">
+              </li>
+              <li><strong>Form catagory:</strong><span class="ban">*</span>
+                <select name="category" style="width:calc(100% - 13px); margin-top:3px;" ngModel required>
+                  <option value="" seleced="selected">Please select a category</option>
+                  <option *ngFor="let category of formCategory;" 
+                  [value]="category.categoryEN">{{category.categoryTH}}</option>
+                </select>
+              </li>
+              <li><strong>Form preview:</strong>
+                <input name="previewUrl" type="file" style="margin-top:3px;"
+                (change)="choosePdfPreview($event)" accept="image/*">
+              </li>
+              <li class="submit-li">
+                <input class="political-simple-btn" type="submit" value="{{'Create a form' | translate:language }}">
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </form>
+</div>

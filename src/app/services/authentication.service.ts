@@ -5,6 +5,8 @@ import { ipHost, testing } from '../globals';
 import { JsonResponse } from '../schemas/json-response';
 import { UserInfo } from '../schemas/user-info';
 
+import { SocketioService } from './socketio.service';
+
 @Injectable()
 export class AuthenticationService {
 
@@ -13,6 +15,7 @@ export class AuthenticationService {
 
   constructor(
     private httpClient: HttpClient,
+    private socketioService: SocketioService
   ) { }
 
   authenticate(): Promise<UserInfo> {
@@ -20,7 +23,10 @@ export class AuthenticationService {
     return this.httpClient.get<JsonResponse>(url).toPromise()
       .then(response => {
         if (testing) console.log(response.message);
-        if (response.status) return response.data as UserInfo;
+        if (response.status) {
+          this.socketioService.login(response.data.username);
+          return response.data as UserInfo;
+        }
         return null;
       })
       .catch(err => null);
@@ -45,6 +51,7 @@ export class AuthenticationService {
       .toPromise()
       .then(response => {
         if (testing) console.log(response.message);
+        if (response.status) this.socketioService.login(response.data.username);
         return response;
       })
       .catch(err => null);
