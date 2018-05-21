@@ -377,5 +377,22 @@ router.post('/setgovformstatus', (req, res)=>{
         .catch(err1=>{res.json({status:false, message:'Set gov form status error: '+err1, data:null})});        
 });
 
+router.post('/creategovform', (req, res)=>{
+    let govForm = req.body.input.govForm;
+    let dbGovForms = req.db.get('govForms');
+
+    dbGovForms.count()
+        .then(totalForm=>{
+            if (govForm.creatorId!==undefined) govForm.creatorId = req.db.id(govForm.creatorId);
+            govForm.accessCode = 'gov-form' + (totalForm+1);
+            dbGovForms.insert(govForm)
+                .then(check2=>{
+                    res.json({status:true, message:'Create gov form successfully.', data:1});
+                })
+                .catch(err2=>{res.json({status:false, message:'Create gov form error: '+err2, data:null})}); 
+        })
+        .catch(err1=>{res.json({status:false, message:'Count gov form error: '+err1, data:null})});       
+});
+
 
 module.exports = router;

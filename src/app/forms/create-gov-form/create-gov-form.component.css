@@ -25,6 +25,8 @@ select {
     border: 1px solid #a3a3a3; 
 }
 
+span.ban {font-weight: 600; color: red !important;}
+
 @media (max-width: 767px) {
     .full-view-panel {width:100%;}
 }

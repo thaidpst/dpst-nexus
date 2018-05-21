@@ -18,7 +18,8 @@
 
     <!-- PDF viewer -->
     <div class="political-main-section"><div class="container"><div class="row">
-      <pdf-viewer class="pdf-viewer" [src]="pdfPath()" (after-load-complete)="pdfLoadComplete($event)"></pdf-viewer>
+      <pdf-viewer class="pdf-viewer" [src]="pdfPath()"
+      (after-load-complete)="pdfLoadComplete($event)"></pdf-viewer>
 
       <!-- New form -->
       <div *ngIf="formService.getMode()=='New' && formService.getRole()!='Admin'" class="gov-form-container">

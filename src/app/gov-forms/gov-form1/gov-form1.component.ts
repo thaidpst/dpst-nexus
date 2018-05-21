@@ -26,7 +26,9 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
   private accessCode = null;
   private routerSubscription;
   private userDetail = null;
-  readonly dpiRatio = 96 / 72;    
+
+  readonly dpiRatio = 96 / 72;
+  private pageHeight = 0;
 
   private form = null;
   private inputList: FormInput[] = [];
@@ -82,47 +84,50 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
   pdfPath() {return '../public/forms/' + this.form.pdfForm;}
   pdfLoadComplete(pdf: PDFDocumentProxy) {
     d3.timeout(()=>{
-      let bbox = d3.select(this.elementRef.nativeElement).select('.canvasWrapper').node().getBoundingClientRect();
+      let host = d3.select(this.elementRef.nativeElement);
+      let bbox1 = host.select('.canvasWrapper').node().getBoundingClientRect(),
+          bbox2 = host.select('.pdfViewer.removePageBorders').node().getBoundingClientRect();;
       d3.select(this.elementRef.nativeElement).select('.button-container')
-        .style('width', bbox.width+'px')
-        .style('top', (bbox.height+20)+'px');
+        .style('width', bbox1.width+'px')
+        .style('top', (bbox2.height+20)+'px');
+
+      this.pageHeight = host.select('.page').node().getBoundingClientRect().height + 10;
+      for (let i = 1; i<=pdf.numPages; i++) {
+        let currentPage = null; // track the current page
+        pdf.getPage(i)
+          .then(p => {
+            currentPage = p;
+            console.log(p.getAnnotations())
+            return p.getAnnotations(); // get the annotations of the current page
+          })
+          .then(ann => {
+            const annotations = (<any>ann) as PDFAnnotationData[];
+  
+            annotations
+              .filter(a=>a.subtype==='Widget') // get the form field annotation only
+              .forEach(a=>{
+                // get the rectangle that represent the single field and resize it according to the current DPI
+                const fieldRect = currentPage.getViewport(this.dpiRatio)
+                  .convertToViewportRectangle(a.rect);
+  
+                this.addFormInput(a, fieldRect, i); // add the corresponding input
+              });
+          });
+      }
     }, 200);
-
-    for (let i = 1; i<=pdf.numPages; i++) {
-      let currentPage = null; // track the current page
-      pdf.getPage(i)
-        .then(p => {
-          currentPage = p;
-          return p.getAnnotations(); // get the annotations of the current page
-        })
-        .then(ann => {
-          // ugly cast due to missing typescript definitions, please contribute to complete @types/pdfjs-dist
-          const annotations = (<any>ann) as PDFAnnotationData[];
-
-          annotations
-            .filter(a=>a.subtype==='Widget') // get the form field annotation only
-            .forEach(a=>{
-              // get the rectangle that represent the single field and resize it according to the current DPI
-              const fieldRect = currentPage.getViewport(this.dpiRatio)
-                .convertToViewportRectangle(a.rect);
-
-              this.addFormInput(a, fieldRect); // add the corresponding input
-            });
-        });
-    }
   }
-  addFormInput(annotation, rect: number[] = null) {
+  addFormInput(annotation, rect: number[] = null, page=0) {
     if (annotation.fieldName==='ลงชื่อ') {
       let tempAnnotation = Object.assign({}, annotation),
           tempRect = rect.slice(0, rect.length);
       tempAnnotation.fieldName = 'dpstSignature';
       tempRect[1] -= 29;
       tempRect[3] -= 29;
-      this.inputList.push(this.createFormInput(annotation, tempRect));
-      this.inputList.push(this.createFormInput(tempAnnotation, rect));
-    } else this.inputList.push(this.createFormInput(annotation, rect));
+      this.inputList.push(this.createFormInput(annotation, tempRect, page));
+      this.inputList.push(this.createFormInput(tempAnnotation, rect, page));
+    } else this.inputList.push(this.createFormInput(annotation, rect, page));
   }
-  createFormInput(annotation, rect: number[] = null) {
+  createFormInput(annotation, rect: number[] = null, page) {
     let formControl = new FormControl(annotation.buttonValue || '');
 
     const input = new FormInput();
@@ -145,7 +150,7 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
     }
 
     if (rect) {
-      input.top = rect[1] - (rect[1] - rect[3]);
+      input.top = rect[1] - (rect[1] - rect[3]) + (this.pageHeight * (page - 1));
       input.left = rect[0];
       input.height = (rect[1] - rect[3]);
       input.width = (rect[2] - rect[0]);

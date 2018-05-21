@@ -222,6 +222,19 @@ export class FormService {
       .catch(err => null);
   }
 
+  createGovForm(govForm) {
+    const url = this.apiUrl + '/creategovform',
+        input = {govForm: govForm};
+    return this.http.post(url, JSON.stringify({ 'input': input }), { headers: this.headers })
+      .toPromise()
+      .then(response => {
+        const result = response.json();
+        if (testing) console.log(result.message);
+        return result;
+      })
+      .catch(err => null);
+  }
+
   // Observable
   observeForms(): Observable<any> {return this.subjectForms.asObservable(); }
   observeSubmittedForms(): Observable<any> {return this.subjectSubmittedForms.asObservable(); }

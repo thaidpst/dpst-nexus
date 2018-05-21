@@ -125,6 +125,12 @@ export class PageAdminManageFormsComponent extends TranslateComponent implements
   }
 
   // Create gov form process
+  govFormCreated(result) {
+    if (result.status) {
+      this.subpage = 'Table';
+      this.formService.adminGetGovForms(this.criteria);
+    }
+  }
 
   // Edit gov form process
   tryToEditGovForm(form) {

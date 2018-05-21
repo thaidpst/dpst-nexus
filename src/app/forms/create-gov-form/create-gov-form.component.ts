@@ -18,6 +18,7 @@ export class CreateGovFormComponent extends TranslateComponent implements OnInit
   private formCategory = null;
   private _formSubmitted = false;  
   private files = {pdfForm: null, previewUrl: null};
+  @Output() govFormCreated: EventEmitter<any> = new EventEmitter();
 
   constructor(
     settings: SettingService,
@@ -30,7 +31,7 @@ export class CreateGovFormComponent extends TranslateComponent implements OnInit
 
   ngOnInit() {
     this.formService.getFormCategory().then(result=>{
-      if (result.status) this.formCategory = result.data; console.log(this.formCategory)
+      if (result.status) this.formCategory = result.data;
     });
   }
 
@@ -46,29 +47,32 @@ export class CreateGovFormComponent extends TranslateComponent implements OnInit
 
     if (!this._formSubmitted && userinfo.level>=7 && this.files.pdfForm!==null) {
       this._formSubmitted = true;
-      console.log(govForm.value)
+      govForm.value.creatorId = userinfo._id;
+      govForm.value.status = 'Active';
+      govForm.value.category = [govForm.value.category];
 
-      // let formFile: any = new FormData();
-      // formFile.append('pdfForm', this.files.pdfForm, this.files.pdfForm['name']);
-      // this.fileuploadService.uploadGovForm(formFile).then(result1=>{
-      //   if (result1.status) {
+      let formFile: any = new FormData();
+      formFile.append('pdfForm', this.files.pdfForm, this.files.pdfForm['name']);
+      this.fileuploadService.uploadGovForm(formFile).then(result1=>{
+        if (result1.status) {
 
-      //     if (this.files.previewUrl===null) this.adminCreateGovFormDB(govForm.value, {pdfForm: result1.data});
-      //     else {
-      //       let formPreviewFile: any = new FormData();
-      //       formPreviewFile.append('previewUrl', this.files.previewUrl, this.files.previewUrl['name']);
-      //       this.fileuploadService.uploadGovFormPreview(formPreviewFile).then(result2=>{
-      //         if (result2.status) this.adminCreateGovFormDB(govForm.value, {pdfForm: result1.data, previewUrl: result2.data});
-      //       });
-      //     }
-      //   }
-      // });
-
+          if (this.files.previewUrl===null) this.adminCreateGovFormDB(govForm.value, {pdfForm: result1.data});
+          else {
+            let formPreviewFile: any = new FormData();
+            formPreviewFile.append('previewUrl', this.files.previewUrl, this.files.previewUrl['name']);
+            this.fileuploadService.uploadGovFormPreview(formPreviewFile).then(result2=>{
+              if (result2.status) this.adminCreateGovFormDB(govForm.value, {pdfForm: result1.data, previewUrl: result2.data});
+            });
+          }
+        }
+      });
     }
   }
   adminCreateGovFormDB(formValue, formPath) {
-    let object = {...formValue, ...formPath, ...{}}
-    console.log(formPath)
+    let govForm = {...formValue, ...formPath};
+    this.formService.createGovForm(govForm).then(result=>{
+      this.govFormCreated.emit(result);
+    });
   }
 
 }

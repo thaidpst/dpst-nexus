@@ -93,5 +93,5 @@
 <ng-container *ngIf="subpage=='Create' && formOnHand===null">
   <input class="political-simple-btn back-btn" type="submit" 
     (click)="subpage='Table'" value="{{'Go back' | translate:language }}">
-  <app-create-gov-form></app-create-gov-form>
+  <app-create-gov-form (govFormCreated)="govFormCreated($event)"></app-create-gov-form>
 </ng-container>
