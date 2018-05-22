@@ -5,9 +5,9 @@
 .gov-form {position: relative;}
 
 .signature {text-align: center;}
-.form-input {position: absolute; border: 1px solid #dbdbdb; background: none;}
+.form-input {position: absolute; border: 1px solid #dbdbdb; background: none; padding: 0;}
 .form-input:disabled {border: none; pointer-events: none;}
-.form-input[type=text] {color: #2b2b2b; font-size: 16px;}
+.form-input[type=text] {color: #2b2b2b; font-size: 14px; vertical-align: middle;}
 .checkbox {margin: 0; width: 21px !important; height: 21px !important; cursor: pointer;}
 .form-input:focus {border: 2px solid #228ae6; background: #f8ff9c;}
 
@@ -17,6 +17,8 @@
 .checkbox-yes {border:1.6px solid #000000; background: #ffffff; padding: 2px;}
 .checkbox-yes div {width: 12px; height: 10px; background: #000000;}
 .checkbox-no {border:1.6px solid #000000; background: #ffffff;}
+
+:host ::ng-deep pdf-viewer .annotationLayer { display: none; }
 
 @media screen and (max-width:1200px) {.gov-form-container {left: 88.5px;}}
 @media screen and (max-width:996px) {.gov-form-container {left: 0;}}
