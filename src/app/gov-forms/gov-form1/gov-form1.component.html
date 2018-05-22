@@ -6,133 +6,142 @@
   <ng-container *ngIf="form!==null && userDetail!==null">
 
     <!-- Form header -->
-    <div class="political-subheader"><div class="container"><div class="row"><div class="col-md-12"><div class="political-subheader-wrap">
-      <h1>{{form.nameTH}}</h1>
-      <ul class="political-breadcrumb">
-        <li><a routerLink="/">{{'Homepage' | translate:language}}</a></li>
-        <li class="active"><a routerLink="/forms" style="color:#555555;">
-            {{'Forms' | translate:language}}
-        </a></li>
-      </ul>
-    </div></div></div></div></div>
+    <div class="political-subheader">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="political-subheader-wrap">
+              <h1>{{form.nameTH}}</h1>
+              <ul class="political-breadcrumb">
+                <li>
+                  <a routerLink="/">{{'Homepage' | translate:language}}</a>
+                </li>
+                <li class="active">
+                  <a routerLink="/forms" style="color:#555555;">
+                    {{'Forms' | translate:language}}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- PDF viewer -->
-    <div class="political-main-section"><div class="container"><div class="row">
-      <pdf-viewer class="pdf-viewer" [src]="pdfPath()"
-      (after-load-complete)="pdfLoadComplete($event)"></pdf-viewer>
+    <div class="political-main-section">
+      <div class="container">
+        <div class="row">
+          <pdf-viewer class="pdf-viewer" [src]="pdfPath()" (after-load-complete)="pdfLoadComplete($event)"></pdf-viewer>
 
-      <!-- New form -->
-      <div *ngIf="formService.getMode()=='New' && formService.getRole()!='Admin'" class="gov-form-container">
-        <form #govForm="ngForm" (ngSubmit)="submitGovForm(govForm)" class="gov-form" ngNativeValidate>
-          <ng-container *ngFor="let input of inputList">
-            <input *ngIf="input.name=='dpstSignature'" class="form-input fullname signature"
-              [type]="input.type" [name]="input.name"
-              [value]="userDetail.firstname + ' ' + userDetail.lastname" 
-              [ngStyle]="getInputPosition(input)" disabled>
-            <input *ngIf="input.name=='ลงชื่อ'" class="form-input signature"
-              [type]="input.type" [name]="input.name" value=""
-              [ngStyle]="getInputPosition(input)" ngModel required>
-            <input *ngIf="input.name!='dpstSignature' && input.name!='ลงชื่อ' && input.type!='checkbox'" 
-              class="form-input" [type]="input.type" [name]="input.name" value=""
-              [ngStyle]="getInputPosition(input)" ngModel>
-            <input *ngIf="input.name!='dpstSignature' && input.name!='ลงชื่อ' && input.type=='checkbox'"
-              class="form-input checkbox" [type]="input.type" [name]="input.name" 
-              (change)="checkboxChange($event, input.name)"
-              [ngStyle]="getInputPosition(input)" ngModel />
-          </ng-container>
+          <!-- New form -->
+          <div *ngIf="formService.getMode()=='New' && formService.getRole()!='Admin'" class="gov-form-container">
+            <form #govForm="ngForm" (ngSubmit)="submitGovForm(govForm)" class="gov-form" ngNativeValidate>
+              <ng-container *ngFor="let input of inputList">
+                <input *ngIf="input.name=='dpstSignature'" class="form-input fullname signature"
+                  [type]="input.type" [name]="input.name" [value]="userDetail.firstname + ' ' + userDetail.lastname"
+                  [ngStyle]="getInputPosition(input)" disabled>
+                <input *ngIf="input.name=='ลงชื่อ'" class="form-input signature" [type]="input.type"
+                  [name]="input.name" value="" [ngStyle]="getInputPosition(input)"
+                  ngModel required>
+                <input *ngIf="input.name!='dpstSignature' && input.name!='ลงชื่อ' && input.type!='checkbox'"
+                  class="form-input" [type]="input.type" [name]="input.name" [(ngModel)]="inputTextFields[input.fieldName]"
+                  [ngStyle]="getInputPosition(input)">
+                <input *ngIf="input.name!='dpstSignature' && input.name!='ลงชื่อ' && input.type=='checkbox'"
+                  class="form-input checkbox" [type]="input.type" [name]="input.name"
+                  (change)="checkboxChange($event, input.name)" [ngStyle]="getInputPosition(input)"
+                  ngModel />
+              </ng-container>
 
-          <div class="button-container">
-            <ng-container *ngIf="language=='Thai'">
-              <input class="political-simple-btn warning-btn" type="submit" value="ส่งแบบฟอร์ม">
-              <input class="political-simple-btn" type="button" value="กลับไปเลือกเเบบฟอร์ม" (click)="goToFormsPage()">
-            </ng-container>
-            <ng-container *ngIf="language=='English'">
-              <input class="political-simple-btn warning-btn" type="submit" value="Submit form">
-              <input class="political-simple-btn" type="button" value="Back to Forms" (click)="goToFormsPage()">
-            </ng-container>
+              <div class="button-container">
+                <ng-container *ngIf="language=='Thai'">
+                  <input class="political-simple-btn warning-btn" type="submit" value="ส่งแบบฟอร์ม">
+                  <input class="political-simple-btn" type="button" value="กลับไปเลือกเเบบฟอร์ม" (click)="goToFormsPage()">
+                </ng-container>
+                <ng-container *ngIf="language=='English'">
+                  <input class="political-simple-btn warning-btn" type="submit" value="Submit form">
+                  <input class="political-simple-btn" type="button" value="Back to Forms" (click)="goToFormsPage()">
+                </ng-container>
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
 
-      <!-- Edit form -->
-      <div *ngIf="formService.getMode()=='Edit' && formService.getRole()!='Admin' && loadForm!==null" class="gov-form-container">
-        <form #govForm="ngForm" (ngSubmit)="editSubmittedGovForm(govForm)" class="gov-form" ngNativeValidate>
-          <ng-container *ngFor="let input of inputList">
-            <input *ngIf="input.name=='dpstSignature'" class="form-input fullname signature"
-              [type]="input.type" [name]="input.name"
-              [value]="userDetail.firstname + ' ' + userDetail.lastname" 
-              [ngStyle]="getInputPosition(input)" disabled>
-            <input *ngIf="input.name=='ลงชื่อ'" class="form-input signature"
-              [type]="input.type" [name]="input.name" 
-              [ngModel]="default(loadForm.formValue['ลงชื่อ'])"
-              [ngStyle]="getInputPosition(input)" ngModel required>
-            <input *ngIf="input.name!='dpstSignature' && input.name!='ลงชื่อ' && input.type!='checkbox'"
-              class="form-input"
-              [type]="input.type" [name]="input.name"
-              [ngModel]="default(loadForm.formValue[input.name])" [value]="input.value"
-              [ngStyle]="getInputPosition(input)" ngModel>
-            <input *ngIf="input.type=='checkbox' && loadForm.formValue[input.name]"
-              class="form-input checkbox"
-              [type]="input.type" [name]="input.name"
-              (change)="checkboxChange($event, input.name)"
-              [ngStyle]="getInputPosition(input)" ngModel checked>
-            <input *ngIf="input.type=='checkbox' && !loadForm.formValue[input.name]"
-              class="form-input checkbox"
-              [type]="input.type" [name]="input.name"
-              (change)="checkboxChange($event, input.name)"
-              [ngStyle]="getInputPosition(input)" ngModel>
-          </ng-container>
+          <!-- Edit form -->
+          <div *ngIf="formService.getMode()=='Edit' && formService.getRole()!='Admin' && loadForm!==null"
+            class="gov-form-container">
+            <form #govForm="ngForm" (ngSubmit)="editSubmittedGovForm(govForm)" class="gov-form"
+              ngNativeValidate>
+              <ng-container *ngFor="let input of inputList">
+                <input *ngIf="input.name=='dpstSignature'" class="form-input fullname signature"
+                  [type]="input.type" [name]="input.name" [value]="userDetail.firstname + ' ' + userDetail.lastname"
+                  [ngStyle]="getInputPosition(input)" disabled>
+                <input *ngIf="input.name=='ลงชื่อ'" class="form-input signature" [type]="input.type"
+                  [name]="input.name" [ngModel]="default(loadForm.formValue['ลงชื่อ'])"
+                  [ngStyle]="getInputPosition(input)" ngModel required>
+                <input *ngIf="input.name!='dpstSignature' && input.name!='ลงชื่อ' && input.type!='checkbox'"
+                  class="form-input" [type]="input.type" [name]="input.name" [(ngModel)]="loadForm.formValue[input.fieldName]"
+                  [ngStyle]="getInputPosition(input)" ngModel>
+                <input *ngIf="input.type=='checkbox' && loadForm.formValue[input.name]" class="form-input checkbox"
+                  [type]="input.type" [name]="input.name" (change)="checkboxChange($event, input.name)"
+                  [ngStyle]="getInputPosition(input)" ngModel checked>
+                <input *ngIf="input.type=='checkbox' && !loadForm.formValue[input.name]" class="form-input checkbox"
+                  [type]="input.type" [name]="input.name" (change)="checkboxChange($event, input.name)"
+                  [ngStyle]="getInputPosition(input)" ngModel>
+              </ng-container>
 
-          <div class="button-container">
-            <input class="political-simple-btn warning-btn" type="submit" value="{{'Edit form' | translate:language }}">
-            <input class="political-simple-btn" type="button" value="{{'Back to user history' | translate:language }}" (click)="goToUserHistoryPage()">
-            <input class="political-simple-btn delete-btn" type="button" value="{{'Delete form' | translate:language }}" (click)="deleteSubmittedForm()">
+              <div class="button-container">
+                <input class="political-simple-btn warning-btn" type="submit" value="{{'Edit form' | translate:language }}">
+                <input class="political-simple-btn" type="button" value="{{'Back to user history' | translate:language }}"
+                  (click)="goToUserHistoryPage()">
+                <input class="political-simple-btn delete-btn" type="button" value="{{'Delete form' | translate:language }}"
+                  (click)="deleteSubmittedForm()">
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
 
-      <!-- View form -->
-      <div *ngIf="(formService.getMode()=='View' || formService.getMode()=='ByPass') && loadForm!==null" class="gov-form-container">
-        <form class="gov-form">
-          <ng-container *ngFor="let input of inputList">
-            <input *ngIf="input.name=='dpstSignature'" class="form-input fullname signature"
-              [type]="input.type" [name]="input.name"
-              [value]="userDetail.firstname + ' ' + userDetail.lastname" 
-              [ngStyle]="getInputPosition(input)" disabled>
-            <input *ngIf="input.name=='ลงชื่อ'" class="form-input signature"
-              [type]="input.type" [name]="input.name" 
-              [ngModel]="default(loadForm.formValue['ลงชื่อ'])"
-              [ngStyle]="getInputPosition(input)" ngModel disabled>
-            <input *ngIf="input.name!='dpstSignature' && input.name!='ลงชื่อ' && input.type!='checkbox'"
-              class="form-input"
-              [type]="input.type" [name]="input.name"
-              [ngModel]="default(loadForm.formValue[input.name])" [value]="input.value"
-              [ngStyle]="getInputPosition(input)" ngModel disabled>
-            <div *ngIf="input.type=='checkbox' && loadForm.formValue[input.name]"
-              class="form-input checkbox-yes" [ngStyle]="getInputPosition(input)"><div></div>
-            </div>
-            <div *ngIf="input.type=='checkbox' && !loadForm.formValue[input.name]"
-              class="form-input checkbox-no" [ngStyle]="getInputPosition(input)"></div>
-          </ng-container>
+          <!-- View form -->
+          <div *ngIf="(formService.getMode()=='View' || formService.getMode()=='ByPass') && loadForm!==null"
+            class="gov-form-container">
+            <form class="gov-form">
+              <ng-container *ngFor="let input of inputList">
+                <input *ngIf="input.name=='dpstSignature'" class="form-input fullname signature"
+                  [type]="input.type" [name]="input.name" [value]="userDetail.firstname + ' ' + userDetail.lastname"
+                  [ngStyle]="getInputPosition(input)" disabled>
+                <input *ngIf="input.name=='ลงชื่อ'" class="form-input signature" [type]="input.type"
+                  [name]="input.name" [ngModel]="default(loadForm.formValue['ลงชื่อ'])"
+                  [ngStyle]="getInputPosition(input)" ngModel disabled>
+                <input *ngIf="input.name!='dpstSignature' && input.name!='ลงชื่อ' && input.type!='checkbox'"
+                  class="form-input" [type]="input.type" [name]="input.name" [(ngModel)]="loadForm.formValue[input.fieldName]"
+                  [ngStyle]="getInputPosition(input)" ngModel disabled>
+                <div *ngIf="input.type=='checkbox' && loadForm.formValue[input.name]" class="form-input checkbox-yes"
+                  [ngStyle]="getInputPosition(input)">
+                  <div></div>
+                </div>
+                <div *ngIf="input.type=='checkbox' && !loadForm.formValue[input.name]" class="form-input checkbox-no"
+                  [ngStyle]="getInputPosition(input)"></div>
+              </ng-container>
 
-          <div class="button-container">
-            <ng-container *ngIf="formService.getRole()!='Admin'">
-              <input class="political-simple-btn" value="{{'Back to user history' | translate:language }}"
-              type="button" (click)="goToUserHistoryPage()">
-            </ng-container>
-            <ng-container *ngIf="formService.getRole()=='Admin'">
-              <input class="political-simple-btn" type="button" value="Back to admin forms" (click)="backToAdminForms()">
-              <input *ngIf="loadForm.status!='Approved'" class="political-simple-btn"
-              type="button" value="Approve" (click)="adminSetSubmittedFormStatus('Approved')">
-              <input *ngIf="loadForm.status!='Not approved'" class="political-simple-btn warning-btn"
-              type="button" value="Not approved" (click)="adminSetSubmittedFormStatus('Not approved')">
-              <input class="political-simple-btn delete-btn" type="button" value="Delete form" (click)="adminDeleteSubmittedForm()">
-            </ng-container>
+              <div class="button-container">
+                <ng-container *ngIf="formService.getRole()!='Admin'">
+                  <input class="political-simple-btn" value="{{'Back to user history' | translate:language }}"
+                    type="button" (click)="goToUserHistoryPage()">
+                </ng-container>
+                <ng-container *ngIf="formService.getRole()=='Admin'">
+                  <input class="political-simple-btn" type="button" value="Back to admin forms" (click)="backToAdminForms()">
+                  <input *ngIf="loadForm.status!='Approved'" class="political-simple-btn" type="button"
+                    value="Approve" (click)="adminSetSubmittedFormStatus('Approved')">
+                  <input *ngIf="loadForm.status!='Not approved'" class="political-simple-btn warning-btn"
+                    type="button" value="Not approved" (click)="adminSetSubmittedFormStatus('Not approved')">
+                  <input class="political-simple-btn delete-btn" type="button" value="Delete form"
+                    (click)="adminDeleteSubmittedForm()">
+                </ng-container>
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
 
-    </div></div></div>
+        </div>
+      </div>
+    </div>
 
   </ng-container>
 </ng-container>

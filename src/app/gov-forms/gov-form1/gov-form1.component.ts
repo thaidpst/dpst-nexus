@@ -35,7 +35,8 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
   private inputNames = [];
 
   private loadForm = null; // Keep track of this.formService.getForm()
-  private checkboxValue = {};  
+  private _inputTextFields = {};
+  private checkboxValue = {};
 
   private _formSubmitted = false;
   @Output() formSubmitted: EventEmitter<any> = new EventEmitter();
@@ -52,13 +53,17 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
     super(settings);
   }
 
+  get inputTextFields() {
+    return this._inputTextFields;
+  }
+
   ngOnInit() {
-    this.routerSubscription = this._router.params.subscribe(params=>{
-      if (params.accessCode!==undefined) {
+    this.routerSubscription = this._router.params.subscribe(params => {
+      if (params.accessCode !== undefined) {
         this.accessCode = params.accessCode;
 
         this.formService.getFormDetail(this.accessCode)
-          .then(result => { if (result.status) this.form = result.data;});
+          .then(result => { if (result.status) this.form = result.data; });
 
         const userinfo = Object.assign({}, this.userinfoService.getUserinfo());
         this.userinfoService.getUserDetail(userinfo)
@@ -81,45 +86,45 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
     }
   }
 
-  pdfPath() {return '../public/forms/' + this.form.pdfForm;}
+  pdfPath() { return '../public/forms/' + this.form.pdfForm; }
   pdfLoadComplete(pdf: PDFDocumentProxy) {
-    d3.timeout(()=>{
-      let host = d3.select(this.elementRef.nativeElement);
-      let bbox1 = host.select('.canvasWrapper').node().getBoundingClientRect(),
-          bbox2 = host.select('.pdfViewer.removePageBorders').node().getBoundingClientRect();;
+    d3.timeout(() => {
+      const host = d3.select(this.elementRef.nativeElement);
+      const bbox1 = host.select('.canvasWrapper').node().getBoundingClientRect(),
+        bbox2 = host.select('.pdfViewer.removePageBorders').node().getBoundingClientRect();
       d3.select(this.elementRef.nativeElement).select('.button-container')
-        .style('width', bbox1.width+'px')
-        .style('top', (bbox2.height+20)+'px');
+        .style('width', bbox1.width + 'px')
+        .style('top', (bbox2.height + 20) + 'px');
 
       this.pageHeight = host.select('.page').node().getBoundingClientRect().height + 10;
-      for (let i = 1; i<=pdf.numPages; i++) {
+      for (let i = 1; i <= pdf.numPages; i++) {
         let currentPage = null; // track the current page
         pdf.getPage(i)
           .then(p => {
             currentPage = p;
-            console.log(p.getAnnotations())
+            console.log(p.getAnnotations());
             return p.getAnnotations(); // get the annotations of the current page
           })
           .then(ann => {
             const annotations = (<any>ann) as PDFAnnotationData[];
-  
+
             annotations
-              .filter(a=>a.subtype==='Widget') // get the form field annotation only
-              .forEach(a=>{
+              .filter(a => a.subtype === 'Widget') // get the form field annotation only
+              .forEach(a => {
                 // get the rectangle that represent the single field and resize it according to the current DPI
                 const fieldRect = currentPage.getViewport(this.dpiRatio)
                   .convertToViewportRectangle(a.rect);
-  
+
                 this.addFormInput(a, fieldRect, i); // add the corresponding input
               });
           });
       }
     }, 200);
   }
-  addFormInput(annotation, rect: number[] = null, page=0) {
-    if (annotation.fieldName==='ลงชื่อ') {
-      let tempAnnotation = Object.assign({}, annotation),
-          tempRect = rect.slice(0, rect.length);
+  addFormInput(annotation, rect: number[] = null, page = 0) {
+    if (annotation.fieldName === 'ลงชื่อ') {
+      const tempAnnotation = Object.assign({}, annotation),
+        tempRect = rect.slice(0, rect.length);
       tempAnnotation.fieldName = 'dpstSignature';
       tempRect[1] -= 29;
       tempRect[3] -= 29;
@@ -128,23 +133,27 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
     } else this.inputList.push(this.createFormInput(annotation, rect, page));
   }
   createFormInput(annotation, rect: number[] = null, page) {
-    let formControl = new FormControl(annotation.buttonValue || '');
+    // const formControl = new FormControl(annotation.buttonValue || '');
 
-    const input = new FormInput();
+    const input = new FormInput(annotation.fieldName);
     input.name = annotation.fieldName.replace(/ /g, '-');
     input.name = input.name.replace(/\./g, '-');
     input.name = input.name.replace(/--/g, '-');
-    if (this.inputNames.indexOf(input.name)<0) this.inputNames.push(input.name);
+    if (this.inputNames.indexOf(input.name) < 0) this.inputNames.push(input.name);
     else {
-      let repeated = this.inputNames.filter(d=>{return d==input.name});
+      const repeated = this.inputNames.filter(d => d === input.name);
       this.inputNames.push(input.name);
       input.name = input.name + repeated.length;
     }
 
-    if (annotation.fieldType==='Tx') {
+    if (annotation.fieldType === 'Tx') {
       input.type = 'text';
-      input.value = annotation.buttonValue || '';
-    } else if (annotation.fieldType==='Btn') {
+      // For multiple fields of the same name (used for linking values),
+      // use value from the first declaration.
+      this._inputTextFields[input.fieldName] =
+        this._inputTextFields[input.fieldName] || annotation.fieldValue || '';
+      input.textAlignment = annotation.textAlignment;
+    } else if (annotation.fieldType === 'Btn') {
       input.type = 'checkbox';
       input.value = '';
     }
@@ -160,12 +169,15 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
   }
 
   getInputPosition(formInput: FormInput) {
-    return {
-        top: `${formInput.top}px`,
-        left: `${formInput.left}px`,
-        height: `${formInput.height}px`,
-        width: `${formInput.width}px`,
+    const style = {
+      top: `${formInput.top}px`,
+      left: `${formInput.left}px`,
+      height: `${formInput.height}px`,
+      width: `${formInput.width}px`,
     };
+    if (formInput.textAlignment === 1)
+      style['text-align'] = 'center';
+    return style;
   }
   checkboxChange(event, name) {
     this.checkboxValue[name] = event.currentTarget.checked;
@@ -184,7 +196,7 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
   }
 
   submitGovForm(govForm: NgForm) {
-    let values = {...govForm.value, ...this.checkboxValue};
+    const values = { ...this._inputTextFields, ...this.checkboxValue };
     this.formService.submitForm(this.userDetail.userId, this.form._id, values)
       .then(result => {
         this._formSubmitted = true;
@@ -194,11 +206,11 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
   }
   editSubmittedGovForm(govForm: NgForm) {
     if (this.formService.getForm() !== null) {
-      let checkbox = {};
-      Object.keys(this.loadForm.formValue).map(key=>{
-        if (this.loadForm.formValue[key]==true) checkbox[key] = true;
+      const checkbox = {};
+      Object.keys(this.loadForm.formValue).map(key => {
+        if (this.loadForm.formValue[key] === true) checkbox[key] = true;
       });
-      let values = {...govForm.value, ...checkbox, ...this.checkboxValue};
+      const values = { ...this._inputTextFields, ...checkbox, ...this.checkboxValue };
       this.formService.editSubmittedGovForm(this.formService.getForm()._id, values)
         .then(result => {
           if (result.status) {
@@ -220,7 +232,7 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
 
   // Admin privilage
   backToAdminForms() {
-    if (this.userinfoService.getUserinfo().level >= 7) {
+    if (this.userinfoService.isAdmin) {
       this.router.navigate(['/admin-panel/submitted-forms']);
     } else {
       this.formService.setMode();
@@ -228,7 +240,7 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
     }
   }
   adminSetSubmittedFormStatus(status) {
-    if (this.userinfoService.getUserinfo().level >= 7) {
+    if (this.userinfoService.isAdmin) {
       const approver = Object.assign({}, this.userinfoService.getUserinfo());
       this.formService.setSubmittedFormStatus(this.loadForm, status, approver).then(result => {
         if (result.status) {
@@ -242,7 +254,7 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
     }
   }
   adminDeleteSubmittedForm() {
-    if (this.userinfoService.getUserinfo().level >= 7) {
+    if (this.userinfoService.isAdmin) {
       this.formService.deleteSubmittedForm(this.loadForm.userId, this.loadForm).then(result => {
         if (result.status) {
           this.socketioService.deletedUserForm(this.loadForm);

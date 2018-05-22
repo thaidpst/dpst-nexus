@@ -68,7 +68,8 @@ export class PageGovFormsComponent extends TranslateComponent implements OnInit,
   }
   dateFromObjectId(objectId) {
     const date = new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
-    return date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear();
+    console.log(date);
+    return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
   }
 
   changeFormCategory(category) {

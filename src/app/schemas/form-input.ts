@@ -5,5 +5,11 @@ export class FormInput {
     left: number;
     width: number;
     height: number;
+    textAlignment: number;
     value; any;
+
+    constructor(
+        public fieldName: string
+    ) {
+    }
 }
