@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, ResponseContentType, Response } from '@angular/http';
 import { ipHost, testing } from '../globals';
 
 import { Observable } from 'rxjs';
@@ -137,6 +137,12 @@ export class FormService {
         return result;
       })
       .catch(err => null);
+  }
+
+  downloadPDF(formId) {
+    // TODO request PDF file from server
+    const url = this.apiUrl + '/download' + '/' + formId;
+    return this.http.get(url).toPromise();
   }
 
   getPendingFormNumber() {

@@ -1,7 +1,8 @@
 {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "html.format.wrapLineLength": 80,
-    "html.format.endWithNewline": true,
-    "eslint.autoFixOnSave": true,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "html.format.wrapLineLength": 80,
+  "html.format.endWithNewline": true,
+  "eslint.autoFixOnSave": true,
+  "editor.detectIndentation": false,
 }

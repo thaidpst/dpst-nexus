@@ -14,6 +14,7 @@ import { PDFAnnotationData } from 'pdfjs-dist';
 import { FormControl } from '@angular/forms';
 import { FormInput } from '../../schemas/form-input';
 import * as d3 from 'd3';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-gov-form1',
@@ -38,6 +39,8 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
   private _inputTextFields = {};
   private checkboxValue = {};
 
+  private _pdfContent;
+
   private _formSubmitted = false;
   @Output() formSubmitted: EventEmitter<any> = new EventEmitter();
 
@@ -48,13 +51,17 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
     private formService: FormService,
     private router: Router,
     private _router: ActivatedRoute,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private domSanitizer: DomSanitizer
   ) {
     super(settings);
   }
 
   get inputTextFields() {
     return this._inputTextFields;
+  }
+  get pdfContent() {
+    return this._pdfContent;
   }
 
   ngOnInit() {
@@ -265,6 +272,18 @@ export class GovForm1Component extends TranslateComponent implements OnInit, OnD
       this.formService.setMode();
       this.router.navigate(['/']);
     }
+  }
+
+  downloadPDF() {
+    // TODO pipe PDF to browser
+    this.formService.downloadPDF(this.formService.getForm()._id)
+      .then((data: any) => {
+        console.log('pdf-data', data);
+        this._pdfContent = data;
+        // const pdfFile = new Blob([data._body], { type: 'application/pdf' });
+        // this._pdfContent = this.domSanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(pdfFile));
+        // console.log('pdf', this._pdfContent);
+      });
   }
 
   ngOnDestroy() {

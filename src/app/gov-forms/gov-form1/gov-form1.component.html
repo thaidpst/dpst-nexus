@@ -132,11 +132,21 @@
                     value="Approve" (click)="adminSetSubmittedFormStatus('Approved')">
                   <input *ngIf="loadForm.status!='Not approved'" class="political-simple-btn warning-btn"
                     type="button" value="Not approved" (click)="adminSetSubmittedFormStatus('Not approved')">
+                  <input class="political-simple-btn" type="button" value="Download PDF" (click)="downloadPDF()">
                   <input class="political-simple-btn delete-btn" type="button" value="Delete form"
                     (click)="adminDeleteSubmittedForm()">
                 </ng-container>
               </div>
             </form>
+
+            <div *ngIf="pdfContent != undefined">
+              <h5>iframe whit local url</h5>
+              <iframe width="500" height="600" [attr.src]="pdfContent" type="application/pdf"></iframe>
+              <h5>object whit local url</h5>
+              <object [attr.data]="pdfContent" type="application/pdf" width="100%" height="100%"></object>
+              <h5>embed whit local url</h5>
+              <embed [attr.src]="pdfContent" type="application/pdf" width="100%" height="100%">
+            </div>
           </div>
 
         </div>

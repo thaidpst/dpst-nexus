@@ -7,7 +7,7 @@
     "start": "concurrently --kill-others \"npm run build\" \"npm run db\" \"npm run serve-api\"",
     "serve": "ng serve",
     "build": "ng build --watch",
-    "serve-api": "node dpstServer.js",
+    "serve-api": "nodemon --watch api dpstServer.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
